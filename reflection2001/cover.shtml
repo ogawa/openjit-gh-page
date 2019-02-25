@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="common.css" type="text/css"/>
+<link rev=made href="mailto:webmaster@openjit.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<title>Reflection 2001: Cover Page</title>
+<style>
+</style>
+</head>
+
+<body>
+
+<p>
+<div class="t1">REFLECTION 2001</div>
+<div class="t2">The Third International Conference on</div>
+<div class="t2">Metalevel Architectures and Separation of Crosscutting Concerns</div>
+<div class="t3">Kyoto, Japan</div>
+<div class="t3">September 25-28, 2001</div></p>
+
+<!--
+<p class="t3">EARLY REGISTRATION DEADLINE: August 31<sup>st</sup>, 2001</p>
+-->
+
+<!--
+<p class="t3">PAPER DEADLINE: March 15<sup>th</sup>, 2001
+(**FINISHED**)</p>
+-->
+
+<p class="t3"><a href="/reflection2001/" target="_top">http://www.openjit.org/reflection2001/</a></p>
+
+<!--
+<blockquote>
+<center><big><underline>LATEST BULLETIN: REFLECTION 2001 WILL TAKE PLACE</underline></big></center>
+
+<p><big>To Participants of Reflection 2001:</big></p>
+
+<p><big>Although there have been recent occurences of tragic events, we are nevertheless pushing forward with holding the Reflection 2001 Conference, as so far within Japan there have been no forseeable immediate dangers---business and travel are as usual. However, if for any reason you are restricted from participating and you happen to be a speaker (including posters) at the conference and/or you already have registered, please let us organizers know at <a href="mailto:ref2k1@matsulab.is.titech.ac.jp">ref2k1@matsulab.is.titech.ac.jp</a>.</big></p>
+</blockquote>
+-->
+
+<p class="t3"><a href="http://link.springer.de/link/service/series/0558/tocs/t2192.htm" target="_top"><img src="lamp1.gif"> ONLINE PROCEEDINGS (LNCS 2192)</a></p>
+
+<p class="t3"><a href="http://www.krp.co.jp/HP98Ehtml/" target="_top"><img src="lamp1.gif"> CONFERENCE SITE INFORMATION</a></p>
+
+<p class="t3"><a href="program.shtml"><img src="lamp1.gif"> ADVANCE PROGRAM</a></p>
+
+<p class="t3"><a href="cfa.shtml"><img src="lamp1.gif"> REGISTRATION INFORMATION</a></p>
+
+<!--
+<p class="t3"><a href="/cman/reflection2001/REG-participators/"><img src="lamp1.gif"> ONLINE REGISTRATION</a></p>
+-->
+
+<p class="t4">Reflection 2001 is sponsored by:<br>
+<a href="http://www.aito.org/" target="_top">AITO - Association Internationale pour les Technologies Objets</a><br>
+<a href="http://wwwsoc.nii.ac.jp/jssst/" target="_top">JSSST - Japan Society for Software Science and Technology</a>
+</p>
+<p class="t4">and in cooperation with:<br>
+<a href="http://www.acm.org/sigsoft" target="_top">ACM SIGSOFT</a><br>
+<a href="http://www.ipsj.or.jp/sig/se/" target="_top">IPSJ - Information Processing Society of Japan, SIGSE</a>
+</p>
+
+<div style="margin-top: 2em">&nbsp;</div>
+
+<!--
+<h1>IMPORTANT DATES</h1>
+
+<dl>
+<dt>Early Registration Deadline</dt>
+<dd><strike>August 31, 2001</strike></dd>
+<dt>Conference
+<dd>September 25-28, 2001</dd>
+</dl>
+-->
+
+<h1>NEW ON THIS SITE</h1>
+
+<dl>
+<dt>October 9th, 2001</dt>
+<dd><a href="http://link.springer.de/link/service/series/0558/tocs/t2192.htm" target="_top">Conference Proceedings (LNCS 2192: Metalevel Architecture and Separation of Crosscutting Concerns, A. Yonezawa and S. Matsuoka Eds.)</a> is now available online.</dd>
+
+<dt>August 7th, 2001</dt>
+<dd><a href="cfa.shtml#student">Student travel support</a> information is now available.</dd>
+
+<dt>July 27th, 2001</dt>
+<dd><a href="cfa.shtml">Call For Participation</a> including Registration Information is available.</dd>
+
+<dt>July 27th, 2001</dt>
+<dd><a href="tutorials.html">Tutorial</a> and <a href="java-tech-workshop.html">The Java Technology Workshop (for Japanese)</a> information is available.</dd>
+
+<dt>July 17th, 2001</dt>
+<dd>Call for Papers for Workshop on Experience with Reflective Systems, held in conjunction with Reflection 2001, is now available.
+<ul>
+  <li><a href="reflective-systems.html">Workshop on Experience with Reflective Systems</a></li>
+</ul>
+</dd>
+
+<dt>July 7th, 2001</dt>
+<dd>Preliminary version of <a href="program.shtml">Advanced Program</a> is now available.</dd>
+
+<dt>March 23th, 2001</dt>
+<dd>The deadline for paper submission is over.</dd>
+
+<dt>March 14th, 2001</dt>
+<dd>If you have any problems with submission after successive attempts, please contact <a href="mailto:reflection2001-submit@is.titech.ac.jp">reflection2001-submit@is.titech.ac.jp</a>.</dd>
+
+<dt>January 21st, 2001</dt>
+<dd>Electronic Paper Submission is now available.
+<!--
+<ul>
+  <li><a href="submit.shtml">Go to Submission Guideline</a></li>
+  <li><a href="/cman/reflection2001/REG-paper/" target="_top">Go to Electronic Paper Submission </a></li>
+</ul>
+-->
+</dd>
+</dl>
+
+<div style="margin-top: 2em">&nbsp;</div>
+
+<center>
+<a href="http://www.aito.org/" target="_top"><img src="aito-logo.gif" width="100" height="49" alt="AITO - Association Internationale pour les Technologies Objets"></a>
+&nbsp;&nbsp;&nbsp;
+<a href="http://wwwsoc.nii.ac.jp/jssst/" target="_top"><img src="jssstlogo-blue.gif" width="122" height="53" alt="JSSST - Japan Society for Software Science and Technology"></a>
+&nbsp;&nbsp;&nbsp;
+<a href="http://www.acm.org/" target="_top"><img src="acm_logo.gif" width="48" height="48" alt="ACM"></a>
+&nbsp;&nbsp;&nbsp;
+<a href="http://www.acm.org/sigsoft/" target="_top"><img src="sigsoft-logo.gif" width="84" height="48" alt="ACM SIGSOFT"></a>
+&nbsp;&nbsp;&nbsp;
+<a href="http://www.ipsj.or.jp/sig/se/" target="_top"><img src="ipsjn.gif" width="77" height="63" alt="IPSJ SIGSE"></a>
+</center>
+
+<div style="margin-top: 1em">&nbsp;</div>
+
+<hr width="200" align="left">
+<div><img src="apache_pb.gif" width="259" height="32" alt="[Powered By Apache]"></div>
+<div><em>Last modified: <!--#echo var="LAST_MODIFIED"--> by webmaster@openjit.org</em></div>
+<!--
+<div><em>Access counts: <!--#exec cgi="cgi-bin/wwwcount.cgi"--></em></div>
+-->
+
+</body>
+</html>

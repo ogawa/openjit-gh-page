@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <link rel="stylesheet" href="common.css" type="text/css">
+    <link rev="made" href="mailto:webmaster@openjit.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <title>Workshop on Experience with Reflective Systems (Talks and Papers)</title>
+    <style>
+    </style>
+  </head>
+
+<body>
+
+<p style="text-align: right">
+<a href="/reflection2001/" target="_top"><img src="ref2001.gif" alt="Reflection 2001 - The Third International Conference on Metalevel Architectures and Separation of Crosscutting Concerns - Kyoto, Japan, September 25-28, 2001" width="285" height="46"></a>
+
+<div class="t1">Talks and Papers to be Presented at the Workshop on Experience with Reflective Systems</div>
+<div class="t2">(Held in conjunction with Reflection 2001, The 3rd International Conference on</div>
+<div class="t2">Metalevel Architectures and Separation of Crosscutting Concerns)</div>
+
+<div class="t3">Kyoto, Japan</div>
+<div class="t3">25 September 2001</div></p>
+
+<p class="t3">Workshop website: <a href="/reflection2001/reflective-systems.html">http://www.openjit.org/reflection2001/reflective-systems.html</a></p>
+<p class="t3">Conference website: <a href="/reflection2001/" target="_top">http://www.openjit.org/reflection2001/</a></p>
+
+<h1 id="talks">Talks</h1>
+
+<h2 id="RAM">Reflection for Adaptable Mobility - Experiences from a project on a reflective system for strong mobile systems<br>
+Mario Sudh&#246lt, &#201cole des Mines de Nantes.</h2>
+ 
+We present our experiences gained from a project supported by France Telecom R&D on a reflective system for strong mobile systems. We argue that separation of concerns can be advantageously applied to the development of applications relying on weak mobility (i.e. moving and executing code) and coarse-grained strong mobility (i.e. moving distributed entities while these entities are executing). We present the design of an infrastructure for such mobile applications where the mobility concern is cleanly separated from other concerns.
+
+We present an overview of a prototype implementation --- called RAM (Reflection for Adaptable Mobility) --- of such an infrastructure for strong mobility in Java by means of computational reflection. This infrastructure permits the development of mobile applications by plugging a mobility concern implemented at the meta-level into a sequential base program, and enables the dynamic introduction of different migration policies. We discuss an implementation of such an infrastructure based on program transformation techniques using appropriate existing tools (Javassist, www.csg.is.titech.ac.jp/~chiba/javassist, and JavaGo, web.yl.is.s.u-tokyo.ac.jp/amo/).
+
+Based on the results of this project, we discuss how the relationships of reflective systems for mobile systems with two larger but closely related contexts:
+
+<ul>
+<li> A generic kernel for reflective programming supporting mobility as one 
+concern among others.
+<li> Aspect-Oriented Programming, in particular a more langage-based approach 
+compared to our current library-based one. 
+</ul>
+
+<h2 id="Security">Reflective Security<br>
+Ian Welch, Department of Computing, University of Newcastle upon Tyne.</h2>
+
+This talk will discuss the use of reflection to enable a separation between security and application level concerns. The talk will cover:
+
+<ul>
+<li> How reflection can be used to enforce well-known security models.
+<li> Requirements for an implementation language for a reflective security architecture.
+<li> Show how these requirements can be satisfied using an extension of the Java(tm) programming language (Kava).
+<li> Overview a reflective security architecture that extends the Java Security architecture.
+<li> Show how this reflective security architecture can be used to implement security for a third-party application and contrast it with other non-reflective approaches.
+</ul>
+
+<h2 id="OpenORB">The Development of OpenORB<br>
+Geoff Coulson, Distributed Multimedia Research Group, Department of Computing, Lancaster University.</h2>
+
+This talk will discuss experiences with the design of a reflective middleware platform called OpenORB v2 that addresses the following requirements: 
+
+<ul>
+<li> backward compatibility with CORBA
+<li> sufficiently configurable to run well on a wide variety of platforms (from supercomputers to PDAs to embedded systems) 
+<li> sufficiently configurable to accommodate a wide range of application areas (e.g. real-time, multimedia, groups, embedded control systems) 
+<li> support run-time inspection, adaptation and extension 
+<li> perform at least as well as present day commodity ORBs 
+</ul>
+
+The platform is built using a well-founded lightweight component model built on the heart of Microsoft's COM (but without COM's higher levels), uses reflective techniques to facilitate (re)configuration, and employs the notion of component frameworks to manage and constrain the scope of reconfiguration operations.
+
+<h1 id="papers">Papers</h1>
+
+<ul>
+<li><a href="workshop-papers/sizhong.pdf">RECOM: A Reflective Architecture of Middleware</a>, Yang Sizhong and Liu Jinde, MCI, College of Computer Science and Engineering, UEST of China, Chengdu, China.
+<li><a href="workshop-papers/haraszti.pdf">The Iguana Experience: Meta-Level Programming in a Compiled Reflective Language</a>, Peter Haraszti, Tilman Sch&#228fer, and Vinny Cahill, Trinity College, Dublin, Ireland.
+<li><a href="workshop-papers/ishikawa.pdf">Some Software Design Issues for Realizing Internet-Scale Ubiquitous Computing</a>, Hiro Ishikawa, and Tatsuo Nakajima, Department of Information and Computer Science, Waseda University, Japan.
+<li><a href="workshop-papers/saikoski.pdf">Experiences with OpenORB's Compositional Meta-Model and Groups of Components</a>, Katia B. Saikoski and Geoff Coulson, Distributed Multimedia Research Group, Department of Computing, Lancaster University.
+</ul>
+
+</body>
+</html>
+
+
+
+

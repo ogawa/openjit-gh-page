@@ -1,0 +1,217 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description content="99/10/29: OpenJIT Compiler System (1)">
+<link rel=next href=slide0049.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0047.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master04_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=318 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=118 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=318 height=31>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=318 height=31><font face="Arial Narrow" color="#010000" size=5><b>OpenJIT
+    Compiler System (1)</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=140 height=31 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=29 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=17 height=217></td>
+  <td width=445 height=217 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=187 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=13 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=348 height=19 colspan=17><font face=Arial color="#010000" size=2>A
+    Joint effort with Fujitsu’s Java compiler group</font><br>
+    </td>
+    <td width=79 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=444 height=2 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=335 height=19 colspan=16><font face=Arial color="#010000" size=2>A
+    Reflective Just-in-time (Open JIT Compiler)</font><br>
+    </td>
+    <td width=92 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=444 height=1 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=348 height=17 colspan=15><font face=Arial color="#010000" size=2>Based
+    on Reflection/OI principle<span style="mso-spacerun: yes">&nbsp;
+    </span>(Java JIT in Java)</font><br>
+    </td>
+    <td width=58 height=17></td>
+   </tr>
+   <tr>
+    <td width=444 height=2 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=232 height=17 colspan=7><font face=Arial color="#010000" size=2>A
+    Java framework for JIT compiler</font><br>
+    </td>
+    <td width=174 height=17 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=444 height=2 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=406 height=17 colspan=16><font face=Arial color="#010000" size=2>Can
+    <i>download/compile </i>various customization &amp; optimization</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=38 height=16 colspan=4></td>
+    <td width=277 height=16 colspan=10><font face=Arial color="#010000" size=2>modules
+    into a JIT compiler “just-in-time”</font><br>
+    </td>
+    <td width=129 height=16 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=444 height=2 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=314 height=19 colspan=14><font face=Arial color="#010000" size=2>“Plugs
+    in” to Standard JavaVM (JDK 1.1.x)</font><br>
+    </td>
+    <td width=113 height=19 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=444 height=2 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=209 height=17 colspan=5><font face=Arial color="#010000" size=2>Works
+    just like off-the-shelf JIT</font><br>
+    </td>
+    <td width=197 height=17 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=444 height=1 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=234 height=16 colspan=5><font face="Courier New" color="#010000"
+    size=1>setenv JAVA_COMPILER OpenJIT</font><br>
+    </td>
+    <td width=151 height=16 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=59 height=15 colspan=7></td>
+    <td width=242 height=15 colspan=6><font face="Courier New" color="#010000"
+    size=1>setenv CLASSPATH &lt;openjitdir&gt;</font><br>
+    </td>
+    <td width=143 height=15 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=59 height=14 colspan=7></td>
+    <td width=292 height=14 colspan=9><font face="Courier New" color="#010000"
+    size=1>setenv LD_LIBRARY_PATH &lt;openjitdir&gt;</font><br>
+    </td>
+    <td width=93 height=14 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=444 height=2 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=223 height=17 colspan=6><font face=Arial color="#010000" size=2>Initially
+    “self-compiles” on startup</font><br>
+    </td>
+    <td width=183 height=17 colspan=10></td>
+   </tr>
+  </table>
+  </td>
+  <td width=13 height=217></td>
+ </tr>
+ <tr>
+  <td width=475 height=9 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=453 height=11 colspan=3></td>
+  <td width=6 height=11><img src="master04_image003.gif" border=0 width=6
+  height=11></td>
+  <td width=16 height=11 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=6></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

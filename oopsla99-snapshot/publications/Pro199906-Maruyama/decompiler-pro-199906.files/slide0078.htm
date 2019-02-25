@@ -1,0 +1,178 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 関連研究(その２)">
+<link rel=next href=slide0079.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0078.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master10_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=199 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=231 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=39 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=26 height=30></td>
+  <td width=202 height=30 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=202 height=30><font face="ＭＳ Ｐゴシック" size=5>関連研究</font><font
+    face="Times New Roman" size=5>(</font><font face="ＭＳ Ｐゴシック" size=5>その２</font><font
+    face="Times New Roman" size=5>)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=247 height=30 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=31 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=29 height=223 colspan=2></td>
+  <td width=430 height=223 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=60 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=165 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=39 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=54 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=26><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=288 height=26 colspan=12><font face=Tahoma size=4>Krakatoa(Proebsting</font><font
+    face="ＭＳ Ｐゴシック" size=4>ら</font><font face=Tahoma size=4>, 1997)</font><br>
+    </td>
+    <td width=124 height=26 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=429 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=23 height=23 colspan=3></td>
+    <td width=19 height=23 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=372 height=23 colspan=12><font face=Tahoma size=3>Ramshaw</font><font
+    face="ＭＳ Ｐゴシック" size=3>が</font><font face=Tahoma size=3>Pascal</font><font
+    face="ＭＳ Ｐゴシック" size=3>用に提案したアルゴリズム</font><br>
+    </td>
+    <td width=15 height=23></td>
+   </tr>
+   <tr>
+    <td width=38 height=22 colspan=4></td>
+    <td width=251 height=22 colspan=8><font face=Tahoma size=3>(Lyle Ramshaw,
+    1988)</font><font face="ＭＳ Ｐゴシック" size=3>の拡張</font><br>
+    </td>
+    <td width=140 height=22 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=429 height=3 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=47 height=20 colspan=6></td>
+    <td width=16 height=20 colspan=3><font face=Marlett color="#0000cc" size=2>h</font></td>
+    <td width=297 height=20 colspan=7><font face="ＭＳ Ｐゴシック" size=2>不自然だが、</font><font
+    face=Tahoma size=2>Java</font><font face="ＭＳ Ｐゴシック" size=2>の文法にのっとった結果</font><br>
+    </td>
+    <td width=69 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=429 height=7 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=19 height=19 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=279 height=19 colspan=10><font face="ＭＳ Ｐゴシック" size=3>パターンマッチングによる書き換え</font><br>
+    </td>
+    <td width=108 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=429 height=6 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=47 height=17 colspan=6></td>
+    <td width=16 height=17 colspan=3><font face=Marlett color="#0000cc" size=2>h</font></td>
+    <td width=243 height=17 colspan=5><font face="ＭＳ Ｐゴシック" size=2>不自然なコードから自然なコードへ</font><br>
+    </td>
+    <td width=123 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=429 height=9 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=23 height=25 colspan=3></td>
+    <td width=24 height=25 colspan=3><font face=Marlett color="#0000cc" size=4>i</font></td>
+    <td width=258 height=25 colspan=7><font face="ＭＳ Ｐゴシック" color=red size=4>アドホック</font><font
+    face="ＭＳ Ｐゴシック" color=black size=3>で、潜在的に</font><font face="ＭＳ Ｐゴシック"
+    color=red size=4>遅い</font><br>
+    </td>
+    <td width=124 height=25 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=429 height=6 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=47 height=17 colspan=6></td>
+    <td width=16 height=17 colspan=3><font face=Marlett color="#0000cc" size=2>h</font></td>
+    <td width=366 height=17 colspan=9><font face="ＭＳ Ｐゴシック" size=2>より自然なコードに復元するためには、多数のパター</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=429 height=2 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=59 height=17 colspan=8></td>
+    <td width=65 height=17 colspan=3><font face="ＭＳ Ｐゴシック" size=2>ンが必要</font><br>
+    </td>
+    <td width=305 height=17 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=16 height=223></td>
+ </tr>
+ <tr>
+  <td width=475 height=33 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,274 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OMPC++: A Portable High-Performance Implementation of DSM using OpenC++
+Reflection</title>
+<meta name=Description content="99/10/27: OMPC++ components">
+<link rel=next href=slide0008.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0007.htm');   
+  else
+    parent.location.href = "../OMPC++Reflection99.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master04_background.gif" bgcolor="#000066" alink="#000044"
+link="#3366ff" vlink=yellow text=white topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=199 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=84 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=132 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=26 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=40 height=41 colspan=2></td>
+  <td width=290 height=41 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=290 height=41><font face="Comic Sans MS" color="#ffcc66" size=5>OMPC++
+    components</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=145 height=41 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=16 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=25 height=253></td>
+  <td width=214 height=254 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=64 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=61 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=172 height=27 colspan=10><font face="Comic Sans MS" size=3>OpenC++
+    [Chiba96]</font><br>
+    </td>
+    <td width=42 height=27 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=17 height=26><font color=white size=3>&#8226;</font></td>
+    <td width=171 height=26 colspan=12><font face="Comic Sans MS" size=3>Compile-Time
+    MOP</font><br>
+    </td>
+    <td width=26 height=26 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=23 height=23 colspan=3></td>
+    <td width=15 height=23><font color=white size=2>&#8226;</font></td>
+    <td width=145 height=23 colspan=8><font face="Comic Sans MS" size=2>static
+    source-level</font><br>
+    </td>
+    <td width=31 height=23 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=65 height=19 colspan=2><font face="Comic Sans MS" size=2>program</font><br>
+    </td>
+    <td width=111 height=19 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=38 height=18 colspan=4></td>
+    <td width=127 height=18 colspan=4><font face="Comic Sans MS" size=2>transformations</font><br>
+    </td>
+    <td width=49 height=18 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=23 height=23 colspan=3></td>
+    <td width=15 height=23><font color=white size=2>&#8226;</font></td>
+    <td width=176 height=23 colspan=12><font face="Comic Sans MS" size=2>metaclass
+    for program</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=144 height=19 colspan=7><font face="Comic Sans MS" size=2>transformations
+    is</font><br>
+    </td>
+    <td width=32 height=19 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=163 height=19 colspan=11><font face="Comic Sans MS" size=2>compiled
+    by OpenC++</font><br>
+    </td>
+    <td width=13 height=19></td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=66 height=19 colspan=3><font face="Comic Sans MS" size=2>compiler</font><br>
+    </td>
+    <td width=110 height=19 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=23 height=23 colspan=3></td>
+    <td width=15 height=23><font color=white size=2>&#8226;</font></td>
+    <td width=162 height=23 colspan=10><font face="Comic Sans MS" size=2>generates
+    a compiler</font><br>
+    </td>
+    <td width=14 height=23 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=132 height=19 colspan=5><font face="Comic Sans MS" size=2>includes
+    program</font><br>
+    </td>
+    <td width=44 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=127 height=19 colspan=4><font face="Comic Sans MS" size=2>transformations</font><br>
+    </td>
+    <td width=49 height=19 colspan=8></td>
+   </tr>
+  </table>
+  </td>
+  <td width=7 height=253></td>
+  <td width=216 height=253 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=55 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=13 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=44 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=183 height=27 colspan=12><font face="Comic Sans MS" size=3>MPC++
+    [Ishikawa96]</font><br>
+    </td>
+    <td width=33 height=27 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=18 height=26><font color=white size=3>&#8226;</font></td>
+    <td width=152 height=26 colspan=9><font face="Comic Sans MS" size=3>extends
+    C++ only</font><br>
+    </td>
+    <td width=46 height=26 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=18 height=22></td>
+    <td width=174 height=22 colspan=12><font face="Comic Sans MS" size=3>using
+    Template and</font><br>
+    </td>
+    <td width=24 height=22 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=18 height=23></td>
+    <td width=108 height=23 colspan=8><font face="Comic Sans MS" size=3>Inheritance</font><br>
+    </td>
+    <td width=90 height=23 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=18 height=26><font color=white size=3>&#8226;</font></td>
+    <td width=77 height=26 colspan=5><font face="Comic Sans MS" size=3>provides</font><br>
+    </td>
+    <td width=121 height=26 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=24 height=23 colspan=3></td>
+    <td width=15 height=23><font color=white size=2>&#8226;</font></td>
+    <td width=143 height=23 colspan=7><font face="Comic Sans MS" size=2>user-level
+    threads</font><br>
+    </td>
+    <td width=34 height=23 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=22 colspan=3></td>
+    <td width=15 height=22><font color=white size=2>&#8226;</font></td>
+    <td width=167 height=22 colspan=10><font face="Comic Sans MS" size=2>remote
+    / local thread</font><br>
+    </td>
+    <td width=10 height=22 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=39 height=19 colspan=4></td>
+    <td width=65 height=19 colspan=3><font face="Comic Sans MS" size=2>creation</font><br>
+    </td>
+    <td width=112 height=19 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=24 height=23 colspan=3></td>
+    <td width=15 height=23><font color=white size=2>&#8226;</font></td>
+    <td width=173 height=23 colspan=11><font face="Comic Sans MS" size=2>remote
+    / local method</font><br>
+    </td>
+    <td width=4 height=23></td>
+   </tr>
+   <tr>
+    <td width=39 height=19 colspan=4></td>
+    <td width=78 height=19 colspan=4><font face="Comic Sans MS" size=2>invocation</font><br>
+    </td>
+    <td width=99 height=19 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=24 height=23 colspan=3></td>
+    <td width=15 height=23><font color=white size=2>&#8226;</font></td>
+    <td width=177 height=23 colspan=12><font face="Comic Sans MS" size=2>remote
+    memory access</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=13 height=253></td>
+ </tr>
+ <tr>
+  <td width=25 height=1></td>
+  <td width=236 height=1 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=19 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

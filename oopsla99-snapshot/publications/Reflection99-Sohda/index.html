@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OpenJIT: Publications</title>
+</head>
+
+<body>
+
+<h2 align=cneter>OMPC++: A Portable High Performance Implementation of DSM using OpenC++ Reflection</h2>
+<h3 align=center>Yukihiko Sohda, Hirotaka Ogawa, Satoshi Matsuoka</h3>
+<h3 align=center>Tokyo Institute of Technology</h3>
+<h4 align=center>Proceedings of Reflection'99</h4>
+<h4 align=center>Meta-Level Architecture and Reflection</h4>
+<h4 align=center>LNCS 1616, pp. 215-234</h4>
+<h4 align=center>July, 1999</h4>
+
+<hr>
+<h3>Paper</h3>
+<ul>
+<li><a href="OMPC++Reflection99.ps">PS file</a>
+<li><a href="OMPC++Reflection99.pdf">PDF file</a>
+</ul>
+<h3>Slide</h3>
+<ul>
+<li><a href="OMPC++Reflection99.html">HTML</a>
+</ul>
+
+<h3>Abstract</h3>
+<blockquote>
+Platform portability is one of the utmost demanded properties of a system today, due to the diversity of runtime execution environment of wide-area networks, and parallel programs are no exceptions. However, parallel execution environments are VERY diverse, could change dynamically, while performance must be portable as well. As a result, techniques for achieving platform portability are sometimes not appropriate, or could restrict the programming model, e.g., to simple message passing. Instead, we propose the use of reflection for achieving platform portability of parallel programs. As a prototype experiment, a software DSM system called OMPC++ was created which utilizes the compile-time metaprogramming features of OpenC++ 2.5 to generate a message-passing MPC++ code from a SPMD-style, shared-memory C++ program. The translation creates memory management objects on each node to manage the consistency protocols for objects arrays residing on different nodes. Read- and write- barriers are automatically inserted on references to shared objects. The resulting system turned out to be quite easy to construct compared to traditional DSM construction methodologies. We evaluated this system on a PC cluster linked by the Myrinet gigabit network, and resulted in reasonable performance compared to a high-performance SMP. 
+</blockquote>
+<hr>
+<a href="../index.html">Return to publication index</a>.
+</body>
+</html>

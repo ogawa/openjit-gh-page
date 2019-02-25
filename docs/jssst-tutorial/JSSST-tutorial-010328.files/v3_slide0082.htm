@@ -1,0 +1,282 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Problems in Java wrt Performance Portability">
+<link rel=next href="v3_slide0012.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0082.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0082_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=19 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=21 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=23 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=99 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=79 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=119 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=476 height=6 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=103 height=76 colspan=9></td>
+  <td width=357 height=76 colspan=7>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=23 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=311 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=23 height=41></td>
+    <td width=311 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Problems in Java wrt</font><br>
+    </td>
+    <td width=23 height=41></td>
+   </tr>
+   <tr>
+    <td width=357 height=35 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Performance Portability</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=16 height=76 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=476 height=5 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=15 height=5 colspan=3></td>
+  <td width=37 height=19 colspan=3 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=37 height=19 align=center><font face="Comic Sans MS"
+    color="#003399" size=1><b>javac</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=424 height=5 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=15 height=14 colspan=3></td>
+  <td width=285 height=14 colspan=8></td>
+  <td width=119 height=67 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=85 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=93 height=19 colspan=4><font face="Comic Sans MS" size=1><b>Execution
+    Env</b></font><br>
+    </td>
+    <td width=26 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=5 height=15><font color=black size=1>&#8226;</font></td>
+    <td width=86 height=15 colspan=2><font face="Comic Sans MS" size=1><b>Interpreters</b></font><br>
+    </td>
+    <td width=28 height=15 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=5 height=16><font color=black size=1>&#8226;</font></td>
+    <td width=95 height=16 colspan=4><font face="Comic Sans MS" size=1><b>JIT
+    compilers</b></font><br>
+    </td>
+    <td width=19 height=16></td>
+   </tr>
+   <tr>
+    <td width=5 height=16><font color=black size=1>&#8226;</font></td>
+    <td width=114 height=16 colspan=5><font face="Comic Sans MS" size=1><b>Native
+    Compilers</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=20 height=14 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=337 height=42 colspan=14></td>
+  <td width=20 height=42 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=32 height=11 colspan=4></td>
+  <td width=104 height=35 colspan=7 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=79 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=104 height=19 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=1><b>Java Bytecode</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=12 height=16></td>
+    <td width=79 height=16 align=center><font face="ＭＳ Ｐゴシック" color="#003399"
+    size=1><b>（</b></font><font face="Comic Sans MS" color="#003399" size=1><b>.classfile</b></font><font
+    face="ＭＳ Ｐゴシック" color="#003399" size=1><b>）</b></font><br>
+    </td>
+    <td width=13 height=16></td>
+   </tr>
+  </table>
+  </td>
+  <td width=201 height=11 colspan=3></td>
+  <td width=20 height=11 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=32 height=24 colspan=4></td>
+  <td width=340 height=24 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=476 height=35 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=115 height=7 colspan=10></td>
+  <td width=44 height=35 colspan=2 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=35 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=44 height=19 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=1><b>Static</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=4 height=15></td>
+    <td width=35 height=15 align=center><font face="Comic Sans MS"
+    color="#003399" size=1><b>comp</b></font><br>
+    </td>
+    <td width=5 height=15></td>
+   </tr>
+  </table>
+  </td>
+  <td width=317 height=7 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=14 height=19 colspan=2></td>
+  <td width=33 height=19 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=33 height=19 align=center><font face="Comic Sans MS"
+    color="#003399" size=1><b>JVM</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=24 height=19 colspan=2></td>
+  <td width=28 height=19>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=28 height=19 align=center><font face="Comic Sans MS"
+    color="#003399" size=1><b>JIT</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=16 height=19 colspan=2></td>
+  <td width=317 height=19 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=115 height=9 colspan=10></td>
+  <td width=99 height=9></td>
+  <td width=216 height=51 colspan=4 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=178 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=178 height=19><font face="Comic Sans MS" color=maroon size=1>Different
+    from Fortran/C,</font><br>
+    </td>
+    <td width=38 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=188 height=16 colspan=2><font face="Comic Sans MS" color=maroon
+    size=1>where program performance</font><br>
+    </td>
+    <td width=28 height=16></td>
+   </tr>
+   <tr>
+    <td width=216 height=16 colspan=3><font face="Comic Sans MS" color=maroon
+    size=1>scaled with machine performance</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=2 height=9 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=258 height=42 colspan=13></td>
+  <td width=2 height=42 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=476 height=5 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=5 height=49></td>
+  <td width=471 height=49 colspan=18><img src="v3_slide0082_image074.gif"
+  border=0 width=471 height=49></td>
+ </tr>
+ <tr>
+  <td width=476 height=7 colspan=19></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

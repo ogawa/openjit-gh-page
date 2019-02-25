@@ -1,0 +1,180 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: New JVM JIT APIs Contd">
+<link rel=next href="v3_slide0273.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0272.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=41 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=23 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=371 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=39 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=41 height=41></td>
+  <td width=394 height=41 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=394 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>New JVM JIT APIs Contd</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=40 height=41 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=19 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=64 height=210 colspan=2></td>
+  <td width=387 height=210 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=40 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=131 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=63 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=48 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=26 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=15 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=308 height=23 colspan=9><font face="Comic Sans MS" size=2>Native
+    method allocation and reflection</font><br>
+    </td>
+    <td width=64 height=23 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=12 height=18><font color="#003399" size=1>&#8226;</font></td>
+    <td width=313 height=18 colspan=7><font face="Comic Sans MS" size=1>Public
+    final native void NativeCodeAlloc(int size)</font><br>
+    </td>
+    <td width=38 height=18 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=321 height=19 colspan=8><font face="Comic Sans MS" size=1>Public
+    final native int NativeCodeReAlloc(int size)</font><br>
+    </td>
+    <td width=30 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=351 height=19 colspan=11><font face="Comic Sans MS" size=1>Public
+    final native void setNativeCode(int pc, int code)</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=283 height=19 colspan=5><font face="Comic Sans MS" size=1>Public
+    final native int getNativeCode(int pc)</font><br>
+    </td>
+    <td width=68 height=19 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=235 height=19 colspan=4><font face="Comic Sans MS" size=1>Private
+    native byte[] MethodName()</font><br>
+    </td>
+    <td width=116 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=15 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=193 height=23 colspan=6><font face="Comic Sans MS" size=2>Class
+    resolution methods</font><br>
+    </td>
+    <td width=179 height=23 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=325 height=19 colspan=9><font face="Comic Sans MS" size=1>Public
+    final native void initParser(int caller_cp, int</font><br>
+    </td>
+    <td width=26 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=36 height=16 colspan=4></td>
+    <td width=41 height=16 colspan=2><font face="Comic Sans MS" size=1>index)</font><br>
+    </td>
+    <td width=310 height=16 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=340 height=19 colspan=10><font face="Comic Sans MS" size=1>Public
+    final native void resolveClass(int caller_cp, int</font><br>
+    </td>
+    <td width=11 height=19></td>
+   </tr>
+   <tr>
+    <td width=36 height=15 colspan=4></td>
+    <td width=41 height=15 colspan=2><font face="Comic Sans MS" size=1>index)</font><br>
+    </td>
+    <td width=310 height=15 colspan=9></td>
+   </tr>
+  </table>
+  </td>
+  <td width=24 height=210></td>
+ </tr>
+ <tr>
+  <td width=475 height=47 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

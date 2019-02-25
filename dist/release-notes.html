@@ -1,0 +1,114 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="../common.css" type="text/css">
+<link rev=made href="mailto:webmaster@matsulab.is.titech.ac.jp">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OpenJIT: Distribution</title>
+
+<style type="text/css">
+<!--
+-->
+</style>
+</head>
+
+<body>
+
+<div class=begin-title>OpenJIT</div>
+<h1 class=title>Release Notes</h1>
+<div class=end-title>&nbsp;</div>
+
+<a name="1.1.16"><h2 class="genre">Changes from 1.1.15</h2></a>
+
+<ul>
+  <li>BUGFIX: Backup paths eventually cause SIGSEGV on X86.  Those paths are only used when dynamic linker doesn't link symbols refered from libOpenJIT.so to corresponding symbols within JVM.
+  <li>BUGFIX: Incorrect type definition that lead GCC's optimization problem.
+  <li>Integrate experimental support for jar version of OpenJIT package for JDK 1.2 or later.  This allows user not to spread indivisual classfiles of OpenJIT's self under JAVA_HOME/jre/classes but to use one archive `OpenJIT.jar'.
+</ul>
+
+<a name="1.1.15"><h2 class="genre">Changes from 1.1.14</h2></a>
+
+<ul>
+  <li>BUGFIX: Allocating multi-dimensional arrays causes SIGSEV in the latest version of JDK 1.1.8. </li>
+  <li>...</li>
+</ul>
+
+<a name="1.1.14"><h2 class="genre">Changes from 1.1.13</h2></a>
+
+<ul>
+  <li>BUGFIX: No IllecalAccessError had occured when accessing final variables. This made it possible to rewrite final variables unsafely.</li>
+
+  <li>REFINE: Change the default value of max_stack_frames (400 -> 43). This value depends on platforms, and several JDK 1.1.8 platforms didn't work with the old default value (400). We now chose the default value to minimize the warm-up time of OpenJIT. The best value for JDK 1.2.2 (both of Blackdown and Sun) is "41" and that for JDK 1.1.8 is "43".</li>
+
+  <li>BUGFIX: In a final block, a branch operation to the outside of the block causes infinite recursive calls at the Control Flow Analysis phase.</li>
+
+  <li>BUGFIX: Change the native codes for "jsr" and "ret". The older versions may cause memory leaks for native stack.</li>
+
+</ul>
+
+<a name="1.1.13"><h2 class="genre">Changes from 1.1.12</h2></a>
+
+<ul>
+  <li>NEW: Support Blackdown Java 2 SDK Version 1.2.2 FCS for Linux.</li>
+  <li>The Blackdown JVM causes SIGSEGV interruption with the previous versions of OpenJIT.</li>
+  <li>The Blackdown VM passes `ucontext' to SignalHandler as an argument. The current version uses this argument.</li>
+  <li>REFINE: The current version checks `stack overflow' more strictly when calling JNIs. The previous versions checked whether the stack was left 8kbytes or not. Now OpenJIT checks whether it is left the exact stack size, that each JNI calls needs, or not.</li>
+</ul>
+
+<a name="1.1.12"><h2 class="genre">Changes from 1.1.11</h2></a>
+
+<ul>
+  <li>BUGFIX: When the block range specified by an exception table is not aligned with the instruction boundary, the previous verison of OpenJIT cannot compile because of NullPointerException.
+  <li>REFINE: Avoid crashes around StackOverFlowError, as thoroughly as possible.
+  <li>REFINE: Modify configure script so as to compile by native-thread JVM.
+</ul>
+
+<a name="1.1.11"><h2 class="genre">Changes from 1.1.10</h2></a>
+
+<ul>
+  <li>NEW: OpenJIT now passed JCK-runtime-vm-122</li>
+  <li>BUGFIX: Cancel initialization of the classes, whose instances catch exceptions.
+  <li>NEW: Implement jni->Unregisted(ClassClass *).</li>
+  <li>TYPO: implet -> implement</li>
+  <li>REFINE: Check StackOverFlowException for x86.</li>
+  <li>NEW: Add compile.omit.stackOverFlowCheck option.</li>
+</ul>
+
+<a name="1.1.10"><h2 class=genre>Changes from 1.1.9</h2></a>
+
+<ul>
+  <li>NEW: OpenJIT now passed JCK 1.2.</li>
+  <li>BUGFIX: When a exception arises, OpenJIT then tries to resolve its execption class. In consequence, it may cause an extra exception. OpenJIT now can correctly handle such exceptions.</li>
+  <li>BUGFIX: OpenJIT can handle exceptions in monitorEnter() and monitorExit(), correctly.</li>
+  <li>BUGFIX: OpenJIT can also handle exceptions in invokeinterface (trying to execute abstract methods)</li>
+  <li>NEW: Support JDK 1.3 (tentative support, it is not well-tested).
+</ul>
+
+<a name="1.1.9"><h2 class="genre">Changes from 1.1.8</h2></a>
+
+<ul>
+  <li>NEW: The years of the copyright are changed (add 2000).
+  <li>BUGFIX: Fix floating operation (Casting NaN value to a long variable, its value become wrong).
+  <li>REFINE: Add several methods for debugging.
+</ul>
+
+<a name="1.1.8"><h2 class="genre">Changes from 1.1.7</h2></a>
+
+<ul>
+  <li>NEW: OpenJIT modules can be downloaded from network at JIT compile
+time. Once you put OpenJIT classfiles into a Web accessible directory,
+you can use this feature in the following way: <br>
+java -Dcompile.URL=http://www.openjit.org/dowload
+  <li>NEW: OpenJIT now can restrict the depth of self-compilation proccess. This feature is mandatory to support network downloadable OpenJIT modules. 
+  <li>NEW: You can control compilation process from Java program, by using Compiler.disable(), Compiler.enable().
+  <li>NEW: Support JDK 1.2.2rc* (blackdown, sun)
+  <li>REFINE: OpenJIT can be built, by using not only *GNU make* but also *standard make*.
+  <li>REFINE: Just type `make install' to plug-in into JDK automatically.
+  <li>BUGFIX: fix floating operation in X86
+  <li>BUGFIX: fix parser for invokeinterface_quick.
+</ul>
+
+<hr>
+<address>openjit@is.titech.ac.jp</address>
+</body>
+</html>

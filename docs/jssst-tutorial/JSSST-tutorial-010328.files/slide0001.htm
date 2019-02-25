@@ -1,0 +1,135 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Efficient Execution of Languages Like Java (Java言語の高速化技術) ">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+<style>
+.CB
+	{color:black;}
+.CT
+	{color:#003399;}
+</style>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0001.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><p:slidetransition advancetime="46448" speed="1" flag="1"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="2"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master09.xml">
+ <p:shaperange href="master09.xml#_x0000_s142337"/><![if !ppt]><p:shaperange
+  href="master09.xml#_x0000_s142338"/><![if !vml]><img border=0
+ v:shapes="_x0000_s142338,_x0000_s142339,_x0000_s142341,_x0000_s142342,_x0000_s142344,_x0000_s142346,_x0000_s142347"
+ src="master09_image165.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master09.xml#_x0000_s142350"/><p:shaperange
+  href="master09.xml#_x0000_s142351"/><![endif]><p:shaperange
+  href="master09.xml#_x0000_m142348"/><v:shape id="_x0000_s2050" type="#_x0000_m142348"
+  style='position:absolute;left:36pt;top:102pt;width:666pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <v:shadow on="t" color="blue"/>
+  <p:placeholder type="centerTitle"/><p:animation number="1" delay="0"
+   type="noBuild" effect="checker" direction="horizontal" buildby="char"
+   flag="17428">
+   <p:sound id="1" builtinid="101" name="Type.wav" href="sound001.wav"/></p:animation>
+ </v:shape><![if !ppt]>
+ <div style='position:absolute;top:11.25%;left:5.05%;width:93.07%;height:31.25%;
+ filter:DropShadow(Color=#0000FF, OffX=1, OffY=1)'><![endif]>
+ <div v:shape="_x0000_s2050" class=CT><span style='position:absolute;
+ top:0%;left:1.0%;width:97.38%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Efficient
+ Execution of </span></span><span style='position:absolute;top:31.2%;
+ left:1.0%;width:97.38%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Languages Like
+ Java<br>
+ </span></span><span style='position:absolute;top:62.4%;left:1.0%;
+ width:97.38%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>(Java</span>言語の高速化技術<span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS"'>)<span
+ style='mso-tab-count:1;width:3.69%'> </span></span></span></div>
+ <![if !ppt]></div>
+ <![endif]><p:shaperange href="master09.xml#_x0000_m142349"/><v:shape id="_x0000_s2051"
+  type="#_x0000_m142349" style='position:absolute;left:114pt;top:276pt;width:7in;
+  height:138pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <v:shadow on="t" color="blue"/>
+  <p:placeholder type="subTitle" position="1"/><p:animation number="2" delay="0"
+   type="noBuild" effect="fly" direction="left" flag="17408"/></v:shape><![if !ppt]>
+ <div style='position:absolute;top:51.0%;left:11.42%;width:79.02%;height:48.25%;
+ filter:DropShadow(Color=#0000FF, OffX=1, OffY=1)'><![endif]>
+ <div v:shape="_x0000_s2051" class=CB>
+ <div style='position:absolute;top:0%;left:6.87%;width:86.25%;height:17.61%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Satoshi Matsuoka&#13;</span></div>
+ <span style='position:absolute;top:17.61%;left:0%;width:100.0%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Tokyo Institute of Technology/<br>
+ </span></span><span
+ style='position:absolute;top:32.12%;left:6.87%;width:86.25%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>JST&#13;</span></span>
+ <div style='position:absolute;top:53.88%;left:6.87%;width:86.25%;height:12.95%'><span
+ lang=EN-US style='mso-fareast-language:JA;display:none'>&#13;</span></div>
+ <span style='position:absolute;top:67.35%;left:6.87%;width:86.25%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>JSSSTutorial 2001/03/31<br>
+ </span></span><span
+ style='position:absolute;top:82.38%;left:6.87%;width:86.25%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Slide ver. 2001/03/03</span></span></div>
+ <![if !ppt]></div>
+ <![endif]></p:slide></div>
+
+</body>
+
+</html>

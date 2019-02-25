@@ -1,0 +1,193 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: Bckgrnd2 - JITs and Portability">
+<link rel=next href=slide0021.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0020.htm');   
+  else
+    parent.location.href = "../OpenJIT-ICSE98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0020_background.gif" bgcolor="#0066cc" alink="#ff9933"
+link="#330099" vlink="#cbcbcb" text=white topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=35 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=400 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=35 height=33></td>
+  <td width=405 height=33 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=405 height=33 align=center><font face="Times New Roman"
+    color="#cbcbcb" size=5>Bckgrnd2 - JITs and Portability</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=35 height=33 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=28 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=40 height=233 colspan=2></td>
+  <td width=412 height=233 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=205 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=29 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=48 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=49 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=242 height=21 colspan=6><font face="Times New Roman" size=3>“Portable”
+    languages e.g., Java</font><br>
+    </td>
+    <td width=153 height=21 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=413 height=4 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=307 height=18 colspan=8><font face="Times New Roman" size=2>Does
+    not compile directly to CPU native code</font><br>
+    </td>
+    <td width=67 height=18 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=413 height=5 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=356 height=18 colspan=9><font face="Times New Roman" size=2>Interpretive
+    execution of common bytecodes on VMs</font><br>
+    </td>
+    <td width=18 height=18 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=413 height=5 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=362 height=18 colspan=10><font face="Times New Roman" size=2>Speed
+    problem </font><font face="ＭＳ Ｐゴシック" size=2>（</font><font
+    face="Times New Roman" size=2>1/10 </font><font face="ＭＳ Ｐゴシック" size=2>～</font><font
+    face="Times New Roman" size=2> 1/100 vs. optim. native code)</font><br>
+    </td>
+    <td width=12 height=18></td>
+   </tr>
+   <tr>
+    <td width=413 height=5 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=18 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=277 height=21 colspan=9><font face="Times New Roman" size=3><i><u>Just-In-Time
+    compiler to the rescue</u></i></font><br>
+    </td>
+    <td width=118 height=21 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=413 height=5 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=206 height=18 colspan=2><font face="Times New Roman" size=2>Rather
+    old idea: Smalltalk, etc.</font><br>
+    </td>
+    <td width=168 height=18 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=413 height=5 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=304 height=18 colspan=7><font face="Times New Roman" size=2>Compile
+    bytecode into native code at runtime</font><br>
+    </td>
+    <td width=70 height=18 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=413 height=5 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=227 height=18 colspan=5><font face="Times New Roman" size=2>1/2 </font><font
+    face="ＭＳ Ｐゴシック" size=2>～</font><font face="Times New Roman" size=2> 1/10
+    vs. optim. native code</font><br>
+    </td>
+    <td width=147 height=18 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=413 height=5 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=18 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=395 height=21 colspan=14><font face="Times New Roman" size=3>Sun,
+    MS, IBM, Symantec, Fujitsu, etc., vigorously</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=413 height=2 colspan=15></td>
+   </tr>
+   <tr>
+    <td width=18 height=21></td>
+    <td width=243 height=21 colspan=7><font face="Times New Roman" size=3>developing
+    “the best” Java JIT.</font><br>
+    </td>
+    <td width=152 height=21 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=23 height=233></td>
+ </tr>
+ <tr>
+  <td width=475 height=16 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

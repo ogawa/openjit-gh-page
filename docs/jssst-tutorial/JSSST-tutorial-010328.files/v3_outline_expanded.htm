@@ -1,0 +1,6666 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../JSSST-tutorial-010328.htm";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor=black text=white link=white vlink=white alink=white>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0001.htm');">Efficient Execution of
+Languages Like Java<br>
+(Java言語の高速化技術)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Satoshi Matsuoka</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Tokyo Institute of Technology/<br>
+  JST</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JSSSTutorial 2001/03/31<br>
+  Slide ver. 2001/03/03</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0205.htm');">Objective of The Tutorial</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Identify the different assumptions of
+  Java execution, and challenges imposed thereby</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Describe history and technicalities
+  of various work to overcome the challenges</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Introduce some of the work that exploits
+  Java’s execution characteristics</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Convince people work on systems
+  efforts on interesting and better languages like Java, instead of arcane
+  languages like Fortran…</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>NOTE: Java is an exemplar for new
+  generation of programming languages. Many issues discussed is applicable to
+  languages “like Java”</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0216.htm');">Disclaimers</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Can’t possibly cover all the research
+  topics</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Too many research going on</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Have to write a book!</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Can’t possibly cover all the slides</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Too many slides for too many topics</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Please read the slides, and/or ask me
+  later</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Can’t possibly finish the slides by
+  camera-ready deadline (_o_)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Latest slides at
+  http://www.openjit.org</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0239.htm');">Audience Assumptions</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Assume basic knowledge of
+  object-orientation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Objects, class, encapsulation,
+  methods, constructors, etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Assume some familiarity with Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Assume familiarity with traditional
+  compiler technologies</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Program graphs, basic analysis
+  techniques, basic optimization techniques</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0179.htm');">Table of Contents</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>1.Intro -- Overview of Java and
+  Differences from Traditional Languages</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>2.General Optimization of Java
+  Programs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>3.Optimizing Concurrent Execution</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>4.Numerical Optimizations of Java
+  Programs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>5.Advanced Techniques and Research
+  Trends Utilizing Java Characteristics</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>6.The Future and Conclusion</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0184.htm');">Intro -- Overview of Java
+and Diffs from Traditional Languages (e.g., Fortran)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Historical Perspective: Bits and
+  Pieces of:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Smalltalk (Simple OO Language Model,
+  Class Library)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>CLU/Modula (Strong Typing, Modules)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Lisp (Dynamic Memory Management)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>C/C++ (Syntax, Protection,
+  Exceptions)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Standardization of Object-Oriented
+  Languages</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>C.f. C in Systems Programming,
+  Fortran in HPC, Scheme in Functional Prog.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Resurgence of recent research in OO
+  languages</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Language Standardization, Bytecode
+  standardization, Library Standardization</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0185.htm');">Java Historical
+Perspective<br>
+(Cont’d)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java Development</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Oak Language</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Handheld device&amp;STBs main apps</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java JDK 1.0</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>HotJava browser, still very slow</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java JDK 1.1</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Fast JIT Compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java JDK 1.2. and later (Java 2)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Advanced Compilers, Runtime</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>New Language/Library Features</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0243.htm');">Is Java Slow in the First
+Place?</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Not very much so for business apps</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Yes, for numerical intensive stuff</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0214.htm');">Review of the Java
+Execution Model</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0206.htm');">What characterizes Java
+execution model, c.f. Fortran w.r.t. Optimization?</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(1) Object-Orientation
+  (Encapsulation)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(2) Inherent Semantical Dynamicity</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(3) Language-Imposed Safety</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(4) Strict Portability Requirements</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(5) Language-Level Concurrency and
+  Interaction with Memory Model, Portability</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(6) Execution Environment?</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0209.htm');">(1) Object-Orientation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Must support semantical aspects of
+  Object-Orientation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Dynamic Object Creation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Objects may not be allocated</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Polymorphism/Dynamic Dispatch</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Call target depends on the dynamic
+  type of the receiver</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Encapsulation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Breakage must be checked</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Can be exploited for optimization</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0339.htm');">(1) Object-Orientation
+(cont’d)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Different Program Style</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Very short methods frequent</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Accessor Methods</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Method Overrides Normal</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Class Framework</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Design Patterns</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Rapid Object Allocation/Deallocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Objects live on heap</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0207.htm');">(2) Inherent Dynamicity</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Inherent Dynamicity prevalent in
+  various aspects of language semantics</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Separate Compilation of classfiles</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Dynamic loading of classes</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>User-defined class loaders</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Reflection</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Cannot assume many things to be
+  static</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>=&gt; Optimization techniques must
+  account for these dynamicity</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0210.htm');">(3) Language-Imposed
+Safety</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Language semantics impose various
+  safety requirements against errors</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Some errors can be detected by the
+  VM/Class Loader before execution</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Others must be detected at runtime</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Null references</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Exceeding array bounds</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>(Nested) Exception Handling</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Inhibits MANY optimizations, esp.
+  code motion</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0211.htm');">(4) Strict Portability
+Requirement</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Strict language semantics definition</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The Java Programming Language, JVM,
+  Standard Libraries</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Results cannot vary between different
+  Java implementations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Arithmetic equivalence cannot be
+  assumed</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Issue: precision, exception -&gt; No
+  reordering</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Interactions with Concurrency and
+  Memory Model</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Initial memory model too strict</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0208.htm');">(5) Concurrency &amp;
+Memory Models</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Concurrency Inherent in the Language
+  (Threads)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Must Guarantee every library to be
+  thread-safe</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Overhead of locking, synchronization</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Interaction with the Memory Model,
+  for portability semantics</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Some optimizations could be inhibited</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Series of recent work by Bill Pugh on
+  Strict Definitions and Revision Proposal</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Extreme # of synchronizations/sec.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Most library methods are synchronized</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Can assume most are uncontended</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0218.htm');">General Strategy for
+Efficient Java Execution</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Perform Static Analysis to identify
+  static properties of program, transform</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Compile/Load/Run Time (JIT time)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>May further optimize/deoptimize</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Identify when static assumptions are
+  broken, and Compensate</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Instrument Performance to guide (de)optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Harder than you might think</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0224.htm');">Chapter 2: General
+Optimization of Java Programs</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>In truth: General Optimization of
+  Object-Oriented Programs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Although most results applicable to
+  Java, most results predate Java, or recent results applicable to other OO
+  languages like Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Lesson to young people: RTFL (Read
+  The F**king Literature)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0215.htm');">Object Orientation (1) &#8211;
+Encapsulation of Control</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Control Encapsulation = Dynamic
+  Dispatch</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Classic Problem &#8211; since Smalltalk72</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Early work in [Krasner83]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Problem: Given callsite s, Set of
+  classes and their relations C, receiver class r<sub>C</sub> and method
+  signature m, which method m<sub>k</sub> to invoke?</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Dispatch(s, C, r<sub>C </sub>, m) = m<sub>k</sub></font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0219.htm');">Dynamic Dispatch (cont’d)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Computing Dispatch(s, C, r<sub>C </sub>,
+  m) =&gt;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Dynamically Typed OO Languages</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>E.g., Smalltalk, CLOS, Self</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>No info of r<sub>C</sub> at s on
+  compile time</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Analysis may provide info for s</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Statically Typed OO Langauges</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>E.g., Modula3, C++, Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Callsite s has type info s<sub>C </sub>=&gt;
+  Dispatch(s<sub>C </sub>, C, r<sub>C </sub>, m)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Basic Strategy: Method Search (or
+  Lookup)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Traverse C from r<sub>C</sub> to
+  root, looking for m<sub>k</sub> that matches m</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0220.htm');">Basic Dynamic Dispatch
+Method Lookup Techniques</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Dispatch Table</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Assign a unique id to every m in C</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Create a table T indexable by all
+  classes in C and all m. For each entry precompute m<sub>k </sub>w/the search
+  algorithm</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>On dispatch, T(r<sub>C</sub>,m) = m<sub>k
+  </sub>(note: r<sub>C </sub>!= k)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>For Single inheritance languages:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Slice the table by columns (class)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Possibly assign overlapping id’s to
+  different method signatures of new methods defined for siblings</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>A pointer from the object to this
+  column.</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Usually called the Virtual Function
+  Table or Vtable after naming in C++.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0221.htm');">Basic Dispatch
+Optimization Techniques (Runtime)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Method Caching</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Instead of creating the entire table
+  T, construct a closed hashtable</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Hit ratio approx 93% on 1024 entry
+  cache for early Smalltalk [Krasner]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Inline Caching[Deustch&amp;
+  Schiffman84]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>For each callsite s, patch code so
+  that directly jumps to m<sub>k</sub></font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>At m<sub>k</sub>, test if r<sub>C</sub>
+  is proper (usually r<sub>C </sub>= k). If not then perform method search, and
+  repatch</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Good for languages w/ multiple
+  inheritance and/or multimethod (e.g., CLOS), c.f. dispatch table</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0222.htm');">Improving on Caching
+Techniques</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Polymorphic Inline Caching [Hoelzle&amp;Ungar91]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Instead of jumping to m<sub>k</sub>,
+  a PIC stub has tests for multiple methods.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>PIC can be generated on-the-fly per
+  each s</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>SmallEiffel work [Zendra97]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Generalizes PIC into binary decision
+  tree =&gt; search O(log(n)) instead of O(n)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Clever method ID encoding to speed up
+  search</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>In practice tree not balanced</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Frequent methods placed higher in
+  tree</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0223.htm');">Basic Dispatch
+Optimization Techniques (Compile Time)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Basic Strategy</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Use static analysis to determine, for
+  each call site s, a set of possible receiver classes Sc</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>If |Sc|=1, then Dispatch(s<sub>C </sub>,
+  C, r<sub>C </sub>, m) has a unique precomputable solution m<sub>k</sub></font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Can be converted to direct procedure
+  call to m<sub>k</sub></font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Even if |Sc|&gt;1, if |Sc| is small
+  we can employ PIC efficiently</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>If receiver is unique we can do
+  various optimizations such as inlining (later)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Question: how powerful should
+  analysis be?</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Flow/Context sensitivity
+  (sensitive/insensitive)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Intraprocedural vs. Interprocedural</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>O(n) where n is the length of program</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0225.htm');">Simple Algorithms for
+Analyzing Receiver Classes</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Class Hierarchy Analysis [Dean
+  et.al.95]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Applicable to Statically-Typed</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>For each method signature m,
+  precompute for each class c in C, set of all m<sub>k</sub>’s that exist in
+  the descendents of c: methods(c, m)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Doesn’t look at program --- O(1)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>At s, possible methods are methods(s<sub>c</sub>,
+  m)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0226.htm');">CHA and Variants</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Unique Name [Calder&amp;Grunwald 94]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Only look at unique method names</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Rapid Type Analysis
+  [Bacon&amp;Sweeney96]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Create global call graph
+  conservatively</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Fast, flow insensitive analysis of
+  call graph to detect possible calls to constructors</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Classes whose constructors are not
+  called can be eliminated from the inheritance graph for CHA</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>SmallEiffel Type Anslysis
+  [Collin,Colnet&amp;Zendra97]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>RTA + Code Duplication to narrow down
+  possible types</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0229.htm');">More Sophisticated Class
+Analysis</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Basic Strategy</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Track program control and data flow</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Intraprocedural, Interprocedural</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Propagate type information along the
+  call graph/dataflow graph, or construct constraints on types</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Infer possible types of receiver at
+  each call site s</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Various techniques, algorithms
+  [Grove97]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Problems</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Complex analysis =&gt; higher cost
+  O(n<sup>k</sup>), or exponential</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Not good for load/run/JIT-time
+  optimizations</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0242.htm');">Some Representative Work</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Various work predate and are
+  applicable to Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Early work on Smalltalk Type
+  Inference [Suzuki81, Borning83, Johnson88]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>0-CFA Algorithm [Shivers91]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Constraint-based type inference
+  [Palsberg&amp;Schwartzbach91,92]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Cartesian Product Algorithm
+  [Agesen95]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Type Directed Cloning
+  [Plevyak&amp;Chien95]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(Combination w/) Pointer Analysis
+  [Ryder97]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Fast Dataflow-based Analysis
+  [Diwan96]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Fast Interprocedural Class Analysis
+  [DeFouw98]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Flow insensitive constraint solving
+  [Hendren2000]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Etc. etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Theoretical accounts and experiments
+  e.g., [Grove OOPSLA97, Tip&amp;Palsberg OOPSLA2K1]</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0340.htm');">Set Based Class Analysis</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Basic Idea: Identify a set of types
+  (classes) that “flow through” between language entities</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Types created at object instantiation
+  point</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Types flow through the programs with
+  assignments</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Method calls and branch merge points
+  cause merger of sets of possible types</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>CHA and RTA extreme simplification of
+  Set Based Analysis where there is only one set (the entire program)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0341.htm');">Classification of Set
+Based Analysis:<br>
+-Where we store class propagation info-<br>
+[Tip &amp; Palsberg OOPSLA2000]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>RA: Reachability Analysis (weakest)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>CHA: Class Hierarchy Analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>RTA: Rapid Type Analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>CTA: Distinct Set per Class</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>FTA: Distinct Set per Class and
+  Method</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>MTA: Distinct Set per Class and Field</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>XTA: Distinct Set per Class, Field,
+  and Method</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>0-CFA: Distinct Set per Expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>O(n<sup>3</sup>) &#8211; not scalable</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Other variants:
+  [DeFouw99][Hendren2000]</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0342.htm');">Hendren’s Practical Type
+Anlysis [OOPSLA2K]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Variable Type Analysis (VTA) and
+  Declared Type Analysis (DTA)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Conservatively create call graph
+  using CHA</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Construct type propagation graph
+  according to all field&amp;variable assignments</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Flow-insensitive</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>VTA: One node per each variable,
+  field, and array</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>DTA: One node per declared type of
+  variable</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Identify SCC in graph, collapse into
+  one node (no cast type kills)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Propagate types along graph edges</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0343.htm');">Hendren’s Algorithm
+(Example1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>class A extends Object {<br>
+  <span style="mso-spacerun: yes">　</span>String m() {<br>
+  <span style="mso-spacerun: yes">　 </span>return (this.toString()); }</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>class B extends A {<br>
+  <span style="mso-spacerun: yes">　</span>String m() {…} }</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>class C extends A {<br>
+  <span style="mso-spacerun: yes">　</span>String m() {…}<br>
+  <span style="mso-spacerun: yes">　</span>public static void main() {<br>
+  <span style="mso-spacerun: yes">　 </span>A a = new A();<br>
+  <span style="mso-spacerun: yes">　 </span>B b = new B();<br>
+  <span style="mso-spacerun: yes">　 </span>String
+  s;<br>
+  <span style="mso-spacerun: yes">　</span>…<br>
+  <span
+  style="mso-spacerun: yes">　 </span>s = a.m();<br>
+  <span style="mso-spacerun: yes">　 </span>s = b.m(); }}</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0344.htm');">Hendren’s Algorithm (VTA)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>A a1, a2, a3;<br>
+  B b1, b2, b3;<br>
+  C c;<br>
+  <br>
+  a1 = new A(); a2 = new A();<br>
+  b1 = new B(); b2 = new B();<br>
+  c = new C();<br>
+  <br>
+  a1 = a2; a3 = a1;<br>
+  a3 = b3; b3 = (B) a3;<br>
+  b1 = b2; b1 = c;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0345.htm');">Hendren’s Algorithm
+(Result)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Analysis Essentially Linear to
+  Program Size (~10s for DTA, ~100s for VTA)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Static Results and Dynamic Results</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Dynamic Results more important</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>For some apps (jack, javac, pizza),
+  identifies and comes close to ideal case for removing virtual calls of
+  monomorphic sites</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Impact on performance comes from
+  transformation, not on dispatch removal</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0230.htm');">Alternative: Type
+Feedback</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Assume dynamic compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Profile at runtime for frequency of
+  method invocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Ex.1 # of method invocations [Self93]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Ex.2 Sampling [IBM Jalapeno]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>If # profiled classes are small, then
+  perform dynamic optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>All class assumptions must be
+  preceded by a guard (Class Test or Method Test)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Once guard is in place, can perform
+  same optimization as static analysis</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0346.htm');">Profiling Techniques</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Counter-based</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Invocation counter per method
+  invocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Precise but need to cope with program
+  transformation,</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Execution time more difficult to
+  account for</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Example: Self93, HotSpot, IBM TRL JIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Profile Based</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Periodically sample execution stack</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Imprecise but less intrusive</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Examples: Kistler work on Oberon,
+  [Whaley2000], IBM Jalapeno</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0234.htm');">Static Analysis vs. Type
+Feedback: Which is better?</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Various work</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Comparative work
+  [Agesen&amp;Holzle95]</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Both similarly effective 95% for Self</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Profile-guided receiver class
+  prediction [Dean95]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Work on C++ Inlining [Holzle96]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>For Java: whole program static
+  analysis still difficult</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Takes too much time AND memory for
+  JITs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>In practice, simple analysis (e.g.,
+  CHA, RTA) + type feedback employed (e.g, Hotspot)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0227.htm');">Program Transformations
+for Optimizing Dynamic Dispatch</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Generally called Devirtulization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>(Method) Inlining</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>If we know that target receiver class
+  is unique (or a few) at callsite s via analysis or profiling, we can inline
+  the body of the target method</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Aggressive use pioneered in Self89
+  [Chambers89]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Principle Optimization Technique for
+  Java JITs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Allows other traditional
+  optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Propagation of control/data/type flow
+  info</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Aggressive program transformations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>C.f., Backpatching [Ishizaki
+  et.al.2000]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Combines inlining and inline Cache</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0286.htm');">Method Inlining (Cont’d)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Inlining Very Effective</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Recall “very small methods”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>But what do we inline?</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Everything [Self89] =&gt; Excessive
+  compilation time, memory</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compilation Stubs [Self91]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Various Heuristics：</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Ex.　Sun ExactVM: Statically bound,
+  straight-line, no exceptions, &lt; 15 bytecodes</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Profile-Directed Inlining [Self93]</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Inline based on Type-Feedback info</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Used in Hotspot, Jalapeno
+  [Alpern@IBM, OOPSLA99]</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0287.htm');">Inlining: Problem
+Generalization</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0288.htm');">Vivek Inlining Slide 2</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0289.htm');">Vivek Inlining Slide 3</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0290.htm');">Vivek Inlining Slide 4</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0291.htm');">Vivek Inlining Slide 5</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0231.htm');">Problems in Optimizing
+Dynamic Dispatch for Java</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Closed-world assumption not valid</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>General problem: class loading
+  invalidates assumptions about C =&gt; invalidates most analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Ex.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0235.htm');">Preparing for Dynamic
+Class Loading</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Deoptimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Revert to non-optimized dynamic
+  dispatch</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>difficulties of on-stack replacement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Replace method while there is an
+  active context on stack</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Even more difficult due to multiple
+  threads</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Preexistence Analysis
+  [Detlefs&amp;Agesen99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Analysis to avoid on-stack
+  replacement</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>o prexisting in a </font><font
+  face=Wingdings size=2>&oacute;</font><font face="Comic Sans MS" size=2> o exists
+  prior to exec. of a</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>If a is preexisting then single-impl.
+  assumption of b will be valid for the duration of invocation of a</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Guarantees that invocation completes
+  safely even if class loading invalidates inlining for future invocations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>In practice, very little
+  recompilations</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0238.htm');">Other Sophisticated
+Optimizations of Control</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java Exceptions</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Threads (Later)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Control Speculation (not covered)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Java for Itanium, etc.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0299.htm');">Sarkar Exceptions Slide1</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0300.htm');">Sarkar Exceptions Slide2</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0302.htm');">Sarkar Exceptions Slide3</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0232.htm');">Optimizing Objects with
+Data Encapsulation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Not as extensively studied as dynamic
+  dispatch</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Implementation of object fields of
+  don’t matter</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>C.f., C/C++ structures/classes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Various work on Object Layout</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Bidirectional Object Layout [Myers95]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Class Hiearchy Specialization
+  [Tip&amp;Sweeney OOPSLA97,99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>IBM Application Extractor</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Efficient Object Layout
+  [Sweeney&amp;Gil99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Object Inlining [Dolby&amp;Chien2000]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Disclaimer: will be covered in detail
+  in future version of slide (_o_)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0349.htm');">Other Interesting
+Optimizations</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Quasi-Static Compilation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sealed Package Optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Background Compilation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Checkcast Removal</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Dynamic Partial Evaluation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Garbage Collection Assistance via
+  Liveness Analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Many more! Still various research
+  opportunities…ｄ</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0347.htm');">Quasi Static
+Compilation<br>
+[Serrano et.al., OOPLSA2000]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>IBM QuickSilver system (for Jalapeno)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Statically Compiled Modules into Java
+  VM</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>May seem straightforward, but
+  difficult:</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Security Checking (w/digital
+  signatures)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Version Management</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Binary Relocation (non-trivial---
+  type/GC maps, exception tables, etc.)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Maintenace of inter-method
+  optimization info</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Basic strategy: check if QSI
+  (Quasi-Static Image) is resuable. If so then perform “stitch”, otherwise
+  default to standard interpretation/JIT compilation.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Performance very good</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0348.htm');">Optimizing Java
+Packages<br>
+[Zaks et.al., OOPSLA2K]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Identify “Sealed”, non-final calls
+  that are confined within Sealed (JAR) Packages</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>All files in package either loaded or
+  not loaded at all</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Create Package Based Class Hierarchy
+  Graph, analyze all methods based on class modifiers</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Subject to aggressive optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>rt.jar</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>10% of packages 20-60% sealed calls</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>&gt;50% packages &gt;5% sealed calls</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0320.htm');">Chapter 3<br>
+Optimizing Java Concurrency</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0233.htm');">Java Concurrency</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java supports (rather unrestricted)
+  concurrency</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>No special synchronization object-
+  ANY object can be locked</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Huge number of synchronizations,
+  mostly uncontended</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2><span style="mso-spacerun:
+  yes">　</span>javac (no parallelism) does nearly 1 million syncs/sec</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Requirements</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Time- and space-efficient</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Scalable &#8211; no global bottlenecks</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0292.htm');">Techniques for Optimizing
+Java Concurrency</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compile/JIT time &#8211; static analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Escape Analysis: identifies objects
+  that do (not) escape a given scope, e.g., method or thread</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Local (non-escaping) objects of
+  threads need not be locked</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Runtime &#8211; fast, lightweight locking</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Applicable to ALL objects being a
+  Monitor</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Note: both optimizes uncontended
+  cases.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>For contended cases: previous
+  research on lightweight threads [Cilk][StackThreads]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Recent work on Java lightweight
+  thread library [Lea2000]</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0237.htm');">Run-time Techniques for
+Fast Synchronization</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Na&iuml;ve Solutions</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Classic JDK Monitor Cache</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>IBM “Bacon Bits” [Bacon98]</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0305.htm');">Some Na&iuml;ve Solutions to
+ubiquitous object locking</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Na&iuml;ve solution: big headers</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Too much space</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Less na&iuml;ve: on-demand allocation of
+  monitor</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>32 bit overhead per object</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>How to install/reclaim monitors?</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0308.htm');">Classic JVM Monitor cache</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0309.htm');">Thin locks - overview</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Reserve 24 bits in object header</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Handle common case
+  &quot;inline&quot;: flat lock</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Inflate the lock for uncommon cases
+  (e.g., contention)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0310.htm');">Thin locks - flat case</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0311.htm');">Thin locks - inflated
+case</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0312.htm');">Thin locks properties</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Advantages</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Fast: 10 instr for locking, less for
+  unlocking (must verify ownership)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compact: 24 bits</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Disadvantages</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Flat lock contention: unbounded
+  busy-wait</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>No deflation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>But work-in-progress may add it at a
+  certain cost<br>
+  (Onodera &amp; Kawachiya)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Reclamation of inflated locks</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0298.htm');">Improved Run-time
+Synchornization Optimization</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Metalocking [Detlefs99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sun EVM</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Variant used in Hotspot [Bak99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Bi-modal Locking [Onodera99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>IBM Tokyo JVM 1.1.8</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Both very sophisticated</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Very low instruction count on
+  uncontended fast path</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0313.htm');">Metalocking
+[Detlefs,Agesen, OOPSLA99]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>2 bits per object</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Basic scheme for lock, unlock, wait,
+  notify:<br>
+  <span style="mso-spacerun: yes">　　　 </span><br>
+  <span style="mso-spacerun: yes">　　　 </span>obtain
+  meta-lock on object<br>
+  <span style="mso-spacerun: yes">　　　　　　　 </span>/* exclusive access to sync.
+  data */<br>
+  <span style="mso-spacerun: yes">　　　　　　　 </span>manipulate sync. Data
+  of object<br>
+  <span style="mso-spacerun: yes">　　 </span>release meta-lock</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0315.htm');">Properties of meta-lock</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Fast: 1 atomic instr. per
+  acquire/release plus half dozen other instrs (uncontended case)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compact: two bits of space per object</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Fair: FIFO ordering (no starvation)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>No unbounded busy-wait</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Flexible (few constraints on data
+  structures protected by meta-lock)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>E.g.: monitor fairness/performance
+  trade-offs</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0317.htm');">Meta-lock performance</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0318.htm');">Monitor-lock
+performance<br>
+(MicroBenchmark)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0319.htm');">Performance comparison</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Approach: desynchronize
+  (single-threaded) prgs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sync cost: timeWithSync -
+  timeWithoutSync</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Count sync ops</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Cycles per sync op = timeSaved /
+  count / clock</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0236.htm');">Sarkar Escape Analysis 1</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0293.htm');">Sarkar Escape Analysis 2</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0294.htm');">Sarkar Escape Analysis 3</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0295.htm');">Sarkar Escape Analysis 4</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0296.htm');">Sarkar Escape Analysis 5</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0297.htm');">Sarkar Escape Analysis 6</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0350.htm');">New: Optimizing
+Contentious Locks [ECOOP2001]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Use Formalization of Memory Model of
+  [Maessen, OOPSLA2001]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Systematically Transform Monitor
+  Calls so that Optimistic Reads are Performed</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Defaults to Standard Monitor when
+  conflict is detected</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Shown to increase concurrency in
+  contentious cases, perform better than ‘pessimistic’ monitor locking</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0240.htm');">Some Major Java Systems</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>IBM</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JDK 1.1.8 (Tokyo Research Lab JVM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Jalapeno (Watson, Entire Java system
+  in Java)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>HPCJ (Watson, High-Performance Java
+  Compiler)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Sun Microsystems</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Research VM (ExactVM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Hotspot</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Other commercial systems (research?)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Various Research VMs and JITs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJIT1, OpenJIT2 [TIT&amp;Fujitsu]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Kaffe</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Future slides will have explanations
+  of these</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0187.htm');">Chapter 4: Numerical
+Optimizations of Java Programs</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0170.htm');">Java sequential numerical
+performance inhibitors <br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>A precise exception model coupled
+  with array<br>
+  bounds and null- pointer checking.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The lack of true, dense,
+  multidimensional arrays.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>No built- in complex data types.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>High- order loop transformations,
+  which change the<br>
+  order of computations, are implicitly prohibited.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>No standard libraries for well- tuned
+  numerical<br>
+  operations (e. g., LAPACK and ESSL for Fortran).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Strict floating- point semantics that
+  prevent the use<br>
+  of fused multiply- add operations.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Most issues can be fixed without
+  language changes!</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0175.htm');">IBM High Performance
+Compiler for Java</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Static Compiler --- produces PPC
+  native code</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Traditional Fortran-like numerical
+  optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>No language extensions--- idiom
+  recognition for typical cases, special class libraries</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Almost Fortran-like performance as a
+  result</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0171.htm');">Array checks
+optimization<br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Consider standard dot- product
+  matrix- multiply:</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>for (int i= 0; i&lt; m; i++)<br>
+  <span style="mso-spacerun: yes">　 </span>for
+  (int j= 0; j&lt; p; j++)<br>
+  <span style="mso-spacerun: yes">　　　 </span>for
+  (int k= 0; k&lt; n; k++)<br>
+  <span style="mso-spacerun: yes">　　　　　 </span>C[i][j] += A[i][k]*
+  B[k][j];<br>
+  Each iteration requires 6 null- pointer checks (C,<br>
+  C[i],
+  A, A[i], B, B[k]) and 6 index checks ( i<br>
+  and j for C , i and k for A ,
+  k and j for B ).<br>
+  The possibility of exceptions prevents any iteration
+  reordering.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0172.htm');">Safe regions through
+versioning<br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0099.htm');">500x500 MATMUL on RS/
+6000 590 <br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0174.htm');">Results of Java x Fortran
+on RS/ 6000 590<br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0173.htm');">Java Language Array
+layouts <br>
+(Picture courtesy of Jose Moreira@IBM Watson)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Contiguous only on rows</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Row Aliasing Possible</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Influence from Lisp, Smalltalk</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Memory hiearchy optimizations harder</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0177.htm');">JavaGrande (IBM) Propsal:
+Java Array Package</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Initially define and implement
+  Fortran 90-like arrays as 100% pure Java class library.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>One class for each elemental data
+  type and rank,<br>
+  e. g., doubleArray2D, intArray1D, ComplexArray3D.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Compiler optimizes/parallelizes the
+  Array class method calls as intrinsic operations.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Example:<br>
+  doubleArray2D A, B,
+  C;<br>
+  for (i=0; i&lt;m; i++)<br>
+  <span style="mso-spacerun: yes">　 </span>for
+  (j=0; j&lt;p; j++)<br>
+  <span style="mso-spacerun: yes">　　　 </span>for (k=0;
+  k&lt;n; k++)<br>
+  <span style="mso-spacerun: yes">　　　　　 </span>C.set(i,j,C.get(i,j)+A.get(i,k)*
+  B.get(k,j));</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0178.htm');">Java DGEMM for the Array
+Package <br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Close to ESSL speed (~1200MFlops)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0330.htm');">Code /Performance
+Portability</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2><span style="mso-spacerun:
+  yes">　</span>Code Portability</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>× : C, Fortran (executes native code
+  directly)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>○ : Java (Portable Code (bytecode)
+  execution)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2><span style="mso-spacerun:
+  yes">　</span>Performance Portability</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>When a certain optimization is
+  performed on the code, the code exhibits measurable performance improvement
+  over different machines</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>○?×? : C, Fortran</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>? : Java</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0081.htm');">“Performance Portability”
+in Java<sup><br>
+</sup>(or lacks thereof)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Advanced JITs, VMs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>BUT! Java portability thru bytcode</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>IBM High-Performance Compiler
+  (static)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>~100 Mflops on dense code (266 Peak)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>half of optimizing Fortran (close
+  w/fma)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>not a JIT compiler --- not exactly
+  Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>How good can we do? In a portable
+  way?</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Optimization at the bytecode level +
+  JITs that could further exploit it</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0082.htm');">Problems in Java wrt
+Performance Portability</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>In Java, bytecode generation and
+  execution are different phases</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0012.htm');">Optimization in Java:
+<br>
+Current Status</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Optimization in OO Languages
+  (Smalltalk, Self, Java)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Message Dispatching</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Caching</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Fast Subclass determination</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Type analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Fast Threads</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Does not consider numerical computing</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Java Benchmarks</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java microbenchmark</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Sieve, Dhrystone, Whetstone, Queen</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>javac, Richards, etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>CaffeineMark, Volanomark</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>SpecJVM98</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>→ Not appropriate as HPC benchmarks</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0329.htm');">AJaPACK : Automatic
+Optimization using Downloadable Self-tuning Portable Library<br>
+[ACM
+JavaGrande 2000]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The package includes BLAS library and
+  a tuning tool for its core routine</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>tunes the BLAS core to achieve
+  highest performance on any environments<br>
+  (this process is portable and
+  hidden from users)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0331.htm');">Prototype : AJaPACK<br>
+[Itou
+etc、JavaGrande2000] <br>
+= ATLAS for Java + JLAPACK [Blount,’99]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>AJaPACK as a prototype</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>→Not downloadable, but self-tunable</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Equivalent to LAPACK</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Achievements</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Evaluate validity of Self-tuning on
+  java</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>ATLAS for Java[Hokke’99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>speed-up with parallelizing the
+  library</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>parallelization of GEMM [JavaGrande2000]</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0332.htm');">ATLAS for Java<br>
+[Matsuoka
+et. al., FGCS2000]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ATLAS [Whaley, Dongarra etc 98]:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>automatic generator for optimized
+  BLAS3 codes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>	This part is ported to Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>The parameter searcher (xmmsearch)
+  surveys optimal mm parameter</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ATLAS parameter</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Loop unrolling factors</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Blocking size</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Latency (mul/add operations)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Whether separate mul and add</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0333.htm');">Parallelizing GEMM<br>
+-multi-threaded
+parallelization</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Evaluates validity of Java
+  parallelization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Fine-grained Master-Worker (FMW)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Allocates a single small blocked
+  matrix multiply to each Worker</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Coarse-grained Master-Worker (CMW)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Allocates multiple small blocked
+  matrix multiplies to each Worker</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Statically-Decomposed Fork-Join (SFJ)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Decompose the outermost loop
+  statically</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0334.htm');">Evaluation Environment</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>PC(Ath)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Athlon 600MHz 1CPU L1cache Inst-64KB
+  + Data 64KB L2cache 512KB</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Linux Redhat 6.1 + IBM JDK1.1.8 JVM
+  with optimizing JIT compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Enterprise 10000(E10K)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>UltraSparc 250MHz x 60CPU L1cache
+  Inst-16KB + Data-16KB L2cache 1MB</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Solaris 2.6 + Solaris Production
+  Release JDK 1.2.1_04a with optimizing JIT compiler (JBE) (-Xoptimize)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Enterprise 4000(E4K)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>UltraSparc 300MHz x 10CPU L1cache
+  Inst-16KB + Data-16KB L2cache 1MB</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Solaris 2.6 + Solaris Production
+  Release JDK 1.2.1_04a with optimizing JIT compiler (JBE) (-Xoptimize)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Origin 2000(O2K)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>R10000 250MHz x 16CPU L1cache
+  Inst-32KB + Data-32KB L2cache 4MB</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>IRIX 6.5 + SGI SDK 1.2.1</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0335.htm');">Peak Performace of
+AJaPACK</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0336.htm');">Performance of AJaPACK(8
+threads)<br>
+Enterprise4000(UltraSparc 300MHz x 10CPU, Solaris Production
+Release JDK 1.2.1_04a)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0337.htm');">Performance of AJaPACK(60
+threads)<br>
+Enterprise10000(UltraSparc 250MHz x 60CPU,<br>
+<span style="mso-spacerun: yes">　</span>Solaris Production Release JDK
+1.2.1_04a)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0321.htm');">Chapter 5: Advanced
+Techniques and Research Trends Utilizing Java Characteristics</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Partial Evaluation and Specialization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Reflective Systems</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0325.htm');">Partial Evaluation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>int power(int x, int n) {</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2><span style="mso-spacerun: yes">　
+  </span>if ( n == 0 )</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2><span style="mso-spacerun: yes">　　　
+  </span>return 1;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2><span style="mso-spacerun: yes">　
+  </span>else</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2><span style="mso-spacerun: yes">　　　
+  </span>return x * power(x, n-1) ;</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>}</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0322.htm');">Partial Evaluation in
+Java</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Specialization Classes - Partial
+  evaluation of classes [Consel et. al., OOPSLA97, ECOOP99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>C++ Doubler [Fujinami ISCOPE97,99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Bytecode Specialization [Masuhara99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Dynamic Compiler =&gt; Can customize
+  at runtime using run-time info</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Pure Java Version of Masuhara’s
+  System [Maruyama, Matsuoka2001]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Seamless Integration of PE into Java
+  system?</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0327.htm');">Specialization Classes -
+Partial evaluation of classes [Consel et. al., OOPSLA97, ECOOP99]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Specifies which input argument to
+  customize, generate customized methods with PE</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Use Predicate Classes [Chambers] to
+  specify customization conditions</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0324.htm');">Bytecode
+Specialization<br>
+[Masuhara99]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Basic idea:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>run-time specialization <br>
+  		in an intermediate
+  language</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>optimization after specialization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java Virtual Machine Language<br>
+  as
+  an intermediate language</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>stack machine</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Typed</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(relatively) language independent</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Interpreted or JIT compiled</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0326.htm');">Overview of BCS</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0328.htm');">Preliminary
+Benchmarks<br>
+- Partial Evaluation of Power(x,n) &#8211;</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Should result in straightline code x
+  * x * x …</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0164.htm');">Reflection</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A Mechanism for Constructing an
+  Open-ended languages and systems</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Has roots in logic, AI, universal
+  Turing Machine, etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>3-Lisp [B.Smith, 1982]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Can access its own interpreter during
+  computation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Introspection - Reference to
+  computational state</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Reflection - Modification of
+  computational state</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>3-KRS [ P. Maes, 1987]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Reflection in OO languages</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Metaobject - describe computation of
+  object</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Metaclass =&gt; Smalltalk</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0143.htm');">Early Work: the ABCL/Rx
+project</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Reflection with Concurrent Objects</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Hybrid Group Reflective Architecture
+  (ECOOP91)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ABCL/R2 and fast runtime (OOPSLA92)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Experimental optimization of parallel
+  scheduling</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ABCL/R3: efficient compilation via
+  partial evaluation　(OOPSLA95, ECOOP98[Masuhara,Matsuoka,Yonezawa])</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Application of the 1st Futamura
+  Projection</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Close to C + Message Passing</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Optimizing parallel programs with
+  ABCL/R3 (Reflection96)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0144.htm');">Open Compiler,
+Compile-Time Metaprogramming</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>“Static” or “Compile-Time” Reflection</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>No Interpreter Intervention</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Eliminating Run-Time Interpretation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Disciplined Macro Preprocessor</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Compile-time Source-to-source
+  Transformation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>C++ Language described in terms of
+  C++</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Customization according to classes</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Type-based analysis &amp; compilation
+  (EPP)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Standard Compiler Analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Flow Analysis<span
+  style="mso-spacerun: yes">　 </span>(OpenC++ extension)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0145.htm');">C++ Metaprogramming/ Open
+Compilers (1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Expression Templates</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Extend STL(Standard Template Library)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Encode structure of expression into
+  types</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compiles X = A + B + C into for i
+  X[i] = A[i] + B[i] + C[i] loop into compile time (not for i T[I] = A[I]+B[I];
+  for i X[I]=T[I]+C[I] )</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Template Metaprogramming</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Generalize Expression Templates</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Similar to Type-directed partial
+  evaluation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>High-performance numerical computing</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>A++/P++ Blitz++, MTL (Matrix Template
+  Library), etc.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0146.htm');">Open Compilers in C++ (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>MPC++ (Ishikawa, RWCP)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Define a metaprogramming language for
+  extending C++ at compile time</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Library Optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Extending C++ for Parallel Computing</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Open C++ (Chiba, Tsukuba Univ.)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Similar to MPC++</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Use C++ itself for compile-time
+  extensions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Per-class customizatio</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Other work such as IBM SOM, Iguana
+  C++</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0147.htm');">Reflection in Java (1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java Reflection API　（JDK1.1.x~)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Structural Reflection, Introspection
+  only</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Change w/Java 1.3?</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java // (parallel) [Caromel97]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Implements computational reflection
+  w/Preprocessor+ReflectionAPI</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>EPP (Extensible PreProcessor]
+  [Ichisugi 97]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Open Compiler, Preprocessor Plugins</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJava, Javassist [Chiba98,2000]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Open Compiler, Similar to OpenC++</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0148.htm');">Reflection in Java (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Various other work</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java and Reflection workshop OOPSLA98</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Reflection Conference 99</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Reflection Workshop OOPSLA99</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>MetaJava, etc.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0245.htm');">Case Study:
+OpenJIT:<br>
+An Open-Ended, Reflective JIT <br>
+(http://www.openjit.org)<br>
+[Ogawa,
+Matsuoka et. al. ECOOP2000, etc.]</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Background: Existing JIT Compilers</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(c.f., Lisp, Smalltalk, Self)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Focus only on standard platforms
+  (e.g., WSs, PCs)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Speed up single-threaded execution of
+  general programs on desktop env.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Never consider trade-offs between
+  memory consumption, execution speed, and compilation speed</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0246.htm');">Our Claim</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>JIT compilers could be utilized and
+  exploited much more for:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Platform-specific optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Application-specific optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Language-extending compilations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Environment- or Usage-specific
+  compilations and Optimizations</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0247.htm');">OpenJIT Compiler
+System<br>
+http://www.openjit.org</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A Joint effort with Fujitsu’s Java
+  compiler group</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A Reflective Just-in-time (Open JIT
+  Compiler)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Based on Reflection/OI principle<span
+  style="mso-spacerun: yes">　 </span>(Java JIT in Java)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>A Java framework for JIT compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Can download/compile various
+  customization &amp; optimization modules into a JIT compiler “just-in-time”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>“Plugs in” to Standard JavaVM (JDK
+  1.1.x, 1.2.x)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Works just like off-the-shelf JIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JCK (Java Compatibility Kit)
+  Compiliant</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Initially “self-compiles” on startup</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0248.htm');">OpenJIT Compiler System
+(2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0249.htm');">OpenJIT High-level
+Motivations</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Applets and libraries are downloaded
+  and executed on-the-fly, in a safe and secure manner, within JVM</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Why not have the JIT compiler be
+  downloaded and executed, on-the-fly!?</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Within the easy, safe, and portable
+  Java execution env.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Example:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The user wants to instrument his code</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Instrumentation component (w/compiler
+  support) is downloaded off the network automatically</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Instrumented native code is generated
+  on-the-fly</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0250.htm');">JDSM [JavaGrande2001]
+<br>
+w/OpenJIT</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Portable DSM on PC clusters</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Using OpenJIT to insert DSM
+  read/write barriers etc. at JIT compile time<br>
+  <span style="mso-spacerun: yes">　</span>(c.f. DEC Shasta)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Develop OpenJIT JDSM compilet</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Assume no source code is available</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Currently being implemented on PC
+  Cluster/VIA environment</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Precursor work: OMPC++ (Portable DSM
+  w/OpenC++)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0251.htm');">Overview of the OpenJIT
+Framework</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0252.htm');">Overview of the OpenJIT
+Framework (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT Frontend System</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Preprocessor for Backend System</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Java class framework for
+  JIT-optimizer and/or JIT-customizer, on Java bytecode or higher-level
+  Intermediate Representation (e.g. Backend RTL)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Classfile Annotation support</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Embed various information to
+  classfiles, and utilize them at JIT-compile phase</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT Backend System</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compact and efficient Java JIT
+  Compiler written in Java itself</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Microscopic optimization on RTL</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>stack-to-register allocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>peephole optimization</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0253.htm');">The OpenJIT Frontend
+System</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT Bytecode Decompiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Translates bytecode streams into
+  augmented AST</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Utilizes a new algorithm for
+  systematic AST reconstruction using dominator trees</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT Class Annotation Analyzer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Extracts classfile annotation
+  information</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Adds the annotation info onto the AST</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT High-level Optimizer Toolkit</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The toolkit for constructing
+  “compilets”</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Compilet: A module to specialize the
+  OpenJIT frontend for performing customized compilations and optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Abstract Syntax Tree Package</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Provides construction of the AST and
+  rewrite utilities</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0254.htm');">Architecture of OpenJIT
+Frontend</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0256.htm');">OpenJIT Bytecode
+Decompiler</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Convert Bytecode into AST w/analysis
+  info</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Systematic control-flow recovery
+  using dominator trees<span style="mso-spacerun: yes">　 </span>[Maruyama99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Lower cost c.f. direct analysis of
+  CFG</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>C.f. Compared to pattern-matching
+  methodologies e.g.,<span style="mso-spacerun: yes">　
+  </span>Krakatoa[PLDI98?]:</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Potentially more efficient</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Robust to code obfuscation</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0257.htm');">Classfile Annotations</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Annotation info attached to
+  classfiles to perform class-specific optimizations &amp; customizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Attach to method attribute area of
+  classfiles</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Attach to each node of AST, callback</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Passes the security checker</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Portable execution on other JVMs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Need customized compilers and tools
+  to generate attribute info</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0258.htm');">Classfile annotation
+(examples)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>User-defined compiler metaclasses as
+  attribute</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Encode metaclass name or metaclass
+  body as annotation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Usage in JDSM</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Insert Read/Write at appropriate
+  places</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>List of Immutable objects</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Support special-case (numerical)
+  optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>E.g., High-level, expensive loop
+  transforms as is with Fortran (too expensive in general for JITs)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Statically annotate loops that could
+  be effectively transformed</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0260.htm');">OpenJIT High-level
+Optimizer Toolkit</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Flowgraph Constructor</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Generate Data/Control Dependence
+  Graph etc. from the AST/CFG</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Each generator is defined as a
+  constructor of subclass of Flowgraph class using the Factory Method design
+  pattern</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Other types of glow graphs can be
+  easily defined by the user</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Flowgraph Analyzer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Implements general analysis
+  algorithms over flowgraphs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Each algorithm defined as the
+  execute() method of subclass of the Analyzer class using the Command design
+  pattern</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>C.f. SUIF</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0261.htm');">OpenJIT High-level
+Optimizer Toolkit (3)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Program Transformer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Register transformation pattens</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>register_pattern(Expression src,
+  Expression dst)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>register_pattern(Statement src,
+  Statement dst)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Specify the root of a subtree in the
+  augmented AST, search the tree depth first, replace the matching pattern
+  w/the registered replacement pattern</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>substitution(Expression root)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>substitution(Statement root)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Experience shown strategy useful but
+  too low level</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Hard to generate all the patterns</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Need higher-level API to generate the
+  patterns</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0262.htm');">Abstract Syntax Tree
+Package</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>Utility routines to express and
+  process AST</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>Every Java syntactic entities</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>Node</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>BinaryExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>AddExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SubtractExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>UnaryExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ConstantExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Statement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>IfStatement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ForStatement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0263.htm');">Abstract Syntax Tree
+Package(2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>public class MultiplyExpression
+  extends BinaryExpression {</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	int op;		// ID</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Expression left;	// LHS expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Expression right;	// RHS expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Type type;		// Type of this
+  expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Annotation ann;	// Embedded
+  Annotation (default: null)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	void code() {		// Convert AST to
+  backend-IR or bytecodes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		if (ann) ann.execute();	//
+  call-back for metacomputation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		left.code();	// generate code for
+  LHS</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		right.code();	// generate code for
+  RHS</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		add(op);	// generate code for
+  “operator”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	}</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>… }</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0264.htm');">Abstract Syntax Tree
+Package(3)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>public class IfStatement extends
+  Statement {</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	int op;		// ID</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Expression cond;	// Conditional
+  expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Statement ifTrue;	// Statement of
+  True-part</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Statement ifFalse;	// Statement of
+  False-part</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Annotation ann;	// Embedded
+  Annotation (default: null)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	void code() {		// Convert AST to
+  backend-IR or bytecodes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		if (ann) ann.execute();	//
+  call-back for metacomputation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		codeBranch(cond);	// generate code
+  for Condition</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		ifTrue.code();	// generate code for
+  Then-part</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		ifFalse.code();	// generate code
+  for Else-part</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		addLabel();	// add label for
+  “Break” statement</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	}</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>… }</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Considering direct use of SSA (Single
+  Static Assignment form) instead of full syntax</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0265.htm');">Overview of the OpenJIT
+Backend System</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0266.htm');">Overview of the OpenJIT
+Backend System (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Bytecode Parser</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Parses the bytecode stream and
+  produces an IL(Intermediate Language) stream</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The IL is a RISC-based, 3-operands
+  instruction set, encode stack instructions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>36 instruction types; complex
+  bytecode instructions encoded as subroutine call (backpatched later)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>RTL Converter</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Translates the stack-based IL code to
+  register based RTL code</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>RTL has infinite number of registers
+  in this process</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Intraprocedural dataflow analysis to
+  determine type and offset of stack operands</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0267.htm');">Overview of the OpenJIT
+Backend System (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Peephole optimizer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Eliminates redundunt instructions in
+  RTL</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Native code generator</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Generate native code for given ISA/OS</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sparc &#8211; Solaris</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>X86 &#8211; Linux, FreeBSD, BSD/OS,
+  Solaris(debugging)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Insert necessary register spill code</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ISA-specific peephole optimizations</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0268.htm');">OpenJIT backend &#8211; the
+technical issues</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT: self-descriptive JIT in Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>→Initially interpreted by JVM,
+  gradually self-compiled for faster execution</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Technical Issues</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>How do we invoke Java-based JIT from
+  within JVM?</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Recursive compilation and
+  deadlock-freedom</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJIT compilation and Application
+  compilation coexsists at runtime</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Is the entire JVM reentrant?<span
+  style="mso-spacerun: yes">　 </span>Multithreading?</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Performance of OpenJIT &#8211; time vs.
+  memory</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Lack of appropriate JIT APIs in JVMs</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0269.htm');">Invoking OpenJIT</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0270.htm');">Recursive Compilation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Locking scheme</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>COMPILE_LOCK(ee);</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>if (COMPILE_ON_THE_WAY(mb)) {</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	/* now compiling this methods. Avoid
+  from double compiling */</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	COMPILE_UNLOCK(ee);</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	return;</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>}</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>START_COMPILE(mb);</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>mb-&gt;invoker = (mb-&gt;fb.access
+  &amp; ACC_SYNCHRONIZED) ? invokeSynchronizedJavaMethod : invokeJavaMethod;</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>/* reset dispatcher temporarily */</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>mb-&gt;CompiledCode = (void
+  *)dispatchJVM;</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>COMPILE_UNLOCK(ee);</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0271.htm');">Lack of Appropriate JVM
+JIT APIs</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>17 new JNI calls added as new JIT API</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Constant pool introspection methods</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native int
+  ConstantPoolValue(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Private final native int
+  ConstantPoolTypeTable(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final int ConstantPoolType(int
+  index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final boolean
+  ConstantPoolTypeResolved(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final String
+  ConstantPoolClass(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Private native byte[]
+  ConstantPoolClass0(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final String
+  ConstantPoolName(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Private native byte[]
+  ConstantPoolName0(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native int
+  ConstantPoolAccess(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native byte[]
+  ConstatntPoolMethodDescriptor(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native int
+  ConstantPoolFieldOffset(int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native int
+  ConstantPoolFieldAddress(int index)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0272.htm');">New JVM JIT APIs Contd</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Native method allocation and
+  reflection</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native void
+  NativeCodeAlloc(int size)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native int
+  NativeCodeReAlloc(int size)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native void
+  setNativeCode(int pc, int code)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native int
+  getNativeCode(int pc)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Private native byte[] MethodName()</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Class resolution methods</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native void
+  initParser(int caller_cp, int index)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Public final native void
+  resolveClass(int caller_cp, int index)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0273.htm');">Performance Analysis</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Execution Performance</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>→Hello, SPECjvm98</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Memory Consumption</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>→Heap Profiling</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>All the OpenJIT objects, except for
+  the small C runtime, are allocated in the heap with the target application</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Standard C-based JIT compilers
+  allocate working space outside the Java heap</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Due to the recursive compilation,
+  multiple compilation contexts are accumulated in the heap</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>→ Increased GC, memory (c.f.,
+  parseBytecode)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0274.htm');">Comparison on the size of
+JIT compilers</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>			<span style="mso-spacerun:
+  yes">　　　　　　　 </span>class#<span style="mso-spacerun: yes">　
+  </span>method#<span style="mso-spacerun: yes">　　 </span>#lines<span
+  style="mso-spacerun: yes">　 </span>class(binary) bytes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Frontend		243	1,439	24,148		629,062</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Backend(sparc)		<span
+  style="mso-spacerun: yes">　 </span>23	<span style="mso-spacerun: yes">　　
+  </span>182	<span style="mso-spacerun: yes">　 </span>7,560		118,592</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Backend(x86)		<span
+  style="mso-spacerun: yes">　 </span>21	<span style="mso-spacerun: yes">　　
+  </span>182	<span style="mso-spacerun: yes">　 </span>8,085		118,125</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>C runtime(sparc)	<span
+  style="mso-spacerun: yes">　　　 </span>3				<span style="mso-spacerun: yes">　
+  </span>42,556</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>C runtime(x86)		<span
+  style="mso-spacerun: yes">　　　 </span>3				<span style="mso-spacerun: yes">　
+  </span>28,928</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sunwjit(sparc)						234,112</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sunwjit(x86)						146,508</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0275.htm');">Benchmarking Environment</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Target Machine</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sun Ultra60 (UltraSparc II 300Mhz x
+  2, 256MB memory)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Solaris 2.6-J</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JDK 1.2.2 (ClassicVM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Applications(1+6)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Hello</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>_201_compress (file compression)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>_202_jess (expert system)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>_209_db (DBMS simulator)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>_213_javac (JDK 1.0.2 compiler)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>_227_mtrt (Multithreaded raytracer)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>_228_jack (parser generator)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0276.htm');">Baseline performance (1)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0277.htm');">Baseline Performance (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0278.htm');">Heap profiling USING
+OpenJIT</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Measureable run-time profile values</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A profiler using JVMPI(JavaVM
+  Profiler Interface)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>→Plug in to the JDK 1.2(ClassicVM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Number, Type, Size of allocated
+  objects</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Number of GCs, etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A Profiler created w/OpenJIT
+  customization</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>→ Output various info generated from
+  backend paths</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Number of methods compiled</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Number, type, size, and lifetime of
+  objects that OpenJIT allocated</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Size of generated native code</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Direct execution, c.f., simulation
+  [Diekman99]</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0279.htm');">Heap usage on Bootstrap</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0280.htm');">SPECjvm98 Heap Usage</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0281.htm');">SPECjvm98 Heap Usage (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0282.htm');">Analysis of Heap Usage on
+Bootstrap</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Two reasons for Heap pressure</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Working data structure proportional
+  to method bytecode size</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Accumulating chain of contexts due to
+  recursive compilation on bootstrap</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Former:<span style="mso-spacerun:
+  yes">　 </span>example: parseBytecode</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Parses 165 JVM instructions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>14,279bytes, 6,861 JVM instructions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Solved via refactoring</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Latter: avoidance via restricting
+  self-compilation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>What strategy is effective?</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0283.htm');">スライド151</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0284.htm');">スライド152</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0285.htm');">Summary of OpenJIT1</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT shown to be matching
+  performance of C-based JIT compilers</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Achieved flexibility</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Profiling customization</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Some small numerical optimization
+  examples</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JDSM (in the works)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Jaguar-style communication
+  optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Frontend/Backend being redesigned for
+  v.2.0</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>More modular, simpler to use</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>http://www.openjit.org/</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Free distribution</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0351.htm');">Now and Future: OpenJIT2</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>インタプリタは遅い⇒コンパイルして実行</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Nativeコードは機種依存、安全性が不明<br>
+  ⇒仮想機械による実行（インタプリタ）</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>実行時情報による更なる最適化<br>
+  ⇒静的なコンパイラの上を行く可能性も</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0352.htm');">OpenJIT2<br>
+コンパイル時間と性能の関係</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>コンパイル時間と性能の関係は離散的</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>最適な実行時間を与えるコンパイラは問題依存</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0353.htm');">従来のJITコンパイラ</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>処理速度至上主義的職人芸実装</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>厳選された最適化</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>一般的に効果のある最適化のみ適用<br>
+  ⇒特定の場面にのみ効果的な最適化はしない</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>特定のアプリケーション（ベンチマーク）で最適</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>マルチレベルJITコンパイラ</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>最適化の度合いの高低の使い分け</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>実行頻度 (e.g. Research VM, Jalapeno)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>場面 (ループ、e.g. IBM JVM)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0354.htm');">最適なJITコンパイラ？</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>実行時間最小を与える最適化度はメソッド毎に異なる</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>アプリケーションによる差異も大きい</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0355.htm');">更なる高性能を実現するために</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>メソッド毎に、より適切に最適化</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>実行頻度</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>ループなどの場面</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>アプリケーション特有の知識の利用</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>適用する最適化の異なる様々なJITコンパイラ</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0356.htm');">JITコンパイラの多様化による問題</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>コンパイラを複数用意するコスト</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>構築のコスト</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>全く違うコンパイラ（e.g. 速さ重視、コードの質重視）</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>同時利用のコスト</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>コンパイラ自体の占めるメモリ</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>複数コンパイラの構築と選択</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>自動的に使い分ける話</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>実行時に生成する話</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ユーザ指定で選択する話</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0357.htm');">関連研究（1/2）</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>コンパイラツールキット</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>SUIF, Zephyr, PROMIS, Vortex, GCCなど</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>中間表現の一般化</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>特に多言語→多ISAという面では成功</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>コンパイラの各パスの独立性が高い</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>最適化器の追加や変更に有効</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0358.htm');">関連研究（2/2）</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>コンパイラ向けアプリケーションフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>The RTL System[Johnsonら, ’91]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>CMCC[Adl-Tabatabaiら, ’96]</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>データフロー解析、最適化、レジスタ割付、コード生成</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>アプリケーションフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>オブジェクト指向によるプログラミング</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>コンポーネント単位の再利用</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>大きなシステムにはコンポーネントの単位が小さい</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>コンポーネントの組み合わせを再利用</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0359.htm');">OpenJIT 2のデザイン</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>抽象度の高い中間表現</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>アプリケーションフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JITコンパイラ構築のコスト削減</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JITコンパイラ同時使用のコスト削減</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>⇒JITコンパイラの多様化を現実的に</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compilet</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Javaで書かれたJITコンパイラモジュール</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>メソッド毎に指定可能</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JITコンパイラの静的な使い分け</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0360.htm');">OpenJIT 2の中間表現</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Control Flow Graph</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>SSA形式の四つ組(org.openjit.compiler.rtl)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>生成にAbstract Factoryパターンで実装を隠蔽</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>ISA依存情報</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>コード生成フェーズ依存の情報</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ISA非依存の最適化フェーズを実現<br>
+  ⇒最適化器のコンポーネント化</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0361.htm');">OpenJIT 2の概要(全体)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0362.htm');">OpenJIT 2の概要(コンパイラ内部)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>各フェーズ内をOO設計</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>各フェーズをアプリケーションフレームワークに</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0363.htm');">JITコンパイラ向けアプリケーションフレームワーク(1/2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>バイトコード解析支援(BytecodeParser)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>全てのJITコンパイラで必要な機能</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>２００種類以上あるバイトコードの解析は面倒</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Template Methodパターンにより異なる目的に使用可</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>CFG構築支援(MethodGraph)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>グラフ操作ライブラリは汎用性が高い反面、使い方が面倒</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>解析済みJVM命令列からCFGを構築</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Factory MethodパターンによりCFGのノード表現を選択可能</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0364.htm');">JITコンパイラ向けアプリケーションフレームワーク(2/2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>中間言語生成支援(RTLGraph, RTLNode)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>スタックの状態を元に中間言語を生成</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>最適化器構築支援</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>グラフの渡り歩き(CFGVisitor, DTVisitor)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>中間言語(SSA)文の繰り返し(SSAIterator)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>データフロー解析器フレームワーク(DFASolver)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Forward/backward solverの構築を支援</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>個々の最適化器</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Baseline/Compiletの部品として利用可能</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0365.htm');">多様なコンパイル方針を実現</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>適用する最適化をメソッド毎に選択</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>新たな最適化器の追加も可能</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0366.htm');">OpenJIT2 実装の現状</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>バイトコードから中間表現への変換</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>非SSA形式⇔SSA形式の変換</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>一部の最適化</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>dead-code elimination, copy
+  propagation, constant propagation, trivial phi elimination</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Liveness解析</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>グラフ操作などのクラスライブラリ</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>約4万行</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0367.htm');">評価</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>実装済みの部分について動作速度を測定</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>デバッグ用ドライバを用いたbaselineコンパイラ</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>本体は全てJava（時間計測用にネイティブメソッド）</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT 2の全てのメソッドに対する処理時間</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>309クラスファイル、2193メソッド、延べ85203バイト</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>実験環境</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Pentium III 500MHz x 2 (SMP), 384MB</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>RedHat Linux 6.2, kernel 2.2.18</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sun JDK-1.2.2_006 (Classic VM, nojit,
+  OpenJIT)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Sun J2SDK-1.3.0_01 (HotSpot Client
+  VM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>IBM J2RE-1.3.0 (cx130-20001124)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0368.htm');">測定結果</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SSA形式はコスト高（全体の60～80%）</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>実行環境の変化でインタプリタ比、２～３倍</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0369.htm');">考察</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Javaで、アプリケーションフレームワークとして記述されたJITコンパイラによるコンパイル速度は3.5bytecode/ミリ秒～12bytecode/ミリ秒</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>基本のコンパイラとしては遅い</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>自己コンパイルに7秒～25秒</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>最適化コンパイラとしては悪くない</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>参考（PowerPC 604e, 166MHz上）</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>IBM JVMは10bytecode/ミリ秒</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Jalapenoの最適化コンパイラは3～5bytecode/ミリ秒</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>本当の評価はプログラムの実行性能を加味すべき</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0370.htm');">まとめ</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>高性能にはJITコンパイラの多様化が必要</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT 2のデザイン</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JITコンパイラ研究の基盤</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>徹底したOO設計により幅広い目的に利用可</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JITコンパイラ向けアプリケーションフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT 2のbaselineコンパイラの処理速度</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SSA形式の利用は高価</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>最適化コンパイラとしてはそこそこの速度</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>生成コードの質との関係は現時点では不明</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0371.htm');">今後の課題</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>設計・実装の完了</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>レジスタ割付、コード生成、OO言語向け最適化</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Release Q2, 2001</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>評価</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JITコンパイラとしての評価</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>各最適化と性能の関係の考察</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>コード再利用の度合いの考察(e.g. CMCC)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compiletの自己適用（コンパイル速度の向上）</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>アダプティブな手法の実現</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>メソッドの呼び出し回数のような単純なもの</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0167.htm');">JavaGrande Forum</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>An International Forum for HPC in
+  Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Forum Process and Membership<br>
+  Forum
+  is open to any qualified member of academia, industry or government who is
+  willing to play an active role.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>http://www.javagrande.org</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Forum secretary: George K.
+  Thiruvathukal</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(george.k.thiruvathukal@ acm. org).</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Academic coordinator: Geoffrey C. Fox</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>(gcf@npac.syr.edu).</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0168.htm');">JavaGrande Activities</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Working Groups</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Numerics Working Group</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Concurrency Working Group</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Conferences</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>ACM JavaGrande Workshops and
+  Conferences since 1997</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>ACM JavaGrande/ISCOPE Conference
+  2001, June, San Francisco, CA</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>International</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>European Branch</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>We are working on establishment of a
+  Japanese Branch</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0169.htm');">JavaGrande Numerics
+Working Group<br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java must provide performance
+  comparable to Fortran and C.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Language features and standard
+  libraries to express mathematical algorithms.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Constraints:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>small changes to Java and JVM,</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>good execution speed,</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>predictability of results is
+  important.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>http://math.nist.gov/javanumerics</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0203.htm');">What we did not have in
+the Slides Today</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Memory Management, Garbage Collection</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Profiling/Instrumentation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Other Numerical Stuff</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>e.g, complex number</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Benchmarks</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SpecJVM98, SciMark, Spec98fp ports</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Still early, no parallel benchmarks</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Fast Communication</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Fast RMI [Phillipsen99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Jaguar [Welsch99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Grid computing</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Many - Javelin, Ninflet, JavaParty,
+  Dogma, etc. etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Applications</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Reports of competitive performance in
+  sparse code</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Language Extension Experiments</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SPMD, BSP support</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenMP for Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0217.htm');">Acknowledgements (_o_)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The JSPP Organizers (Earlier Version)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The TIT/Fujitsu OpenJIT Team</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Ole Agesen, Dave Detlefs, Steve
+  Heller, Sunlabs East</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Jose Moreira, Vivek Sakar, IBM Watson</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Hidehiko Masuhara, Univ. Tokyo</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>PDC (Parallel Distributed Consortium)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>IPA, RISE (OpenJIT sponsors)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The TEA group, Ninf group</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Audience Comments are Welcome</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Will be fed back to the latest
+  version of the slides</font></td>
+ </tr>
+</table>
+
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="../common.css" type="text/css">
+<link rev=made href="mailto:webmaster@matsulab.is.titech.ac.jp">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OpenJIT:Benchmark Results</title>
+
+<style type="text/css">
+<!--
+TABLE {
+	margin-bottom:	40px;
+}
+TH {
+	border-width: 1;
+	padding: 5px;
+	border-style: outset;
+	background-color: #ccffcc;
+}
+TD {
+	border-width: 1;
+	padding: 5px;
+	border-style: outset;
+	background-color: #ffffcc;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<h1 class=banner>OpenJIT</h1>
+<h1 class=subbanner>Benchmark Results</h1>
+
+<h2 class=genre>SPEC JVM98 on Linux (x86)</h2>
+
+<h3>Experimental Environment</h3>
+
+<ul>
+ <li>AMD Athlon 600MHz with 386MB of memory
+ <li>RedHat Linux 6.1
+ <li>Command line option: -mx256m
+</ul>
+
+<h3>Java Runtime</h3>
+
+<ul>
+ <li>OpenJIT: Blackdown JDK 1.1.7v3 with OpenJIT
+ <li>JDK1.1.7: Blackdown JDK 1.1.7v3 without JIT
+ <li>IBM1.1.8: IBM JDK 1.1.8 (1999/10/28 version) with JIT
+</ul>
+
+<table>
+ <tr>
+  <th colspan=4>SPEC JVM98 Benchmark</th>
+ </tr>
+ <tr>
+  <th>Benchmark</th>
+  <th>OpenJIT</th>
+  <th>JDK1.1.7</th>
+  <th>IBM1.1.8</th>
+ </tr>
+ <tr>
+  <td>_200_check</td>
+  <td align=right>0.043</td>
+  <td align=right>0.047</td>
+  <td align=right>0.042</td>
+ </tr>
+ <tr>
+  <td>_201_compress</td>
+  <td align=right>40.828</td>
+  <td align=right>308.071</td>
+  <td align=right>18.236</td>
+ </tr>
+ <tr>
+  <td>_202_jess</td>
+  <td align=right>29.783</td>
+  <td align=right>77.086</td>
+  <td align=right>13.142</td>
+ </tr>
+ <tr>
+  <td>_209_db</td>
+  <td align=right>85.881</td>
+  <td align=right>166.235</td>
+  <td align=right>40.259</td>
+ </tr>
+ <tr>
+  <td>_213_javac</td>
+  <td align=right>56.227</td>
+  <td align=right>109.789</td>
+  <td align=right>30.964</td>
+ </tr>
+ <tr>
+  <td>_222_mpegaudio</td>
+  <td align=right>40.911</td>
+  <td align=right>262.643</td>
+  <td align=right>11.942</td>
+ </tr>
+ <tr>
+  <td>_227_mtrt</td>
+  <td align=right>30.101</td>
+  <td align=right>108.404</td>
+  <td align=right>17.014</td>
+ </tr>
+ <tr>
+  <td>_228_jack</td>
+  <td align=right>28.403</td>
+  <td align=right>98.918</td>
+  <td align=right>10.751</td>
+ </tr>
+</table>
+
+<hr>
+<address>openjit@is.titech.ac.jp</address>
+</body>
+</html>

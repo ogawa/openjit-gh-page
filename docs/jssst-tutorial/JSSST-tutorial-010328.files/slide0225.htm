@@ -1,0 +1,373 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Simple Algorithms for Analyzing Receiver Classes">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0225.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="364"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s372738" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s372739" type="#_x0000_m141325"
+  style='position:absolute;left:18pt;top:150pt;width:6in;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape><v:shapetype id="_x0000_t202"
+  coordsize="21600,21600" o:spt="202" path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s372740" type="#_x0000_t202" style='position:absolute;
+  left:486pt;top:162pt;width:120pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s372741" type="#_x0000_t202" style='position:absolute;
+  left:457.25pt;top:198.75pt;width:81.625pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s372742" type="#_x0000_t202" style='position:absolute;
+  left:439.25pt;top:240.75pt;width:120pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s372743" type="#_x0000_t202" style='position:absolute;
+  left:577.25pt;top:198.75pt;width:120pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape>
+ <div v:shape="_x0000_s372738" class=T><span style='position:absolute;
+ top:6.25%;left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Simple
+ Algorithms for </span></span><span style='position:absolute;top:16.0%;
+ left:4.3%;width:91.57%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Analyzing
+ Receiver Classes</span></span></div>
+ <div v:shape="_x0000_s372739">
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:27.25%;left:7.3%;width:55.99%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-6.68%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'><b><u>Class Hierarchy Analysis</u></b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'> </span></span><span style='position:
+ absolute;top:32.75%;left:7.3%;width:54.49%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:88%;
+ mso-fareast-language:JA'>[Dean et.al.95]&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:39.5%;
+ left:8.42%;width:60.11%;height:6.5%'><span style='position:absolute;
+ top:0%;left:5.29%;width:94.7%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-5.59%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Applicable
+ to Statically-Typed&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:45.5%;left:11.61%;width:55.61%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-5.72%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>For
+ each method signature m, </span></span><span style='position:absolute;
+ top:50.25%;left:11.61%;width:56.92%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>precompute
+ for each class c in </span></span><span style='position:absolute;top:55.0%;
+ left:11.61%;width:54.49%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>C,
+ set of all m</span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:57%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'>k</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>’s that exist in </span></span><span
+ style='position:absolute;top:59.75%;left:11.61%;width:50.0%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>the descendents of c: </span></span><span
+ style='position:absolute;top:64.75%;left:11.61%;width:50.0%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'><i>methods</i></span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>(c, m)&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:70.5%;
+ left:13.48%;width:52.24%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.65%;width:95.34%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.88%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Doesn’t
+ look at program --- O(1)&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:75.25%;left:11.61%;width:50.0%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-6.36%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>At
+ s, possible methods are </span></span><span style='position:absolute;
+ top:80.25%;left:11.61%;width:50.0%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'><i>methods</i></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>(s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:57%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'>c</span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:86%;mso-fareast-language:JA'>, m)</span></span></div>
+ </div>
+ <div v:shape="_x0000_s372740" class=O style='position:absolute;top:31.0%;
+ left:68.53%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>A: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>A</b></span><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>,n</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>A</b></span></div>
+ <div v:shape="_x0000_s372741" class=O style='position:absolute;top:37.75%;
+ left:64.6%;width:11.42%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>B: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>B</b></span></div>
+ <div v:shape="_x0000_s372742" class=O style='position:absolute;top:45.5%;
+ left:61.98%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>C: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>C</b></span><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>,p</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>C</b></span></div>
+ <div v:shape="_x0000_s372743" class=O style='position:absolute;top:37.75%;
+ left:81.27%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>D: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>D</b></span><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>,n</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>D</b></span></div>
+ <v:line id="_x0000_s372744" style='position:absolute;flip:x' from="499.25pt,192.75pt"
+  to="523.25pt,210.75pt" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:line id="_x0000_s372745" style='position:absolute;flip:x' from="469.25pt,222.75pt"
+  to="505.25pt,252.75pt" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><![if !vml]><img border=0 v:shapes="_x0000_s372744,_x0000_s372745"
+ src="slide0225_image191.gif" style='position:absolute;top:35.5%;left:64.98%;
+ width:8.23%;height:12.0%'><![endif]><v:line id="_x0000_s372746" style='position:absolute'
+  from="607.25pt,192.75pt" to="637.25pt,210.75pt" strokecolor="black [1]"
+  strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:shape id="_x0000_s372747" type="#_x0000_t202" style='position:absolute;
+  left:6in;top:306pt;width:294pt;height:194.5pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s372746"
+ src="slide0225_image192.gif" style='position:absolute;top:35.5%;left:84.08%;
+ width:4.86%;height:4.25%'><![endif]>
+ <div v:shape="_x0000_s372747" class=O><span style='position:absolute;
+ top:57.5%;left:61.04%;width:38.95%'><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:83%;mso-fareast-language:JA'><b>A a; B b; C c;<br>
+ </b></span></span><span
+ style='position:absolute;top:61.25%;left:61.04%;width:44.19%'><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>a.m;
+ </b></span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";font-size:83%;
+ mso-fareast-language:JA'><b>//methods={</b></span><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>m</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>A</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>,</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>m</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>B</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>,</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>m</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>C</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>}<br>
+ </b></span></span><span
+ style='position:absolute;top:65.75%;left:61.04%;width:39.32%'><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>b.m;
+ </b></span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";font-size:83%;
+ mso-fareast-language:JA'><b>//methods={</b></span><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>m</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>B</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>,</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>m</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>C</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>}
+ </b></span></span><span style='position:absolute;top:70.0%;left:61.04%;
+ width:38.95%'><span lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:
+ "Courier New";mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:
+ JA'><b>c.m; </b></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'><b>//methods={</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>m</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>C</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>}&#13;</b></span></span><span
+ style='position:absolute;top:74.5%;left:61.04%;width:38.95%'><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>c.p;
+ </b></span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";font-size:83%;
+ mso-fareast-language:JA'><b>//methods={</b></span><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>p</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>C</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>}<br>
+ </b></span></span><span
+ style='position:absolute;top:79.0%;left:61.04%;width:38.95%'><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>a.p;
+ </b></span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";font-size:83%;
+ mso-fareast-language:JA'><b>//methods={</b></span><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>p</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>C</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>}<br>
+ </b></span></span><span
+ style='position:absolute;top:83.5%;left:61.04%;width:38.95%'><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>c.n;
+ </b></span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";font-size:83%;
+ mso-fareast-language:JA'><b>//error&#13;</b></span></span>
+ <div style='position:absolute;top:89.0%;left:61.04%;width:38.95%;height:3.25%'><span
+ style='mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-special-format:
+ lastCR;display:none'><b>&#13;</b></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description content="99/10/29: Framework of OpenJIT Frontend system">
+<link rel=next href=slide0023.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0045.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master04_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=436 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=436 height=31>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=436 height=31><font face="Arial Narrow" color="#010000" size=5><b>Framework
+    of OpenJIT Frontend system</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=22 height=31 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=30 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=17 height=181></td>
+  <td width=454 height=181 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=132 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=219 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=19 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=404 height=22 colspan=9><font face=Arial color="#010000" size=3>Frontend
+    system provides a framework for JIT-</font><br>
+    </td>
+    <td width=32 height=22 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=453 height=1 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=22></td>
+    <td width=436 height=22 colspan=12><font face=Arial color="#010000" size=3>optimizer
+    and/or JIT-customizer, on Java bytecode</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=17 height=22></td>
+    <td width=375 height=22 colspan=7><font face=Arial color="#010000" size=3>or
+    higher-level Intermediate Representation</font><br>
+    </td>
+    <td width=61 height=22 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=453 height=4 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=23 height=20 colspan=3></td>
+    <td width=15 height=20><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=352 height=20 colspan=3><font face=Arial color="#010000" size=3>Decompiles
+    Java bytecodes into Java ASTs</font><br>
+    </td>
+    <td width=63 height=20 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=453 height=5 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=23 height=20 colspan=3></td>
+    <td width=15 height=20><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=401 height=20 colspan=7><font face=Arial color="#010000" size=3>Transforms
+    ASTs to optimized-/customized- ASTs</font><br>
+    </td>
+    <td width=14 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=453 height=5 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=23 height=20 colspan=3></td>
+    <td width=15 height=20><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=408 height=20 colspan=8><font face=Arial color="#010000" size=3>Compiles
+    customized-ASTs into Java bytecodes or</font><br>
+    </td>
+    <td width=7 height=20></td>
+   </tr>
+   <tr>
+    <td width=38 height=20 colspan=4></td>
+    <td width=373 height=20 colspan=5><font face=Arial color="#010000" size=3>Intermediate
+    Representation (such as RTL) for</font><br>
+    </td>
+    <td width=42 height=20 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=453 height=1 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=38 height=20 colspan=4></td>
+    <td width=133 height=20 colspan=2><font face=Arial color="#010000" size=3>Backend
+    system</font><br>
+    </td>
+    <td width=282 height=20 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=4 height=181></td>
+ </tr>
+ <tr>
+  <td width=475 height=44 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=453 height=11 colspan=2></td>
+  <td width=6 height=11><img src="master04_image012.gif" border=0 width=6
+  height=11></td>
+  <td width=16 height=11 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

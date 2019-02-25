@@ -1,0 +1,130 @@
+/* Fundamental */
+
+BODY {
+	font-family:	Verdana, Georgia, serif;
+	font-weight:	medium;
+	font-size:	11pt;/* 11pt */
+	line-height:	1.3;
+	margin-top:	10px;
+	margin-right:	20px;
+	margin-left:	20px;
+	margin-bottom:	40px;
+	background-color:	white;
+}
+TABLE {
+	font-weight:	medium;
+	font-size:	11pt;/* 11pt */
+	line-height:	1.3;
+	width:	100%;
+}
+H1, H2, H3, H4, H5, H6 {
+	font-family:	Trebuchet MS, Arial, sans-serif;
+	font-weight:	bold;
+	line-height:	1.1;
+}
+H1 {
+	font-size:	20pt;
+/*	color:		maroon;*/
+}
+H2 {
+	font-size:	18pt;
+/*	color:		black;*/
+}
+H3 {
+	font-size:	13pt;
+/*	font-style:	italic;
+	color:		crimson;*/
+}
+H4 {
+	font-size:	11pt;
+/*	color:		green;*/
+}
+H5 {
+	font-size:	10pt;
+}
+H6 {
+	font-size:	8pt;
+}
+LI, OL {
+	padding-bottom:	5px;
+}
+A:link {
+	color:		blue;
+}
+A:visited {
+	color:		navy;
+}
+A:active, A:hover {
+	background:	#FFA;
+}
+A, IMG {
+	border: 0;
+}
+DT {
+	font-weight:	bold;
+}
+ADDRESS {
+	margin-top:	2em;
+	font-size:	9pt;
+	font-style:	normal;
+	text-align:	right;
+}
+PRE, CODE {
+	font-family:	"Lucida Console", monospace;
+}
+PRE {
+	background-color:	#CCC;
+}
+
+/* Utils */
+
+H1.banner {
+	font-family:	Impact, Arial, sans-serif;
+	font-size:	60pt;
+	color:		#CCC;
+	text-align:	right;
+}
+H1.subbanner {
+	font-size:	20pt;
+	color:		blue;
+	margin-top:	-60px;
+	text-align:	right; /* IE5‚Å‚Í•K—v‚È‚¢ */
+	float:		right;
+}
+.genre {
+	font-family:	Trebuchet MS, Arial, sans-serif;
+	font-weight:	bold;
+	font-size:	12pt;
+	color:	white;
+	background-color: blue;
+	text-indent:	6px;
+}
+.left {
+	text-align:	left;
+}
+.center	{
+	text-align:	center;
+}
+.right {
+	text-align:	right;
+}
+
+/* Item Header */
+
+.new {
+	list-style-image:	url(icons/lamp1.gif);
+	list-style-position:	outside;
+}
+ul li {
+	list-style-type:	square;
+	list-style-position:	outside;
+}
+ul li li {
+	list-style-type:	disc;
+	list-style-position:	outside;
+}
+
+/* Background */
+
+/* Junk */
+

@@ -1,0 +1,240 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Problems in Optimizing Dynamic Dispatch for Java">
+<link rel=next href="v3_slide0235.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0231.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0231_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=33 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=95 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=45 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=78 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=68 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=44 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=33 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=14></td>
+ </tr>
+ <tr>
+  <td width=38 height=76 colspan=2></td>
+  <td width=401 height=76 colspan=10>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=30 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=340 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=30 height=41></td>
+    <td width=340 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Problems in Optimizing</font><br>
+    </td>
+    <td width=31 height=41></td>
+   </tr>
+   <tr>
+    <td width=401 height=35 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Dynamic Dispatch for Java</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=36 height=76 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=40 height=142 colspan=3></td>
+  <td width=371 height=142 colspan=8>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=32 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=221 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=57 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=38 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=30><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=349 height=30 colspan=5><font face="Comic Sans MS" size=4>Closed-world
+    assumption not valid</font><br>
+    </td>
+    <td width=4 height=30></td>
+   </tr>
+   <tr>
+    <td width=18 height=30><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=311 height=30 colspan=4><font face="Comic Sans MS" size=4>General
+    problem: class loading</font><br>
+    </td>
+    <td width=42 height=30 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=18 height=26></td>
+    <td width=353 height=26 colspan=6><font face="Comic Sans MS" size=4>invalidates
+    assumptions about C =&gt;</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=18 height=25></td>
+    <td width=254 height=25 colspan=3><font face="Comic Sans MS" size=4>invalidates
+    most analysis</font><br>
+    </td>
+    <td width=99 height=25 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=18 height=30><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=33 height=30 colspan=2><font face="Comic Sans MS" size=4>Ex.</font><br>
+    </td>
+    <td width=320 height=30 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=64 height=142 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=4 colspan=14></td>
+ </tr>
+ <tr>
+  <td width=5 height=5></td>
+  <td width=175 height=48 colspan=4 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=59 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=91 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=175 height=16 colspan=3><font face="Courier New" size=1><b>A
+    a=getAorSubclass();</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=150 height=16 colspan=2><font face="Courier New" size=1><b>a.n;
+    //bad if n is</b></font><br>
+    </td>
+    <td width=25 height=16></td>
+   </tr>
+   <tr>
+    <td width=59 height=16><font face="Courier New" size=1><b>inlined</b></font><br>
+    </td>
+    <td width=116 height=16 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=295 height=5 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=5 height=20></td>
+  <td width=146 height=20 colspan=2></td>
+  <td width=47 height=20 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=47 height=20><font face="Courier New" size=2><b>B: m</b><b><sub>B</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=102 height=20 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=5 height=7></td>
+  <td width=295 height=7 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=5 height=16></td>
+  <td width=221 height=16 colspan=5></td>
+  <td width=74 height=20 colspan=4 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=20><font face="Courier New" color=red size=2><b>D: m</b><b><sub>D</sub></b><b>,n</b><b><sub>D</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+ </tr>
+ <tr>
+  <td width=401 height=4 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=329 height=5 colspan=8></td>
+  <td width=143 height=20 colspan=5 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=143 height=20><font face="Comic Sans MS" size=1><b>Methods(A,n)={</b></font><font
+    face="Courier New" size=1><b>n</b><b><sub>a</sub></b></font><font
+    face="Comic Sans MS" size=1><b>,</b></font><font face="Courier New"
+    color=red size=1><b>n</b><b><sub>D</sub></b></font><font
+    face="Comic Sans MS" color=black size=1><b>}</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=3 height=5></td>
+ </tr>
+ <tr>
+  <td width=135 height=15 colspan=4></td>
+  <td width=123 height=20 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=123 height=20><font face="Comic Sans MS" size=1><b>Methods(A,n)={</b></font><font
+    face="Courier New" size=1><b>n</b><b><sub>A</sub></b></font><font
+    face="Comic Sans MS" size=1><b>}</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=71 height=15 colspan=2></td>
+  <td width=3 height=15></td>
+ </tr>
+ <tr>
+  <td width=135 height=5 colspan=4></td>
+  <td width=217 height=5 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=475 height=35 colspan=14></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

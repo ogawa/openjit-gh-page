@@ -1,0 +1,202 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: OpenJIT Project Member">
+<link rel=next href=slide0038.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0031.htm');   
+  else
+    parent.location.href = "../OpenJIT-OOPSLA98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master03_background.gif" bgcolor=white alink="#5f5f5f"
+link="#969696" vlink="#cbcbcb" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=300 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=57 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=40 height=33></td>
+  <td width=312 height=33 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=312 height=33><font face="Times New Roman" size=5>OpenJIT Project
+    Member</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=123 height=33 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=16 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=52 height=223 colspan=2></td>
+  <td width=357 height=223 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=84 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=65 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=43 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=300 height=20 colspan=18><font face=Arial size=3><b>Joint project
+    between TIT &amp; Fujitsu</b></font><br>
+    </td>
+    <td width=40 height=20></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=340 height=20 colspan=19><font face=Arial size=3><b>Fujitsu
+    Compiler Technologies Division</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=358 height=1 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=106 height=17 colspan=5><font face=Arial size=2><b>Koichiro Hotta</b></font><br>
+    </td>
+    <td width=213 height=17 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=174 height=20 colspan=15><font face=Arial size=3><b>Fujitsu
+    Laboratories</b></font><br>
+    </td>
+    <td width=166 height=20 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=358 height=1 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=123 height=17 colspan=9><font face=Arial size=2><b>Fuminori
+    Kimura</b></font><br>
+    </td>
+    <td width=196 height=17 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=113 height=17 colspan=6><font face=Arial size=2><b>Kouya Shimura</b></font><br>
+    </td>
+    <td width=206 height=17 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=358 height=1 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=257 height=20 colspan=17><font face=Arial size=3><b>Tokyo
+    Institute of Technology</b></font><br>
+    </td>
+    <td width=83 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=131 height=17 colspan=11><font face=Arial size=2><b>Satoshi
+    Matsuoka</b></font><br>
+    </td>
+    <td width=188 height=17 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=116 height=17 colspan=7><font face=Arial size=2><b>Hirotaka Ogawa</b></font><br>
+    </td>
+    <td width=203 height=17 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=358 height=1 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=99 height=16 colspan=5><font face=Arial size=1><b>Other students</b></font><br>
+    </td>
+    <td width=199 height=16 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=239 height=20 colspan=16><font face=Arial size=3><b>Electrotechnical
+    Laboratory</b></font><br>
+    </td>
+    <td width=101 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=125 height=17 colspan=10><font face=Arial size=2><b>Hiromitsu
+    Takagi</b></font><br>
+    </td>
+    <td width=194 height=17 colspan=6></td>
+   </tr>
+  </table>
+  </td>
+  <td width=66 height=223 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=9 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=425 height=11 colspan=5></td>
+  <td width=11 height=11><img src="master03_image017.gif" border=0 width=11
+  height=11></td>
+  <td width=39 height=11></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

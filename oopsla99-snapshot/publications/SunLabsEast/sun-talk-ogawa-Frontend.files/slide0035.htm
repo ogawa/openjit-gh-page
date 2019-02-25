@@ -1,0 +1,213 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description
+content="99/10/29: OpenJIT High-level Optimizer Toolkit (3)">
+<link rel=next href=slide0038.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0035.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master04_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=431 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=432 height=31 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=432 height=31><font face="Arial Narrow" color="#010000" size=5><b>OpenJIT
+    High-level Optimizer Toolkit (3)</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=26 height=31 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=30 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=17 height=205></td>
+  <td width=454 height=205 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=29 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=117 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=33 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=65 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=336 height=19 colspan=16><font face=Arial color="#010000" size=2>Program
+    Transformer works as shown below:</font><br>
+    </td>
+    <td width=101 height=19 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=454 height=4 colspan=22></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=230 height=17 colspan=11><font face=Arial color="#010000" size=2>1.
+    Register pattern matching rules</font><br>
+    </td>
+    <td width=186 height=17 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=454 height=3 colspan=22></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=312 height=16 colspan=12><font face=Arial color="#010000" size=1>register_pattern(Expression
+    pat, Expression subst)</font><br>
+    </td>
+    <td width=83 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=454 height=3 colspan=22></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=301 height=16 colspan=11><font face=Arial color="#010000" size=1>register_pattern(Statement
+    pat, Statement subst)</font><br>
+    </td>
+    <td width=94 height=16 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=454 height=3 colspan=22></td>
+   </tr>
+   <tr>
+    <td width=71 height=14 colspan=9></td>
+    <td width=12 height=14><font color="#336699" size=1>&#8226;</font></td>
+    <td width=296 height=14 colspan=10><font face=Arial color="#010000" size=1>“pat”
+    and “subst” can be made by using AST package</font><br>
+    </td>
+    <td width=75 height=14 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=454 height=3 colspan=22></td>
+   </tr>
+   <tr>
+    <td width=71 height=14 colspan=9></td>
+    <td width=12 height=14><font color="#336699" size=1>&#8226;</font></td>
+    <td width=205 height=14 colspan=6><font face=Arial color="#010000" size=1>They
+    can include *not concern* node</font><br>
+    </td>
+    <td width=166 height=14 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=454 height=4 colspan=22></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=416 height=17 colspan=18><font face=Arial color="#010000" size=2>2.
+    Check if the sub-tree, whose root is specified (usually this),</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=38 height=17 colspan=4></td>
+    <td width=351 height=17 colspan=17><font face=Arial color="#010000" size=2>matches
+    an existing pattern. If match, substitution is</font><br>
+    </td>
+    <td width=65 height=17></td>
+   </tr>
+   <tr>
+    <td width=38 height=17 colspan=4></td>
+    <td width=75 height=17 colspan=8><font face=Arial color="#010000" size=2>performed.</font><br>
+    </td>
+    <td width=341 height=17 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=454 height=4 colspan=22></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=176 height=16 colspan=7><font face=Arial color="#010000" size=1>substitution(Expression
+    root)</font><br>
+    </td>
+    <td width=219 height=16 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=454 height=3 colspan=22></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=171 height=16 colspan=6><font face=Arial color="#010000" size=1>substitution(Statement
+    root)</font><br>
+    </td>
+    <td width=224 height=16 colspan=9></td>
+   </tr>
+  </table>
+  </td>
+  <td width=4 height=205></td>
+ </tr>
+ <tr>
+  <td width=475 height=20 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=448 height=11 colspan=2></td>
+  <td width=12 height=11 colspan=2><img src="master04_image023.gif" border=0
+  width=12 height=11></td>
+  <td width=15 height=11 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=6></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

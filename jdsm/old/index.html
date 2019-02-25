@@ -1,0 +1,123 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=x-sjis">
+<!--link rel="stylesheet" type="text/css" href="./style.css"-->
+<title>News</title>
+</head>
+<body>
+<br>
+<!--
+<h2 align=center>高度情報化支援ソフトウェアシーズ育成事業</h2>
+-->
+<h2 align=center>
+Javaによる高可搬かつ高性能な分散共有メモリ型<br>
+並列プログラミング環境JDSMの開発
+</h2>
+<h3 align=center>
+東京工業大学大学院 <br>
+情報理工学研究科 数理・計算科学専攻 松岡研究室<br>
+</h3>
+<br>
+<hr>
+<table border=0 width=90% align=center>
+<tr><th>概要</th></tr>
+<tr><td>
+<p>
+近年の計算機構成技術の発展に伴って急速に多様化しているソフトウェア実行環
+境の上でプラットフォームポータビリティを確保することは希求の課題である。
+特にPCクラスタ/WSクラスタ等の分散メモリ並列計算機上の並列言語処理系に関
+しても同様のことが求められる。つまり、汎用性・保守性を維持しつつ、実行時
+環境に最適化されたプログラムを生成できなければならない。このような要求を
+満たす処理系を実現する一つの方法はリクレクションを用いることである。我々
+は、Java言語処理系において、JITコンパイル時のコード生成の挙動を動的に変
+更できるOpenJITを利用して、SPMDスタイルで書かれたJavaの並列マルチスレッ
+ドプログラムに対して、共有分散メモリ機能を実現したメッセージパッシングプ
+ログラムを自動的に生成し、実行する並列言語処理系JDSMを実現した。具体的に
+はCompile-time MOPを用いたプログラム変換によって、共有変数に対応する共有
+メモリ管理オブジェクトの生成・初期化、共有変数へのアクセスの管理オブジェ
+クトを介したアクセスへの変換などを行ったJavaのプログラムを生成する。Fast
+Ethernetで接続された16台構成のPCクラスタ上で性能評価し、リフレクションを
+用いた分散共有メモリ実現の有効性を確認した。
+</p>
+</td></tr>
+</table>
+
+<table border=0 width=90% align=center>
+<tr><th>Abstract</th></tr>
+<tr><td>
+<p>
+Platform portability is one of the utmost demanded properties of a
+system today, due to the diversity of runtime execution environment of
+wide-area networks, and parallel programs are no exceptions.  However,
+parallel execution environments are very diverse, could change
+dynamically, while performance must be portable as well.  As a result,
+techniques for achieving platform portability are sometimes not
+appropriate, or could restrict the programming model, e.g., to simple
+message passing.  Instead, we propose the use of reflection for
+achieving platform portability of parallel programs.  As a prototype
+experiment, a software DSM system called JDSM was created which utilizes
+the JIT compile-time metaprogramming features of OpenJIT to generate a
+message-passing Java bytecode program from a SPMD-style, shared-memory
+Java bytecode program.  The translation creates memory management
+objects on each node to manage the consistency protocols for objects
+arrays residing on different nodes. Read- and write- barriers are
+automatically inserted on references to shared objects.  The resulting
+system turned out to be quite easy to construct compared to traditional
+DSM construction methodologies.  We evaluated this system on a PC
+cluster linked by the FastEther network, and resulted in reasonable
+performance.
+</p>
+</td></tr>
+</table>
+
+<hr>
+
+<h3>目次</h3>
+<ul>
+<li><a href="1.html">1 序論</a>
+<ul>
+<li><a href="1.html#1">1.1 背景</a>
+<li><a href="1.html#2">1.2 本研究の目的と提案</a>
+</ul>
+<li><a href="2.html">2 関連研究</a>
+<ul>
+<li><a href="2.html#1">2.1 分散共有メモリ</a>
+<li><a href="2.html#2">2.2 自己反映計算</a>
+</ul>
+<li><a href="3.html">3 JDSMシステムの実装</a>
+<ul>
+<li><a href="3.html#1">3.1 通信インターフェース部</a>
+<li><a href="3.html#2">3.2 分散共有メモリ</a>
+<li><a href="3.html#3">3.3 プログラム解析と変換</a>
+</ul>
+<li><a href="4.html">4 評価</a>
+<ul>
+<li><a href="4.html#1">4.1 評価環境</a>
+<li><a href="4.html#2">4.2 性能評価</a>
+</ul>
+<li><a href="5.html">5 結論</a>
+<ul>
+<li><a href="5.html#1">5.1 まとめ</a>
+<li><a href="5.html#2">5.2 今後の課題</a>
+</ul>
+<li><a href="bib.html">参考文献</a>
+</ul>
+
+<h3>論文のダウンロード</h3>
+<ul>
+<li><a href="thesis.pdf">PDFファイル</a>
+</ul>
+
+<hr>
+
+<p>
+※本研究は
+情報処理振興事業協会（IPA）の委託により
+財団法人ソフトウェア工学研究財団（RISE）が実施した平成11年度
+高度情報化支援ソフトウェアシーズ育成事業」として行われた。
+</p>
+
+<hr>
+
+</body>
+</html>

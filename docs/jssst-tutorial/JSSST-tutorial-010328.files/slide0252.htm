@@ -1,0 +1,175 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Overview of the OpenJIT Framework (2)">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0252.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = true, g_autoTrans = false, g_transSecs = 1;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(1);
+//-->
+</script><![endif]><p:slidetransition advancetime="0" effect="pull"
+ direction="right" flag="1"/><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="439"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden;filter:revealtrans(Duration=1, Transition=6)'><p:slide
+ coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s447490" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s447491" type="#_x0000_m141325"
+  style='position:absolute;left:66pt;top:150pt;width:642pt;height:372pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s447490" class=T><span style='position:absolute;
+ top:6.25%;left:5.43%;width:89.13%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Overview of the
+ OpenJIT </span></span><span style='position:absolute;top:16.0%;left:8.42%;
+ width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>Framework (2)</span></span></div>
+ <div v:shape="_x0000_s447491">
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:27.25%;
+ left:10.11%;width:87.26%;height:7.5%'><span style='position:absolute;
+ top:0%;left:4.29%;width:95.7%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.48%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>OpenJIT Frontend System&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:34.0%;
+ left:15.16%;width:82.39%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.86%;width:96.13%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.01%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Preprocessor
+ for Backend System&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:40.0%;left:22.65%;width:83.52%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-2.91%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Java
+ class framework for JIT-optimizer and/or JIT-</span></span><span
+ style='position:absolute;top:44.0%;left:22.65%;width:74.9%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>customizer, on Java bytecode or
+ higher-level </span></span><span style='position:absolute;top:48.0%;
+ left:22.65%;width:75.65%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Intermediate
+ Representation (e.g. Backend RTL)&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:52.75%;
+ left:15.16%;width:82.39%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.86%;width:96.13%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.01%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Classfile
+ Annotation support&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:58.75%;left:22.65%;width:88.38%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-2.75%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Embed
+ various information to classfiles, and utilize them </span></span><span
+ style='position:absolute;top:62.75%;left:22.65%;width:74.9%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>at JIT-compile phase&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:67.5%;
+ left:10.11%;width:87.26%;height:7.5%'><span style='position:absolute;
+ top:0%;left:4.29%;width:95.7%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.48%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>OpenJIT Backend System&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:74.25%;left:18.35%;width:92.5%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.44%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Compact
+ and efficient Java JIT Compiler written </span></span><span style='position:
+ absolute;top:79.25%;left:18.35%;width:79.21%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>in Java itself&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:85.0%;
+ left:15.16%;width:82.39%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.86%;width:96.13%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.01%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Microscopic
+ optimization on RTL&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:91.0%;
+ left:20.22%;width:77.34%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.14%;width:96.85%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.25%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>stack-to-register
+ allocation&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:95.75%;
+ left:20.22%;width:77.34%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.14%;width:96.85%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.25%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>peephole
+ optimization</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

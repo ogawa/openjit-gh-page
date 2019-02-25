@@ -1,0 +1,248 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: OpenJIT2 コンパイル時間と性能の関係">
+<link rel=next href="v3_slide0353.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0352.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0352_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=24 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=63 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=42 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=42 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=70 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=33 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=476 height=10 colspan=32></td>
+ </tr>
+ <tr>
+  <td width=54 height=74 colspan=7></td>
+  <td width=392 height=74 colspan=23>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=117 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=157 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=117 height=41></td>
+    <td width=157 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>OpenJIT2</font><br>
+    </td>
+    <td width=118 height=41></td>
+   </tr>
+   <tr>
+    <td width=392 height=3 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=392 height=30 colspan=3 align=center><font face="ＭＳ Ｐゴシック"
+    color="#003399" size=5>コンパイル時間と性能の関係</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=30 height=74 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=476 height=1 colspan=32></td>
+ </tr>
+ <tr>
+  <td width=381 height=15 colspan=26></td>
+  <td width=32 height=26 colspan=3 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=32 height=26><font face=Tahoma color=red size=4>JIT</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=63 height=15 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=9 height=11></td>
+  <td width=34 height=17 colspan=4 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=34 height=17><font face="ＭＳ Ｐゴシック" size=2>性能</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=164 height=11 colspan=11></td>
+  <td width=67 height=17 colspan=6 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=67 height=17><font face="ＭＳ Ｐゴシック" size=2>実行時間</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=107 height=11 colspan=4></td>
+  <td width=63 height=11 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=9 height=6></td>
+  <td width=164 height=6 colspan=11></td>
+  <td width=202 height=6 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=476 height=1 colspan=32></td>
+ </tr>
+ <tr>
+  <td width=35 height=14 colspan=3></td>
+  <td width=4 height=123 rowspan=3><img src="v3_slide0352_image135.gif"
+  border=0 width=4 height=123></td>
+  <td width=4 height=14></td>
+  <td width=4 height=123 rowspan=3><img src="v3_slide0352_image136.gif"
+  border=0 width=4 height=123></td>
+  <td width=12 height=14 colspan=3></td>
+  <td width=4 height=123 rowspan=3><img src="v3_slide0352_image137.gif"
+  border=0 width=4 height=123></td>
+  <td width=24 height=14></td>
+  <td width=4 height=123 rowspan=3><img src="v3_slide0352_image138.gif"
+  border=0 width=4 height=123></td>
+  <td width=63 height=14></td>
+  <td width=4 height=123 rowspan=3><img src="v3_slide0352_image139.gif"
+  border=0 width=4 height=123></td>
+  <td width=91 height=14 colspan=3></td>
+  <td width=4 height=123 rowspan=3><img src="v3_slide0352_image140.gif"
+  border=0 width=4 height=123></td>
+  <td width=4 height=14></td>
+  <td width=4 height=123 rowspan=3><img src="v3_slide0352_image141.gif"
+  border=0 width=4 height=123></td>
+  <td width=119 height=14 colspan=5></td>
+  <td width=4 height=123 colspan=2 rowspan=3><img
+  src="v3_slide0352_image142.gif" border=0 width=4 height=123></td>
+  <td width=92 height=14 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=35 height=17 colspan=3></td>
+  <td width=4 height=17></td>
+  <td width=12 height=17 colspan=3></td>
+  <td width=24 height=17></td>
+  <td width=63 height=17></td>
+  <td width=91 height=17 colspan=3></td>
+  <td width=4 height=17></td>
+  <td width=9 height=17></td>
+  <td width=82 height=17 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=82 height=17><font face="ＭＳ Ｐゴシック" size=2>インタプリタ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=28 height=17></td>
+  <td width=92 height=17 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=35 height=92 colspan=3></td>
+  <td width=4 height=92></td>
+  <td width=12 height=92 colspan=3></td>
+  <td width=24 height=92></td>
+  <td width=63 height=92></td>
+  <td width=91 height=92 colspan=3></td>
+  <td width=4 height=92></td>
+  <td width=119 height=92 colspan=5></td>
+  <td width=92 height=92 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=476 height=5 colspan=32></td>
+ </tr>
+ <tr>
+  <td width=56 height=17 colspan=8></td>
+  <td width=109 height=17 colspan=7>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=109 height=17><font face="ＭＳ Ｐゴシック" size=2>コンパイル時間</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=117 height=17 colspan=8></td>
+  <td width=109 height=17 colspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=109 height=17><font face="ＭＳ Ｐゴシック" size=2>コンパイル時間</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=85 height=17 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=476 height=20 colspan=32></td>
+ </tr>
+ <tr>
+  <td width=21 height=52 colspan=2></td>
+  <td width=455 height=52 colspan=30><img src="v3_slide0352_image143.gif"
+  border=0 width=455 height=52></td>
+ </tr>
+ <tr>
+  <td width=476 height=21 colspan=32></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

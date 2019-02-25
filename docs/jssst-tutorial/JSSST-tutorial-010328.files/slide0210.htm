@@ -1,0 +1,194 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: (3) Language-Imposed Safety">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0210.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="348"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s356354" type="#_x0000_m141324"
+  style='position:absolute;left:24pt;top:48pt;width:642pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s356355" type="#_x0000_m141325"
+  style='position:absolute;left:54pt;top:150pt;width:642pt;height:324pt' o:spt="1"
+  path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke joinstyle="miter" o:forcedash="f"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s356354" class=T style='position:absolute;top:11.0%;
+ left:-2.8%;width:101.68%;height:11.5%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS"'>(3) Language-Imposed Safety</span></div>
+ <div v:shape="_x0000_s356355">
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:27.0%;left:12.17%;width:86.51%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-4.32%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Language semantics impose various </span></span><span
+ style='position:absolute;top:33.5%;left:12.17%;width:88.01%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>safety requirements against errors&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:41.25%;left:16.66%;width:79.77%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.99%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Some errors can be detected by the </span></span><span
+ style='position:absolute;top:46.75%;left:16.66%;width:79.21%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>VM/Class Loader before execution&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:53.75%;
+ left:13.48%;width:83.33%;height:7.5%'><span style='position:absolute;
+ top:0%;left:3.82%;width:96.17%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.97%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Others must be detected at runtime&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:60.5%;
+ left:18.53%;width:77.34%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.14%;width:96.85%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.25%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Null references&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:66.25%;
+ left:18.53%;width:77.34%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.14%;width:96.85%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.25%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Exceeding array bounds&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:72.25%;
+ left:13.48%;width:82.39%;height:7.5%'><span style='position:absolute;
+ top:0%;left:3.86%;width:96.13%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-4.01%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>(Nested) Exception Handling&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:79.0%;
+ left:18.53%;width:90.26%;height:6.5%'><span style='position:absolute;
+ top:0%;left:2.69%;width:97.09%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-2.77%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Inhibits MANY optimizations, esp. code motion</span></span></div>
+ </div>
+ <v:shapetype id="_x0000_t88" coordsize="21600,21600" o:spt="88" adj="1800,10800"
+  path="m0,0qx10800@0l10800@2qy21600@11,10800@3l10800@1qy0,21600e" filled="f">
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="sum 21600 0 #0"/>
+   <v:f eqn="sum #1 0 #0"/>
+   <v:f eqn="sum #1 #0 0"/>
+   <v:f eqn="prod #0 9598 32768"/>
+   <v:f eqn="sum 21600 0 @4"/>
+   <v:f eqn="sum 21600 0 #1"/>
+   <v:f eqn="min #1 @6"/>
+   <v:f eqn="prod @7 1 2"/>
+   <v:f eqn="prod #0 2 1"/>
+   <v:f eqn="sum 21600 0 @9"/>
+   <v:f eqn="val #1"/>
+  </v:formulas>
+  <v:path arrowok="t" o:connecttype="custom" o:connectlocs="0,0;21600,@11;0,21600"
+   textboxrect="0,@4,7637,@5"/>
+  <v:handles>
+   <v:h position="center,#0" yrange="0,@8"/>
+   <v:h position="bottomRight,#1" yrange="@9,@10"/>
+  </v:handles>
+ </v:shapetype><v:shape id="_x0000_s356357" type="#_x0000_t88" style='position:absolute;
+  left:420pt;top:330pt;width:30pt;height:54pt;mso-wrap-style:none;
+  v-text-anchor:middle' fillcolor="#82b5ca [4]" strokecolor="black [1]"
+  strokeweight="3pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:shape><v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202"
+  path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s356360" type="#_x0000_t202" style='position:absolute;
+  left:462pt;top:323.875pt;width:204pt;height:72.125pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s356357"
+ src="slide0210_image178.gif" style='position:absolute;top:60.75%;left:58.05%;
+ width:5.05%;height:11.0%'><![endif]>
+ <div v:shape="_x0000_s356360" class=O><span style='position:absolute;
+ top:60.25%;left:65.16%;width:27.52%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:75%;layout-flow:horizontal;mso-fareast-language:JA'><b>These must
+ always </b></span></span><span style='position:absolute;top:64.25%;left:65.16%;
+ width:26.4%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";font-size:75%;
+ layout-flow:horizontal;mso-fareast-language:JA'><b>be checked at </b></span></span><span
+ style='position:absolute;top:68.25%;left:65.16%;width:26.4%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:75%;layout-flow:horizontal;
+ mso-fareast-language:JA'><b>runtime</b></span></span></div>
+</p:slide></div>
+
+</body>
+
+</html>

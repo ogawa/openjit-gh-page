@@ -1,0 +1,163 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: More Sophisticated Class Analysis">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0229.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="368"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s376834" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:642pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s376835" type="#_x0000_m141325"
+  style='position:absolute;left:36pt;top:150pt;width:666pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s376834" class=T><span style='position:absolute;
+ top:6.25%;left:8.42%;width:87.26%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>More
+ Sophisticated Class </span></span><span style='position:absolute;top:16.0%;
+ left:8.42%;width:87.26%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Analysis</span></span></div>
+ <div v:shape="_x0000_s376835">
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:27.25%;
+ left:5.99%;width:90.63%;height:7.5%'><span style='position:absolute;
+ top:0%;left:4.13%;width:95.86%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.31%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>Basic Strategy&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:34.0%;
+ left:11.04%;width:85.58%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.5%;width:96.49%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.62%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Track
+ program control and data flow&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:40.0%;
+ left:15.91%;width:80.71%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.24%;width:96.75%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.35%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Intraprocedural,
+ </span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:83%;mso-fareast-language:JA'><u>Interprocedural&#13;</u></span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:44.75%;left:14.04%;width:82.58%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.62%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Propagate
+ type information along the call </span></span><span style='position:absolute;
+ top:49.5%;left:14.04%;width:94.0%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>graph/dataflow
+ graph, or construct constraints on </span></span><span style='position:absolute;
+ top:54.25%;left:14.04%;width:82.58%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>types&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:60.25%;
+ left:11.04%;width:97.19%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.08%;width:96.72%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.18%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'><u>Infer
+ possible types of receiver at each call site s&#13;</u></span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:66.0%;
+ left:11.04%;width:85.58%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.5%;width:96.49%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.62%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Various
+ techniques, algorithms [Grove97]&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:72.0%;
+ left:5.99%;width:90.63%;height:7.5%'><span style='position:absolute;
+ top:0%;left:4.13%;width:95.86%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.31%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>Problems&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:78.75%;
+ left:11.04%;width:101.12%;height:6.5%'><span style='position:absolute;
+ top:0%;left:2.96%;width:96.85%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.05%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Complex
+ analysis =&gt; higher cost O(n</span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:57%;position:relative;
+ top:-.45em;mso-text-raise:30%;mso-fareast-language:JA'>k</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>), or exponential&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:84.75%;
+ left:15.91%;width:80.71%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.24%;width:96.75%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.35%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Not
+ good for load/run/JIT-time optimizations</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

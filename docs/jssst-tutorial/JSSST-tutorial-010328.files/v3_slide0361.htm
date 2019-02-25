@@ -1,0 +1,242 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: OpenJIT 2の概要(全体)">
+<link rel=next href="v3_slide0362.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0361.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0361_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=23 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=45 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=44 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=78 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=61 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=53 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=19 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=39 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=63 height=41 colspan=4></td>
+  <td width=350 height=41 colspan=13>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=350 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>OpenJIT 2</font><font face="ＭＳ Ｐゴシック" color="#003399"
+    size=5>の概要</font><font face="Comic Sans MS" color="#003399" size=5>(</font><font
+    face="ＭＳ Ｐゴシック" color="#003399" size=5>全体</font><font face="Comic Sans MS"
+    color="#003399" size=5>)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=62 height=41 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=17 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=68 height=26 colspan=6></td>
+  <td width=185 height=26 colspan=6>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=185 height=26 align=center><font face=Tahoma size=4>OpenJIT
+    Compiler</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=222 height=26 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=40 height=21 colspan=3></td>
+  <td width=91 height=52 colspan=7 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=85 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=3 height=26></td>
+    <td width=85 height=26 align=center><font face=Tahoma size=4>Baseline</font><br>
+    </td>
+    <td width=3 height=26></td>
+   </tr>
+   <tr>
+    <td width=91 height=25 colspan=3 align=center><font face=Tahoma size=4>Compiler</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=344 height=21 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=40 height=14 colspan=3></td>
+  <td width=44 height=14></td>
+  <td width=91 height=26 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=91 height=26 align=center><font face=Tahoma size=4>Compilet</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=209 height=14 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=40 height=12 colspan=3></td>
+  <td width=44 height=12></td>
+  <td width=94 height=12 colspan=3></td>
+  <td width=72 height=39 colspan=2 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=37 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=72 height=20 colspan=3 align=center><font face=Tahoma size=2>Compiled</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=18 height=19></td>
+    <td width=37 height=19 align=center><font face=Tahoma size=2>code</font><br>
+    </td>
+    <td width=17 height=19></td>
+   </tr>
+  </table>
+  </td>
+  <td width=43 height=12></td>
+ </tr>
+ <tr>
+  <td width=40 height=5 colspan=3></td>
+  <td width=229 height=5 colspan=6></td>
+  <td width=43 height=5></td>
+ </tr>
+ <tr>
+  <td width=360 height=22 colspan=16></td>
+  <td width=43 height=22></td>
+ </tr>
+ <tr>
+  <td width=475 height=59 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=32 height=5 colspan=2></td>
+  <td width=34 height=17 colspan=3 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=34 height=17><font face="ＭＳ Ｐゴシック" size=2>制御</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=409 height=5 colspan=14></td>
+ </tr>
+ <tr>
+  <td width=32 height=12 colspan=2></td>
+  <td width=60 height=12 colspan=4></td>
+  <td width=201 height=26 colspan=5 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=201 height=26 align=center><font face=Tahoma size=4>OpenJIT C
+    Runtime</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=148 height=12 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=126 height=14 colspan=9></td>
+  <td width=148 height=14 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=475 height=7 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=120 height=6 colspan=8></td>
+  <td width=211 height=26 colspan=7 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=211 height=26 align=center><font face=Tahoma size=4>Java Virtual
+    Machine</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=144 height=6 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=29 height=17></td>
+  <td width=46 height=17 colspan=6>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=46 height=17><font face="ＭＳ Ｐゴシック" size=2>データ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=45 height=17></td>
+  <td width=144 height=17 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=120 height=3 colspan=8></td>
+  <td width=144 height=3 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=19></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

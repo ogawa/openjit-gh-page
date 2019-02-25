@@ -1,0 +1,204 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJITフロントエンドシステムの設計</title>
+<meta name=Description content="99/10/29: Abstract Syntax Tree Package(2)">
+<link rel=next href=slide0023.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0022.htm');   
+  else
+    parent.location.href = "../frontend-pro-199908.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master12_background.gif" bgcolor=white alink="#ffcf01"
+link="#3333cc" vlink="#cfdbfd" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=36 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=414 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=38 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=36 height=36></td>
+  <td width=439 height=36 colspan=2><img src="slide0022_image018.gif" border=0
+  width=439 height=36></td>
+ </tr>
+ <tr>
+  <td width=475 height=11 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=36 height=244></td>
+  <td width=414 height=244>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=154 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=79 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=42 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=36 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=31 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=358 height=17 colspan=9><font face=Tahoma size=1>public class
+    MultiplyExpression extends BinaryExpression {</font><br>
+    </td>
+    <td width=56 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=180 height=17 colspan=2><font face=Tahoma size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>int op;<span style='mso-tab-count:
+    2'>&nbsp;&nbsp;&nbsp;&nbsp; </span>// ID</font><br>
+    </td>
+    <td width=234 height=17 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=259 height=17 colspan=3><font face=Tahoma size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>Expression left;<span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>// LHS expression</font><br>
+    </td>
+    <td width=155 height=17 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=260 height=17 colspan=4><font face=Tahoma size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>Expression right;<span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>// RHS expression</font><br>
+    </td>
+    <td width=154 height=17 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=307 height=17 colspan=7><font face=Tahoma size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>Type type;<span
+    style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp; </span>// Type of this
+    expression</font><br>
+    </td>
+    <td width=107 height=17 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=389 height=17 colspan=10><font face=Tahoma size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>Annotation ann;<span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>// Embedded Annotation
+    (default: null)</font><br>
+    </td>
+    <td width=25 height=17 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=414 height=17 colspan=12><font face=Tahoma size=1><span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>void code() {<span
+    style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp; </span>// Convert AST to
+    backend-IR or bytecodes</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=401 height=17 colspan=11><font face=Tahoma size=1><span
+    style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp; </span>if (ann)
+    ann.execute();<span style='mso-tab-count:1'>&nbsp;&nbsp; </span>//
+    call-back for metacomputation</font><br>
+    </td>
+    <td width=13 height=17></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=302 height=17 colspan=5><font face=Tahoma size=1><span
+    style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp; </span>left.code();<span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>// generate code for LHS</font><br>
+    </td>
+    <td width=112 height=17 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=304 height=17 colspan=6><font face=Tahoma size=1><span
+    style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp; </span>right.code();<span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>// generate code for RHS</font><br>
+    </td>
+    <td width=110 height=17 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=343 height=17 colspan=8><font face=Tahoma size=1><span
+    style='mso-tab-count:2'>&nbsp;&nbsp;&nbsp;&nbsp; </span>add(op);<span
+    style='mso-tab-count:1'>&nbsp;&nbsp; </span>// generate code for </font><font
+    face="Times New Roman" size=1>“</font><font face=Tahoma size=1>operator</font><font
+    face="Times New Roman" size=1>”</font><br>
+    </td>
+    <td width=71 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=26 height=17><font face=Tahoma size=1><span style='mso-tab-count:
+    1'>&nbsp;&nbsp; </span>}</font><br>
+    </td>
+    <td width=388 height=17 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=414 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=26 height=17><font face="Times New Roman" size=1>…</font><font
+    face=Tahoma size=1> }</font><br>
+    </td>
+    <td width=388 height=17 colspan=11></td>
+   </tr>
+  </table>
+  </td>
+  <td width=25 height=244></td>
+ </tr>
+ <tr>
+  <td width=475 height=27 colspan=3></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

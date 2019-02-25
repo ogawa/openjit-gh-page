@@ -1,0 +1,563 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Review of the Java Execution Model">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0214.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="352,483"/>
+ <o:regrouptable v:ext="edit">
+  <o:entry new="1" old="0"/>
+ </o:regrouptable>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s360450" type="#_x0000_m141324"
+  style='position:absolute;left:48pt;top:24pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><v:group id="_x0000_s360455" style='position:absolute;
+  left:0;top:126pt;width:150pt;height:156.875pt' coordorigin=",1577"
+  coordsize="1200,1255">
+  <v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202" path="m0,0l0,21600,21600,21600,21600,0xe">
+   <v:stroke joinstyle="miter"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+  </v:shapetype><v:shape id="_x0000_s360452" type="#_x0000_t202" style='position:absolute;
+   left:86;top:1577;width:1114;height:996' filled="f" fillcolor="#82b5ca [4]"
+   strokecolor="black [1]" strokeweight="2.25pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape><v:shape id="_x0000_s360454" type="#_x0000_t202" style='position:absolute;
+   top:2544;width:1180;height:288;mso-wrap-style:none;v-text-anchor:top-baseline'
+   filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]"
+   strokeweight="1pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><v:group id="_x0000_s360464" style='position:absolute;
+  left:246pt;top:126pt;width:180pt;height:159.5pt' coordorigin="1968,1008"
+  coordsize="1440,1276">
+  <v:shape id="_x0000_s360458" type="#_x0000_t202" style='position:absolute;
+   left:2112;top:1008;width:970;height:536' o:regroupid="1" filled="f"
+   fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape><v:shape id="_x0000_s360459" type="#_x0000_t202" style='position:absolute;
+   left:1968;top:1536;width:1440;height:748' o:regroupid="1" filled="f"
+   fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]" strokeweight="1pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s360455,_x0000_s360452,_x0000_s360454,_x0000_s360464,_x0000_s360458,_x0000_s360459"
+ src="slide0214_image171.gif" style='position:absolute;top:23.25%;left:0%;
+ width:59.55%;height:30.25%'><![endif]>
+ <div v:shape="_x0000_s360450" class=T><span style='position:absolute;
+ top:1.75%;left:7.67%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Review of the
+ Java </span></span><span style='position:absolute;top:11.5%;left:7.67%;
+ width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>Execution Model</span></span></div>
+ <div v:shape="_x0000_s360452" class=O><span style='position:absolute;
+ top:24.5%;left:2.62%;width:17.22%'><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>Class A </b></span></span><span style='position:
+ absolute;top:29.75%;left:2.62%;width:17.22%'><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";mso-fareast-language:JA'><b>{&#13;</b></span></span>
+ <div style='position:absolute;top:35.0%;left:2.62%;width:17.22%;height:5.5%'><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";mso-fareast-language:JA'><b><span
+ style="mso-spacerun: yes">&nbsp;</span></b></span><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";mso-fareast-language:JA'><b>…</b></span><span
+ lang=EN-US style='mso-ascii-font-family:"Courier New";mso-hansi-font-family:
+ "Courier New";mso-fareast-language:JA;display:none'><b>&#13;</b></span></div>
+ <div style='position:absolute;top:40.25%;left:2.62%;width:17.22%;height:5.5%'><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";mso-fareast-language:JA'><b>}</b></span></div>
+ </div>
+ <div v:shape="_x0000_s360454" class=O style='position:absolute;top:45.75%;
+ left:.93%;width:22.28%;height:6.5%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Java source</span></div>
+ <div v:shape="_x0000_s360458" class=O>
+ <div style='position:absolute;top:24.25%;left:37.82%;width:17.04%;height:5.5%'><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";mso-fareast-language:JA'><b>Iload 1&#13;</b></span></div>
+ <div style='position:absolute;top:29.75%;left:37.82%;width:14.6%;height:5.5%'><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";mso-fareast-language:JA'><b>…</b></span><span
+ lang=EN-US style='mso-ascii-font-family:"Courier New";mso-hansi-font-family:
+ "Courier New";mso-fareast-language:JA;mso-special-format:lastCR;display:none'><b>&#13;</b></span></div>
+ </div>
+ <div v:shape="_x0000_s360459" class=O><span style='position:absolute;
+ top:35.5%;left:35.2%;width:26.02%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Java Classfile<br>
+ </span></span><span
+ style='position:absolute;top:40.75%;left:35.2%;width:23.22%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>(Bytecode + </span></span><span
+ style='position:absolute;top:46.25%;left:35.2%;width:26.77%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Constant Pool)</span></span></div>
+ <v:shapetype id="_x0000_t13" coordsize="21600,21600" o:spt="13" adj="16200,5400"
+  path="m@0,0l@0@1,0@1,0@2@0@2@0,21600,21600,10800xe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="val #1"/>
+   <v:f eqn="sum height 0 #1"/>
+   <v:f eqn="sum 10800 0 #1"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @4 @3 10800"/>
+   <v:f eqn="sum width 0 @5"/>
+  </v:formulas>
+  <v:path o:connecttype="custom" o:connectlocs="@0,0;0,10800;@0,21600;21600,10800"
+   o:connectangles="270,180,90,0" textboxrect="0,@1,@6,@2"/>
+  <v:handles>
+   <v:h position="#0,#1" xrange="0,21600" yrange="0,10800"/>
+  </v:handles>
+ </v:shapetype><v:shape id="_x0000_s360460" type="#_x0000_t13" style='position:absolute;
+  left:168pt;top:150pt;width:90pt;height:42pt;mso-wrap-style:none;
+  v-text-anchor:middle' adj="10230,4564" fillcolor="#82b5ca [4]" strokecolor="black [1]"
+  strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:shape><v:group id="_x0000_s360465" style='position:absolute;left:162pt;
+  top:198pt;width:84pt;height:54pt' coordorigin="1296,1680" coordsize="672,432">
+  <v:shapetype id="_x0000_t176" coordsize="21600,21600" o:spt="176" adj="2700"
+   path="m@0,0qx0@0l0@2qy@0,21600l@1,21600qx21600@2l21600@0qy@1,0xe">
+   <v:stroke joinstyle="miter"/>
+   <v:formulas>
+    <v:f eqn="val #0"/>
+    <v:f eqn="sum width 0 #0"/>
+    <v:f eqn="sum height 0 #0"/>
+    <v:f eqn="prod @0 2929 10000"/>
+    <v:f eqn="sum width 0 @3"/>
+    <v:f eqn="sum height 0 @3"/>
+    <v:f eqn="val width"/>
+    <v:f eqn="val height"/>
+    <v:f eqn="prod width 1 2"/>
+    <v:f eqn="prod height 1 2"/>
+   </v:formulas>
+   <v:path gradientshapeok="t" limo="10800,10800" o:connecttype="custom"
+    o:connectlocs="@8,0;0,@9;@8,@7;@6,@9" textboxrect="@3,@3,@4,@5"/>
+  </v:shapetype><v:shape id="_x0000_s360462" type="#_x0000_t176" style='position:absolute;
+   left:1296;top:1680;width:672;height:432;mso-wrap-style:none;v-text-anchor:middle'
+   filled="f" fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+  </v:shape><v:shape id="_x0000_s360463" type="#_x0000_t202" style='position:absolute;
+   left:1344;top:1728;width:581;height:288;mso-wrap-style:none;v-text-anchor:top-baseline'
+   filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]"
+   strokeweight="1pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s360460,_x0000_s360465,_x0000_s360462,_x0000_s360463"
+ src="slide0214_image172.gif" style='position:absolute;top:27.0%;left:22.28%;
+ width:14.41%;height:20.25%'><![endif]>
+ <div v:shape="_x0000_s360463" class=O style='position:absolute;top:37.75%;
+ left:24.34%;width:9.92%;height:6.5%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>javac</span></div>
+ <v:line id="_x0000_s360466" style='position:absolute' from="18pt,4in" to="444pt,4in"
+  strokecolor="#039 [3]" strokeweight="3pt">
+  <v:stroke dashstyle="dash" startarrowwidth="narrow" startarrowlength="short"
+   endarrowwidth="narrow" endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><![if !vml]><img border=0 v:shapes="_x0000_s360466"
+ src="slide0214_image173.gif" style='position:absolute;top:53.0%;left:2.24%;
+ width:59.92%;height:1.0%'><![endif]><v:shape id="_x0000_s360470" style='position:absolute;
+  left:396pt;top:168pt;width:240pt;height:150pt' coordsize="1033,1200" path="m0,0c145,34,713,5,873,205hhc1033,405,942,993,960,1200hbe"
+  filled="f" fillcolor="#82b5ca [4]" strokecolor="#82b5ca [4]" strokeweight="20pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:roundrect id="_x0000_s360471" style='position:absolute;left:18pt;
+  top:294pt;width:684pt;height:198pt;mso-wrap-style:none;v-text-anchor:middle'
+  arcsize="10923f" filled="f" fillcolor="#82b5ca [4]" strokecolor="black [1]"
+  strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:roundrect><v:shape id="_x0000_s360472" type="#_x0000_t202" style='position:absolute;
+  left:186pt;top:486pt;width:300.125pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s360473" type="#_x0000_t202" style='position:absolute;
+  left:546pt;top:84pt;width:109.25pt;height:64.75pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s360475" type="#_x0000_t202" style='position:absolute;
+  left:54pt;top:486pt;width:104.5pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:group id="_x0000_s360492" style='position:absolute;left:8in;
+  top:324pt;width:102pt;height:78pt' coordorigin="3984,2640" coordsize="816,624">
+  <v:roundrect id="_x0000_s360477" style='position:absolute;left:3984;top:2640;
+   width:720;height:624;mso-wrap-style:none;v-text-anchor:middle' arcsize="10923f"
+   filled="f" fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+  </v:roundrect><v:shape id="_x0000_s360478" type="#_x0000_t202" style='position:absolute;
+   left:3984;top:2688;width:816;height:518' filled="f" fillcolor="#82b5ca [4]"
+   stroked="f" strokecolor="black [1]" strokeweight="1pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s360470,_x0000_s360471,_x0000_s360492,_x0000_s360477,_x0000_s360478"
+ src="slide0214_image174.gif" style='position:absolute;top:29.25%;left:2.43%;
+ width:95.69%;height:62.5%'><![endif]>
+ <div v:shape="_x0000_s360472" class=O style='position:absolute;top:90.0%;
+ left:26.77%;width:47.75%;height:6.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>The Java Virtual Machine</span></div>
+ <div v:shape="_x0000_s360473" class=O><span style='position:absolute;
+ top:15.5%;left:76.77%;width:14.41%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ color:red;mso-fareast-language:JA'>Compile </span></span><span
+ style='position:absolute;top:20.75%;left:76.77%;width:13.29%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";color:red;mso-fareast-language:JA'>Time</span></span></div>
+ <div v:shape="_x0000_s360475" class=O style='position:absolute;top:90.0%;
+ left:8.42%;width:15.16%;height:6.5%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ color:red;mso-fareast-language:JA'>Runtime</span></div>
+ <div v:shape="_x0000_s360478" class=O><span style='position:absolute;
+ top:61.0%;left:81.08%;width:12.35%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Class </span></span><span style='position:absolute;
+ top:66.5%;left:81.08%;width:13.1%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Loader</span></span></div>
+ <v:shape id="_x0000_s360479" type="#_x0000_t13" style='position:absolute;
+  left:516pt;top:342pt;width:60pt;height:42pt;rotation:180;mso-wrap-style:none;
+  v-text-anchor:middle' adj="10230,4564" fillcolor="#82b5ca [4]" strokecolor="black [1]"
+  strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-rotate:180'/>
+ </v:shape><v:shape id="_x0000_s360484" type="#_x0000_t202" style='position:absolute;
+  left:366pt;top:324pt;width:150pt;height:153.25pt' filled="f" fillcolor="#82b5ca [4]"
+  strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shapetype id="_x0000_t9" coordsize="21600,21600" o:spt="9" adj="5400"
+  path="m@0,0l0,10800@0,21600@1,21600,21600,10800@1,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="sum height 0 #0"/>
+   <v:f eqn="prod @0 2929 10000"/>
+   <v:f eqn="sum width 0 @3"/>
+   <v:f eqn="sum height 0 @3"/>
+  </v:formulas>
+  <v:path gradientshapeok="t" o:connecttype="rect" textboxrect="1800,1800,19800,19800;3600,3600,18000,18000;6300,6300,15300,15300"/>
+  <v:handles>
+   <v:h position="#0,topLeft" xrange="0,10800"/>
+  </v:handles>
+ </v:shapetype><v:shape id="_x0000_s360487" type="#_x0000_t9" style='position:absolute;
+  left:24pt;top:306pt;width:96pt;height:180pt;mso-wrap-style:none;
+  v-text-anchor:middle' adj="2194" filled="f" fillcolor="#82b5ca [4]"
+  strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:shape><v:shape id="_x0000_s360489" type="#_x0000_t202" style='position:absolute;
+  left:30pt;top:372.375pt;width:94.25pt;height:64.75pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:roundrect id="_x0000_s360490" style='position:absolute;left:156pt;
+  top:306pt;width:180pt;height:84pt;mso-wrap-style:none;v-text-anchor:middle'
+  arcsize="10923f" filled="f" fillcolor="#82b5ca [4]" strokecolor="black [1]"
+  strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:roundrect><v:shape id="_x0000_s360491" type="#_x0000_t202" style='position:absolute;
+  left:162pt;top:312pt;width:174pt;height:79.25pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s360493" type="#_x0000_t202" style='position:absolute;
+  left:516pt;top:156pt;width:108pt;height:64.75pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:group id="_x0000_s360502" style='position:absolute;left:258pt;
+  top:402pt;width:102pt;height:79.25pt' coordorigin="1728,3312" coordsize="816,634">
+  <v:roundrect id="_x0000_s360494" style='position:absolute;left:1728;top:3312;
+   width:816;height:624;mso-wrap-style:none;v-text-anchor:middle' arcsize="10923f"
+   filled="f" fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+  </v:roundrect><v:shape id="_x0000_s360495" type="#_x0000_t202" style='position:absolute;
+   left:1728;top:3312;width:760;height:634;mso-wrap-style:none;v-text-anchor:top-baseline'
+   filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]"
+   strokeweight="1pt">
+   <v:fill color2="white [0]"/>
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s360479,_x0000_s360484,_x0000_s360487,_x0000_s360490,_x0000_s360502,_x0000_s360494,_x0000_s360495"
+ src="slide0214_image175.gif" style='position:absolute;top:55.0%;left:2.05%;
+ width:78.83%;height:37.0%'><![endif]>
+ <div v:shape="_x0000_s360484" class=O><span style='position:absolute;
+ top:60.25%;left:52.05%;width:18.91%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Internally </span></span><span style='position:absolute;
+ top:65.5%;left:52.05%;width:18.72%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Stored </span></span><span style='position:absolute;
+ top:70.75%;left:52.05%;width:21.72%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>classes etc.<br>
+ </span></span><span
+ style='position:absolute;top:76.25%;left:52.05%;width:22.28%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>(Tables, BC, </span></span><span
+ style='position:absolute;top:81.5%;left:52.05%;width:22.84%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Constants…)</span></span></div>
+ <div v:shape="_x0000_s360489" class=O><span style='position:absolute;
+ top:69.0%;left:5.24%;width:13.48%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Object<br>
+ </span></span><span style='position:
+ absolute;top:74.25%;left:5.24%;width:11.23%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Heap</span></span></div>
+ <div v:shape="_x0000_s360491" class=O><span style='position:absolute;
+ top:58.0%;left:23.59%;width:24.71%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>Bytecode Stack </span></span><span
+ style='position:absolute;top:62.25%;left:23.59%;width:22.28%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Machine
+ </span></span><span style='position:absolute;top:66.75%;left:23.59%;
+ width:22.28%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";font-size:83%;
+ mso-fareast-language:JA'>Interpreter</span></span></div>
+ <div v:shape="_x0000_s360493" class=O style='mso-line-spacing:"100 50 0"'><span
+ style='position:absolute;top:28.75%;left:72.65%;width:13.48%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Dyamic </span></span><span
+ style='position:absolute;top:34.25%;left:72.65%;width:14.23%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Loading</span></span></div>
+ <div v:shape="_x0000_s360495" class=O><span style='position:absolute;
+ top:74.5%;left:36.89%;width:12.73%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>Just-in-<br>
+ </span></span><span
+ style='position:absolute;top:79.0%;left:36.89%;width:11.42%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Time<br>
+ </span></span><span
+ style='position:absolute;top:83.5%;left:36.89%;width:13.67%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Compiler</span></span></div>
+ <v:shape id="_x0000_s360496" type="#_x0000_t202" style='position:absolute;
+  left:126pt;top:420pt;width:90pt;height:57.5pt' filled="f" fillcolor="#82b5ca [4]"
+  strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s360496"
+ src="slide0214_image176.gif" style='position:absolute;top:77.5%;left:17.41%;
+ width:13.1%;height:11.5%'><![endif]>
+ <div v:shape="_x0000_s360496" class=O><span style='position:absolute;
+ top:78.0%;left:18.72%;width:10.48%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>Native<br>
+ </span></span><span
+ style='position:absolute;top:82.5%;left:18.72%;width:10.29%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Code</span></span></div>
+ <v:line id="_x0000_s360497" style='position:absolute;flip:y' from="438pt,120pt"
+  to="690pt,4in" strokecolor="#039 [3]" strokeweight="3pt">
+  <v:stroke dashstyle="dash" startarrowwidth="narrow" startarrowlength="short"
+   endarrowwidth="narrow" endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:line id="_x0000_s360499" style='position:absolute' from="438pt,4in"
+  to="10in,510pt" strokecolor="#039 [3]" strokeweight="3pt">
+  <v:stroke dashstyle="dash" startarrowwidth="narrow" startarrowlength="short"
+   endarrowwidth="narrow" endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:shape id="_x0000_s360500" type="#_x0000_t202" style='position:absolute;
+  left:516pt;top:234pt;width:109.25pt;height:64.75pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s360503" type="#_x0000_t13" style='position:absolute;
+  left:3in;top:426pt;width:36pt;height:42pt;rotation:180;mso-wrap-style:none;
+  v-text-anchor:middle' adj="10230,4564" fillcolor="#82b5ca [4]" strokecolor="black [1]"
+  strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-rotate:180'/>
+ </v:shape><v:rect id="_x0000_s360508" style='position:absolute;left:4in;top:348pt;
+  width:24pt;height:12pt;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+  fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:rect><v:rect id="_x0000_s360509" style='position:absolute;left:4in;top:5in;
+  width:24pt;height:12pt;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+  fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:rect><v:rect id="_x0000_s360510" style='position:absolute;left:4in;top:372pt;
+  width:24pt;height:12pt;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+  fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:rect><![if !vml]><img border=0
+ v:shapes="_x0000_s360497,_x0000_s360499,_x0000_s360503,_x0000_s360508,_x0000_s360509,_x0000_s360510"
+ src="slide0214_image177.gif" style='position:absolute;top:22.0%;left:29.4%;
+ width:71.16%;height:73.25%'><![endif]>
+ <div v:shape="_x0000_s360500" class=O><span style='position:absolute;
+ top:43.25%;left:72.65%;width:13.29%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ color:red;mso-fareast-language:JA'>Load<br>
+ </span></span><span
+ style='position:absolute;top:48.75%;left:72.65%;width:13.29%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";color:red;mso-fareast-language:JA'>Time</span></span></div>
+</p:slide></div>
+
+</body>
+
+</html>

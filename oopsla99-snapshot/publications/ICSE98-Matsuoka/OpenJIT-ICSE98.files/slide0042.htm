@@ -1,0 +1,236 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description
+content="99/10/28: OpenJIT Preliminary Benchmarks (3) - Warmup Time">
+<link rel=next href=slide0043.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0042.htm');   
+  else
+    parent.location.href = "../OpenJIT-ICSE98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0042_background.gif" bgcolor="#0066cc" alink="#ff9933"
+link="#330099" vlink="#cbcbcb" text=white topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=28 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=134 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=25 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=215 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=29 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=28 height=68></td>
+  <td width=419 height=68 colspan=8>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=271 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=74 height=33></td>
+    <td width=271 height=33 align=center><font face="Times New Roman"
+    color="#cbcbcb" size=5>OpenJIT Preliminary</font><br>
+    </td>
+    <td width=74 height=33></td>
+   </tr>
+   <tr>
+    <td width=419 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=419 height=33 colspan=3 align=center><font face="Times New Roman"
+    color="#cbcbcb" size=5>Benchmarks (3) - Warmup Time</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=28 height=68></td>
+ </tr>
+ <tr>
+  <td width=475 height=8 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=40 height=134 colspan=2></td>
+  <td width=385 height=134 colspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=188 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=62 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=367 height=21 colspan=4><font face="Times New Roman" size=3>Coldstart,
+    compile &amp; execute an empty method</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=189 height=20 colspan=2><font face="Times New Roman" size=3><u>(incl.
+    self-compile time)</u></font><br>
+    </td>
+    <td width=178 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=385 height=72 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=18 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=251 height=21 colspan=3><font face="Times New Roman" size=3>Execution
+    Result (wo/Frontend)</font><br>
+    </td>
+    <td width=116 height=21></td>
+   </tr>
+  </table>
+  </td>
+  <td width=50 height=134 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=48 height=74 colspan=3></td>
+  <td width=134 height=75 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=24 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=96 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=134 height=18 colspan=5><font face="Times New Roman" size=2>OpenJIT(JDK1.1.5)</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=134 height=1 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=18></td>
+    <td width=96 height=18><font face="Times New Roman" size=2>real<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>1.138</font><br>
+    </td>
+    <td width=14 height=18 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=134 height=1 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=18></td>
+    <td width=99 height=18 colspan=3><font face="Times New Roman" size=2>user<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>0.880</font><br>
+    </td>
+    <td width=11 height=18></td>
+   </tr>
+   <tr>
+    <td width=134 height=1 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=18></td>
+    <td width=97 height=18 colspan=2><font face="Times New Roman" size=2>sys<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>0.117</font><br>
+    </td>
+    <td width=13 height=18 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=25 height=74></td>
+  <td width=215 height=75 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=116 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=66 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=139 height=18 colspan=2><font face="Times New Roman" size=2>JDK1.1.5
+    Interpreter</font><br>
+    </td>
+    <td width=75 height=18 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=214 height=1 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=23 height=18></td>
+    <td width=182 height=18 colspan=2><font face="Times New Roman" size=2>real<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>0.346 (diff = 0.79)</font><br>
+    </td>
+    <td width=9 height=18 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=214 height=1 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=23 height=18></td>
+    <td width=185 height=18 colspan=3><font face="Times New Roman" size=2>user<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>0.142 (diff = 0.74)</font><br>
+    </td>
+    <td width=6 height=18></td>
+   </tr>
+   <tr>
+    <td width=214 height=1 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=23 height=18></td>
+    <td width=191 height=18 colspan=4><font face="Times New Roman" size=2>sys<span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>0.075 (diff = 0.042)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=53 height=74 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=48 height=1 colspan=3></td>
+  <td width=25 height=1></td>
+  <td width=3 height=1></td>
+  <td width=11 height=11 rowspan=2><img src="master05_image016.gif" border=0
+  width=11 height=11></td>
+  <td width=39 height=1 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=425 height=10 colspan=7></td>
+  <td width=39 height=10 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=10></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,227 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: OpenJIT Customization">
+<link rel=next href=slide0025.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0032.htm');   
+  else
+    parent.location.href = "../OpenJIT-OOPSLA98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0032_background.gif" bgcolor=white alink="#5f5f5f"
+link="#969696" vlink="#cbcbcb" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=293 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=113 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=40 height=33 colspan=2></td>
+  <td width=293 height=33>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=293 height=33><font face="Times New Roman" size=5>OpenJIT
+    Customization</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=142 height=33 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=25 height=249></td>
+  <td width=421 height=249 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=59 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=83 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=65 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=38 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=24 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=214 height=20 colspan=12><font face=Arial size=3><b>3 levels of
+    customization</b></font><br>
+    </td>
+    <td width=190 height=20 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=421 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=383 height=17 colspan=17><font face=Arial size=2><b><i>1. No
+    changes in Java language syntax or semantics</i></b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=421 height=4 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=275 height=16 colspan=8><font face=Arial size=1><b>Standard
+    Compiler incl. OO optimizations</b></font><br>
+    </td>
+    <td width=87 height=16 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=421 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=169 height=16 colspan=5><font face=Arial size=1><b>User-definable
+    (like SUIF)</b></font><br>
+    </td>
+    <td width=193 height=16 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=421 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=331 height=17 colspan=14><font face=Arial size=2><b><i>2.
+    Semantic extensions but no syntax change</i></b></font><br>
+    </td>
+    <td width=52 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=421 height=1 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=38 height=17 colspan=4></td>
+    <td width=81 height=17 colspan=5><font face=Arial size=2><b><i>extensions</i></b></font><br>
+    </td>
+    <td width=302 height=17 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=421 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=276 height=16 colspan=9><font face=Arial size=1><b>Adaptation to
+    Computing Env. (e.g., DSM)</b></font><br>
+    </td>
+    <td width=86 height=16 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=421 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=237 height=16 colspan=7><font face=Arial size=1><b>Both frontend
+    and backend support</b></font><br>
+    </td>
+    <td width=125 height=16 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=421 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=314 height=17 colspan=13><font face=Arial size=2><b><i>3. Both
+    Syntactic and Semantic Extensions</i></b></font><br>
+    </td>
+    <td width=69 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=421 height=4 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=322 height=16 colspan=12><font face=Arial size=1><b>New Language
+    Primitives (e.g.,<span style="mso-spacerun: yes">&nbsp; </span>Data
+    distribution</b></font><br>
+    </td>
+    <td width=40 height=16 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=59 height=16 colspan=7></td>
+    <td width=72 height=16 colspan=3><font face=Arial size=1><b>Directives)</b></font><br>
+    </td>
+    <td width=290 height=16 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=421 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=155 height=16 colspan=4><font face=Arial size=1><b>NOT directly
+    supported</b></font><br>
+    </td>
+    <td width=207 height=16 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=421 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=346 height=16 colspan=13><font face=Arial size=1><b>New bytecode </b></font><font
+    face="ＭＳ Ｐゴシック" size=1><b>→</b></font><font face=Arial size=1><b> Need
+    javac equiv. to emit bytecode</b></font><br>
+    </td>
+    <td width=16 height=16></td>
+   </tr>
+  </table>
+  </td>
+  <td width=29 height=249></td>
+ </tr>
+ <tr>
+  <td width=475 height=16 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

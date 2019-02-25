@@ -1,0 +1,227 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJITフロントエンドシステムの設計</title>
+<meta name=Description
+content="99/10/29: OpenJIT High-level Optimizer Toolkit (3)">
+<link rel=next href=slide0021.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0016.htm');   
+  else
+    parent.location.href = "../frontend-pro-199908.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0016_background.gif" bgcolor=white alink="#ffcf01"
+link="#3333cc" vlink="#cfdbfd" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=36 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=359 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=79 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=9 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=36 height=64></td>
+  <td width=359 height=64>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=128 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=359 height=33 colspan=2><font face=Tahoma color="#0000cc" size=5>OpenJIT
+    High-level Optimizer</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=128 height=32><font face=Tahoma color="#0000cc" size=5>Toolkit
+    (3)</font><br>
+    </td>
+    <td width=231 height=32></td>
+   </tr>
+  </table>
+  </td>
+  <td width=80 height=64 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=11 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=36 height=245></td>
+  <td width=438 height=245 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=19 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=87 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=41 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=29 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=111 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=28 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=32 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=28 height=4 colspan=3></td>
+    <td width=185 height=23 colspan=7 rowspan=3><font face=Tahoma size=3>Program
+    Transformer</font><br>
+    </td>
+    <td width=225 height=4 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=15 height=15><img src=image001.gif border=0 width=14 height=15></td>
+    <td width=13 height=15 colspan=2></td>
+    <td width=225 height=15 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=28 height=4 colspan=3></td>
+    <td width=225 height=4 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=438 height=3 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=2></td>
+    <td width=24 height=17 colspan=2><font face="ＭＳ Ｐゴシック" color=black size=1>1.</font></td>
+    <td width=108 height=17 colspan=4><font face="ＭＳ Ｐゴシック" size=2>パターンを登録</font><br>
+    </td>
+    <td width=282 height=17 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=4></td>
+    <td width=20 height=17 colspan=2><font face=Wingdings color="#3333cc"
+    size=1>w</font></td>
+    <td width=293 height=17 colspan=8><font face=Tahoma size=1>register_pattern(Expression
+    src, Expression dst)</font><br>
+    </td>
+    <td width=77 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=4></td>
+    <td width=20 height=17 colspan=2><font face=Wingdings color="#3333cc"
+    size=1>w</font></td>
+    <td width=288 height=17 colspan=7><font face=Tahoma size=1>register_pattern(Statement
+    src, Statement dst)</font><br>
+    </td>
+    <td width=82 height=17 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=438 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=2></td>
+    <td width=24 height=17 colspan=2><font face="ＭＳ Ｐゴシック" color=black size=1>2.</font></td>
+    <td width=380 height=17 colspan=13><font face="ＭＳ Ｐゴシック" size=2>指定されたノードをルートノードとする部分木に対して、</font><br>
+    </td>
+    <td width=10 height=17></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=4></td>
+    <td width=341 height=17 colspan=11><font face="ＭＳ Ｐゴシック" size=2>深さ優先探索で登録されたパターンを検索、置換</font><br>
+    </td>
+    <td width=49 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=4></td>
+    <td width=20 height=17 colspan=2><font face=Wingdings color="#3333cc"
+    size=1>w</font></td>
+    <td width=177 height=17 colspan=6><font face=Tahoma size=1>substitution(Expression
+    root)</font><br>
+    </td>
+    <td width=193 height=17 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=4></td>
+    <td width=20 height=17 colspan=2><font face=Wingdings color="#3333cc"
+    size=1>w</font></td>
+    <td width=174 height=17 colspan=5><font face=Tahoma size=1>substitution(Statement
+    root)</font><br>
+    </td>
+    <td width=196 height=17 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=438 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=28 height=2 colspan=3></td>
+    <td width=393 height=19 colspan=13 rowspan=3><font face="ＭＳ Ｐゴシック" size=3>これらのルーチンは低レベル、かつパターンを生</font><br>
+    </td>
+    <td width=17 height=2 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=15 height=15><img src=image001.gif border=0 width=14 height=15></td>
+    <td width=13 height=15 colspan=2></td>
+    <td width=17 height=15 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=28 height=2 colspan=3></td>
+    <td width=17 height=2 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=438 height=1 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=28 height=19 colspan=3></td>
+    <td width=169 height=19 colspan=6><font face="ＭＳ Ｐゴシック" size=3>成する手続きが煩雑</font><br>
+    </td>
+    <td width=241 height=19 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=438 height=27 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=28 height=5 colspan=3></td>
+    <td width=410 height=23 colspan=15 rowspan=3><font face="ＭＳ Ｐゴシック" size=3>より高度な記述からパターンを生成する</font><font
+    face=Tahoma size=3>API</font><font face="ＭＳ Ｐゴシック" size=3>が必要</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=15 height=15><img src=image001.gif border=0 width=14 height=15></td>
+    <td width=13 height=15 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=28 height=3 colspan=3></td>
+   </tr>
+  </table>
+  </td>
+  <td width=1 height=245></td>
+ </tr>
+ <tr>
+  <td width=475 height=27 colspan=4></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

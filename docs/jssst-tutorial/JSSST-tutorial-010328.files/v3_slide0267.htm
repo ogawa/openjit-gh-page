@@ -1,0 +1,170 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Overview of the OpenJIT Backend System (2)">
+<link rel=next href="v3_slide0268.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0267.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=388 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=44 height=76 colspan=2></td>
+  <td width=388 height=76>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=45 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=298 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=388 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Overview of the OpenJIT</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=45 height=35></td>
+    <td width=298 height=35 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Backend System (2)</font><br>
+    </td>
+    <td width=45 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=43 height=76 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=40 height=182></td>
+  <td width=394 height=182 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=97 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=32 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=33 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=95 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=27><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=172 height=27 colspan=9><font face="Comic Sans MS" size=3>Peephole
+    optimizer</font><br>
+    </td>
+    <td width=205 height=27 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=24 height=23 colspan=3></td>
+    <td width=15 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=316 height=23 colspan=11><font face="Comic Sans MS" size=2>Eliminates
+    redundunt instructions in RTL</font><br>
+    </td>
+    <td width=40 height=23></td>
+   </tr>
+   <tr>
+    <td width=18 height=27><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=205 height=27 colspan=10><font face="Comic Sans MS" size=3>Native
+    code generator</font><br>
+    </td>
+    <td width=172 height=27 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=22 colspan=3></td>
+    <td width=15 height=22><font color="#003399" size=2>&#8226;</font></td>
+    <td width=311 height=22 colspan=10><font face="Comic Sans MS" size=2>Generate
+    native code for given ISA/OS</font><br>
+    </td>
+    <td width=45 height=22 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=48 height=19 colspan=6></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=98 height=19 colspan=2><font face="Comic Sans MS" size=1>Sparc &#8211;
+    Solaris</font><br>
+    </td>
+    <td width=237 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=48 height=19 colspan=6></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=335 height=19 colspan=9><font face="Comic Sans MS" size=1>X86 &#8211;
+    Linux, FreeBSD, BSD/OS, Solaris(debugging)</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=24 height=23 colspan=3></td>
+    <td width=15 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=279 height=23 colspan=8><font face="Comic Sans MS" size=2>Insert
+    necessary register spill code</font><br>
+    </td>
+    <td width=77 height=23 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=24 height=23 colspan=3></td>
+    <td width=15 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=283 height=23 colspan=9><font face="Comic Sans MS" size=2>ISA-specific
+    peephole optimizations</font><br>
+    </td>
+    <td width=73 height=23 colspan=3></td>
+   </tr>
+  </table>
+  </td>
+  <td width=41 height=182></td>
+ </tr>
+ <tr>
+  <td width=475 height=76 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

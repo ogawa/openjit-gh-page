@@ -1,0 +1,171 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 処理速度の詳細">
+<link rel=next href=slide0097.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0085.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master10_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=192 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=239 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=26 height=27></td>
+  <td width=195 height=27 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=195 height=27><font face="ＭＳ Ｐゴシック" size=5>処理速度の詳細</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=254 height=27 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=35 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=29 height=218 colspan=2></td>
+  <td width=431 height=218 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=218 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=79 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=33 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=361 height=22 colspan=10><font face="ＭＳ Ｐゴシック" size=4>我々のデコンパイラの処理速度の詳細</font><br>
+    </td>
+    <td width=53 height=22 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=431 height=4 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=23 colspan=3></td>
+    <td width=19 height=23 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=240 height=23 colspan=4><font face=Tahoma size=3>mocha</font><font
+    face="ＭＳ Ｐゴシック" size=3>については、調査不能</font><br>
+    </td>
+    <td width=149 height=23 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=431 height=4 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=22 colspan=3></td>
+    <td width=19 height=22 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=389 height=22 colspan=12><font face="Courier New" size=3><b>‘java
+    -prof’</b></font><font face="ＭＳ Ｐゴシック" size=3>コマンドで、プロファイルを取得</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=431 height=7 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=19 height=19 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=380 height=19 colspan=8><font face="ＭＳ Ｐゴシック" size=3>さまざまなバイトコードで確かめるために、我々</font><br>
+    </td>
+    <td width=9 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=38 height=23 colspan=4></td>
+    <td width=387 height=23 colspan=11><font face="ＭＳ Ｐゴシック" size=3>のデコンパイラを構成する</font><font
+    face=Tahoma size=3>221</font><font face="ＭＳ Ｐゴシック" size=3>個のクラス、</font><font
+    face=Tahoma size=3>1460</font><br>
+    </td>
+    <td width=6 height=23 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=431 height=3 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=386 height=19 colspan=10><font face="ＭＳ Ｐゴシック" size=3>個のメソッド全てをデコンパイルする時間を調査</font><br>
+    </td>
+    <td width=7 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=431 height=7 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=19 height=19 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=388 height=19 colspan=11><font face="ＭＳ Ｐゴシック" size=3>結果の考察の便利のために、デコンパイル結果</font><br>
+    </td>
+    <td width=1 height=19></td>
+   </tr>
+   <tr>
+    <td width=431 height=4 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=261 height=19 colspan=6><font face="ＭＳ Ｐゴシック" size=3>の出力部分を省いたものを使用</font><br>
+    </td>
+    <td width=132 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=431 height=6 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=47 height=17 colspan=6></td>
+    <td width=16 height=17><font face=Marlett color="#0000cc" size=2>h</font></td>
+    <td width=326 height=17 colspan=5><font face="ＭＳ Ｐゴシック" size=2>出力にかかる時間が大、かつ、分散されている</font><br>
+    </td>
+    <td width=42 height=17 colspan=5></td>
+   </tr>
+  </table>
+  </td>
+  <td width=15 height=218></td>
+ </tr>
+ <tr>
+  <td width=475 height=34 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: 多様なコンパイル方針を実現">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0365.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 39761;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 40760);
+//-->
+</script><![endif]><p:slidetransition advancetime="39760" flag="1025"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="607"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s621570" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s621571" type="#_x0000_m141325"
+  style='position:absolute;left:36pt;top:444pt;width:644pt;height:96pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape><v:shapetype id="_x0000_t202"
+  coordsize="21600,21600" o:spt="202" path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s621572" type="#_x0000_t202" style='position:absolute;
+  left:18pt;top:251.25pt;width:138pt;height:36.75pt' fillcolor="#cff"
+  strokecolor="blue">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s621572"
+ src="slide0365_image427.gif" style='position:absolute;top:46.5%;left:2.43%;
+ width:19.66%;height:7.25%'><![endif]>
+ <div v:shape="_x0000_s621570" class=T style='position:absolute;top:13.75%;
+ left:5.05%;width:90.07%;height:8.5%'>多様なコンパイル方針を実現</div>
+ <div v:shape="_x0000_s621571" class=B>
+ <div style='position:absolute;top:84.0%;left:5.99%;width:87.64%;height:6.25%'><span
+ style='position:absolute;top:0%;left:4.27%;width:95.72%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.46%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span>適用する最適化をメソッド毎に選択&#13;</span></div>
+ <div style='position:absolute;top:92.5%;left:5.99%;width:87.64%;height:6.25%'><span
+ style='position:absolute;top:0%;left:4.27%;width:95.72%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.46%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span>新たな最適化器の追加も可能</span></div>
+ </div>
+ <div v:shape="_x0000_s621572" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:48.0%;left:2.24%;width:20.03%;height:4.75%'><span style='layout-flow:horizontal'>バイトコード</span></div>
+ <v:shape id="_x0000_s621573" type="#_x0000_t202" style='position:absolute;
+  left:612pt;top:251.25pt;width:84pt;height:36.75pt' fillcolor="#cff"
+  strokecolor="blue">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:rect id="_x0000_s621574" style='position:absolute;left:198pt;
+  top:150pt;width:372pt;height:222pt;mso-wrap-style:none;v-text-anchor:middle'
+  filled="f" fillcolor="#cff" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+ </v:rect><v:shape id="_x0000_s621575" type="#_x0000_t202" style='position:absolute;
+  left:204pt;top:150pt;width:354pt;height:36pt' filled="f" fillcolor="#cff"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s621576" type="#_x0000_t202" style='position:absolute;
+  left:210pt;top:222pt;width:66pt;height:94.25pt' fillcolor="#ff9"
+  strokecolor="red">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s621577" type="#_x0000_t202" style='position:absolute;
+  left:480pt;top:234pt;width:78pt;height:65.5pt' fillcolor="#ff9"
+  strokecolor="red">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shapetype id="_x0000_t13" coordsize="21600,21600" o:spt="13"
+  adj="16200,5400" path="m@0,0l@0@1,0@1,0@2@0@2@0,21600,21600,10800xe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="val #1"/>
+   <v:f eqn="sum height 0 #1"/>
+   <v:f eqn="sum 10800 0 #1"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @4 @3 10800"/>
+   <v:f eqn="sum width 0 @5"/>
+  </v:formulas>
+  <v:path o:connecttype="custom" o:connectlocs="@0,0;0,10800;@0,21600;21600,10800"
+   o:connectangles="270,180,90,0" textboxrect="0,@1,@6,@2"/>
+  <v:handles>
+   <v:h position="#0,#1" xrange="0,21600" yrange="0,10800"/>
+  </v:handles>
+ </v:shapetype><v:shape id="_x0000_s621578" type="#_x0000_t13" style='position:absolute;
+  left:168pt;top:252pt;width:36pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:middle' fillcolor="blue" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:shape><v:shape id="_x0000_s621579" type="#_x0000_t13" style='position:absolute;
+  left:564pt;top:252pt;width:42pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:middle' fillcolor="blue" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:shape><v:shape id="_x0000_s621580" type="#_x0000_t202" style='position:absolute;
+  left:330pt;top:198pt;width:102pt;height:36.75pt' fillcolor="#cfc"
+  strokecolor="green">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s621581" type="#_x0000_t202" style='position:absolute;
+  left:330pt;top:257.25pt;width:102pt;height:36.75pt' fillcolor="#cfc"
+  strokecolor="green">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s621582" type="#_x0000_t202" style='position:absolute;
+  left:330pt;top:317.25pt;width:102pt;height:36.75pt' fillcolor="#cfc"
+  strokecolor="green">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s621583" type="#_x0000_t202" style='position:absolute;
+  left:324pt;top:390pt;width:114pt;height:36.75pt' fillcolor="#ffc9c5"
+  strokecolor="red">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:line id="_x0000_s621584" style='position:absolute;flip:y' from="282pt,222pt"
+  to="324pt,264pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621585" style='position:absolute' from="438pt,222pt"
+  to="474pt,252pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621586" style='position:absolute' from="378pt,234pt"
+  to="378pt,258pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621587" style='position:absolute' from="438pt,276pt"
+  to="474pt,276pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621588" style='position:absolute' from="378pt,294pt"
+  to="378pt,318pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621589" style='position:absolute;flip:y' from="438pt,294pt"
+  to="474pt,336pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621590" style='position:absolute' from="282pt,276pt"
+  to="324pt,276pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621591" style='position:absolute' from="282pt,4in"
+  to="324pt,330pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621592" style='position:absolute' from="378pt,354pt"
+  to="378pt,390pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><![if !vml]><img border=0
+ v:shapes="_x0000_s621573,_x0000_s621574,_x0000_s621576,_x0000_s621577,_x0000_s621578,_x0000_s621579,_x0000_s621580,_x0000_s621581,_x0000_s621582,_x0000_s621583,_x0000_s621584,_x0000_s621585,_x0000_s621586,_x0000_s621587,_x0000_s621588,_x0000_s621589,_x0000_s621590,_x0000_s621591,_x0000_s621592"
+ src="slide0365_image428.gif" style='position:absolute;top:27.75%;left:22.84%;
+ width:74.15%;height:51.75%'><![endif]>
+ <div v:shape="_x0000_s621573" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:47.25%;left:85.39%;width:10.86%;height:5.5%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;layout-flow:horizontal;mso-fareast-language:JA'>native</span></div>
+ <div v:shape="_x0000_s621575" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:28.5%;left:29.4%;width:47.37%;height:5.5%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;layout-flow:horizontal;mso-fareast-language:JA'>Baseline/Compilet</span></div>
+ <div v:shape="_x0000_s621576" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0'><span style='position:absolute;
+ top:42.5%;left:29.77%;width:8.23%'><span style='layout-flow:horizontal'>中間</span></span><span
+ style='position:absolute;top:48.0%;left:29.77%;width:8.23%'><span
+ style='layout-flow:horizontal'>表現</span></span><span style='position:absolute;
+ top:53.25%;left:29.77%;width:8.23%'><span style='layout-flow:horizontal'>生成</span></span></div>
+ <div v:shape="_x0000_s621577" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0'><span style='position:absolute;
+ top:44.75%;left:67.22%;width:10.11%'><span style='layout-flow:horizontal'>コード</span></span><span
+ style='position:absolute;top:50.25%;left:67.79%;width:8.8%'><span
+ style='layout-flow:horizontal'>生成</span></span></div>
+ <div v:shape="_x0000_s621580" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:37.25%;left:45.88%;width:14.41%;height:5.5%'><span style='layout-flow:
+ horizontal'>最適化</span><span style='font-family:Tahoma;mso-ascii-font-family:
+ Tahoma;mso-hansi-font-family:Tahoma;layout-flow:horizontal'>1</span><span
+ style='layout-flow:horizontal;mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <div v:shape="_x0000_s621581" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:48.25%;left:45.88%;width:14.41%;height:5.5%'><span style='layout-flow:
+ horizontal'>最適化</span><span style='font-family:Tahoma;mso-ascii-font-family:
+ Tahoma;mso-hansi-font-family:Tahoma;layout-flow:horizontal'>2</span><span
+ style='layout-flow:horizontal;mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <div v:shape="_x0000_s621582" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:59.5%;left:45.88%;width:14.41%;height:5.5%'><span style='layout-flow:horizontal'>最適化</span><span
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;layout-flow:horizontal'>3</span><span style='layout-flow:horizontal;
+ mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <div v:shape="_x0000_s621583" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:73.75%;left:44.94%;width:16.1%;height:4.75%'><span style='layout-flow:
+ horizontal'>新最適化</span></div>
+ <v:line id="_x0000_s621593" style='position:absolute;flip:y' from="420pt,312pt"
+  to="480pt,384pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><v:line id="_x0000_s621594" style='position:absolute' from="282pt,306pt"
+  to="348pt,384pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:line><![if !vml]><img border=0 v:shapes="_x0000_s621593,_x0000_s621594"
+ src="slide0365_image429.gif" style='position:absolute;top:56.5%;left:38.95%;
+ width:28.08%;height:15.25%'><![endif]></p:slide></div>
+
+</body>
+
+</html>

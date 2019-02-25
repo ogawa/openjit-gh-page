@@ -1,0 +1,162 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: OpenJIT High-level Motivations">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0249.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="436"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s444418" type="#_x0000_m141324"
+  style='position:absolute;left:48pt;top:24pt;width:654pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s444419" type="#_x0000_m141325"
+  style='position:absolute;left:66pt;top:150pt;width:612pt;height:372pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s444418" class=T><span style='position:absolute;
+ top:1.75%;left:7.67%;width:88.95%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>OpenJIT
+ High-level </span></span><span style='position:absolute;top:11.5%;left:7.67%;
+ width:88.95%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>Motivations</span></span></div>
+ <div v:shape="_x0000_s444419">
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:27.25%;left:13.85%;width:95.31%'><span style='font-size:75%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-3.92%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>Applets and libraries are downloaded
+ and executed </span></span><span style='position:absolute;top:32.25%;
+ left:13.85%;width:86.89%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>on-the-fly,
+ in a safe and secure manner, within </span></span><span style='position:absolute;
+ top:37.0%;left:13.85%;width:79.4%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>JVM&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:44.25%;
+ left:10.11%;width:83.14%;height:4.75%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:75%;visibility:hidden'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-size:75%;mso-fareast-language:JA;display:none'>&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:48.75%;left:13.85%;width:94.94%'><span style='font-size:75%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-3.94%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>Why not have the JIT compiler be
+ downloaded and </span></span><span style='position:absolute;top:53.5%;
+ left:13.85%;width:79.4%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>executed,
+ on-the-fly!?&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:59.25%;
+ left:15.16%;width:89.7%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.54%;width:96.45%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.67%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>Within
+ the easy, safe, and portable Java execution env.&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:65.5%;
+ left:10.11%;width:83.14%;height:4.75%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:75%;visibility:hidden'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-size:75%;mso-fareast-language:JA;display:none'>&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:70.0%;
+ left:10.11%;width:83.14%;height:6.5%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:75%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>Example:&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:76.0%;
+ left:15.16%;width:78.08%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.07%;width:96.16%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.23%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>The
+ user wants to instrument his code&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:80.75%;left:18.35%;width:80.14%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.97%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>Instrumentation
+ component (w/compiler support) is </span></span><span style='position:absolute;
+ top:84.75%;left:18.35%;width:75.09%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>downloaded
+ off the network automatically&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:89.75%;
+ left:15.16%;width:80.89%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.93%;width:96.29%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.08%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>Instrumented
+ native code is generated on-the-fly</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

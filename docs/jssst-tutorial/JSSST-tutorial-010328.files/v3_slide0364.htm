@@ -1,0 +1,164 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: JITコンパイラ向けアプリケーションフレームワーク(2/2)">
+<link rel=next href="v3_slide0365.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0364.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0364_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=435 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=97 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=29 height=247></td>
+  <td width=435 height=247>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=113 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=152 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=30><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=406 height=30 colspan=15><font face="ＭＳ Ｐゴシック" size=4>中間言語生成支援</font><font
+    face="Comic Sans MS" size=4>(RTLGraph, RTLNode)</font><br>
+    </td>
+    <td width=12 height=30></td>
+   </tr>
+   <tr>
+    <td width=435 height=6 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=15 height=19><font color="#003399" size=3>&#8226;</font></td>
+    <td width=309 height=19 colspan=7><font face="ＭＳ Ｐゴシック" size=3>スタックの状態を元に中間言語を生成</font><br>
+    </td>
+    <td width=88 height=19 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=435 height=9 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=178 height=22 colspan=9><font face="ＭＳ Ｐゴシック" size=4>最適化器構築支援</font><br>
+    </td>
+    <td width=240 height=22 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=435 height=1 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=27 colspan=3></td>
+    <td width=15 height=27><font color="#003399" size=3>&#8226;</font></td>
+    <td width=352 height=27 colspan=10><font face="ＭＳ Ｐゴシック" size=3>グラフの渡り歩き</font><font
+    face="Comic Sans MS" size=3>(CFGVisitor, DTVisitor)</font><br>
+    </td>
+    <td width=45 height=27 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=23 height=27 colspan=3></td>
+    <td width=15 height=27><font color="#003399" size=3>&#8226;</font></td>
+    <td width=374 height=27 colspan=11><font face="ＭＳ Ｐゴシック" size=3>中間言語</font><font
+    face="Comic Sans MS" size=3>(SSA)</font><font face="ＭＳ Ｐゴシック" size=3>文の繰り返し</font><font
+    face="Comic Sans MS" size=3>(SSAIterator)</font><br>
+    </td>
+    <td width=23 height=27 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=23 height=26 colspan=3></td>
+    <td width=15 height=26><font color="#003399" size=3>&#8226;</font></td>
+    <td width=397 height=26 colspan=13><font face="ＭＳ Ｐゴシック" size=3>データフロー解析器フレームワーク</font><font
+    face="Comic Sans MS" size=3>(DFASolver)</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=47 height=23 colspan=6></td>
+    <td width=12 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=296 height=23 colspan=5><font face="Comic Sans MS" size=2>Forward/backward
+    solver</font><font face="ＭＳ Ｐゴシック" size=2>の構築を支援</font><br>
+    </td>
+    <td width=80 height=23 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=435 height=7 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=156 height=22 colspan=8><font face="ＭＳ Ｐゴシック" size=4>個々の最適化器</font><br>
+    </td>
+    <td width=262 height=22 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=435 height=1 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=27 colspan=3></td>
+    <td width=15 height=27><font color="#003399" size=3>&#8226;</font></td>
+    <td width=346 height=27 colspan=9><font face="Comic Sans MS" size=3>Baseline/Compilet</font><font
+    face="ＭＳ Ｐゴシック" size=3>の部品として利用可能</font><br>
+    </td>
+    <td width=51 height=27 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=11 height=247></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=3></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

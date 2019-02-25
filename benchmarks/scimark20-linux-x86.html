@@ -1,0 +1,105 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="../common.css" type="text/css">
+<link rev=made href="mailto:webmaster@matsulab.is.titech.ac.jp">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OpenJIT: Benchmark Results</title>
+
+<style type="text/css">
+<!--
+TABLE {
+	margin-bottom:	40px;
+}
+TH {
+	border-width: 1;
+	padding: 5px;
+	border-style: outset;
+	background-color: #ccffcc;
+}
+TD {
+	border-width: 1;
+	padding: 5px;
+	border-style: outset;
+	background-color: #ffffcc;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<div class=begin-title>OpenJIT</div>
+<h1 class=title>Benchmark Results</h1>
+<div class=end-title>&nbsp;</div>
+
+<h2 class=genre>SciMark 2.0 on Linux (x86)</h2>
+
+<h3>Experimental Environment</h3>
+
+<ul>
+ <li>AMD Athlon 600MHz with 386MB of memory
+ <li>RedHat Linux 6.1
+ <li>Command line option: -mx256m
+</ul>
+
+<h3>Java Runtime</h3>
+
+<ul>
+ <li>OpenJIT: Blackdown JDK 1.1.7v3 with OpenJIT
+ <li>JDK1.1.7: Blackdown JDK 1.1.7v3 without JIT
+ <li>IBM1.1.8: IBM JDK 1.1.8 (1999/10/28 version) with JIT
+</ul>
+
+<table>
+ <tr>
+  <th colspan=4>SciMark 2.0 Benchmark</th>
+ </tr>
+ <tr>
+  <th>Benchmark</th>
+  <th>OpenJIT</th>
+  <th>JDK1.1.7</th>
+  <th>IBM1.1.8</th>
+ </tr>
+ <tr>
+  <td>Composite Score</td>
+  <td align=right>16.00</td>
+  <td align=right>3.633</td>
+  <td align=right>81.39</td>
+ </tr>
+ <tr>
+  <td>FFT (1024)</td>
+  <td align=right>14.88</td>
+  <td align=right>1.886</td>
+  <td align=right>58.26</td>
+ </tr>
+ <tr>
+  <td>SOR (100x100)</td>
+  <td align=right>20.72</td>
+  <td align=right>6.157</td>
+  <td align=right>126.90</td>
+ </tr>
+ <tr>
+  <td>Monte Carlo</td>
+  <td align=right>3.816</td>
+  <td align=right>1.044</td>
+  <td align=right>14.77</td>
+ </tr>
+ <tr>
+  <td>Sparse matmult (N=1000, nz=5000)</td>
+  <td align=right>25.62</td>
+  <td align=right>3.861</td>
+  <td align=right>85.71</td>
+ </tr>
+ <tr>
+  <td>LU (100x100)</td>
+  <td align=right>14.98</td>
+  <td align=right>5.218</td>
+  <td align=right>121.29</td>
+ </tr>
+</table>
+
+<hr>
+<address>openjit@is.titech.ac.jp</address>
+</body>
+</html>

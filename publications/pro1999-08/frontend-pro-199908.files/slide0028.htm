@@ -1,0 +1,222 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJITフロントエンドシステムの設計</title>
+<meta name=Description content="99/10/29: まとめ">
+<link rel=next href=slide0029.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0028.htm');   
+  else
+    parent.location.href = "../frontend-pro-199908.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master12_background.gif" bgcolor=white alink="#ffcf01"
+link="#3333cc" vlink="#cfdbfd" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=36 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=81 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=351 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=43 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=36 height=30></td>
+  <td width=81 height=30>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=81 height=30><font face="ＭＳ Ｐゴシック" color="#0000cc" size=5>まとめ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=358 height=30 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=36 height=252></td>
+  <td width=432 height=252 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=44 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=34 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=192 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=24 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=36 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=2 colspan=2></td>
+    <td width=407 height=19 colspan=13 rowspan=3><font face="ＭＳ Ｐゴシック" size=3>フロントエンドシステムはバイトコードレベルでの最</font><br>
+    </td>
+    <td width=8 height=2></td>
+   </tr>
+   <tr>
+    <td width=15 height=15><img src=image001.gif border=0 width=14 height=15></td>
+    <td width=3 height=15></td>
+    <td width=8 height=15></td>
+   </tr>
+   <tr>
+    <td width=18 height=2 colspan=2></td>
+    <td width=8 height=2></td>
+   </tr>
+   <tr>
+    <td width=18 height=18 colspan=2></td>
+    <td width=398 height=18 colspan=12><font face="ＭＳ Ｐゴシック" size=3>適化・カスタム化を実現するクラスフレームワーク</font><br>
+    </td>
+    <td width=17 height=18 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=433 height=3 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=18 height=2 colspan=2></td>
+    <td width=292 height=19 colspan=6 rowspan=3><font face="ＭＳ Ｐゴシック" size=3>ポータブル、かつ拡張性のある設計</font><br>
+    </td>
+    <td width=123 height=2 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=15 height=15><img src=image001.gif border=0 width=14 height=15></td>
+    <td width=3 height=15></td>
+    <td width=123 height=15 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=18 height=2 colspan=2></td>
+    <td width=123 height=2 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=433 height=7 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=18 height=2 colspan=2></td>
+    <td width=407 height=19 colspan=13 rowspan=3><font face="ＭＳ Ｐゴシック" size=3>行列積に対する単純なプログラム変換の例を用い</font><br>
+    </td>
+    <td width=8 height=2></td>
+   </tr>
+   <tr>
+    <td width=15 height=15><img src=image001.gif border=0 width=14 height=15></td>
+    <td width=3 height=15></td>
+    <td width=8 height=15></td>
+   </tr>
+   <tr>
+    <td width=18 height=2 colspan=2></td>
+    <td width=8 height=2></td>
+   </tr>
+   <tr>
+    <td width=433 height=3 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=18 height=19 colspan=2></td>
+    <td width=100 height=19 colspan=5><font face="ＭＳ Ｐゴシック" size=3>て評価した：</font><br>
+    </td>
+    <td width=315 height=19 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=433 height=3 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=24 height=20 colspan=3></td>
+    <td width=329 height=20 colspan=8><font face=Tahoma size=2>OpenJIT</font><font
+    face="ＭＳ Ｐゴシック" size=2>と</font><font face=Tahoma size=2>sunwjit</font><font
+    face="ＭＳ Ｐゴシック" size=2>の実行時間の差は</font><font face=Tahoma size=2>10%</font><font
+    face="ＭＳ Ｐゴシック" size=2>以下</font><br>
+    </td>
+    <td width=80 height=20 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=433 height=2 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=39 height=17 colspan=4></td>
+    <td width=288 height=17 colspan=6><font face="ＭＳ Ｐゴシック" size=2>→生成されるネイティブコードの効率の差</font><br>
+    </td>
+    <td width=106 height=17 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=433 height=3 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=24 height=20 colspan=3></td>
+    <td width=15 height=20><font face=Wingdings color=black size=1>n</font></td>
+    <td width=341 height=20 colspan=9><font face=Tahoma size=2>OpenJIT</font><font
+    face="ＭＳ Ｐゴシック" size=2>と</font><font face=Tahoma size=2>sunwjit</font><font
+    face="ＭＳ Ｐゴシック" size=2>のオーバーヘッドの比は</font><font face=Tahoma size=2>2</font><font
+    face="ＭＳ Ｐゴシック" size=2>倍強</font><br>
+    </td>
+    <td width=53 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=39 height=19 colspan=4></td>
+    <td width=317 height=19 colspan=8><font face="ＭＳ Ｐゴシック" size=2>→</font><font
+    face=Tahoma size=2>OpenJIT</font><font face="ＭＳ Ｐゴシック" size=2>では</font><font
+    face=Tahoma size=2>JIT</font><font face="ＭＳ Ｐゴシック" size=2>本体もコンパイルするため</font><br>
+    </td>
+    <td width=77 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=433 height=6 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font face=Wingdings color=black size=1>n</font></td>
+    <td width=394 height=17 colspan=12><font face="ＭＳ Ｐゴシック" size=2>フロントエンドのオーバーヘッドはサイズや実行回数に依</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=433 height=2 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=39 height=17 colspan=4></td>
+    <td width=45 height=17 colspan=2><font face="ＭＳ Ｐゴシック" size=2>らない</font><br>
+    </td>
+    <td width=349 height=17 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=433 height=2 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=39 height=17 colspan=4></td>
+    <td width=285 height=17 colspan=5><font face="ＭＳ Ｐゴシック" size=2>→サイズや実行回数が大きくなれば償却</font><br>
+    </td>
+    <td width=109 height=17 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=7 height=252></td>
+ </tr>
+ <tr>
+  <td width=475 height=19 colspan=4></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

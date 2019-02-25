@@ -1,0 +1,217 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Simple Algorithms for Analyzing Receiver Classes">
+<link rel=next href="v3_slide0226.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0225.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0225_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=39 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=251 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=19 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=38 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=23 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=39 height=76></td>
+  <td width=398 height=76 colspan=9>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=33 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=331 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=33 height=41></td>
+    <td width=331 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Simple Algorithms for</font><br>
+    </td>
+    <td width=34 height=41></td>
+   </tr>
+   <tr>
+    <td width=398 height=35 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Analyzing Receiver Classes</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=38 height=76 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=325 height=20 colspan=5></td>
+  <td width=74 height=20 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=20><font face="Courier New" size=2><b>A: m</b><b><sub>A</sub></b><b>,n</b><b><sub>A</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=76 height=20 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=4 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=306 height=20 colspan=4></td>
+  <td width=47 height=20 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=47 height=20><font face="Courier New" size=2><b>B: m</b><b><sub>B</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=33 height=20 colspan=2></td>
+  <td width=74 height=20 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=20><font face="Courier New" size=2><b>D: m</b><b><sub>D</sub></b><b>,n</b><b><sub>D</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=15 height=20 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=8 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=295 height=20 colspan=3></td>
+  <td width=74 height=20 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=20><font face="Courier New" size=2><b>C: m</b><b><sub>C</sub></b><b>,p</b><b><sub>C</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=106 height=20 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=290 height=112 colspan=2></td>
+  <td width=183 height=112 colspan=10>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=92 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=27 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=20 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=117 height=16 colspan=2><font face="Courier New" size=1><b>A a; B
+    b; C c;</b></font><br>
+    </td>
+    <td width=66 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=183 height=18 colspan=5><font face="Courier New" size=1><b>a.m; </b></font><font
+    face="Comic Sans MS" size=1><b>//methods={</b></font><font
+    face="Courier New" size=1><b>m</b><b><sub>A</sub></b></font><font
+    face="Comic Sans MS" size=1><b>,</b></font><font face="Courier New" size=1><b>m</b><b><sub>B</sub></b></font><font
+    face="Comic Sans MS" size=1><b>,</b></font><font face="Courier New" size=1><b>m</b><b><sub>C</sub></b></font><font
+    face="Comic Sans MS" size=1><b>}</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=164 height=16 colspan=4><font face="Courier New" size=1><b>b.m; </b></font><font
+    face="Comic Sans MS" size=1><b>//methods={</b></font><font
+    face="Courier New" size=1><b>m</b><b><sub>B</sub></b></font><font
+    face="Comic Sans MS" size=1><b>,</b></font><font face="Courier New" size=1><b>m</b><b><sub>C</sub></b></font><font
+    face="Comic Sans MS" size=1><b>}</b></font><br>
+    </td>
+    <td width=19 height=16></td>
+   </tr>
+   <tr>
+    <td width=144 height=16 colspan=3><font face="Courier New" size=1><b>c.m; </b></font><font
+    face="Comic Sans MS" size=1><b>//methods={</b></font><font
+    face="Courier New" size=1><b>m</b><b><sub>C</sub></b></font><font
+    face="Comic Sans MS" size=1><b>}</b></font><br>
+    </td>
+    <td width=39 height=16 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=144 height=15 colspan=3><font face="Courier New" size=1><b>c.p; </b></font><font
+    face="Comic Sans MS" size=1><b>//methods={</b></font><font
+    face="Courier New" size=1><b>p</b><b><sub>C</sub></b></font><font
+    face="Comic Sans MS" size=1><b>}</b></font><br>
+    </td>
+    <td width=39 height=15 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=144 height=16 colspan=3><font face="Courier New" size=1><b>a.p; </b></font><font
+    face="Comic Sans MS" size=1><b>//methods={</b></font><font
+    face="Courier New" size=1><b>p</b><b><sub>C</sub></b></font><font
+    face="Comic Sans MS" size=1><b>}</b></font><br>
+    </td>
+    <td width=39 height=16 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=92 height=15><font face="Courier New" size=1><b>c.n; </b></font><font
+    face="Comic Sans MS" size=1><b>//error</b></font><br>
+    </td>
+    <td width=91 height=15 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=2 height=112></td>
+ </tr>
+ <tr>
+  <td width=475 height=40 colspan=13></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

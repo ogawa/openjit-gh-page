@@ -1,0 +1,204 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: OpenJIT Preliminary Benchmarks (1)">
+<link rel=next href=slide0041.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0039.htm');   
+  else
+    parent.location.href = "../OpenJIT-ICSE98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0039_background.gif" bgcolor="#0066cc" alink="#ff9933"
+link="#330099" vlink="#cbcbcb" text=white topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=62 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=271 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=63 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=29 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=102 height=68 colspan=2></td>
+  <td width=271 height=68>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=33 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=206 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=271 height=33 colspan=3 align=center><font face="Times New Roman"
+    color="#cbcbcb" size=5>OpenJIT Preliminary</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=271 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=33 height=33></td>
+    <td width=206 height=33 align=center><font face="Times New Roman"
+    color="#cbcbcb" size=5>Benchmarks (1)</font><br>
+    </td>
+    <td width=32 height=33></td>
+   </tr>
+  </table>
+  </td>
+  <td width=102 height=68 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=10 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=40 height=225></td>
+  <td width=396 height=225 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=45 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=43 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=45 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=110 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=52 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=379 height=21 colspan=17><font face="Times New Roman" size=3>Very
+    early results - does not directly reflect final</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=397 height=1 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=21></td>
+    <td width=99 height=21 colspan=9><font face="Times New Roman" size=3>performance</font><br>
+    </td>
+    <td width=280 height=21 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=397 height=5 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=85 height=18 colspan=8><font face="Times New Roman" size=2>No
+    Frontend</font><br>
+    </td>
+    <td width=273 height=18 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=397 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=128 height=18 colspan=9><font face="Times New Roman" size=2>Prototype
+    Backend</font><br>
+    </td>
+    <td width=230 height=18 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=397 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=152 height=16 colspan=7><font face="Times New Roman" size=1>No
+    good register allocation</font><br>
+    </td>
+    <td width=185 height=16 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=397 height=3 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=163 height=16 colspan=8><font face="Times New Roman" size=1>Little
+    peephole optimizations</font><br>
+    </td>
+    <td width=174 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=397 height=5 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=367 height=21 colspan=16><font face="Times New Roman" size=3>Still,
+    good news is that it runs and works pretty</font><br>
+    </td>
+    <td width=12 height=21></td>
+   </tr>
+   <tr>
+    <td width=397 height=1 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=21></td>
+    <td width=54 height=21 colspan=8><font face="Times New Roman" size=3>well…</font><br>
+    </td>
+    <td width=325 height=21 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=397 height=6 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=315 height=21 colspan=15><font face="Times New Roman" size=3>Comparison
+    to Fujitsu’s <i>commercial</i> JIT</font><br>
+    </td>
+    <td width=64 height=21 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=397 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=80 height=18 colspan=7><font face="Times New Roman" size=2>written
+    in C</font><br>
+    </td>
+    <td width=278 height=18 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=39 height=225></td>
+ </tr>
+ <tr>
+  <td width=475 height=24 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

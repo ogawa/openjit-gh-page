@@ -1,0 +1,217 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description
+content="99/10/29: Overview of OpenJIT Frontend System (1)">
+<link rel=next href=slide0036.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0023.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0023_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=453 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=453 height=31>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=453 height=31><font face="Arial Narrow" color="#010000" size=5><b>Overview
+    of OpenJIT Frontend System (1)</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=5 height=31 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=30 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=17 height=229></td>
+  <td width=456 height=229 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=24 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=112 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=34 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=39 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=55 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=365 height=19 colspan=18><font face=Arial color="#010000" size=2>OpenJIT
+    Frontend System consists of 4 modules:</font><br>
+    </td>
+    <td width=74 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=456 height=4 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=211 height=17 colspan=10><font face=Arial color="#010000" size=2>OpenJIT
+    Bytecode Discompiler</font><br>
+    </td>
+    <td width=207 height=17 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=456 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=280 height=16 colspan=12><font face=Arial color="#010000" size=1>converting
+    bytecodes to Abstract Syntax Tree</font><br>
+    </td>
+    <td width=129 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=456 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=243 height=17 colspan=12><font face=Arial color="#010000" size=2>OpenJIT
+    Class Annotation Analyzer</font><br>
+    </td>
+    <td width=175 height=17 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=456 height=4 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=409 height=16 colspan=15><font face=Arial color="#010000" size=1>reading
+    classfile annotation and embedding annotation info to AST</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=456 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=250 height=17 colspan=13><font face=Arial color="#010000" size=2>OpenJIT
+    High-level Optimizer Toolkit</font><br>
+    </td>
+    <td width=168 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=456 height=4 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=358 height=16 colspan=14><font face=Arial color="#010000" size=1>toolkit
+    for optimizations and customizations using OpenJIT</font><br>
+    </td>
+    <td width=51 height=16></td>
+   </tr>
+   <tr>
+    <td width=456 height=2 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=71 height=14 colspan=7></td>
+    <td width=12 height=14><font color="#336699" size=1>&#8226;</font></td>
+    <td width=128 height=14 colspan=4><font face=Arial color="#010000" size=1>Flow
+    graph constructor</font><br>
+    </td>
+    <td width=245 height=14 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=456 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=71 height=14 colspan=7></td>
+    <td width=12 height=14><font color="#336699" size=1>&#8226;</font></td>
+    <td width=113 height=14 colspan=2><font face=Arial color="#010000" size=1>Flow
+    graph analyzer</font><br>
+    </td>
+    <td width=260 height=14 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=456 height=4 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=71 height=14 colspan=7></td>
+    <td width=12 height=14><font color="#336699" size=1>&#8226;</font></td>
+    <td width=116 height=14 colspan=3><font face=Arial color="#010000" size=1>Program
+    transformer</font><br>
+    </td>
+    <td width=257 height=14 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=456 height=3 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=207 height=17 colspan=9><font face=Arial color="#010000" size=2>Abstract
+    Syntax Tree Package</font><br>
+    </td>
+    <td width=211 height=17 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=456 height=4 colspan=21></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=213 height=16 colspan=9><font face=Arial color="#010000" size=1>AST
+    representation, utility routines</font><br>
+    </td>
+    <td width=196 height=16 colspan=6></td>
+   </tr>
+  </table>
+  </td>
+  <td width=2 height=229></td>
+ </tr>
+ <tr>
+  <td width=475 height=21 colspan=4></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

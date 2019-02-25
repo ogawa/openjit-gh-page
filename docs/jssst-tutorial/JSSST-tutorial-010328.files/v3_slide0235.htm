@@ -1,0 +1,183 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Preparing for Dynamic Class Loading">
+<link rel=next href="v3_slide0238.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0235.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0235_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=30 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=335 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=20 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=31 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=30 height=76></td>
+  <td width=417 height=76 colspan=9>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=151 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=113 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=417 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Preparing for Dynamic Class</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=151 height=35></td>
+    <td width=113 height=35 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Loading</font><br>
+    </td>
+    <td width=153 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=28 height=76 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=36 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=365 height=23 colspan=2></td>
+  <td width=77 height=23 colspan=7>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=77 height=23><font face="Comic Sans MS" size=2>(call o2.b)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=33 height=23 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=1 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=377 height=42 colspan=4></td>
+  <td width=78 height=42 colspan=7>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=61 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=61 height=23><font face="Comic Sans MS" size=2>Method</font><br>
+    </td>
+    <td width=17 height=23></td>
+   </tr>
+   <tr>
+    <td width=78 height=19 colspan=2><font face="Comic Sans MS" size=2>b
+    (inlined)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=20 height=42></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=365 height=23 colspan=2></td>
+  <td width=74 height=23 colspan=6>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=23><font face="Comic Sans MS" size=2>Method a</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=36 height=23 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=2 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=397 height=29 colspan=5></td>
+  <td width=33 height=29 colspan=2><img src="v3_slide0235_image024.gif"
+  border=0 width=33 height=29></td>
+  <td width=45 height=29 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=475 height=9 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=373 height=23 colspan=3></td>
+  <td width=55 height=23 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=55 height=23><font face="Comic Sans MS" size=2>call o.b</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=47 height=23 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=475 height=20 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=365 height=23 colspan=2></td>
+  <td width=74 height=23 colspan=6>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=23><font face="Comic Sans MS" size=2>Method a</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=36 height=23 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=13 colspan=12></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

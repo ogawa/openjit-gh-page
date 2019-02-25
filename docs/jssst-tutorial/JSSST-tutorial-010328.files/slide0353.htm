@@ -1,0 +1,134 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: 従来のJITコンパイラ">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0353.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 50161;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 51160);
+//-->
+</script><![endif]><p:slidetransition advancetime="50160" flag="1025"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="595"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s609282" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s609283" type="#_x0000_m141325"
+  style='position:absolute;left:36pt;top:148.5pt;width:644pt;height:373.5pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s609282" class=T style='position:absolute;top:11.0%;
+ left:8.42%;width:83.14%;height:11.5%'>従来の<span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>JIT</span>コンパイラ</div>
+ <div v:shape="_x0000_s609283">
+ <div class=B style='position:absolute;top:29.25%;left:5.99%;width:87.64%;
+ height:6.25%'><span style='position:absolute;top:0%;left:4.27%;width:95.72%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.46%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span>処理速度至上主義的職人芸実装&#13;</span></div>
+ <div class=B style='position:absolute;top:37.75%;left:5.99%;width:87.64%;
+ height:6.25%'><span style='position:absolute;top:0%;left:4.27%;width:95.72%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.46%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span>厳選された最適化&#13;</span></div>
+ <div class=B1><span style='position:absolute;top:46.25%;left:14.04%;
+ width:79.4%'><span style='font-size:114%;color:red'><span style='mso-special-format:
+ bullet;color:#003399;mso-color-index:3;position:absolute;left:-3.77%'>&#8226;</span></span><span
+ style='font-size:114%;color:red'>一般的</span>に効果のある最適化のみ適用<br>
+ </span><span
+ style='position:absolute;top:53.25%;left:14.04%;width:91.01%'>⇒特定の場面にのみ効果的な最適化はしない&#13;</span></div>
+ <div class=B1 style='position:absolute;top:60.75%;left:11.04%;width:92.32%;
+ height:5.5%'><span style='position:absolute;top:0%;left:3.24%;width:96.75%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.35%'>&#8226;</span>特定のアプリケーション（ベンチマーク）で最適&#13;</span></div>
+ <div class=B style='position:absolute;top:66.5%;left:5.99%;width:87.64%;
+ height:8.5%'><span style='position:absolute;top:0%;left:4.27%;width:95.72%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.46%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span>マルチレベル<span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>JIT</span>コンパイラ&#13;</span></div>
+ <div class=B1 style='position:absolute;top:76.75%;left:11.04%;width:82.58%;
+ height:5.5%'><span style='position:absolute;top:0%;left:3.62%;width:96.14%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.77%'>&#8226;</span>最適化の度合いの高低の使い分け&#13;</span></div>
+ <div class=B2 style='position:absolute;top:82.5%;left:15.91%;width:77.52%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.38%;width:96.85%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.49%'>&#8226;</span>実行頻度<span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS"'> (e.g. Research VM, Jalapeno)&#13;</span></span></div>
+ <div class=B2 style='position:absolute;top:88.75%;left:15.91%;width:77.52%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.38%;width:96.85%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.49%'>&#8226;</span>場面<span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS"'> (</span>ループ、<span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>e.g. IBM JVM)</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

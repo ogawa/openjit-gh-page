@@ -1,0 +1,157 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Reflection">
+<link rel=next href="v3_slide0143.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0164.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0164_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=160 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=155 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=44 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=48 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=20 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=39 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=160 height=41></td>
+  <td width=155 height=41>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=155 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Reflection</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=160 height=41 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=475 height=65 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=332 height=37 colspan=3></td>
+  <td width=134 height=37 colspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=85 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=25 height=18></td>
+    <td width=85 height=18 align=center><font face="Times New Roman" size=2><b>Metaobject</b></font><br>
+    </td>
+    <td width=24 height=18></td>
+   </tr>
+   <tr>
+    <td width=134 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=134 height=18 colspan=3 align=center><font face="Times New Roman"
+    size=2><b>(Interpreter, VM)</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=9 height=37></td>
+ </tr>
+ <tr>
+  <td width=475 height=28 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=337 height=31 colspan=4></td>
+  <td width=61 height=31 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=54 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=61 height=16 colspan=2><font face=Arial size=1><b>Interpret/</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=54 height=16><font face=Arial size=1><b>Execute</b></font><br>
+    </td>
+    <td width=7 height=16></td>
+   </tr>
+  </table>
+  </td>
+  <td width=77 height=31 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=21 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=354 height=37 colspan=5></td>
+  <td width=92 height=37 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=20 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=51 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=20 height=18></td>
+    <td width=51 height=18 align=center><font face="Times New Roman" size=2><b>Object</b></font><br>
+    </td>
+    <td width=21 height=18></td>
+   </tr>
+   <tr>
+    <td width=92 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=92 height=18 colspan=3 align=center><font face="Times New Roman"
+    size=2><b>(Base Level)</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=29 height=37 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=57 colspan=9></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

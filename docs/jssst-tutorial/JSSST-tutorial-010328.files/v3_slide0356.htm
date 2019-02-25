@@ -1,0 +1,198 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: JITコンパイラの多様化による問題">
+<link rel=next href="v3_slide0357.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0356.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=32 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=356 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=47 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=32 height=74></td>
+  <td width=411 height=74 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=174 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=65 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=411 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>JIT</font><font face="ＭＳ Ｐゴシック" color="#003399"
+    size=5>コンパイラの多様化による</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=411 height=3 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=174 height=30></td>
+    <td width=65 height=30 align=center><font face="ＭＳ Ｐゴシック" color="#003399"
+    size=5>問題</font><br>
+    </td>
+    <td width=172 height=30></td>
+   </tr>
+  </table>
+  </td>
+  <td width=32 height=74></td>
+ </tr>
+ <tr>
+  <td width=475 height=8 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=40 height=198 colspan=2></td>
+  <td width=356 height=198>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=68 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=33 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=24 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=19 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=24 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=19><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=259 height=19 colspan=15><font face="ＭＳ Ｐゴシック" size=3>コンパイラを複数用意するコスト</font><br>
+    </td>
+    <td width=80 height=19></td>
+   </tr>
+   <tr>
+    <td width=357 height=7 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color="#003399" size=2>&#8226;</font></td>
+    <td width=90 height=17 colspan=5><font face="ＭＳ Ｐゴシック" size=2>構築のコスト</font><br>
+    </td>
+    <td width=228 height=17 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=48 height=19 colspan=6></td>
+    <td width=12 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=297 height=19 colspan=10><font face="ＭＳ Ｐゴシック" size=1>全く違うコンパイラ（</font><font
+    face="Comic Sans MS" size=1>e.g. </font><font face="ＭＳ Ｐゴシック" size=1>速さ重視、コードの質重視）</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=357 height=6 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color="#003399" size=2>&#8226;</font></td>
+    <td width=123 height=17 colspan=6><font face="ＭＳ Ｐゴシック" size=2>同時利用のコスト</font><br>
+    </td>
+    <td width=195 height=17 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=357 height=4 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=48 height=14 colspan=6></td>
+    <td width=12 height=14><font color="#003399" size=1>&#8226;</font></td>
+    <td width=174 height=14 colspan=7><font face="ＭＳ Ｐゴシック" size=1>コンパイラ自体の占めるメモリ</font><br>
+    </td>
+    <td width=123 height=14 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=357 height=7 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=18 height=19><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=235 height=19 colspan=14><font face="ＭＳ Ｐゴシック" size=3>複数コンパイラの構築と選択</font><br>
+    </td>
+    <td width=104 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=357 height=7 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color="#003399" size=2>&#8226;</font></td>
+    <td width=162 height=17 colspan=8><font face="ＭＳ Ｐゴシック" size=2>自動的に使い分ける話</font><br>
+    </td>
+    <td width=156 height=17 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=357 height=6 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color="#003399" size=2>&#8226;</font></td>
+    <td width=147 height=17 colspan=7><font face="ＭＳ Ｐゴシック" size=2>実行時に生成する話</font><br>
+    </td>
+    <td width=171 height=17 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=357 height=5 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color="#003399" size=2>&#8226;</font></td>
+    <td width=178 height=17 colspan=9><font face="ＭＳ Ｐゴシック" size=2>ユーザ指定で選択する話</font><br>
+    </td>
+    <td width=140 height=17 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=79 height=198 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=54 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

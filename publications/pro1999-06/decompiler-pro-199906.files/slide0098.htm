@@ -1,0 +1,411 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 例">
+<link rel=next href=slide0044.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0098.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0098_background.gif" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=29 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=118 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=25 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=13 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=35></td>
+ </tr>
+ <tr>
+  <td width=26 height=5 colspan=2></td>
+  <td width=29 height=27 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=29 height=27><font face="ＭＳ Ｐゴシック" size=5>例</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=420 height=5 colspan=32></td>
+ </tr>
+ <tr>
+  <td width=26 height=22 colspan=2></td>
+  <td width=122 height=22 colspan=2></td>
+  <td width=106 height=42 colspan=10 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=105 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=105 height=19 align=center><font face="ＭＳ Ｐゴシック" size=3>コントロール</font><br>
+    </td>
+    <td width=1 height=19></td>
+   </tr>
+   <tr>
+    <td width=106 height=4 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=106 height=19 colspan=2 align=center><font face="ＭＳ Ｐゴシック"
+    size=3>フローグラフ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=58 height=22 colspan=5></td>
+  <td width=83 height=42 colspan=11 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=53 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=83 height=19 colspan=3 align=center><font face="ＭＳ Ｐゴシック" size=3>ドミネータ</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=83 height=4 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=15 height=19></td>
+    <td width=53 height=19 align=center><font face="ＭＳ Ｐゴシック" size=3>ツリー</font><br>
+    </td>
+    <td width=15 height=19></td>
+   </tr>
+  </table>
+  </td>
+  <td width=51 height=22 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=177 height=20 colspan=5></td>
+  <td width=58 height=20 colspan=5></td>
+  <td width=51 height=20 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=10 colspan=35></td>
+ </tr>
+ <tr>
+  <td width=220 height=1 colspan=9></td>
+  <td width=15 height=30 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>1</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=140 height=1 colspan=15></td>
+  <td width=15 height=30 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>1</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=85 height=1 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=20 height=9></td>
+  <td width=158 height=177 colspan=5 rowspan=19><img
+  src="slide0098_image012.gif" border=0 width=158 height=177></td>
+  <td width=42 height=9 colspan=3></td>
+  <td width=140 height=9 colspan=15></td>
+  <td width=85 height=9 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=20 height=19></td>
+  <td width=42 height=19 colspan=3></td>
+  <td width=47 height=19 colspan=4></td>
+  <td width=54 height=19 colspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=54 height=19 align=center><font face="ＭＳ Ｐゴシック" size=3>ヘッダ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=39 height=19 colspan=6></td>
+  <td width=85 height=19 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=20 height=1></td>
+  <td width=42 height=1 colspan=3></td>
+  <td width=140 height=1 colspan=15></td>
+  <td width=85 height=1 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=20 height=21></td>
+  <td width=42 height=21 colspan=3></td>
+  <td width=15 height=22 rowspan=2><img src="slide0098_image013.gif" border=0
+  width=15 height=22></td>
+  <td width=240 height=21 colspan=25></td>
+ </tr>
+ <tr>
+  <td width=20 height=1></td>
+  <td width=42 height=1 colspan=3></td>
+  <td width=140 height=1 colspan=15></td>
+  <td width=15 height=30 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>2</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=85 height=1 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=20 height=5></td>
+  <td width=42 height=5 colspan=3></td>
+  <td width=15 height=30 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>2</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=140 height=5 colspan=15></td>
+  <td width=85 height=5 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=20 height=19></td>
+  <td width=42 height=19 colspan=3></td>
+  <td width=79 height=19 colspan=8></td>
+  <td width=54 height=19 colspan=6>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=54 height=19 align=center><font face="ＭＳ Ｐゴシック" size=3>ヘッダ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=7 height=19></td>
+  <td width=85 height=19 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=20 height=5></td>
+  <td width=42 height=5 colspan=3></td>
+  <td width=140 height=5 colspan=15></td>
+  <td width=85 height=5 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=20 height=1></td>
+  <td width=42 height=1 colspan=3></td>
+  <td width=240 height=1 colspan=25></td>
+ </tr>
+ <tr>
+  <td width=20 height=17></td>
+  <td width=297 height=17 colspan=29></td>
+ </tr>
+ <tr>
+  <td width=20 height=3></td>
+  <td width=74 height=3 colspan=5></td>
+  <td width=15 height=30 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>3</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=208 height=3 colspan=23></td>
+ </tr>
+ <tr>
+  <td width=20 height=1></td>
+  <td width=74 height=1 colspan=5></td>
+  <td width=131 height=1 colspan=15></td>
+  <td width=15 height=30 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>3</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=62 height=1 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=20 height=26></td>
+  <td width=74 height=26 colspan=5></td>
+  <td width=84 height=26 colspan=10></td>
+  <td width=15 height=30 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>6</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=32 height=26 colspan=4></td>
+  <td width=62 height=26 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=20 height=3></td>
+  <td width=173 height=3 colspan=16></td>
+  <td width=32 height=3 colspan=4></td>
+  <td width=2 height=3></td>
+  <td width=14 height=30 colspan=3 rowspan=4><img src="slide0098_image014.gif"
+  border=0 width=14 height=30></td>
+  <td width=46 height=3 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=20 height=1></td>
+  <td width=173 height=1 colspan=16></td>
+  <td width=49 height=1 colspan=6></td>
+  <td width=46 height=1 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=20 height=23></td>
+  <td width=237 height=23 colspan=23></td>
+  <td width=46 height=23 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=20 height=3></td>
+  <td width=35 height=3 colspan=2></td>
+  <td width=90 height=19 colspan=9 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=90 height=19 align=center><font face="ＭＳ Ｐゴシック" size=3>後続ノード</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=112 height=3 colspan=12></td>
+  <td width=46 height=3 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=20 height=16></td>
+  <td width=35 height=16 colspan=2></td>
+  <td width=72 height=16 colspan=8></td>
+  <td width=15 height=30 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>4</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=32 height=16 colspan=4></td>
+  <td width=15 height=30 colspan=3 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>5</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=38 height=16 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=20 height=3></td>
+  <td width=197 height=3 colspan=19></td>
+  <td width=32 height=3 colspan=4></td>
+  <td width=38 height=3 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=375 height=11 colspan=25></td>
+  <td width=32 height=11 colspan=4></td>
+  <td width=38 height=11 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=35></td>
+ </tr>
+ <tr>
+  <td width=173 height=14 colspan=4></td>
+  <td width=15 height=30 colspan=3 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>6</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=84 height=14 colspan=6></td>
+  <td width=15 height=30 colspan=3 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=30 align=center><font face="Times New Roman" size=5>5</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=188 height=14 colspan=19></td>
+ </tr>
+ <tr>
+  <td width=173 height=16 colspan=4></td>
+  <td width=84 height=16 colspan=6></td>
+  <td width=59 height=16 colspan=5></td>
+  <td width=104 height=19 colspan=13 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=104 height=19 align=center><font face="ＭＳ Ｐゴシック" size=3>バックエッジ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=25 height=16></td>
+ </tr>
+ <tr>
+  <td width=346 height=3 colspan=21></td>
+  <td width=25 height=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=23 colspan=35></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

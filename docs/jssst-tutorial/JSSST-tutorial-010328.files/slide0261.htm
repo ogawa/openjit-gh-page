@@ -1,0 +1,214 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: OpenJIT High-level Optimizer Toolkit (3)">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0261.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = true, g_autoTrans = false, g_transSecs = 1;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(1);
+//-->
+</script><![endif]><p:slidetransition advancetime="0" effect="pull"
+ direction="right" flag="1"/><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="448"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden;filter:revealtrans(Duration=1, Transition=6)'><p:slide
+ coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s456706" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s456707" type="#_x0000_m141325"
+  style='position:absolute;left:66pt;top:150pt;width:630pt;height:366pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s456706" class=T><span style='position:absolute;
+ top:7.25%;left:2.24%;width:95.69%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:91%;mso-fareast-language:JA'>OpenJIT
+ High-level Optimizer </span></span><span style='position:absolute;top:16.0%;
+ left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:91%;mso-fareast-language:JA'>Toolkit
+ (3)</span></span></div>
+ <div v:shape="_x0000_s456707">
+ <div class=B3 style='mso-margin-left-alt:1080'></div>
+ <div class=B4 style='mso-margin-left-alt:1368'></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:336;
+ position:absolute;top:27.25%;left:10.11%;width:85.58%;height:6.5%'><span
+ style='position:absolute;top:0%;left:6.78%;width:93.21%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-7.27%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Program
+ Transformer &#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";mso-margin-left-alt:576;
+ position:absolute;top:33.25%;left:15.16%;width:80.71%;height:5.5%'><span
+ style='position:absolute;top:0%;left:6.26%;width:93.73%'><span
+ style='font-size:71%'><span style='mso-special-format:"numbullet3\,1";
+ color:#003399;mso-color-index:3;position:absolute;left:-6.68%'>1.</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Register transformation pattens&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";mso-margin-left-alt:816;
+ position:absolute;top:38.0%;left:20.22%;width:75.65%;height:5.0%'><span
+ style='position:absolute;top:0%;left:5.44%;width:94.55%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-5.75%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>register_pattern(Expression src,
+ Expression dst)&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";mso-margin-left-alt:816;
+ position:absolute;top:42.5%;left:20.22%;width:75.65%;height:5.0%'><span
+ style='position:absolute;top:0%;left:5.44%;width:94.55%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-5.75%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>register_pattern(Statement src,
+ Statement dst)&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";mso-margin-left-alt:576'><span
+ style='position:absolute;top:47.0%;left:20.22%;width:83.14%'><span
+ style='font-size:71%'><span style='mso-special-format:"numbullet3\,1";
+ color:#003399;mso-color-index:3;position:absolute;left:-6.08%'>2.</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Specify the root of a subtree in the
+ augmented AST, </span></span><span style='position:absolute;top:51.0%;
+ left:20.22%;width:90.63%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>search
+ the tree depth first, replace the matching pattern </span></span><span
+ style='position:absolute;top:55.0%;left:20.22%;width:75.65%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>w/the registered replacement
+ pattern&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";mso-margin-left-alt:816;
+ position:absolute;top:59.75%;left:20.22%;width:75.65%;height:5.0%'><span
+ style='position:absolute;top:0%;left:5.44%;width:94.55%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-5.75%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>substitution(Expression root)&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";mso-margin-left-alt:816;
+ position:absolute;top:64.25%;left:20.22%;width:75.65%;height:5.0%'><span
+ style='position:absolute;top:0%;left:5.44%;width:94.55%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-5.75%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>substitution(Statement root)&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:336;
+ position:absolute;top:68.75%;left:10.11%;width:100.74%;height:6.5%'><span
+ style='position:absolute;top:0%;left:5.76%;width:94.05%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-6.12%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Experience
+ shown strategy useful but too low level&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";mso-margin-left-alt:576'><span
+ style='position:absolute;top:74.5%;left:20.22%;width:75.65%'><span
+ style='font-size:71%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-6.68%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Hard to generate all the patterns<br>
+ </span></span><span
+ style='position:absolute;top:79.75%;left:20.22%;width:75.65%'><span
+ lang=EN-US style='font-size:71%;mso-fareast-language:JA;display:none'>&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:336;
+ position:absolute;top:84.75%;left:10.11%;width:85.58%;height:4.75%'><span
+ style='position:absolute;top:0%;left:6.78%;width:93.21%'><span
+ style='font-size:75%;visibility:hidden'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-7.27%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span></span><span lang=EN-US
+ style='font-size:75%;mso-fareast-language:JA;display:none'><i>&#13;</i></span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";mso-margin-left-alt:336;
+ position:absolute;top:89.25%;left:10.11%;width:95.5%;height:6.5%'><span
+ style='position:absolute;top:0%;left:6.07%;width:93.92%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-6.47%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Need
+ higher-level API to generate the patterns</span></span></div>
+ </div>
+ <v:shapetype id="_x0000_t67" coordsize="21600,21600" o:spt="67" adj="16200,5400"
+  path="m0@0l@1@0@1,0@2,0@2@0,21600@0,10800,21600xe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="val #1"/>
+   <v:f eqn="sum height 0 #1"/>
+   <v:f eqn="sum 10800 0 #1"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @4 @3 10800"/>
+   <v:f eqn="sum width 0 @5"/>
+  </v:formulas>
+  <v:path o:connecttype="custom" o:connectlocs="10800,0;0,@0;10800,21600;21600,@0"
+   o:connectangles="270,180,90,0" textboxrect="@1,0,@2,@6"/>
+  <v:handles>
+   <v:h position="#1,#0" xrange="0,10800" yrange="0,21600"/>
+  </v:handles>
+ </v:shapetype><v:shape id="_x0000_s456708" type="#_x0000_t67" style='position:absolute;
+  left:318pt;top:6in;width:120pt;height:42pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:middle'
+  fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="3pt">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s456708"
+ src="slide0261_image355.gif" style='position:absolute;top:77.75%;left:42.5%;
+ width:20.22%;height:12.75%'><![endif]></p:slide></div>
+
+</body>
+
+</html>

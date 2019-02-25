@@ -1,0 +1,337 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description content="99/10/29: OpenJIT Compiler System (2)">
+<link rel=next href=slide0048.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0049.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0049_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=80 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=34 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=61 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=104 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=24 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=33 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=22></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=318 height=31 colspan=10>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=318 height=31><font face="Arial Narrow" color="#010000" size=5><b>OpenJIT
+    Compiler System (2)</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=140 height=31 colspan=11></td>
+ </tr>
+ <tr>
+  <td width=475 height=26 colspan=22></td>
+ </tr>
+ <tr>
+  <td width=150 height=6 colspan=8></td>
+  <td width=209 height=81 colspan=4 rowspan=7><img src="slide0049_image004.gif"
+  border=0 width=209 height=81></td>
+  <td width=116 height=6 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=26 height=17 colspan=3></td>
+  <td width=80 height=58 rowspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=35 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=22 height=20 colspan=2></td>
+    <td width=35 height=20 align=center><font face=Tahoma color="#010000"
+    size=2>Java</font><br>
+    </td>
+    <td width=23 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=8 height=19></td>
+    <td width=63 height=19 colspan=3 align=center><font face=Tahoma
+    color="#010000" size=2>Classfile</font><br>
+    </td>
+    <td width=9 height=19></td>
+   </tr>
+   <tr>
+    <td width=80 height=19 colspan=5 align=center><font face=Tahoma
+    color="#010000" size=2>(methods)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=44 height=17 colspan=4></td>
+  <td width=116 height=17 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=26 height=2 colspan=3></td>
+  <td width=44 height=2 colspan=4></td>
+  <td width=54 height=2 colspan=5></td>
+  <td width=41 height=33 colspan=3 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=31 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=41 height=17 colspan=3 align=center><font face=Tahoma
+    color="#010000" size=1>Native</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=5 height=15></td>
+    <td width=31 height=15 align=center><font face=Tahoma color="#010000"
+    size=1>code</font><br>
+    </td>
+    <td width=5 height=15></td>
+   </tr>
+  </table>
+  </td>
+  <td width=21 height=2 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=26 height=29 colspan=3></td>
+  <td width=9 height=29 colspan=2></td>
+  <td width=34 height=29><img src="slide0049_image005.gif" border=0 width=34
+  height=29></td>
+  <td width=1 height=29></td>
+  <td width=1 height=29></td>
+  <td width=34 height=29 colspan=2><img src="slide0049_image006.gif" border=0
+  width=34 height=29></td>
+  <td width=19 height=29 colspan=2></td>
+  <td width=21 height=29 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=26 height=2 colspan=3></td>
+  <td width=44 height=2 colspan=4></td>
+  <td width=54 height=2 colspan=5></td>
+  <td width=21 height=2 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=26 height=8 colspan=3></td>
+  <td width=44 height=8 colspan=4></td>
+  <td width=116 height=8 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=150 height=17 colspan=8></td>
+  <td width=116 height=17 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=475 height=31 colspan=22></td>
+ </tr>
+ <tr>
+  <td width=23 height=3 colspan=2></td>
+  <td width=86 height=96 colspan=3 rowspan=8>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=35 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=25 height=20 colspan=4></td>
+    <td width=35 height=20 align=center><font face=Tahoma color="#010000"
+    size=2>Java</font><br>
+    </td>
+    <td width=26 height=20 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=11 height=18 colspan=3></td>
+    <td width=63 height=18 colspan=3 align=center><font face=Tahoma
+    color="#010000" size=2>Classfile</font><br>
+    </td>
+    <td width=12 height=18 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=86 height=19 colspan=9 align=center><font face=Tahoma
+    color="#010000" size=2>(methods+</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=9 height=19 colspan=2></td>
+    <td width=68 height=19 colspan=5 align=center><font face=Tahoma
+    color="#010000" size=2>Compiler</font><br>
+    </td>
+    <td width=9 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=1 height=19></td>
+    <td width=83 height=19 colspan=7 align=center><font face=Tahoma
+    color="#010000" size=2>metacode)</font><br>
+    </td>
+    <td width=2 height=19></td>
+   </tr>
+  </table>
+  </td>
+  <td width=366 height=3 colspan=17></td>
+ </tr>
+ <tr>
+  <td width=23 height=18 colspan=2></td>
+  <td width=41 height=18 colspan=3></td>
+  <td width=209 height=81 colspan=4 rowspan=5><img src="slide0049_image007.gif"
+  border=0 width=209 height=81></td>
+  <td width=116 height=18 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=23 height=2 colspan=2></td>
+  <td width=41 height=2 colspan=3></td>
+  <td width=54 height=2 colspan=5></td>
+  <td width=41 height=33 colspan=3 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=31 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=41 height=17 colspan=3 align=center><font face=Tahoma
+    color="#010000" size=1>Native</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=5 height=16></td>
+    <td width=31 height=16 align=center><font face=Tahoma color="#010000"
+    size=1>code</font><br>
+    </td>
+    <td width=5 height=16></td>
+   </tr>
+  </table>
+  </td>
+  <td width=21 height=2 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=23 height=29 colspan=2></td>
+  <td width=6 height=29></td>
+  <td width=34 height=29><img src="slide0049_image008.gif" border=0 width=34
+  height=29></td>
+  <td width=1 height=29></td>
+  <td width=2 height=29 colspan=2></td>
+  <td width=34 height=29 colspan=2><img src="slide0049_image009.gif" border=0
+  width=34 height=29></td>
+  <td width=18 height=29></td>
+  <td width=21 height=29 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=23 height=2 colspan=2></td>
+  <td width=41 height=2 colspan=3></td>
+  <td width=54 height=2 colspan=5></td>
+  <td width=21 height=2 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=23 height=30 colspan=2></td>
+  <td width=41 height=30 colspan=3></td>
+  <td width=116 height=30 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=23 height=9 colspan=2></td>
+  <td width=366 height=9 colspan=17></td>
+ </tr>
+ <tr>
+  <td width=23 height=3 colspan=2></td>
+  <td width=206 height=3 colspan=5></td>
+  <td width=118 height=39 colspan=8 rowspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=73 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=118 height=20 colspan=3 align=center><font face=Tahoma
+    color="#010000" size=2>Self-application</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=22 height=19></td>
+    <td width=73 height=19 align=center><font face=Tahoma color="#010000"
+    size=2>(compile)</font><br>
+    </td>
+    <td width=23 height=19></td>
+   </tr>
+  </table>
+  </td>
+  <td width=42 height=3 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=315 height=1 colspan=10></td>
+  <td width=42 height=1 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=211 height=39 colspan=9 rowspan=4><img src="slide0049_image010.gif"
+  border=0 width=211 height=39></td>
+  <td width=104 height=20></td>
+  <td width=42 height=20 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=104 height=11></td>
+  <td width=20 height=11></td>
+  <td width=6 height=11 colspan=2><img src="master04_image011.gif" border=0
+  width=6 height=11></td>
+  <td width=16 height=11></td>
+ </tr>
+ <tr>
+  <td width=104 height=4></td>
+  <td width=42 height=4 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=264 height=4 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=475 height=6 colspan=22></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,165 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Open Compiler, Compile-Time Metaprogramming">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0144.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><p:slidetransition advancetime="0" flag="1"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="236"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s241666" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s241667" type="#_x0000_m141325"
+  style='position:absolute;left:54pt;top:150pt;width:612pt;height:156pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="body" position="1" size="half"/></v:shape>
+ <div v:shape="_x0000_s241666" class=T><span style='position:absolute;
+ top:6.25%;left:6.17%;width:87.82%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'><b><u>Open
+ Compiler, Compile-</u></b></span></span><span style='position:absolute;
+ top:16.0%;left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'><b><u>Time
+ Metaprogramming</u></b></span></span></div>
+ <div v:shape="_x0000_s241667">
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:27.25%;
+ left:8.42%;width:83.14%;height:6.5%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=JA style='font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>“</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Static” or “Compile-Time”
+ Reflection&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:33.25%;
+ left:13.48%;width:78.08%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.07%;width:96.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.23%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>No
+ Interpreter Intervention&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:38.0%;
+ left:13.48%;width:78.08%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.07%;width:96.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.23%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Eliminating
+ Run-Time Interpretation&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:43.0%;
+ left:8.42%;width:83.14%;height:6.5%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Disciplined Macro Preprocessor&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:48.75%;
+ left:13.48%;width:78.08%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.07%;width:96.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.23%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Compile-time
+ Source-to-source Transformation&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:53.75%;
+ left:13.48%;width:78.08%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.07%;width:96.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.23%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>C++
+ Language described in terms of C++&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:58.5%;
+ left:8.42%;width:83.14%;height:6.5%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Customization according to classes&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:64.5%;
+ left:13.48%;width:78.08%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.07%;width:96.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.23%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Type-based
+ analysis &amp; compilation (EPP)&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:69.25%;
+ left:8.42%;width:83.14%;height:6.5%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Standard Compiler Analysis&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:75.25%;
+ left:13.48%;width:78.08%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.07%;width:96.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.23%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Flow
+ Analysis<span style="mso-spacerun: yes">&nbsp; </span>(OpenC++ extension)</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

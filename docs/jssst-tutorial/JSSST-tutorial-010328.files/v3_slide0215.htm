@@ -1,0 +1,228 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Object Orientation (1) &#8211; Encapsulation of Control">
+<link rel=next href="v3_slide0219.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0215.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0215_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=57 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=193 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=60 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=57 height=76></td>
+  <td width=363 height=76 colspan=10>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=360 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=1 height=41></td>
+    <td width=360 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Object Orientation (1) &#8211;</font><br>
+    </td>
+    <td width=2 height=41></td>
+   </tr>
+   <tr>
+    <td width=363 height=35 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Encapsulation of Control</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=55 height=76 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=3 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=275 height=159 colspan=4></td>
+  <td width=159 height=159 colspan=8>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=76 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=76 height=16><font face="Courier New" size=1><b>Class A {</b></font><br>
+    </td>
+    <td width=83 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=101 height=14 colspan=2><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">　 </span>int m() {}</b></font><br>
+    </td>
+    <td width=58 height=14 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=126 height=15 colspan=3><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">　 </span>int n() {}<span style="mso-spacerun:
+    yes">　 </span>}</b></font><br>
+    </td>
+    <td width=33 height=15></td>
+   </tr>
+   <tr>
+    <td width=159 height=14 colspan=4><font face="Courier New" size=1><b>Class
+    B extends A {</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=126 height=14 colspan=3><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">　 </span>int m() {}<span style="mso-spacerun:
+    yes">　 </span>}</b></font><br>
+    </td>
+    <td width=33 height=14></td>
+   </tr>
+   <tr>
+    <td width=159 height=14 colspan=4><font face="Courier New" size=1><b>Class
+    C extends B {</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=101 height=15 colspan=2><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">　 </span>int m() {}</b></font><br>
+    </td>
+    <td width=58 height=15 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=126 height=14 colspan=3><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">　 </span>int p() {}<span style="mso-spacerun:
+    yes">　 </span>}</b></font><br>
+    </td>
+    <td width=33 height=14></td>
+   </tr>
+   <tr>
+    <td width=159 height=14 colspan=4><font face="Courier New" size=1><b>Class
+    D extends A {</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=101 height=15 colspan=2><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">　 </span>int m() {}</b></font><br>
+    </td>
+    <td width=58 height=15 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=126 height=14 colspan=3><font face="Courier New" size=1><b><span
+    style="mso-spacerun: yes">　 </span>int n() {}<span style="mso-spacerun:
+    yes">　 </span>}</b></font><br>
+    </td>
+    <td width=33 height=14></td>
+   </tr>
+  </table>
+  </td>
+  <td width=41 height=159></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=281 height=20 colspan=5></td>
+  <td width=74 height=20 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=20><font face="Courier New" size=2><b>A: m</b><b><sub>A</sub></b><b>,n</b><b><sub>A</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=120 height=20 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=4 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=262 height=20 colspan=3></td>
+  <td width=47 height=20 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=47 height=20><font face="Courier New" size=2><b>B: m</b><b><sub>B</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=32 height=20 colspan=2></td>
+  <td width=74 height=20 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=20><font face="Courier New" size=2><b>D: m</b><b><sub>D</sub></b><b>,n</b><b><sub>D</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=60 height=20 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=8 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=250 height=20 colspan=2></td>
+  <td width=74 height=20 colspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=74 height=20><font face="Courier New" size=2><b>C: m</b><b><sub>C</sub></b><b>,p</b><b><sub>C</sub></b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=151 height=20 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=13></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,128 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: OpenJIT 2の中間表現">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0360.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 24289;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 25288);
+//-->
+</script><![endif]><p:slidetransition advancetime="24288" flag="1025"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="602"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s616450" type="#_x0000_m141324"
+  style='position:absolute;left:32pt;top:18pt;width:688pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s616451" type="#_x0000_m141325"
+  style='position:absolute;left:36pt;top:148.5pt;width:666pt;height:391.5pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s616450" class=T style='position:absolute;top:5.5%;
+ left:5.43%;width:93.63%;height:11.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>OpenJIT 2</span>の中間表現</div>
+ <div v:shape="_x0000_s616451">
+ <div class=B style='position:absolute;top:27.25%;left:5.99%;width:90.63%;
+ height:8.5%'><span style='position:absolute;top:0%;left:4.13%;width:95.86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.31%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Control Flow Graph&#13;</span></span></div>
+ <div class=B style='position:absolute;top:35.75%;left:5.99%;width:108.23%;
+ height:8.5%'><span style='position:absolute;top:0%;left:3.46%;width:96.53%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-3.58%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>SSA</span>形式の四つ組<span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS"'>(org.openjit.compiler.rtl)&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:44.25%;left:11.04%;width:99.06%;
+ height:7.5%'><span style='position:absolute;top:0%;left:3.02%;width:96.78%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.12%'>&#8226;</span>生成に<span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Abstract
+ Factory</span>パターンで実装を隠蔽&#13;</span></div>
+ <div class=B2 style='position:absolute;top:51.75%;left:15.91%;width:80.71%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.24%;width:96.75%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.35%'>&#8226;</span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>ISA</span>依存情報&#13;</span></div>
+ <div class=B2 style='position:absolute;top:59.5%;left:15.91%;width:80.71%;
+ height:4.75%'><span style='position:absolute;top:0%;left:3.24%;width:96.75%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.35%'>&#8226;</span>コード生成フェーズ依存の情報&#13;</span></div>
+ <div class=B1><span style='position:absolute;top:64.5%;left:14.04%;width:82.58%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.62%'>&#8226;</span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>ISA</span>非依存の最適化フェーズを実現<br>
+ </span><span
+ style='position:absolute;top:72.5%;left:14.04%;width:82.58%'>⇒最適化器のコンポーネント化</span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

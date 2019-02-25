@@ -1,0 +1,142 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 今後の課題">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0010.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master10_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=136 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=294 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=26 height=27></td>
+  <td width=139 height=27 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=139 height=27><font face="ＭＳ Ｐゴシック" size=5>今後の課題</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=310 height=27 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=35 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=29 height=192 colspan=2></td>
+  <td width=430 height=192 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=267 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=55 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=48 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=413 height=22 colspan=11><font face="ＭＳ Ｐゴシック" size=4>より完全な実装を行う。特に、高速化を行う。</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=430 height=4 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=26><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=357 height=26 colspan=8><font face="ＭＳ Ｐゴシック" size=4>最近の</font><font
+    face=Tahoma size=4>VM</font><font face="ＭＳ Ｐゴシック" size=4>を用いた更なる評価を行う。</font><br>
+    </td>
+    <td width=56 height=26 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=430 height=7 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=19 height=19 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=387 height=19 colspan=6><font face="ＭＳ Ｐゴシック" size=3>ボトルネックとなっている、シンボリック実行部分</font><br>
+    </td>
+    <td width=1 height=19></td>
+   </tr>
+   <tr>
+    <td width=38 height=23 colspan=4></td>
+    <td width=271 height=23 colspan=2><font face="ＭＳ Ｐゴシック" size=3>は最近の</font><font
+    face=Tahoma size=3>VM</font><font face="ＭＳ Ｐゴシック" size=3>で高速化されるか？</font><br>
+    </td>
+    <td width=121 height=23 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=430 height=5 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=26><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=347 height=26 colspan=6><font face=Tahoma size=4>mocha</font><font
+    face="ＭＳ Ｐゴシック" size=4>以外のデコンパイラとの比較。</font><br>
+    </td>
+    <td width=66 height=26 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=430 height=8 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=405 height=22 colspan=9><font face="ＭＳ Ｐゴシック" size=4>高度な最適化を行うコンパイラのコードは？</font><br>
+    </td>
+    <td width=8 height=22 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=430 height=8 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=356 height=22 colspan=7><font face="ＭＳ Ｐゴシック" size=4>ソースを出力するデコンパイラにする。</font><br>
+    </td>
+    <td width=57 height=22 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=16 height=192></td>
+ </tr>
+ <tr>
+  <td width=475 height=60 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

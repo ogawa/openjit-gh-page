@@ -1,0 +1,224 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28">
+<link rel=next href=slide0053.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0064.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0064_background.gif" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=241 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=27 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=17 colspan=17></td>
+ </tr>
+ <tr>
+  <td width=25 height=66 colspan=2></td>
+  <td width=294 height=66 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=182 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=182 height=30><font face="Times New Roman" size=1><span
+    style="mso-spacerun: yes">&nbsp;</span></font><font face="ＭＳ Ｐゴシック" size=5>抽象構文木と</font><br>
+    </td>
+    <td width=112 height=30></td>
+   </tr>
+   <tr>
+    <td width=294 height=6 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=294 height=30 colspan=2><font face="ＭＳ Ｐゴシック" size=5>ドミネータツリーの類似</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=156 height=66 colspan=11></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=17></td>
+ </tr>
+ <tr>
+  <td width=352 height=17 colspan=8></td>
+  <td width=27 height=25 colspan=4 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=27 height=25 align=center><font face="ＭＳ Ｐゴシック" color="#ff3300"
+    size=4>赤</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=96 height=17 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=21 height=8></td>
+  <td width=245 height=155 colspan=2 rowspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=47 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=35 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=70 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=58 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=245 height=22 colspan=6><font face="Courier New" color="#ff3300"
+    size=3><b>String msg = “Good “;</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=245 height=1 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=152 height=22 colspan=3><font face="Courier New" color="#9900cc"
+    size=3><b>if (sleepy())</b></font><br>
+    </td>
+    <td width=93 height=22 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=210 height=22 colspan=4><font face="Courier New" color=green
+    size=3><b><span style="mso-spacerun: yes">&nbsp; </span>msg += “night!”;</b></font><br>
+    </td>
+    <td width=35 height=22 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=47 height=22><font face="Courier New" color="#9900cc" size=3><b>else</b></font><br>
+    </td>
+    <td width=198 height=22 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=221 height=22 colspan=5><font face="Courier New" color=white
+    size=3><b>! </b></font><font face="Courier New" color="#000099" size=3><b>msg
+    += “morning”;</b></font><br>
+    </td>
+    <td width=24 height=22></td>
+   </tr>
+   <tr>
+    <td width=152 height=22 colspan=3><font face="Courier New" size=3><b>println(msg);</b></font><br>
+    </td>
+    <td width=93 height=22 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=82 height=22 colspan=2><font face="Courier New" size=3><b>return;</b></font><br>
+    </td>
+    <td width=163 height=22 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=86 height=8 colspan=5></td>
+  <td width=96 height=8 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=21 height=67></td>
+  <td width=209 height=67 colspan=14></td>
+ </tr>
+ <tr>
+  <td width=21 height=28></td>
+  <td width=69 height=28 colspan=4></td>
+  <td width=58 height=28 colspan=6>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=58 height=28 align=center><font face="Courier New" color=purple
+    size=4><b>if</b></font><font face="ＭＳ Ｐゴシック" color=purple size=4>文</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=82 height=28 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=21 height=3></td>
+  <td width=209 height=3 colspan=14></td>
+ </tr>
+ <tr>
+  <td width=21 height=49></td>
+  <td width=93 height=49 colspan=6></td>
+  <td width=15 height=49><img src="slide0064_image015.gif" border=0 width=15
+  height=49></td>
+  <td width=1 height=49></td>
+  <td width=45 height=49 colspan=4><img src="slide0064_image016.gif" border=0
+  width=45 height=49></td>
+  <td width=55 height=49 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=6 colspan=17></td>
+ </tr>
+ <tr>
+  <td width=289 height=25 colspan=4></td>
+  <td width=27 height=25>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=27 height=25 align=center><font face="ＭＳ Ｐゴシック" size=4>黒</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=36 height=25 colspan=3></td>
+  <td width=27 height=25 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=27 height=25 align=center><font face="ＭＳ Ｐゴシック" color="#003399"
+    size=4>青</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=36 height=25 colspan=2></td>
+  <td width=27 height=25 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=27 height=25 align=center><font face="ＭＳ Ｐゴシック" color=green
+    size=4>緑</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=33 height=25></td>
+ </tr>
+ <tr>
+  <td width=475 height=28 colspan=17></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

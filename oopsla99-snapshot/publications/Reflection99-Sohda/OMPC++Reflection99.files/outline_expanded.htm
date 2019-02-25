@@ -1,0 +1,1190 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../OMPC++Reflection99.html";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor="#000066" text=white link=white vlink=white alink=white>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0001.htm');">OMPC++:<br>
+A Portable High Performance Implementation of DSM using OpenC++ Reflection</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Yukihiko Sohda, Hirotaka Ogawa,
+  Satoshi Matsuoka</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Tokyo Institute of Technology</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0002.htm');">Background</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Platform portability for parallel
+  computers is required</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>diversity environments support</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>memory models, communication models</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>PC-/WS-Clusters using commodity
+  hardware</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>high performance</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>on any platforms</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>optimize to each platform</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>programming model</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>supports diversity models</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0003.htm');">Current solutions - problems</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Parallel programming languages (e.g
+  HPF)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>restriction on programming models</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>automatic parallelizing compiler
+  (e.g. PDG Fortran Compiler)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>difficult to port a compiler itself</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>some programs not parallized well,
+  scalability problems</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>message passing libraries (e.g. MPI,
+  PVM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>restriction on programming models</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>complexities of programming</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0004.htm');">Solution: Reflection or
+“Open Compiler” strategy</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Provide portability using Reflection
+  or “Open Compiler”</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>diverse programming models</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>easy to support diverse environments</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>only write compiler metaclasses for
+  each environment</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>good performance</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Program transformations by an open
+  compiler<span style="mso-spacerun: yes">&nbsp;&nbsp; </span>either statically
+  or with dynamic info.</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>customized optimization for
+  particular environment or application</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0042.htm');">Solution: OpenJIT Project</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A TIT/Fujitsu Open Source Java JIT
+  Project</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A dynamically customizable Java JIT
+  compiler in Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Apply “Open Compiler” “Reflection” to
+  JITs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Dynamic compilation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Self-compiling (JIT in Java and
+  coexist w/app objects)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Basis for various JIT research (c.f.
+  Stanford SUIF)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Will be public domain this summer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Plugs into standard Sun JVM (1.1.x)
+  (as is w/standard C- JITs)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Solaris-SPARC JDK 1.1.x, 1.2 (ref
+  JVM), Linux x86</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Second fastest JIT on x86 Linux</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Allow customization of JITs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Dynamic loading of optimization
+  classes (Compilets)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Customized behavior</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Optimize for apps and environment</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0043.htm');">OpenJIT general schema</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0005.htm');">This work - Open Compiler
+DSM Experiment in C++</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Precursor work to OpenJIT parallel
+  programming support</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Provides a parallel programming
+  system - OMPC++</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Implements Software Distributed
+  Shared Memory (DSM) using OpenC++ and MPC++</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Shows Reflection can provide platform
+  portability in high-performance parallel programming</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0006.htm');">Overview of OMPC++</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Transforms shared memory based
+  multithreaded programs into DSM supported programs for non shared memory
+  environment</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Program transformation is provided by
+  Open Compiler (OpenC++)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>DSM support routines is written
+  in<span style="mso-spacerun: yes">&nbsp; </span>MPC++ MTTL</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0007.htm');">OMPC++ components</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenC++ [Chiba96]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compile-Time MOP</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>static source-level program
+  transformations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>metaclass for program transformations
+  is compiled by OpenC++ compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>generates a compiler includes program
+  transformations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>MPC++ [Ishikawa96]</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>extends C++ only using Template and
+  Inheritance</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>provides</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>user-level threads</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>remote / local thread creation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>remote / local method invocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>remote memory access</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0008.htm');">Work flow of <br>
+OMPC++</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>DSM Program Transformation via
+  metaprogramming</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Users write standard multihreaded
+  code</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compiles OpenC++ DSM metacode to
+  generate a DSM C++ compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>The generated compiler performs
+  program transformation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Transformed programs <br>
+  compiled by the MPC++ compiler + PM + DSM Lib</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0010.htm');">Software DSM</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Distributed Shared Array class</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>template class</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>flexible &amp; portable</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Write-Invalidate style</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>DSA class includes:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>contents of array<br>
+  divided into blocks</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>unit of memory transfer</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>block size is BlockSize</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>management table</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>pointer to real memory</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Overriding [], () operators</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>for miss checking</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>when write accessing, requires block
+  locking</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>writeStart(), writeEnd() must be
+  inserted</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>invalidations are invoked
+  asynchronously w/ MPC++ threads</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>inlining</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0041.htm');">Software DSM(2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>read access</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>check local copy</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>if there is no valid local copy,
+  requests copy to owner PE</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>write access</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>check ownership</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>if this PE doesn’t have owner ship,
+  requests ownership to owner PE</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>send an invalidation to all copy
+  owner PEs</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0023.htm');">Rules for source programs
+written by users</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OMPC++ sdsm APIs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>sdsm_init()</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>initializes shared data structures,
+  execute on 1 PE</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>sdsm_main()</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>main routine, run in parallel</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>sdsm_done()</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>cleanup/finalization, execute on 1 PE</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0011.htm');">Program Transformation(1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenC++ Metaclasses for
+  transformation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>named SharedClass</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>define how to transform</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>defined as subclass of OpenC++ Class</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>overriding methods to change existing
+  transformations</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>TranslateInitializer()</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>TranslateAssign()</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>FinalizeInstance()</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>metaclass size is about 250lines</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0026.htm');">OMPC++ metaclass sample code</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>in TranslateAssign() ...</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0024.htm');">Program Transformation(2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>TranslateInitializer()</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>to get object information (size,
+  type..)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>TranslateAssign()</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>to insert access checking</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>FinalizeInstance()</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>adds initialize, finalize routine</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>allocate / free memory and objects</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>initialize memory management tables</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>main routine(sdsm_main()) invocation</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0025.htm');">Example: before and after
+the transformation</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0013.htm');">Evaluation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Basic DSM performance</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>read/write accessing throughput /w
+  several BlockSize</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>all accesses invoke memory copies but
+  no invalidation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>CG Kernel, SPLASH2 FFT, LU</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>LU: small(16k) and large(261k)
+  problem size</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>FFT: size 64Kpoints</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>LU: matrix size 1024x1024</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>porting SPLASH2 to OMPC++</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>small, non-fundamental modifications</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>basic declarations etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>core computation routines unchanged</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>about 70line modifications within
+  1000lines total</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0014.htm');">Evaluation - Environtent</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>PC Cluster</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>RWCP PC-Cluster II</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>PentiumPro 200MHz</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>128MB Memory</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Myrinet/PM</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Linkspeed 100MB/sec</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Linux 2.0.36</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>SCore 2.4</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>user-level parallel programming
+  environment</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0035.htm');">Continuous Read/Write</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0036.htm');">Blocked Stride r/w (worst
+case)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0038.htm');">CG Kernel (1) - Small
+Problem</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0039.htm');">CG Kernel (2) - Large
+Problem</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0015.htm');">SPLASH2 FFT</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>3.2 times speedup with 8PEs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0016.htm');">SPLASH2 LU</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>3.3 times speedup with 8PEs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0022.htm');">SPLASH2 LU (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Applied batched checks to the
+  inner-loop<span style="mso-spacerun: yes">&nbsp; </span>daxpy function</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>5.3 times speedup with 8PEs</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0040.htm');">Comparison with other<span
+style="mso-spacerun: yes">&nbsp; </span>Software DSM systems</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Page-based software DSM (e.g.
+  TreadMarks)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OS-dependent (e.g. trapping page
+  fault)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Class-based software DSM</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>users have to insert memory
+  operations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>binary-level transformation (e.g. DEC
+  Shasta)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>efficient, but processor-binary
+  dependent</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Macro or ad-hoc preprocessor</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>portable, but hard to build and
+  implement</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>using Reflection</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>easy to build and use, portable and
+  efficient</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0017.htm');">Conclusion</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Platform portability can be achieved
+  by Reflection</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OMPC++ adds DSM support C++ parallel
+  programs in a portable way</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>good performance software DSM</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>still need optimization work</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0018.htm');">Future work</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Higher performance</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>applying other optimizing techniques</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>c.f. Shasta(e.g. batching miss
+  checks)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Object-based DSM</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Other benchmarks</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>e.g. SPLASH2 Barns, Radix…</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Evaluation on other environments</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Demonstrate OMPC+++ portability</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Apply to Java -- Using OpenJIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>JDSM: Software DSM for Java</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0044.htm');">スライド30</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0021.htm');">OMPC++ Components hierarchy</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0037.htm');">Cost of invalidations</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Asynchronous invalidation invocation</font></td>
+ </tr>
+</table>
+
+</p>
+
+</body>
+
+</html>

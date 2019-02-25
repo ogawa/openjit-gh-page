@@ -1,0 +1,284 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: デコンパイルとは">
+<link rel=next href=slide0013.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0077.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0077_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=32 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=44 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=28 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=30 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=46 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=36 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=24 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=44 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=38 colspan=25></td>
+ </tr>
+ <tr>
+  <td width=32 height=27></td>
+  <td width=201 height=27 colspan=12>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=201 height=27><font face="ＭＳ Ｐゴシック" size=5>デコンパイルとは</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=242 height=27 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=475 height=19 colspan=25></td>
+ </tr>
+ <tr>
+  <td width=131 height=17 colspan=7></td>
+  <td width=221 height=17 colspan=11>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=221 height=17 align=center><font face="ＭＳ Ｐゴシック" size=2>ソースプログラムのコンパイル</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=123 height=17 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=25></td>
+ </tr>
+ <tr>
+  <td width=380 height=9 colspan=21></td>
+  <td width=44 height=36 rowspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=44 height=17 align=center><font face="ＭＳ Ｐゴシック" color=red size=2>バイト</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=44 height=2></td>
+   </tr>
+   <tr>
+    <td width=44 height=17 align=center><font face="ＭＳ Ｐゴシック" color=red size=2>コード</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=51 height=9 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=135 height=1 colspan=8></td>
+  <td width=32 height=21 colspan=2 rowspan=3><img src="slide0077_image001.gif"
+  border=0 width=32 height=21></td>
+  <td width=156 height=1 colspan=6></td>
+  <td width=32 height=21 colspan=3 rowspan=3><img src="slide0077_image002.gif"
+  border=0 width=32 height=21></td>
+  <td width=25 height=1 colspan=2></td>
+  <td width=51 height=1 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=61 height=17 colspan=3></td>
+  <td width=48 height=17 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=48 height=17 align=center><font face="ＭＳ Ｐゴシック" color="#000066"
+    size=2>ソース</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=26 height=17 colspan=2></td>
+  <td width=36 height=17 colspan=2></td>
+  <td width=76 height=17 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=76 height=17 align=center><font face="ＭＳ Ｐゴシック" color="#996633"
+    size=2>コンパイラ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=44 height=17 colspan=2></td>
+  <td width=25 height=17 colspan=2></td>
+  <td width=51 height=17 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=135 height=3 colspan=8></td>
+  <td width=156 height=3 colspan=6></td>
+  <td width=25 height=3 colspan=2></td>
+  <td width=51 height=3 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=380 height=6 colspan=21></td>
+  <td width=51 height=6 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=25></td>
+ </tr>
+ <tr>
+  <td width=144 height=17 colspan=9></td>
+  <td width=199 height=17 colspan=8>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=199 height=17 align=center><font face="ＭＳ Ｐゴシック" size=2>バイトコードのデコンパイル</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=132 height=17 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=475 height=9 colspan=25></td>
+ </tr>
+ <tr>
+  <td width=63 height=9 colspan=4></td>
+  <td width=44 height=36 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=44 height=17 align=center><font face="ＭＳ Ｐゴシック" color=red size=2>バイト</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=44 height=2></td>
+   </tr>
+   <tr>
+    <td width=44 height=17 align=center><font face="ＭＳ Ｐゴシック" color=red size=2>コード</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=368 height=9 colspan=20></td>
+ </tr>
+ <tr>
+  <td width=63 height=17 colspan=4></td>
+  <td width=28 height=17 colspan=3></td>
+  <td width=32 height=21 colspan=2 rowspan=2><img src="slide0077_image003.gif"
+  border=0 width=32 height=21></td>
+  <td width=28 height=17></td>
+  <td width=92 height=17 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=92 height=17 align=center><font face="ＭＳ Ｐゴシック" color="#996633"
+    size=2>デコンパイラ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=36 height=17></td>
+  <td width=32 height=21 colspan=3 rowspan=2><img src="slide0077_image004.gif"
+  border=0 width=32 height=21></td>
+  <td width=24 height=17></td>
+  <td width=48 height=17 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=48 height=17 align=center><font face="ＭＳ Ｐゴシック" color="#000066"
+    size=2>ソース</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=48 height=17 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=63 height=4 colspan=4></td>
+  <td width=28 height=4 colspan=3></td>
+  <td width=156 height=4 colspan=6></td>
+  <td width=120 height=4 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=63 height=6 colspan=4></td>
+  <td width=368 height=6 colspan=20></td>
+ </tr>
+ <tr>
+  <td width=475 height=38 colspan=25></td>
+ </tr>
+ <tr>
+  <td width=44 height=71 colspan=2></td>
+  <td width=403 height=71 colspan=22>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=72 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=178 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=22><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=275 height=22 colspan=6><font face="ＭＳ Ｐゴシック" color=purple
+    size=4>完全なデコンパイルは不可能</font><br>
+    </td>
+    <td width=111 height=22></td>
+   </tr>
+   <tr>
+    <td width=404 height=7 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=19 height=19 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=361 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=3>同じ意味のプログラム、最適化の影響、失わ</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=404 height=3 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=39 height=19 colspan=4></td>
+    <td width=76 height=19 colspan=2><font face="ＭＳ Ｐゴシック" size=3>れる情報</font><br>
+    </td>
+    <td width=289 height=19 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=28 height=71></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=25></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

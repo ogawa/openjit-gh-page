@@ -1,0 +1,166 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description content="99/10/29: OpenJIT Bytecode Discompiler">
+<link rel=next href=slide0037.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0024.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master04_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=314 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=93 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=337 height=31 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=337 height=31><font face="Arial Narrow" color="#010000" size=5><b>OpenJIT
+    Bytecode Discompiler</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=121 height=31 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=30 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=40 height=225 colspan=2></td>
+  <td width=407 height=230 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=159 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=50 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=37 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=106 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=15 height=20><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=390 height=20 colspan=10><font face=Arial color="#010000" size=3>This
+    module recovers Java Abstract Syntax Tree</font><br>
+    </td>
+    <td width=2 height=20></td>
+   </tr>
+   <tr>
+    <td width=407 height=1 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=15 height=20></td>
+    <td width=181 height=20 colspan=5><font face=Arial color="#010000" size=3>from
+    input’s bytecodes</font><br>
+    </td>
+    <td width=211 height=20 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=407 height=4 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=12 height=19><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=226 height=19 colspan=5><font face=Arial color="#010000" size=2>extract
+    control flow information</font><br>
+    </td>
+    <td width=145 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=407 height=4 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=12 height=19><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=263 height=19 colspan=6><font face=Arial color="#010000" size=2>recover
+    expressions in basic blocks</font><br>
+    </td>
+    <td width=108 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=407 height=4 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=15 height=20><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=392 height=20 colspan=11><font face=Arial color="#010000" size=3>Basic
+    Idea: AST’s control flowgraph is analogous</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=407 height=1 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=15 height=20></td>
+    <td width=242 height=20 colspan=7><font face=Arial color="#010000" size=3>with
+    dominator tree in its form.</font><br>
+    </td>
+    <td width=150 height=20 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=407 height=79 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=15 height=20><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=192 height=20 colspan=6><font face=Arial color="#010000" size=3>See
+    Maruyama’s slides.</font><br>
+    </td>
+    <td width=200 height=20 colspan=5></td>
+   </tr>
+  </table>
+  </td>
+  <td width=28 height=225 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=40 height=5 colspan=2></td>
+  <td width=6 height=5></td>
+  <td width=6 height=11 rowspan=2><img src="master04_image015.gif" border=0
+  width=6 height=11></td>
+  <td width=16 height=5></td>
+ </tr>
+ <tr>
+  <td width=453 height=6 colspan=5></td>
+  <td width=16 height=6></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

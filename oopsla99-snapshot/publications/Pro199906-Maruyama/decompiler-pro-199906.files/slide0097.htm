@@ -1,0 +1,196 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: プロファイルの結果">
+<link rel=next href=slide0007.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0097.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0097_background.gif" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=38 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=188 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=170 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=26 height=27></td>
+  <td width=226 height=27 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=226 height=27><font face="ＭＳ Ｐゴシック" size=5>プロファイルの結果</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=223 height=27 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=34 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=282 height=25 colspan=5></td>
+  <td width=170 height=175 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=38 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=91 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=19><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=137 height=19 colspan=6><font face="ＭＳ Ｐゴシック" size=3>制御構造の復元</font><br>
+    </td>
+    <td width=15 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=170 height=4 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=18 height=19></td>
+    <td width=151 height=19 colspan=7><font face="ＭＳ Ｐゴシック" size=3>に要する時間は全</font><br>
+    </td>
+    <td width=1 height=19></td>
+   </tr>
+   <tr>
+    <td width=170 height=3 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=18 height=19></td>
+    <td width=130 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=3>体のわずか５％</font><br>
+    </td>
+    <td width=22 height=19 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=170 height=14 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=18 height=19><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=135 height=19 colspan=4><font face="ＭＳ Ｐゴシック" size=3>クラスファイルの</font><br>
+    </td>
+    <td width=17 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=170 height=3 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=18 height=19></td>
+    <td width=136 height=19 colspan=5><font face="ＭＳ Ｐゴシック" size=3>読み込みが遅い</font><br>
+    </td>
+    <td width=16 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=170 height=15 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=18 height=19><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=152 height=19 colspan=8><font face="ＭＳ Ｐゴシック" size=3>シンボリック実行も</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=170 height=3 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=18 height=19></td>
+    <td width=39 height=19 colspan=2><font face="ＭＳ Ｐゴシック" size=3>遅い</font><br>
+    </td>
+    <td width=113 height=19 colspan=6></td>
+   </tr>
+  </table>
+  </td>
+  <td width=23 height=25></td>
+ </tr>
+ <tr>
+  <td width=64 height=109 colspan=2></td>
+  <td width=206 height=109 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=102 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=58 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=8 height=19><font color=black size=3>&#8226;</font></td>
+    <td width=161 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=3>寿命が短く、多量の</font><br>
+    </td>
+    <td width=37 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=206 height=3 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=206 height=19 colspan=7><font face="ＭＳ Ｐゴシック" size=3>　オブジェクトの生成破棄</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=206 height=3 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=111 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=3>　が問題か？</font><br>
+    </td>
+    <td width=95 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=8 height=23><font color=black size=3>&#8226;</font></td>
+    <td width=175 height=23 colspan=5><font face=Tahoma size=3>HotSpot</font><font
+    face="ＭＳ Ｐゴシック" size=3>など、最近の</font><br>
+    </td>
+    <td width=23 height=23></td>
+   </tr>
+   <tr>
+    <td width=180 height=22 colspan=5><font face="ＭＳ Ｐゴシック" size=1>　</font><font
+    face=Tahoma size=3>VM</font><font face="ＭＳ Ｐゴシック" size=3>で、改善される？</font><br>
+    </td>
+    <td width=26 height=22 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=12 height=109></td>
+  <td width=23 height=109></td>
+ </tr>
+ <tr>
+  <td width=282 height=41 colspan=5></td>
+  <td width=23 height=41></td>
+ </tr>
+ <tr>
+  <td width=475 height=78 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

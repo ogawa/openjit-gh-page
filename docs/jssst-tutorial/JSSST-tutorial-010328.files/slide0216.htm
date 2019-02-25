@@ -1,0 +1,165 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Disclaimers">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0216.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+InitBuildEffects();
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="354,498"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s362498" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape>
+ <div v:shape="_x0000_s362498" class=T style='position:absolute;top:11.0%;
+ left:8.42%;width:83.14%;height:11.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>Disclaimers</span></div>
+ <![if !ppt]>
+ <div style='visibility:hidden'><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s362499" type="#_x0000_m141325"
+  style='position:absolute;left:48pt;top:132pt;width:9in;height:390pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/><p:animation number="1" delay="0"
+   type="text" level="1" effect="fly" direction="right" flag="1040">
+   <p:sound id="6" builtinid="102" name="carbrake.wav" href="sound006.wav"/></p:animation>
+ </v:shape><![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='position:absolute;top:23.75%;left:6.74%;width:102.43%;height:73.5%'><![endif]>
+ <div v:shape="_x0000_s362499">
+ <div style='position:absolute;top:0%;left:.91%;width:91.59%;height:38.77%;
+ overflow:hidden;visibility:hidden;mso-build:2;mso-build-order:1;mso-build-sound-name:
+ sound006.wav'>
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:0%;left:3.99%;width:96.0%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-4.15%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Can’t possibly cover all the research </span></span><span
+ style='position:absolute;top:21.92%;left:3.99%;width:90.01%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>topics&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:49.12%;
+ left:5.38%;width:88.62%;height:26.31%'><span style='position:absolute;
+ top:0%;left:3.6%;width:96.17%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.74%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Too many research going on&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:73.68%;
+ left:5.38%;width:88.62%;height:26.31%'><span style='position:absolute;
+ top:0%;left:3.6%;width:96.17%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.74%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Have to write a book!&#13;</span></span></div>
+ </div>
+ <div style='position:absolute;top:37.75%;left:.91%;width:99.08%;height:30.27%;
+ overflow:hidden;visibility:hidden;mso-build:2;mso-build-order:1;mso-build-sound-name:
+ sound006.wav'>
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:0%;
+ left:0%;width:86.9%;height:38.2%'><span style='position:absolute;top:0%;
+ left:4.24%;width:95.75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-4.43%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Can’t possibly
+ cover all the slides&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:35.95%;
+ left:4.98%;width:81.91%;height:33.7%'><span style='position:absolute;
+ top:0%;left:3.6%;width:96.17%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.74%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Too many slides for too many topics&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:66.29%;
+ left:4.98%;width:95.01%;height:33.7%'><span style='position:absolute;
+ top:0%;left:3.1%;width:96.89%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.2%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Please read the slides, and/or ask me later&#13;</span></span></div>
+ </div>
+ <div style='position:absolute;top:67.0%;left:.91%;width:91.77%;height:29.59%;
+ overflow:hidden;visibility:hidden;mso-build:2;mso-build-order:1;mso-build-sound-name:
+ sound006.wav'>
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:0%;left:3.98%;width:89.84%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-4.43%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Can’t possibly finish the slides by </span></span><span
+ style='position:absolute;top:29.88%;left:3.98%;width:89.84%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>camera-ready deadline (_o_)&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:65.51%;
+ left:5.37%;width:94.62%;height:34.48%'><span style='position:absolute;
+ top:0%;left:3.36%;width:96.63%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.48%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Latest slides at http://www.openjit.org</span></span></div>
+ </div>
+ </div>
+ <![if !ppt]></div>
+ <![endif]></p:slide></div>
+
+</body>
+
+</html>

@@ -1,0 +1,168 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 考察">
+<link rel=next href=slide0009.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0007.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master10_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=53 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=383 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=26 height=27></td>
+  <td width=56 height=27 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=56 height=27><font face="ＭＳ Ｐゴシック" size=5>考察</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=393 height=27 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=31 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=29 height=215 colspan=2></td>
+  <td width=436 height=215 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=43 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=127 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=41 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=75 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=83 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=23><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=405 height=23 colspan=11><font face=Tahoma size=3>mocha</font><font
+    face="ＭＳ Ｐゴシック" size=3>では復元できない制御構造を、我々のアル</font><br>
+    </td>
+    <td width=13 height=23 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=435 height=3 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=17 height=19></td>
+    <td width=193 height=19 colspan=6><font face="ＭＳ Ｐゴシック" size=3>ゴリズムは復元できた。</font><br>
+    </td>
+    <td width=225 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=435 height=4 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=17 height=23><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=234 height=23 colspan=7><font face="ＭＳ Ｐゴシック" size=3>処理速度は、</font><font
+    face=Tahoma size=3>mocha</font><font face="ＭＳ Ｐゴシック" size=3>と同等。</font><br>
+    </td>
+    <td width=184 height=23 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=435 height=7 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=418 height=19 colspan=13><font face="ＭＳ Ｐゴシック" size=3>デコンパイルにかかる処理時間の多くは、制御構造</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=435 height=3 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=17 height=19></td>
+    <td width=313 height=19 colspan=9><font face="ＭＳ Ｐゴシック" size=3>の復元以前の部分に費やされている。</font><br>
+    </td>
+    <td width=105 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=435 height=8 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=415 height=19 colspan=12><font face="ＭＳ Ｐゴシック" size=3>特に、シンボリック実行（式の復元）に時間がかかっ</font><br>
+    </td>
+    <td width=3 height=19></td>
+   </tr>
+   <tr>
+    <td width=435 height=3 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=17 height=19></td>
+    <td width=66 height=19 colspan=5><font face="ＭＳ Ｐゴシック" size=3>ている。</font><br>
+    </td>
+    <td width=352 height=19 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=435 height=3 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=23 height=20 colspan=3></td>
+    <td width=16 height=20><font face=Marlett color="#0000cc" size=2>i</font></td>
+    <td width=374 height=20 colspan=7><font face="ＭＳ Ｐゴシック" size=2>最近の</font><font
+    face=Tahoma size=2>VM</font><font face="ＭＳ Ｐゴシック" size=2>（</font><font
+    face=Tahoma size=2>HotSpot</font><font face="ＭＳ Ｐゴシック" size=2>など）を用いるだけで、改善可能。</font><br>
+    </td>
+    <td width=22 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=435 height=6 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=16 height=17><font face=Marlett color="#0000cc" size=2>i</font></td>
+    <td width=287 height=17 colspan=5><font face="ＭＳ Ｐゴシック" size=2>無駄なオブジェクトの生成破棄を止める。</font><br>
+    </td>
+    <td width=109 height=17 colspan=5></td>
+   </tr>
+  </table>
+  </td>
+  <td width=10 height=215></td>
+ </tr>
+ <tr>
+  <td width=475 height=41 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

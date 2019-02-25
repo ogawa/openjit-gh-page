@@ -1,0 +1,230 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: OpenJIT Compiler Overview (3)">
+<link rel=next href=slide0032.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0035.htm');   
+  else
+    parent.location.href = "../OpenJIT-OOPSLA98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master03_background.gif" bgcolor=white alink="#5f5f5f"
+link="#969696" vlink="#cbcbcb" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=374 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=40 height=33></td>
+  <td width=401 height=33 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=401 height=33><font face="Times New Roman" size=5>OpenJIT
+    Compiler Overview (3)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=34 height=33></td>
+ </tr>
+ <tr>
+  <td width=475 height=27 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=40 height=221></td>
+  <td width=374 height=242 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=146 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=29 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=71 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=19 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=225 height=20 colspan=12><font face=Arial size=3><b><i><u>OpenJIT
+    Frontend System</u></i></b></font><br>
+    </td>
+    <td width=132 height=20 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=375 height=4 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=233 height=17 colspan=11><font face=Arial size=2><b>Bytecode-to-bytecode
+    optimizer</b></font><br>
+    </td>
+    <td width=103 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=375 height=4 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=312 height=16 colspan=11><font face=Arial size=1><b>“Discompiler”
+    to recover Java source structure</b></font><br>
+    </td>
+    <td width=3 height=16></td>
+   </tr>
+   <tr>
+    <td width=375 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=315 height=16 colspan=12><font face=Arial size=1><b>Class
+    framework for standard program analysis</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=375 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=216 height=17 colspan=10><font face=Arial size=2><b>Classfile
+    Annotation Analysis</b></font><br>
+    </td>
+    <td width=120 height=17 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=375 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=293 height=16 colspan=10><font face=Arial size=1><b>Various info
+    for optimization and extensions</b></font><br>
+    </td>
+    <td width=22 height=16 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=375 height=5 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=222 height=20 colspan=11><font face=Arial size=3><b><i><u>OpenJIT
+    Backend System</u></i></b></font><br>
+    </td>
+    <td width=135 height=20 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=375 height=4 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=243 height=17 colspan=12><font face=Arial size=2><b>A small Java
+    JIT compiler in Java</b></font><br>
+    </td>
+    <td width=93 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=375 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=170 height=17 colspan=6><font face=Arial size=2><b>Standard
+    optimizations</b></font><br>
+    </td>
+    <td width=166 height=17 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=375 height=4 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=178 height=16 colspan=4><font face=Arial size=1><b>stack-to-register
+    allocation</b></font><br>
+    </td>
+    <td width=137 height=16 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=375 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=147 height=16 colspan=2><font face=Arial size=1><b>peephole
+    optimization</b></font><br>
+    </td>
+    <td width=168 height=16 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=375 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=147 height=16 colspan=2><font face=Arial size=1><b>stack ops to
+    RISC ops</b></font><br>
+    </td>
+    <td width=168 height=16 colspan=10></td>
+   </tr>
+  </table>
+  </td>
+  <td width=61 height=221 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=40 height=11></td>
+  <td width=11 height=11></td>
+  <td width=11 height=11><img src="master03_image015.gif" border=0 width=11
+  height=11></td>
+  <td width=39 height=11 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=40 height=10></td>
+  <td width=61 height=10 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=8 colspan=6></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

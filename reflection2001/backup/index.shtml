@@ -1,0 +1,88 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="common.css" type="text/css"/>
+<link rev=made href="mailto:webmaster@openjit.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<title>Reflection 2001: Cover Page</title>
+<style>
+</style>
+</head>
+
+<body>
+
+<table>
+<tr><td class="menu">
+
+<p class="m1">REFLECTION 2001</p>
+
+<div style="text-align: center"><img src="cover.jpg" width="125" height="92"></div>
+
+<p class="m2s">COVER PAGE</p>
+
+<p class="m2"><a href="cfp.shtml">CALL FOR PAPERS</a></p>
+
+<p class="m2"><a href="submit.shtml">SUBMISSION GUIDELINE</a></p>
+
+<p class="m2"><a href="cfa.shtml">CALL FOR PARTICIPATION</a></p>
+
+<p class="m2"><a href="program.shtml">PROGRAM</a></p>
+
+</td>
+<td>
+
+<p>
+<div class="t1">REFLECTION 2001</div>
+<div class="t2">The Third International Conference on</div>
+<div class="t2">Metalevel Architectures and Separation of Crosscutting Concerns</div>
+<div class="t3">Kyoto, Japan</div>
+<div class="t3">September 26-28, 2001</div></p>
+
+<!--<p class="t3">ABSTRACT DEADLINE: March 9<sup>th</sup>, 2001</p>-->
+<p class="t3">PAPER DEADLINE: March 15<sup>th</sup>, 2001
+(**FINISHED**)
+<!--
+<br>
+<span style="color: red">(We strongly encourage you to submit the abstract of the paper by <span style="text-decoration: underline">March 9<sup>th</sup>, 2001</span>, prior to your submitting the full paper)</span>
+-->
+</p>
+
+<p class="t3"><a href="http://www.is.titech.ac.jp/reflection2001/">http://www.is.titech.ac.jp/reflection2001/</a></p>
+
+<p class="t4">
+Planned to be under auspices of <a href="http://www.jssst.or.jp/">Japan Society for Software Science and Technology (JSSST)</a>, <a href="http://www.aito.org/">AITO</a>, <a href="http://www.ipsj.or.jp/">Information Processing Society of Japan (IPSJ)</a>, <a href="http://www.acm.org/sigs/sigplan/">ACM SIGPLAN</a>. (All subject to formal approvals)
+</p>
+
+<div style="margin-top: 2em">&nbsp;</div>
+
+<h1>NEW ON THIS SITE</h1>
+
+<dl>
+
+<dt>March 23th, 2001</dt>
+<dd>The deadline for paper submission is over.</dd>
+
+<dt>March 14th, 2001</dt>
+<dd>If you have any problems with submission after successive attempts, please contact <a href="mailto:reflection2001-submit@is.titech.ac.jp">reflection2001-submit@is.titech.ac.jp</a>.</dd>
+
+<dt>January 21st, 2001</dt>
+<dd>Electronic Paper Submission is now available.
+<ul>
+  <li><a href="submit.shtml">Go to Submission Guideline</a></li>
+  <li><a href="http://www.openjit.org/cman/reflection2001/REG-paper/">Go to Electronic Paper Submission </a></li>
+</ul>
+</dd>
+</dl>
+
+<div style="margin-top: 10em">&nbsp;</div>
+
+<hr width="200" align="left">
+<div><img src="apache_pb.gif" width="259" height="32" alt="[Powered By Apache]"></div>
+<div><em>Last modified: <!--#echo var="LAST_MODIFIED"--> by webmaster@openjit.org</em></div>
+<div><em>Access counts: <!--#exec cgi="cgi-bin/wwwcount.cgi"--></em></div>
+</td></tr>
+</table>
+
+</body>
+</html>

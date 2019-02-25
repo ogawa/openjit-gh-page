@@ -1,0 +1,202 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: Our Proposal: OpenJIT Compiler">
+<link rel=next href=slide0027.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0023.htm');   
+  else
+    parent.location.href = "../OpenJIT-OOPSLA98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master03_background.gif" bgcolor=white alink="#5f5f5f"
+link="#969696" vlink="#cbcbcb" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=385 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=40 height=33 colspan=2></td>
+  <td width=408 height=33 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=408 height=33><font face="Times New Roman" size=5>Our Proposal: <i>OpenJIT
+    Compiler</i></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=27 height=33 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=25 height=236></td>
+  <td width=437 height=236 colspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=100 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=73 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=76 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=75 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=19 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=415 height=20 colspan=14><font face=Arial size=3><b>A Joint
+    effort with Fujitsu’s Java compiler group</b></font><br>
+    </td>
+    <td width=5 height=20></td>
+   </tr>
+   <tr>
+    <td width=437 height=4 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=17 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=388 height=20 colspan=10><font face=Arial size=3><b>A Reflective
+    Just-in-time (Open JIT Compiler)</b></font><br>
+    </td>
+    <td width=32 height=20 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=437 height=4 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=371 height=17 colspan=8><font face=Arial size=2><b>Based on
+    Reflection/OI principle<span style="mso-spacerun: yes">&nbsp; </span>(Java
+    JIT in Java)</b></font><br>
+    </td>
+    <td width=28 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=437 height=4 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=250 height=17 colspan=4><font face=Arial size=2><b>A Java
+    framework for JIT compiler</b></font><br>
+    </td>
+    <td width=149 height=17 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=437 height=4 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=348 height=17 colspan=6><font face=Arial size=2><b>Can </b><b><i>download/compile
+    </i></b><b>various customization &amp;</b></font><br>
+    </td>
+    <td width=51 height=17 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=38 height=17 colspan=4></td>
+    <td width=399 height=17 colspan=12><font face=Arial size=2><b>optimization
+    modules into a JIT compiler “just-in-time”</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=437 height=5 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=17 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=294 height=20 colspan=8><font face=Arial size=3><b>Generic JIT
+    Customization Library</b></font><br>
+    </td>
+    <td width=126 height=20 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=437 height=5 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=17 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=413 height=20 colspan=13><font face=Arial size=3><b>Class-specific
+    JIT customization </b></font><font face=明朝 size=3><b>→　</b></font><font
+    face=Arial size=3><b>The library</b></font><br>
+    </td>
+    <td width=7 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=410 height=20 colspan=12><font face=Arial size=3><b>builder can
+    embed class-specific customization</b></font><br>
+    </td>
+    <td width=10 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=437 height=1 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=195 height=20 colspan=6><font face=Arial size=3><b>of JIT into
+    the classfile</b></font><br>
+    </td>
+    <td width=225 height=20 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=437 height=4 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=101 height=17 colspan=2><font face=Arial size=2><b>scope control</b></font><br>
+    </td>
+    <td width=298 height=17 colspan=10></td>
+   </tr>
+  </table>
+  </td>
+  <td width=13 height=236></td>
+ </tr>
+ <tr>
+  <td width=425 height=11 colspan=3></td>
+  <td width=11 height=11><img src="master03_image008.gif" border=0 width=11
+  height=11></td>
+  <td width=39 height=11 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

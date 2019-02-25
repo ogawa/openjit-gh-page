@@ -1,0 +1,263 @@
+<xml xmlns:v="urn:schemas-microsoft-com:vml"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:p="urn:schemas-microsoft-com:office:powerpoint">
+ <p:presentation notessizex="4317" notessizey="6218">
+  <p:master id="8" type="main" href="master08.htm" xmlhref="master08.xml"
+   template="Mtfuji" layout="title_body"
+   slots="title,body,dateTime,footer,slideNumber">
+   <p:schemes>
+    <p:colorscheme
+     colors="#25367F,#FFFFFF,#000000,#B29782,#82B5CA,#448C8E,#5C885F,#6B5653"/>
+    <p:colorscheme
+     colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"/>
+    <p:colorscheme
+     colors="#FFFFFF,#000000,#FFFFFF,#000000,#C0C0C0,#808080,#4D4D4D,#EAEAEA"/>
+    <p:colorscheme
+     colors="#ACCEDC,#000000,#FFFFFF,#003366,#82B5CA,#769537,#3F7EBD,#B77A3D"/>
+    <p:colorscheme
+     colors="#800080,#FFFFFF,#000000,#FFFFCC,#FF6699,#FFCC66,#99CC00,#FF9933"/>
+    <p:colorscheme
+     colors="#009999,#FFFFFF,#006699,#FFFFCC,#47B6B9,#C6A854,#46904B,#003366"/>
+   </p:schemes>
+  </p:master>
+  <p:master id="9" type="title" href="master09.htm" xmlhref="master09.xml"
+   layout="title_subtitle"
+   slots="centerTitle,subTitle,dateTime,footer,slideNumber"/>
+  <p:master id="1" type="notes" href="master01.htm" layout="notes"
+   slots="header,dateTime,slideImage,body,footer,slideNumber"/>
+  <p:master id="2" type="handout" href="master02.htm" layout="handout"
+   slots="header,dateTime,footer,slideNumber"/>
+  <p:slide id="1" href="slide0001.htm" masterhref="master09.htm"
+   layout="title_subtitle" slots="centerTitle,subTitle"/>
+  <p:slide id="205" href="slide0205.htm" layout="title_body" slots="title,body"
+   collapseoutline="t"/>
+  <p:slide id="216" href="slide0216.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="239" href="slide0239.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="179" href="slide0179.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="184" href="slide0184.htm" layout="title_body" slots="title,body"
+   collapseoutline="t"/>
+  <p:slide id="185" href="slide0185.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="243" href="slide0243.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="214" href="slide0214.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="206" href="slide0206.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="209" href="slide0209.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="339" href="slide0339.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="207" href="slide0207.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="210" href="slide0210.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="211" href="slide0211.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="208" href="slide0208.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="218" href="slide0218.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="224" href="slide0224.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="215" href="slide0215.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="219" href="slide0219.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="220" href="slide0220.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="221" href="slide0221.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="222" href="slide0222.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="223" href="slide0223.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="225" href="slide0225.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="226" href="slide0226.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="229" href="slide0229.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="242" href="slide0242.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="340" href="slide0340.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="341" href="slide0341.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="342" href="slide0342.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="343" href="slide0343.htm" layout="2_columns"
+   slots="title,body,body"/>
+  <p:slide id="344" href="slide0344.htm" xmlhref="slide0344.xml"
+   layout="title_body" slots="title,body"/>
+  <p:slide id="345" href="slide0345.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="230" href="slide0230.htm" layout="title_body" slots="title,body"
+   collapseoutline="t"/>
+  <p:slide id="346" href="slide0346.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="234" href="slide0234.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="227" href="slide0227.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="286" href="slide0286.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="287" href="slide0287.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="288" href="slide0288.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="289" href="slide0289.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="290" href="slide0290.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="291" href="slide0291.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="231" href="slide0231.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="235" href="slide0235.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="238" href="slide0238.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="299" href="slide0299.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="300" href="slide0300.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="302" href="slide0302.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="232" href="slide0232.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="349" href="slide0349.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="347" href="slide0347.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="348" href="slide0348.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="320" href="slide0320.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="233" href="slide0233.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="292" href="slide0292.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="237" href="slide0237.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="305" href="slide0305.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="308" href="slide0308.htm" layout="title_only" slots="title"/>
+  <p:slide id="309" href="slide0309.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="310" href="slide0310.htm" layout="title_only" slots="title"/>
+  <p:slide id="311" href="slide0311.htm" layout="title_only" slots="title"/>
+  <p:slide id="312" href="slide0312.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="298" href="slide0298.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="313" href="slide0313.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="315" href="slide0315.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="317" href="slide0317.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="318" href="slide0318.htm" layout="title_body"
+   slots="title,object"/>
+  <p:slide id="319" href="slide0319.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="236" href="slide0236.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="293" href="slide0293.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="294" href="slide0294.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="295" href="slide0295.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="296" href="slide0296.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="297" href="slide0297.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="350" href="slide0350.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="240" href="slide0240.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="187" href="slide0187.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="170" href="slide0170.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="175" href="slide0175.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="171" href="slide0171.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="172" href="slide0172.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="99" href="slide0099.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="174" href="slide0174.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="173" href="slide0173.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="177" href="slide0177.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="178" href="slide0178.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="330" href="slide0330.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="81" href="slide0081.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="82" href="slide0082.htm" layout="2_columns"
+   slots="title,body,body"/>
+  <p:slide id="12" href="slide0012.htm" layout="2_columns"
+   slots="title,body,body"/>
+  <p:slide id="329" href="slide0329.htm" xmlhref="slide0329.xml"
+   layout="title_body" slots="title,body" collapseoutline="t"/>
+  <p:slide id="331" href="slide0331.htm" layout="title_body" slots="title,body"
+   collapseoutline="t"/>
+  <p:slide id="332" href="slide0332.htm" layout="title_body" slots="title,graph"/>
+  <p:slide id="333" href="slide0333.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="334" href="slide0334.htm" layout="2_columns"
+   slots="title,body,body" omitmastershapes="t"/>
+  <p:slide id="335" href="slide0335.htm" xmlhref="slide0335.xml"
+   layout="title_body" slots="title,graph"/>
+  <p:slide id="336" href="slide0336.htm" layout="title_body" slots="title,graph"/>
+  <p:slide id="337" href="slide0337.htm" layout="title_body" slots="title,graph"/>
+  <p:slide id="321" href="slide0321.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="325" href="slide0325.htm" layout="2_columns"
+   slots="title,body,body"/>
+  <p:slide id="322" href="slide0322.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="327" href="slide0327.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="324" href="slide0324.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="326" href="slide0326.htm" layout="2_rows"
+   slots="title,body,object"/>
+  <p:slide id="328" href="slide0328.htm" layout="title_only" slots="title"/>
+  <p:slide id="164" href="slide0164.htm" layout="2_rows"
+   slots="title,body,object"/>
+  <p:slide id="143" href="slide0143.htm" layout="2_rows"
+   slots="title,body,object"/>
+  <p:slide id="144" href="slide0144.htm" layout="2_rows"
+   slots="title,body,object"/>
+  <p:slide id="145" href="slide0145.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="146" href="slide0146.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="147" href="slide0147.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="148" href="slide0148.htm" layout="2_rows"
+   slots="title,body,object"/>
+  <p:slide id="245" href="slide0245.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="246" href="slide0246.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="247" href="slide0247.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="248" href="slide0248.htm" layout="title_only" slots="title"/>
+  <p:slide id="249" href="slide0249.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="250" href="slide0250.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="251" href="slide0251.htm" layout="title_only" slots="title"/>
+  <p:slide id="252" href="slide0252.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="253" href="slide0253.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="254" href="slide0254.htm" layout="title_only" slots="title"/>
+  <p:slide id="256" href="slide0256.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="257" href="slide0257.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="258" href="slide0258.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="260" href="slide0260.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="261" href="slide0261.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="262" href="slide0262.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="263" href="slide0263.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="264" href="slide0264.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="265" href="slide0265.htm" layout="title_only" slots="title"/>
+  <p:slide id="266" href="slide0266.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="267" href="slide0267.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="268" href="slide0268.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="269" href="slide0269.htm" layout="title_only" slots="title"/>
+  <p:slide id="270" href="slide0270.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="271" href="slide0271.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="272" href="slide0272.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="273" href="slide0273.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="274" href="slide0274.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="275" href="slide0275.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="276" href="slide0276.htm" layout="title_only" slots="title"/>
+  <p:slide id="277" href="slide0277.htm" layout="title_only" slots="title"/>
+  <p:slide id="278" href="slide0278.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="279" href="slide0279.htm" layout="title_only" slots="title"/>
+  <p:slide id="280" href="slide0280.htm" layout="title_only" slots="title"/>
+  <p:slide id="281" href="slide0281.htm" layout="title_only" slots="title"/>
+  <p:slide id="282" href="slide0282.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="283" href="slide0283.htm" layout="title_only" slots="title"/>
+  <p:slide id="284" href="slide0284.htm" layout="title_only" slots="title"/>
+  <p:slide id="285" href="slide0285.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="351" href="slide0351.htm" layout="2_columns"
+   slots="title,body,body"/>
+  <p:slide id="352" href="slide0352.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="353" href="slide0353.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="354" href="slide0354.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="355" href="slide0355.htm" layout="2_columns"
+   slots="title,body,body"/>
+  <p:slide id="356" href="slide0356.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="357" href="slide0357.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="358" href="slide0358.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="359" href="slide0359.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="360" href="slide0360.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="361" href="slide0361.htm" layout="title_only" slots="title"/>
+  <p:slide id="362" href="slide0362.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="363" href="slide0363.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="364" href="slide0364.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="365" href="slide0365.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="366" href="slide0366.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="367" href="slide0367.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="368" href="slide0368.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="369" href="slide0369.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="370" href="slide0370.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="371" href="slide0371.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="167" href="slide0167.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="168" href="slide0168.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="169" href="slide0169.htm" layout="title_body" slots="title,body"/>
+  <p:slide id="203" href="slide0203.htm" layout="2_columns"
+   slots="title,body,body"/>
+  <p:slide id="217" href="slide0217.htm" layout="2_rows"
+   slots="title,body,object"/>
+  <p:viewstate type="slideView" restoredleft="284" restoredtop="901"
+   horizbarstate="2" manualadjustleft="t" manualadjusttop="t"/>
+  <p:slideshowsettings pencolor="schemeText"/>
+  <p:font name="Times New Roman" charset="0" type="4" family="18"/>
+  <p:font name="ＭＳ Ｐゴシック" charset="128" type="4" family="50"/>
+  <p:font name="Comic Sans MS" charset="0" type="4" family="66"/>
+  <p:font name="Monotype Sorts" charset="2" type="6" family="2"/>
+  <p:font name="ＭＳ Ｐ明朝" charset="128" type="4" family="18"/>
+  <p:font name="Courier New" charset="0" type="4" family="49"/>
+  <p:font name="Symbol" charset="2" type="4" family="18"/>
+  <p:font name="Wingdings" charset="2" type="4" family="2"/>
+  <p:font name="times" charset="0" type="10" family="18"/>
+  <p:font name="courier" charset="0" type="10" family="49"/>
+  <p:font name="Helvetica-Bold"/>
+  <p:font name="Helvetica" charset="0" type="10" family="34"/>
+  <p:font name="Courier-Bold"/>
+  <p:font name="Arial" charset="0" type="4" family="34"/>
+  <p:font name="HG丸ｺﾞｼｯｸM-PRO" charset="128" type="4" family="49"/>
+  <p:font name="Tahoma" charset="0" type="4" family="34"/>
+  <p:headersfooters noheader="t"/>
+  <p:headersfooters notes="t" slidenumber="t"/>
+  <p:pptdocumentsettings framecolors="WhiteTextOnBlack" hideslideanimation="t"/>
+  <p:htmlpublishsettings browsersupport="dual"
+   href="C:\Documents and Settings\ogawa\デスクトップ\JSSST-tutorial-010328.htm"
+   hidespeakernote="t" noloadinbrowser="t"/>
+ </p:presentation>
+ <o:shapedefaults v:ext="edit" spidmax="629762">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short" color2="none [0]" weight="1pt"/>
+  <o:colormru v:ext="edit" colors="red,#6f6,#f39,blue,#f69,#3c3,#6f3,#00c"/>
+  <o:colormenu v:ext="edit" fillcolor="none [0]" shadowcolor="blue"/>
+ </o:shapedefaults></xml>

@@ -1,0 +1,74 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTNav" )
+  parent.location.href = "../sun-talk-shimura-Backend.htm";
+//-->
+</script>
+
+<script>
+<!--
+function WriteBody()
+{
+  if( window.name != "PPTNav" ) return;
+
+  document.writeln( '<table border=0 valign=top cellpadding=2 cellspacing=0> <tr>  <td>' );
+
+  innerText = "";
+  if ( parent.GetHrefObj( parent.g_currentSlide ).m_origVisibility == 1 )
+    innerText = "スライド" + parent.GetCurrentSlideNum() + " / " + parent.GetNumSlides();
+  else
+    innerText = "非表示スライド";
+
+  fEnable = ( ( parent.g_currentSlide != 1 && parent.GetHrefObj( parent.g_currentSlide - 1 ).m_visibility == 1 ) ) ||
+		( parent.GetCurrentSlideNum() > 1 );
+
+  if( fEnable )
+  {
+    prevBtn = "prev_active.gif";
+    document.write( '<a href=\"javascript:parent.GoToPrevSld()\">' );
+  }
+  else
+    prevBtn = "prev_disabled.gif";
+  
+  document.write( '<img src=\"' + prevBtn + '\" border=0 alt=\"前のスライド\">' );
+
+  if( fEnable )
+    document.write( '</a>' );
+
+  document.write( '</td>  <td align=center><font face=\"ＭＳ 明朝\" color=#000000 size=2>' + innerText + '</font></td>  <td>' );
+
+  fEnable = ( parent.GetCurrentSlideNum() != parent.GetNumSlides() );
+  if( fEnable )
+  {
+    nextBtn = "next_active.gif";
+    document.write( '<a href=\"javascript:parent.GoToNextSld()\">' );
+  }
+  else
+    nextBtn = "next_disabled.gif";
+  document.write( '<img src=\"' + nextBtn + '\"  border=0 alt=\"次のスライド\">' );
+
+  if( fEnable )
+    document.write( '</a>' );
+
+  document.write( '</td> </tr></table>' );
+}
+//-->
+</script>
+</head>
+
+<body bgcolor=silver topmargin=2>
+
+<center><script><!--
+WriteBody();//-->
+</script></center>
+
+</body>
+
+</html>

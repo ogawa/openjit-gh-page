@@ -1,0 +1,148 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../decompiler-pro-199906.html";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor=white text=black link=black vlink=black alink=black>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0076.htm');">Javaバイトコードをデコンパイルする<br>
+効果的なアルゴリズム</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0077.htm');">デコンパイルとは</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0013.htm');">背景</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0020.htm');">背景（その２）</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0034.htm');">従来のデコンパイラでは不十分？</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0035.htm');">関連研究</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0078.htm');">関連研究(その２)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0079.htm');">Krakatoaの手法</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0080.htm');">用語説明</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0081.htm');">用語説明（その２）</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0098.htm');">例</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0044.htm');">デコンパイラの概要</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0019.htm');">制御構造の復元</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0016.htm');">どこが難しいか？</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0006.htm');">着目</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0064.htm');">スライド16</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0053.htm');">バイトコードから<br>
+直接得られる制御情報</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0088.htm');">スライド18</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0065.htm');">アルゴリズム</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0068.htm');">アルゴリズム（その２）</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0089.htm');">スライド21</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0052.htm');">例で用いるプログラム</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0047.htm');">前段階（解析前）</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0070.htm');">ドミネータツリー</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0086.htm');">第一段階：　ヘッダを識別する</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0087.htm');">第二段階：<br>
+後続ノードを探し制御構造を選ぶ</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0090.htm');">第三段階：　if構造を復元する</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0091.htm');">第四段階：<br>
+break/continueを復元する</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0092.htm');">最終段階：　結果を出力する</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0074.htm');">解析結果</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0094.htm');">スライド31</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0021.htm');">評価</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0075.htm');">デコンパイル結果（mochaの場合）</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0041.htm');">デコンパイル結果（本研究）</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0084.htm');">速度比較</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0082.htm');">速度比較の結果</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0085.htm');">処理速度の詳細</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0097.htm');">プロファイルの結果</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0007.htm');">考察</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0009.htm');">結論</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0010.htm');">今後の課題</a></b></font></p>
+
+</body>
+
+</html>

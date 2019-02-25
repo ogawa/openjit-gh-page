@@ -1,0 +1,173 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description content="99/10/29: OpenJIT Class Annotation Analyzer (2)">
+<link rel=next href=slide0026.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0040.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master04_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=420 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=420 height=31>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=420 height=31><font face="Arial Narrow" color="#010000" size=5><b>OpenJIT
+    Class Annotation Analyzer (2)</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=38 height=31 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=30 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=17 height=154></td>
+  <td width=441 height=154 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=47 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=75 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=65 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=91 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=208 height=19 colspan=11><font face=Arial color="#010000" size=2>Classfile
+    Annotation (cont’d)</font><br>
+    </td>
+    <td width=215 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=440 height=4 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=252 height=17 colspan=9><font face=Arial color="#010000" size=2>Annotated
+    Classfiles are still portable</font><br>
+    </td>
+    <td width=150 height=17 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=440 height=3 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=342 height=16 colspan=8><font face=Arial color="#010000" size=1>standard
+    (non-OpenJIT) JIT compilers can also execute</font><br>
+    </td>
+    <td width=39 height=16></td>
+   </tr>
+   <tr>
+    <td width=59 height=16 colspan=7></td>
+    <td width=123 height=16 colspan=3><font face=Arial color="#010000" size=1>annotated
+    classfiles</font><br>
+    </td>
+    <td width=258 height=16 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=440 height=3 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font face="Monotype Sorts" color="#ff9966" size=1>F</font></td>
+    <td width=251 height=16 colspan=7><font face=Arial color="#010000" size=1>unnecessary
+    to change the method body</font><br>
+    </td>
+    <td width=130 height=16 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=440 height=4 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=187 height=19 colspan=10><font face=Arial color="#010000" size=2>How
+    the analyzer works?</font><br>
+    </td>
+    <td width=236 height=19 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=440 height=3 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=15 height=17><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=402 height=17 colspan=12><font face=Arial color="#010000" size=2>associates
+    each classfile annotation with the corresponding</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=38 height=17 colspan=4></td>
+    <td width=69 height=17 colspan=5><font face=Arial color="#010000" size=2>AST
+    node</font><br>
+    </td>
+    <td width=333 height=17 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=17 height=154 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=71 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=448 height=11 colspan=3></td>
+  <td width=12 height=11 colspan=2><img src="master04_image019.gif" border=0
+  width=12 height=11></td>
+  <td width=15 height=11></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=6></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

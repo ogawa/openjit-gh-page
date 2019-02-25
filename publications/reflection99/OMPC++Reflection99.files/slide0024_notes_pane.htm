@@ -1,0 +1,55 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTNts" )
+  parent.location.href = "../OMPC++Reflection99.html";
+//-->
+</script>
+</head>
+
+<body bgcolor="#000066" text=white>
+
+<table border=0 width="100%">
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>We show what
+  transformation is executed in each method.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>In
+  TranslateInitializer, the size of a shared object and the information on a
+  type are obtained.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>The access check
+  to a shared memory is inserted in TranslateAssign.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>The routine of
+  initialization / finalization is generated and inserted in FinalizaInstance.
+  Specifically, the routine for calls of the allocation and release of a shared
+  memory, initialization of memory management tables and usr wrote routine such
+  as sdsm_main() is generated and inserted.</font><br>
+  </td>
+ </tr>
+</table>
+
+</body>
+
+</html>

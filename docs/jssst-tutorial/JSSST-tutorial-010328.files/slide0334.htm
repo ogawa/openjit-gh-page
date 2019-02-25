@@ -1,0 +1,187 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Evaluation Environment">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0334.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 59217;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 60216);
+//-->
+</script><![endif]><p:slidetransition advancetime="59216" flag="1025"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="568"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s581634" type="#_x0000_m141324"
+  style='position:absolute;left:38.625pt;top:0;width:642.75pt;height:60pt;
+  mso-wrap-style:square'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s581635" type="#_x0000_m141325"
+  style='position:absolute;left:0;top:58.5pt;width:10in;height:481.5pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1" size="half"/></v:shape>
+ <div v:shape="_x0000_s581634" class=T style='position:absolute;top:-.5%;
+ left:6.36%;width:87.45%;height:11.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>Evaluation Environment</span></div>
+ <div v:shape="_x0000_s581635">
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:10.5%;
+ left:.93%;width:98.12%;height:5.5%'><span style='position:absolute;top:0%;
+ left:3.81%;width:96.18%'><span style='font-size:71%'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-3.96%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>PC(Ath)&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:15.5%;left:9.17%;width:98.12%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.24%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Athlon
+ 600MHz 1CPU L1cache Inst-64KB + Data 64KB L2cache </span></span><span
+ style='position:absolute;top:19.5%;left:9.17%;width:90.07%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>512KB&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:24.5%;
+ left:5.99%;width:108.05%;height:5.5%'><span style='position:absolute;
+ top:0%;left:2.94%;width:97.05%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.03%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Linux
+ Redhat 6.1 + IBM JDK1.1.8 JVM with optimizing JIT compiler&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:29.25%;
+ left:.93%;width:98.12%;height:5.5%'><span style='position:absolute;top:0%;
+ left:3.81%;width:96.18%'><span style='font-size:71%'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-3.96%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Enterprise 10000(E10K)&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:34.25%;left:9.17%;width:96.25%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.3%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>UltraSparc
+ 250MHz x 60CPU L1cache Inst-16KB + Data-16KB </span></span><span
+ style='position:absolute;top:38.25%;left:9.17%;width:90.07%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>L2cache 1MB&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:43.0%;left:9.17%;width:92.69%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.43%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Solaris
+ 2.6 + Solaris Production Release JDK 1.2.1_04a with </span></span><span
+ style='position:absolute;top:47.0%;left:9.17%;width:90.07%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>optimizing JIT compiler (JBE)
+ (-Xoptimize)&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:52.0%;
+ left:.93%;width:98.12%;height:5.5%'><span style='position:absolute;top:0%;
+ left:3.81%;width:96.18%'><span style='font-size:71%'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-3.96%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Enterprise 4000(E4K)&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:56.75%;left:9.17%;width:95.69%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.32%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>UltraSparc
+ 300MHz x 10CPU L1cache Inst-16KB + Data-16KB </span></span><span
+ style='position:absolute;top:60.75%;left:9.17%;width:90.07%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>L2cache 1MB&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:65.75%;left:9.17%;width:92.69%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.43%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Solaris
+ 2.6 + Solaris Production Release JDK 1.2.1_04a with </span></span><span
+ style='position:absolute;top:69.75%;left:9.17%;width:90.07%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>optimizing JIT compiler (JBE)
+ (-Xoptimize)&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:74.5%;
+ left:.93%;width:98.12%;height:5.5%'><span style='position:absolute;top:0%;
+ left:3.81%;width:96.18%'><span style='font-size:71%'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-3.96%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Origin 2000(O2K) &#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:79.5%;left:9.17%;width:105.05%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.03%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>R10000
+ 250MHz x 16CPU L1cache Inst-32KB + Data-32KB L2cache </span></span><span
+ style='position:absolute;top:83.5%;left:9.17%;width:90.07%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>4MB&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:88.25%;
+ left:5.99%;width:93.07%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.42%;width:96.78%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.53%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>IRIX
+ 6.5 + SGI SDK 1.2.1</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

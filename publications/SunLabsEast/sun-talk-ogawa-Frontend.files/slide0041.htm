@@ -1,0 +1,202 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description content="99/10/29: Abstract Syntax Tree Package">
+<link rel=next href=slide0028.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0041.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master04_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=204 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=123 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=104 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=327 height=31 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=327 height=31><font face="Arial Narrow" color="#010000" size=5><b>Abstract
+    Syntax Tree Package</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=131 height=31 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=28 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=17 height=204></td>
+  <td width=204 height=204>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=13 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=14><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=31 height=14 colspan=6><font face=Arial color="#010000" size=1>Node</font><br>
+    </td>
+    <td width=156 height=14 colspan=16></td>
+   </tr>
+   <tr>
+    <td width=23 height=16 colspan=3></td>
+    <td width=15 height=16><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=70 height=16 colspan=12><font face=Arial color="#010000" size=1>Expression</font><br>
+    </td>
+    <td width=96 height=16 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16 colspan=2><font face="Monotype Sorts" color="#ff9966"
+    size=1>F</font></td>
+    <td width=109 height=16 colspan=12><font face=Arial color="#010000" size=1>BinaryExpression</font><br>
+    </td>
+    <td width=36 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=71 height=16 colspan=10></td>
+    <td width=12 height=16 colspan=2><font color="#336699" size=1>&#8226;</font></td>
+    <td width=94 height=16 colspan=9><font face=Arial color="#010000" size=1>AddExpression</font><br>
+    </td>
+    <td width=27 height=16 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=71 height=16 colspan=10></td>
+    <td width=12 height=16 colspan=2><font color="#336699" size=1>&#8226;</font></td>
+    <td width=121 height=16 colspan=11><font face=Arial color="#010000" size=1>SubtractExpression</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=71 height=15 colspan=10></td>
+    <td width=12 height=15 colspan=2><font color="#336699" size=1>&#8226;</font></td>
+    <td width=15 height=15 colspan=2><font face=Arial color="#010000" size=1>…</font><br>
+    </td>
+    <td width=106 height=15 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16 colspan=2><font face="Monotype Sorts" color="#ff9966"
+    size=1>F</font></td>
+    <td width=106 height=16 colspan=11><font face=Arial color="#010000" size=1>UnaryExpression</font><br>
+    </td>
+    <td width=39 height=16 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16 colspan=2><font face="Monotype Sorts" color="#ff9966"
+    size=1>F</font></td>
+    <td width=125 height=16 colspan=14><font face=Arial color="#010000" size=1>ConstantExpression</font><br>
+    </td>
+    <td width=20 height=16></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16 colspan=2><font face="Monotype Sorts" color="#ff9966"
+    size=1>F</font></td>
+    <td width=15 height=16 colspan=3><font face=Arial color="#010000" size=1>…</font><br>
+    </td>
+    <td width=130 height=16 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=23 height=16 colspan=3></td>
+    <td width=15 height=16><font face="Monotype Sorts" color="#336699" size=1>u</font></td>
+    <td width=64 height=16 colspan=11><font face=Arial color="#010000" size=1>Statement</font><br>
+    </td>
+    <td width=102 height=16 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=47 height=15 colspan=6></td>
+    <td width=12 height=15 colspan=2><font face="Monotype Sorts" color="#ff9966"
+    size=1>F</font></td>
+    <td width=72 height=15 colspan=9><font face=Arial color="#010000" size=1>IfStatement</font><br>
+    </td>
+    <td width=73 height=15 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16 colspan=2><font face="Monotype Sorts" color="#ff9966"
+    size=1>F</font></td>
+    <td width=85 height=16 colspan=10><font face=Arial color="#010000" size=1>ForStatement</font><br>
+    </td>
+    <td width=60 height=16 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16 colspan=2><font face="Monotype Sorts" color="#ff9966"
+    size=1>F</font></td>
+    <td width=15 height=16 colspan=3><font face=Arial color="#010000" size=1>…</font><br>
+    </td>
+    <td width=130 height=16 colspan=12></td>
+   </tr>
+  </table>
+  </td>
+  <td width=254 height=204 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=23 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=448 height=11 colspan=4></td>
+  <td width=12 height=11><img src="master04_image027.gif" border=0 width=12
+  height=11></td>
+  <td width=15 height=11></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=6></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+body {
+  font-family: Palatino Linotype, Arial, Helvetica, sans-serif;
+  line-height: 1.3;
+  font-size: 12pt;
+  margin-top: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  margin-bottom: 20px;
+  color: #004;
+  background-color: #fee;
+}
+
+table {
+  font-size: 12pt;
+  text-align: justify;
+  width: 100%;
+}
+td,th { border: thin solid #fee; background-color: #fcc; }
+th.time { width: 100px; }
+
+.t1 { font-size: 20pt; text-align: center; font-weight: bold; }
+.t2 { font-size: 14pt; text-align: center; font-weight: bold; }
+.t3 { font-size: 12pt; text-align: center; font-weight: bold; }
+.t4 {
+  text-align: justify;
+  font-weight: bold;
+  margin-right: 20%;
+  margin-left: 20%;
+}
+
+h1 { font-size: 12pt; text-indent: 0.5em; background-color: #fcc; margin-top: 4em;}
+
+h2 { font-size: 12pt; text-decoration: underline;}
+
+strong {
+  font-size: larger;
+  font-weight: bold;
+}
+
+a { color: blue }
+a, img { border: 0 }
+
+dt {font-weight: bold}
+
+.new {
+  font-size: 14pt;
+  color: black;
+}
+li.new { list-style-image: url(lamp1.gif); list-style-position: outside;}
+.new a:link, .new a:visited { font-size: 16pt; text-decoration: underline;}
+
+blockquote {
+background-color: #ffc;
+border: thin outset #fee;
+padding: 1em;
+}

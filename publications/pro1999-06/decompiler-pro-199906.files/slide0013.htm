@@ -1,0 +1,152 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 背景">
+<link rel=next href=slide0020.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0013.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master10_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=13 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=138 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=33 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=165 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=13 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=28 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=26 height=27 colspan=2></td>
+  <td width=56 height=27 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=56 height=27><font face="ＭＳ Ｐゴシック" size=5>背景</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=393 height=27 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=475 height=36 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=39 height=30 colspan=3></td>
+  <td width=394 height=30 colspan=7>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=394 height=30 align=center><font face=Tahoma color="#ff3300"
+    size=4>Java</font><font face="ＭＳ Ｐゴシック" color="#ff3300" size=4>バイトコードをデコンパイルする</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=42 height=30 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=13 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=15 height=22></td>
+  <td width=447 height=22 colspan=11>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=447 height=22 align=center><font face="ＭＳ Ｐゴシック" size=4>従来の主な目的は、リバースエンジニアリング</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=13 height=22></td>
+ </tr>
+ <tr>
+  <td width=475 height=6 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=222 height=23 colspan=7></td>
+  <td width=33 height=23><img src="slide0013_image005.gif" border=0 width=33
+  height=23></td>
+  <td width=220 height=23 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=475 height=9 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=42 height=22 colspan=4></td>
+  <td width=392 height=22 colspan=7>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=392 height=22 align=center><font face="ＭＳ Ｐゴシック" size=4>元のプログラムがそこそこわかれば良い</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=41 height=22 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=21 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=84 height=53 colspan=6></td>
+  <td width=336 height=53 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=323 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=6 height=19><font color=black size=3>&#8226;</font></td>
+    <td width=329 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=3>式が復元されるだけでも、かなりうれしい</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=335 height=14 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=6 height=19><font color=black size=3>&#8226;</font></td>
+    <td width=324 height=19 colspan=2><font face="ＭＳ Ｐゴシック" size=3>制御構造も復元されると、もっとうれしい</font><br>
+    </td>
+    <td width=5 height=19></td>
+   </tr>
+  </table>
+  </td>
+  <td width=55 height=53 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=52 colspan=13></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

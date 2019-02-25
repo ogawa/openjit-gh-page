@@ -1,0 +1,186 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: 従来のJITコンパイラ">
+<link rel=next href="v3_slide0354.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0353.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=62 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=294 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=61 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=39 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=91 height=41 colspan=2></td>
+  <td width=294 height=41>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=294 height=41 align=center><font face="ＭＳ Ｐゴシック" color="#003399"
+    size=5>従来の</font><font face="Comic Sans MS" color="#003399" size=5>JIT</font><font
+    face="ＭＳ Ｐゴシック" color="#003399" size=5>コンパイラ</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=90 height=41 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=24 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=29 height=235></td>
+  <td width=417 height=235 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=128 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=88 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=48 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=55 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=311 height=22 colspan=12><font face="ＭＳ Ｐゴシック" size=4>処理速度至上主義的職人芸実装</font><br>
+    </td>
+    <td width=88 height=22 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=416 height=8 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=171 height=22 colspan=8><font face="ＭＳ Ｐゴシック" size=4>厳選された最適化</font><br>
+    </td>
+    <td width=228 height=22 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=416 height=9 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=22 colspan=3></td>
+    <td width=15 height=22><font color="#003399" size=4>&#8226;</font></td>
+    <td width=315 height=22 colspan=10><font face="ＭＳ Ｐゴシック" color=red size=4>一般的</font><font
+    face="ＭＳ Ｐゴシック" color=black size=3>に効果のある最適化のみ適用</font><br>
+    </td>
+    <td width=63 height=22 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=416 height=2 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=38 height=19 colspan=4></td>
+    <td width=378 height=19 colspan=13><font face="ＭＳ Ｐゴシック" size=3>⇒特定の場面にのみ効果的な最適化はしない</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=416 height=8 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=15 height=19><font color="#003399" size=3>&#8226;</font></td>
+    <td width=371 height=19 colspan=12><font face="ＭＳ Ｐゴシック" size=3>特定のアプリケーション（ベンチマーク）で最適</font><br>
+    </td>
+    <td width=7 height=19></td>
+   </tr>
+   <tr>
+    <td width=416 height=2 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=17 height=30><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=262 height=30 colspan=10><font face="ＭＳ Ｐゴシック" size=4>マルチレベル</font><font
+    face="Comic Sans MS" size=4>JIT</font><font face="ＭＳ Ｐゴシック" size=4>コンパイラ</font><br>
+    </td>
+    <td width=137 height=30 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=416 height=6 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=15 height=19><font color="#003399" size=3>&#8226;</font></td>
+    <td width=289 height=19 colspan=8><font face="ＭＳ Ｐゴシック" size=3>最適化の度合いの高低の使い分け</font><br>
+    </td>
+    <td width=89 height=19 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=416 height=1 colspan=17></td>
+   </tr>
+   <tr>
+    <td width=47 height=23 colspan=6></td>
+    <td width=12 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=295 height=23 colspan=8><font face="ＭＳ Ｐゴシック" size=2>実行頻度</font><font
+    face="Comic Sans MS" size=2> (e.g. Research VM, Jalapeno)</font><br>
+    </td>
+    <td width=62 height=23 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=47 height=23 colspan=6></td>
+    <td width=12 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=217 height=23 colspan=3><font face="ＭＳ Ｐゴシック" size=2>場面</font><font
+    face="Comic Sans MS" size=2> (</font><font face="ＭＳ Ｐゴシック" size=2>ループ、</font><font
+    face="Comic Sans MS" size=2>e.g. IBM JVM)</font><br>
+    </td>
+    <td width=140 height=23 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=29 height=235></td>
+ </tr>
+ <tr>
+  <td width=475 height=17 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

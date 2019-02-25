@@ -1,0 +1,362 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Hendren’s Algorithm (VTA)">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0344.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+InitBuildEffects();
+MakeSldVis(0);
+//-->
+</script><![endif]>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml" href="slide0344.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><p:shaperange
+  href="master08.xml#_x0000_m141325"/><p:shaperange
+  href="slide0344.xml#_x0000_s595970"/>
+ <div v:shape="_x0000_s595970" class=T style='position:absolute;top:11.0%;
+ left:3.55%;width:93.07%;height:11.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>Hendren’s Algorithm (VTA)</span></div>
+ <div v:shape="_x0000_s595971" class=B><span style='position:absolute;
+ top:29.0%;left:9.73%;width:34.45%'><span style='font-size:63%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-10.86%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>A a1, a2, a3;<br>
+ </span></span><span
+ style='position:absolute;top:33.5%;left:9.73%;width:34.45%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>B b1, b2, b3;<br>
+ </span></span><span
+ style='position:absolute;top:38.0%;left:9.73%;width:34.45%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>C c;<br>
+ </span></span><span
+ style='position:absolute;top:43.5%;left:9.73%;width:34.45%'><span lang=EN-US
+ style='font-size:63%;mso-fareast-language:JA'><br>
+ </span></span><span
+ style='position:absolute;top:46.75%;left:9.73%;width:41.01%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>a1 = new A(); a2 = new A();<br>
+ </span></span><span
+ style='position:absolute;top:51.25%;left:9.73%;width:41.01%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>b1 = new B(); b2 = new B();<br>
+ </span></span><span
+ style='position:absolute;top:55.75%;left:9.73%;width:34.45%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>c = new C();<br>
+ </span></span><span
+ style='position:absolute;top:61.25%;left:9.73%;width:34.45%'><span lang=EN-US
+ style='font-size:63%;mso-fareast-language:JA'><br>
+ </span></span><span
+ style='position:absolute;top:64.5%;left:9.73%;width:34.45%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>a1 = a2; a3 = a1;<br>
+ </span></span><span
+ style='position:absolute;top:69.0%;left:9.73%;width:34.45%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>a3 = b3; b3 = (B) a3;<br>
+ </span></span><span
+ style='position:absolute;top:73.5%;left:9.73%;width:34.45%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:63%;mso-fareast-language:JA'>b1 = b2; b1 = c;&#13;</span></span>
+ <div style='position:absolute;top:80.0%;left:5.99%;width:38.2%;height:4.0%'><span
+ style='position:absolute;top:0%;left:9.8%;width:90.19%'><span
+ style='font-size:63%;visibility:hidden'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-10.86%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ style='font-size:63%;mso-special-format:lastCR;display:none'>&#13;</span></span></div>
+ </div>
+ <![if !ppt]>
+ <div style='visibility:hidden'><![endif]><p:shaperange
+  href="slide0344.xml#_x0000_s595987" id="_x0000_s595987"/><![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='position:absolute;top:24.25%;left:44.75%;width:22.28%;height:32.0%;
+ overflow:hidden;visibility:hidden;filter:revealtrans( duration=1,transition=12);
+ mso-build:29;mso-build-order:1' onfilterchange="javascript:TickHandler()"><![endif]><img
+ border=0
+ v:shapes="_x0000_s595987,_x0000_s595972,_x0000_s595974,_x0000_s595975,_x0000_s595976,_x0000_s595977,_x0000_s595978,_x0000_s595979,_x0000_s595980,_x0000_s595981,_x0000_s595983,_x0000_s595984,_x0000_s595985,_x0000_s595986"
+ src="slide0344_image197.gif" style='position:absolute;top:0%;left:0%;
+ width:100.0%;height:100.0%'>
+ <div v:shape="_x0000_s595972" class=O style='text-align:center;position:absolute;
+ top:10.93%;left:3.36%;width:18.48%;height:20.31%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a1</span></div>
+ <div v:shape="_x0000_s595974" class=O style='text-align:center;position:absolute;
+ top:10.93%;left:39.49%;width:21.0%;height:20.31%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a2</span></div>
+ <div v:shape="_x0000_s595975" class=O style='text-align:center;position:absolute;
+ top:10.93%;left:77.31%;width:21.0%;height:20.31%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a3</span></div>
+ <div v:shape="_x0000_s595978" class=O style='text-align:center;position:absolute;
+ top:45.31%;left:2.52%;width:19.32%;height:20.31%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b1</span></div>
+ <div v:shape="_x0000_s595979" class=O style='text-align:center;position:absolute;
+ top:45.31%;left:38.65%;width:22.68%;height:20.31%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b2</span></div>
+ <div v:shape="_x0000_s595980" class=O style='text-align:center;position:absolute;
+ top:45.31%;left:76.47%;width:22.68%;height:20.31%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b3</span></div>
+ <div v:shape="_x0000_s595983" class=O style='text-align:center;position:absolute;
+ top:76.56%;left:7.56%;width:10.08%;height:20.31%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>c</span></div>
+ <![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='visibility:hidden'><![endif]><p:shaperange
+  href="slide0344.xml#_x0000_s596008" id="_x0000_s596008"/><![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='position:absolute;top:24.25%;left:69.85%;width:22.28%;height:35.75%;
+ overflow:hidden;visibility:hidden;filter:revealtrans( duration=1,transition=12);
+ mso-build:29;mso-build-order:2' onfilterchange="javascript:TickHandler()"><![endif]><img
+ border=0
+ v:shapes="_x0000_s596008,_x0000_s595989,_x0000_s595990,_x0000_s595991,_x0000_s595992,_x0000_s595993,_x0000_s595994,_x0000_s595995,_x0000_s595996,_x0000_s595997,_x0000_s595998,_x0000_s595999,_x0000_s596000,_x0000_s596001,_x0000_s596002,_x0000_s596003,_x0000_s596004,_x0000_s596005,_x0000_s596006"
+ src="slide0344_image198.gif" style='position:absolute;top:0%;left:0%;
+ width:100.0%;height:100.0%'>
+ <div v:shape="_x0000_s595989" class=O style='text-align:center;position:absolute;
+ top:9.79%;left:3.36%;width:18.48%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a1</span></div>
+ <div v:shape="_x0000_s595990" class=O style='text-align:center;position:absolute;
+ top:9.79%;left:39.49%;width:21.0%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a2</span></div>
+ <div v:shape="_x0000_s595991" class=O style='text-align:center;position:absolute;
+ top:9.79%;left:76.47%;width:21.0%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a3</span></div>
+ <div v:shape="_x0000_s595994" class=O style='text-align:center;position:absolute;
+ top:40.55%;left:2.52%;width:19.32%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b1</span></div>
+ <div v:shape="_x0000_s595995" class=O style='text-align:center;position:absolute;
+ top:40.55%;left:38.65%;width:22.68%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b2</span></div>
+ <div v:shape="_x0000_s595996" class=O style='text-align:center;position:absolute;
+ top:40.55%;left:75.63%;width:22.68%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b3</span></div>
+ <div v:shape="_x0000_s595998" class=O style='text-align:center;position:absolute;
+ top:68.53%;left:7.56%;width:10.08%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>c</span></div>
+ <div v:shape="_x0000_s596002" class=O style='position:absolute;top:23.07%;
+ left:11.76%;width:22.68%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{A}</span></div>
+ <div v:shape="_x0000_s596003" class=O style='position:absolute;top:22.37%;
+ left:50.42%;width:22.68%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{A}</span></div>
+ <div v:shape="_x0000_s596004" class=O style='position:absolute;top:53.14%;
+ left:12.6%;width:21.0%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{B}</span></div>
+ <div v:shape="_x0000_s596005" class=O style='position:absolute;top:52.44%;
+ left:51.26%;width:21.0%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{B}</span></div>
+ <div v:shape="_x0000_s596006" class=O style='position:absolute;top:82.51%;
+ left:13.44%;width:21.0%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{C}</span></div>
+ <![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='visibility:hidden'><![endif]><p:shaperange
+  href="slide0344.xml#_x0000_s596053" id="_x0000_s596053"/><![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='position:absolute;top:57.5%;left:44.75%;width:25.65%;height:35.75%;
+ overflow:hidden;visibility:hidden;filter:revealtrans( duration=1,transition=12);
+ mso-build:29;mso-build-order:3' onfilterchange="javascript:TickHandler()"><![endif]><img
+ border=0
+ v:shapes="_x0000_s596053,_x0000_s596011,_x0000_s596012,_x0000_s596013,_x0000_s596014,_x0000_s596015,_x0000_s596016,_x0000_s596017,_x0000_s596018,_x0000_s596019,_x0000_s596020,_x0000_s596021,_x0000_s596022,_x0000_s596023,_x0000_s596024,_x0000_s596025,_x0000_s596026,_x0000_s596027,_x0000_s596028,_x0000_s596029,_x0000_s596030"
+ src="slide0344_image199.gif" style='position:absolute;top:0%;left:0%;
+ width:99.27%;height:100.0%'>
+ <div v:shape="_x0000_s596011" class=O style='text-align:center;position:absolute;
+ top:9.79%;left:2.91%;width:16.05%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a1</span></div>
+ <div v:shape="_x0000_s596012" class=O style='text-align:center;position:absolute;
+ top:9.79%;left:34.3%;width:18.24%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a2</span></div>
+ <div v:shape="_x0000_s596013" class=O style='text-align:center;position:absolute;
+ top:9.79%;left:67.15%;width:18.24%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a3</span></div>
+ <div v:shape="_x0000_s596016" class=O style='text-align:center;position:absolute;
+ top:41.25%;left:2.18%;width:16.78%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b1</span></div>
+ <div v:shape="_x0000_s596017" class=O style='text-align:center;position:absolute;
+ top:41.25%;left:33.57%;width:19.7%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b2</span></div>
+ <div v:shape="_x0000_s596018" class=O style='text-align:center;position:absolute;
+ top:41.25%;left:66.42%;width:19.7%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b3</span></div>
+ <div v:shape="_x0000_s596020" class=O style='text-align:center;position:absolute;
+ top:69.23%;left:6.56%;width:8.75%;height:18.18%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>c</span></div>
+ <div v:shape="_x0000_s596024" class=O style='position:absolute;top:23.77%;
+ left:10.94%;width:19.7%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{A}</span></div>
+ <div v:shape="_x0000_s596025" class=O style='position:absolute;top:23.07%;
+ left:43.79%;width:19.7%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{A}</span></div>
+ <div v:shape="_x0000_s596026" class=O style='position:absolute;top:53.14%;
+ left:11.67%;width:18.24%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{B}</span></div>
+ <div v:shape="_x0000_s596027" class=O style='position:absolute;top:52.44%;
+ left:44.52%;width:18.24%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{B}</span></div>
+ <div v:shape="_x0000_s596028" class=O style='position:absolute;top:83.21%;
+ left:12.4%;width:18.24%;height:15.38%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{C}</span></div>
+ <div v:shape="_x0000_s596030" class=O style='position:absolute;top:65.73%;
+ left:70.07%;width:30.65%;height:18.18%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>SCC</span></div>
+ <![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='visibility:hidden'><![endif]><p:shaperange
+  href="slide0344.xml#_x0000_s596055" id="_x0000_s596055"/><![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='position:absolute;top:56.75%;left:71.53%;width:25.65%;height:37.75%;
+ overflow:hidden;visibility:hidden;filter:revealtrans( duration=1,transition=12);
+ mso-build:29;mso-build-order:4' onfilterchange="javascript:TickHandler()"><![endif]><img
+ border=0
+ v:shapes="_x0000_s596055,_x0000_s596033,_x0000_s596034,_x0000_s596035,_x0000_s596036,_x0000_s596037,_x0000_s596038,_x0000_s596039,_x0000_s596040,_x0000_s596041,_x0000_s596042,_x0000_s596043,_x0000_s596044,_x0000_s596045,_x0000_s596046,_x0000_s596047,_x0000_s596048,_x0000_s596049,_x0000_s596050,_x0000_s596051,_x0000_s596052,_x0000_s596054"
+ src="slide0344_image200.gif" style='position:absolute;top:0%;left:0%;
+ width:100.0%;height:100.0%'>
+ <div v:shape="_x0000_s596033" class=O style='text-align:center;position:absolute;
+ top:14.56%;left:2.91%;width:16.05%;height:17.21%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a1</span></div>
+ <div v:shape="_x0000_s596034" class=O style='text-align:center;position:absolute;
+ top:14.56%;left:34.3%;width:18.24%;height:17.21%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a2</span></div>
+ <div v:shape="_x0000_s596035" class=O style='text-align:center;position:absolute;
+ top:14.56%;left:66.42%;width:18.24%;height:17.21%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>a3</span></div>
+ <div v:shape="_x0000_s596038" class=O style='text-align:center;position:absolute;
+ top:43.7%;left:2.18%;width:16.78%;height:17.21%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b1</span></div>
+ <div v:shape="_x0000_s596039" class=O style='text-align:center;position:absolute;
+ top:43.7%;left:33.57%;width:19.7%;height:17.21%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b2</span></div>
+ <div v:shape="_x0000_s596040" class=O style='text-align:center;position:absolute;
+ top:43.7%;left:65.69%;width:19.7%;height:17.21%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b3</span></div>
+ <div v:shape="_x0000_s596042" class=O style='text-align:center;position:absolute;
+ top:70.19%;left:5.83%;width:8.75%;height:17.21%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>c</span></div>
+ <div v:shape="_x0000_s596046" class=O style='position:absolute;top:27.15%;
+ left:10.21%;width:19.7%;height:14.56%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{A}</span></div>
+ <div v:shape="_x0000_s596047" class=O style='position:absolute;top:26.49%;
+ left:43.06%;width:19.7%;height:14.56%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{A}</span></div>
+ <div v:shape="_x0000_s596048" class=O style='position:absolute;top:55.62%;
+ left:10.94%;width:29.92%;height:14.56%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{B,C}</span></div>
+ <div v:shape="_x0000_s596049" class=O style='position:absolute;top:54.96%;
+ left:43.79%;width:18.24%;height:14.56%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{B}</span></div>
+ <div v:shape="_x0000_s596050" class=O style='position:absolute;top:83.44%;
+ left:11.67%;width:18.24%;height:14.56%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{C}</span></div>
+ <div v:shape="_x0000_s596052" class=O style='position:absolute;top:67.54%;
+ left:69.34%;width:30.65%;height:17.21%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>SCC</span></div>
+ <div v:shape="_x0000_s596054" class=O style='position:absolute;top:0%;
+ left:78.83%;width:19.7%;height:14.56%'><span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:83%'>{A}</span><span lang=EN-US style='mso-fareast-language:JA;
+ mso-special-format:lastCR;display:none'>&#13;</span></div>
+ <![if !ppt]></div>
+ <![endif]></p:slide>
+</div>
+
+</body>
+
+</html>

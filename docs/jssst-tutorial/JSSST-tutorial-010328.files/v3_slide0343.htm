@@ -1,0 +1,304 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Hendren’s Algorithm (Example1)">
+<link rel=next href="v3_slide0344.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0343.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0343_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=84 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=131 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=48 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=26 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=84 height=76></td>
+  <td width=307 height=76 colspan=15>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=73 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=162 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=307 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Hendren’s Algorithm</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=73 height=35></td>
+    <td width=162 height=35 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>(Example1)</font><br>
+    </td>
+    <td width=72 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=84 height=76 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=475 height=48 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=237 height=5 colspan=4></td>
+  <td width=49 height=19 colspan=5 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=49 height=19 align=center><font face="Comic Sans MS" size=1>Object</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=189 height=5 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=237 height=14 colspan=4></td>
+  <td width=13 height=14></td>
+  <td width=85 height=37 colspan=5 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=30 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=30 height=23><font face="Comic Sans MS" size=2>A.m</font><br>
+    </td>
+    <td width=55 height=23></td>
+   </tr>
+   <tr>
+    <td width=85 height=14 colspan=2><font face="Comic Sans MS" size=1>this.toString()</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=14 height=14 colspan=2></td>
+  <td width=28 height=23 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=28 height=23><font face="Comic Sans MS" size=2>B.m</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=49 height=14 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=299 height=9 colspan=10></td>
+  <td width=14 height=9 colspan=2></td>
+  <td width=49 height=9 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=299 height=14 colspan=10></td>
+  <td width=91 height=14 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=475 height=10 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=250 height=20 colspan=6></td>
+  <td width=23 height=35 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=6 height=19></td>
+    <td width=12 height=19 align=center><font face="Comic Sans MS" size=1>A</font><br>
+    </td>
+    <td width=5 height=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=16 colspan=3 align=center><font face="Comic Sans MS"
+    size=1>m()</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=202 height=20 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=250 height=15 colspan=6></td>
+  <td width=53 height=15 colspan=4></td>
+  <td width=126 height=23 colspan=7 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=126 height=23><font face="Comic Sans MS" size=2>Object.toString</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=23 height=15 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=326 height=8 colspan=12></td>
+  <td width=23 height=8 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=272 height=8 colspan=7></td>
+  <td width=42 height=51 colspan=4 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=19 colspan=2></td>
+    <td width=10 height=19 align=center><font face="Comic Sans MS" size=1>C</font><br>
+    </td>
+    <td width=15 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=10 height=16></td>
+    <td width=23 height=16 colspan=3 align=center><font face="Comic Sans MS"
+    size=1>m()</font><br>
+    </td>
+    <td width=9 height=16></td>
+   </tr>
+   <tr>
+    <td width=42 height=16 colspan=5 align=center><font face="Comic Sans MS"
+    size=1>main()</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=161 height=8 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=223 height=20 colspan=3></td>
+  <td width=23 height=35 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=6 height=19></td>
+    <td width=10 height=19 align=center><font face="Comic Sans MS" size=1>B</font><br>
+    </td>
+    <td width=7 height=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=16 colspan=3 align=center><font face="Comic Sans MS"
+    size=1>m()</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=26 height=20 colspan=2></td>
+  <td width=161 height=20 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=223 height=15 colspan=3></td>
+  <td width=26 height=15 colspan=2></td>
+  <td width=22 height=15 colspan=3></td>
+  <td width=117 height=42 colspan=6 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=84 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=117 height=23 colspan=3 align=center><font face="Comic Sans MS"
+    size=2>(Conservative)</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=16 height=19></td>
+    <td width=84 height=19 align=center><font face="Comic Sans MS" size=2>Call
+    Graph</font><br>
+    </td>
+    <td width=17 height=19></td>
+   </tr>
+  </table>
+  </td>
+  <td width=22 height=15></td>
+ </tr>
+ <tr>
+  <td width=272 height=8 colspan=7></td>
+  <td width=22 height=8 colspan=3></td>
+  <td width=22 height=8></td>
+ </tr>
+ <tr>
+  <td width=336 height=9 colspan=14></td>
+  <td width=22 height=9></td>
+ </tr>
+ <tr>
+  <td width=215 height=10 colspan=2></td>
+  <td width=112 height=23 colspan=11 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=112 height=23><font face="Comic Sans MS" size=2>Class hiearchy</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=9 height=10></td>
+  <td width=22 height=10></td>
+ </tr>
+ <tr>
+  <td width=215 height=13 colspan=2></td>
+  <td width=148 height=13 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=475 height=32 colspan=21></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

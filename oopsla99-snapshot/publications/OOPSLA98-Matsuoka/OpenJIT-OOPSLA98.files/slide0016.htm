@@ -1,0 +1,189 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: Open Compilers in C++ (2)">
+<link rel=next href=slide0045.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0016.htm');   
+  else
+    parent.location.href = "../OpenJIT-OOPSLA98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0016_background.gif" bgcolor=white alink="#5f5f5f"
+link="#969696" vlink="#cbcbcb" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=338 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=71 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=40 height=33></td>
+  <td width=338 height=33>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=338 height=33><font face="Times New Roman" size=5>Open Compilers
+    in C++ (2)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=97 height=33 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=27 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=40 height=227></td>
+  <td width=409 height=227 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=123 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=32 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=19 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=55 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=77 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=22><font face=Wingdings color="#5f5f5f" size=2>l</font></td>
+    <td width=236 height=22 colspan=12><font face=Arial size=3><b>MPC++
+    (Ishikawa, RWCP)</b></font><br>
+    </td>
+    <td width=156 height=22 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=410 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=371 height=17 colspan=14><font face=Arial size=2><b>Define a
+    metaprogramming language for extending</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=39 height=17 colspan=4></td>
+    <td width=145 height=17 colspan=5><font face=Arial size=2><b>C++ at compile
+    time</b></font><br>
+    </td>
+    <td width=226 height=17 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=410 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=143 height=16 colspan=4><font face=Arial size=1><b>Library
+    Optimizations</b></font><br>
+    </td>
+    <td width=207 height=16 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=410 height=3 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=250 height=16 colspan=8><font face=Arial size=1><b>Extending C++
+    for Parallel Computing</b></font><br>
+    </td>
+    <td width=100 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=410 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=22><font face=Wingdings color="#5f5f5f" size=2>l</font></td>
+    <td width=308 height=22 colspan=15><font face=Arial size=3><b>Open C++
+    (Chiba, Tsukuba Univ.)</b></font><br>
+    </td>
+    <td width=84 height=22 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=410 height=5 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=20 colspan=3></td>
+    <td width=15 height=20><font color=black size=3>&#8226;</font></td>
+    <td width=149 height=20 colspan=6><font face=Arial size=3><b>Similar to
+    MPC++</b></font><br>
+    </td>
+    <td width=222 height=20 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=410 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=20 colspan=3></td>
+    <td width=15 height=20><font color=black size=3>&#8226;</font></td>
+    <td width=364 height=20 colspan=13><font face=Arial size=3><b>Use C++
+    itself for compile-time extensions</b></font><br>
+    </td>
+    <td width=7 height=20></td>
+   </tr>
+   <tr>
+    <td width=410 height=5 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=20 colspan=3></td>
+    <td width=15 height=20><font color=black size=3>&#8226;</font></td>
+    <td width=196 height=20 colspan=8><font face=Arial size=3><b>Per-class
+    customizatio</b></font><br>
+    </td>
+    <td width=175 height=20 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=410 height=5 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=23><font face=Wingdings color="#5f5f5f" size=2>l</font></td>
+    <td width=291 height=23 colspan=13><font face=Arial size=4><b>Other work
+    such as IBM SOM</b></font><br>
+    </td>
+    <td width=101 height=23 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=26 height=227></td>
+ </tr>
+ <tr>
+  <td width=475 height=23 colspan=4></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

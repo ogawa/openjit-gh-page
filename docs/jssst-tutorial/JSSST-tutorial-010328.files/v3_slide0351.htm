@@ -1,0 +1,163 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Now and Future: OpenJIT2">
+<link rel=next href="v3_slide0352.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0351.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0351_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=313 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=26 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=30 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=21 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=39 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=32 height=41 colspan=2></td>
+  <td width=412 height=41 colspan=6>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=412 height=41 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Now and Future: OpenJIT2</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=31 height=41></td>
+ </tr>
+ <tr>
+  <td width=475 height=24 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=40 height=113 colspan=3></td>
+  <td width=353 height=113 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=301 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=19><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=330 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=3>インタプリタは遅い⇒コンパイルして実行</font><br>
+    </td>
+    <td width=5 height=19></td>
+   </tr>
+   <tr>
+    <td width=353 height=46 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=18 height=27><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=335 height=27 colspan=4><font face="Comic Sans MS" size=3>Native</font><font
+    face="ＭＳ Ｐゴシック" size=3>コードは機種依存、安全性が不明</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=353 height=2 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=18 height=19></td>
+    <td width=302 height=19 colspan=2><font face="ＭＳ Ｐゴシック" size=3>⇒仮想機械による実行（インタプリタ）</font><br>
+    </td>
+    <td width=33 height=19 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=82 height=113 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=31 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=54 height=26 colspan=4></td>
+  <td width=369 height=26 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=369 height=26 align=center><font face=Tahoma color=red size=4>JIT</font><font
+    face="ＭＳ Ｐゴシック" color=red size=4>コンパイラの利用で良いとこ取り！</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=52 height=26 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=29 height=42></td>
+  <td width=338 height=42 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=259 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=261 height=19 colspan=2><font face="ＭＳ Ｐゴシック" size=3>実行時情報による更なる最適化</font><br>
+    </td>
+    <td width=59 height=19></td>
+   </tr>
+   <tr>
+    <td width=337 height=4 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=17 height=19></td>
+    <td width=320 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=3>⇒静的なコンパイラの上を行く可能性も</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=108 height=42 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=26 colspan=9></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

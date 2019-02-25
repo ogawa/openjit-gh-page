@@ -1,0 +1,176 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Method Inlining (Cont’d)">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0286.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="471"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s482306" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s482307" type="#_x0000_m141325"
+  style='position:absolute;left:36pt;top:132pt;width:612pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s482306" class=T style='position:absolute;top:11.0%;
+ left:8.42%;width:83.14%;height:11.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>Method Inlining (Cont’d)</span></div>
+ <div v:shape="_x0000_s482307">
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:23.75%;
+ left:5.99%;width:83.14%;height:7.5%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>Inlining Very Effective&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:30.75%;
+ left:11.04%;width:78.08%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.83%;width:96.16%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.99%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Recall
+ </span><span lang=EN-US style='font-family:"Comic Sans MS";mso-hansi-font-family:
+ "Comic Sans MS";font-size:86%;mso-fareast-language:JA'>“</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>very small methods</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>”</span><span lang=EN-US
+ style='font-size:86%;mso-fareast-language:JA;display:none'>&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:36.5%;
+ left:5.99%;width:83.14%;height:7.5%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>But what do we inline?&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:43.5%;left:14.04%;width:83.7%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.57%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Everything
+ [Self89] =&gt; Excessive compilation </span></span><span style='position:absolute;
+ top:48.25%;left:14.04%;width:75.09%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>time,
+ memory&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:54.0%;
+ left:11.04%;width:78.08%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.83%;width:96.16%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.99%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Compilation
+ Stubs [Self91]&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:60.0%;
+ left:11.04%;width:78.08%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.83%;width:96.16%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.99%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Various
+ Heuristics</span><span lang=EN-US style='font-size:86%;mso-fareast-language:
+ JA'>：&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:65.75%;left:18.53%;width:82.2%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.18%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Ex.</span><span
+ lang=EN-US style='font-size:83%;mso-fareast-language:JA'>　</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>Sun ExactVM: Statically bound,
+ straight-line, no </span></span><span style='position:absolute;top:69.75%;
+ left:18.53%;width:70.59%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>exceptions,
+ </span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:83%;mso-fareast-language:JA'><u>&lt;</u></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'> 15 bytecodes&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:74.75%;
+ left:11.04%;width:78.08%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.83%;width:96.16%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.99%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>Profile-Directed
+ Inlining [Self93]&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:80.5%;
+ left:15.91%;width:73.22%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.58%;width:96.41%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.71%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Inline
+ based on Type-Feedback info&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:85.5%;
+ left:15.91%;width:86.89%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.01%;width:97.19%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.1%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Used
+ in Hotspot, Jalapeno [Alpern@IBM, OOPSLA99]</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

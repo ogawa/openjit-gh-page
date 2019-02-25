@@ -1,0 +1,381 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Problems in Optimizing Dynamic Dispatch for Java">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0231.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="370"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s378882" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s378883" type="#_x0000_m141325"
+  style='position:absolute;left:54pt;top:150pt;width:612pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape><v:shapetype id="_x0000_t202"
+  coordsize="21600,21600" o:spt="202" path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s378884" type="#_x0000_t202" style='position:absolute;
+  left:270pt;top:348pt;width:120pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s378885" type="#_x0000_t202" style='position:absolute;
+  left:241.25pt;top:384.75pt;width:81.625pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s378886" type="#_x0000_t202" style='position:absolute;
+  left:223.25pt;top:426.75pt;width:120pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape>
+ <div v:shape="_x0000_s378882" class=T><span style='position:absolute;
+ top:6.25%;left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Problems in
+ Optimizing </span></span><span style='position:absolute;top:16.0%;left:4.11%;
+ width:91.94%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>Dynamic Dispatch for Java</span></span></div>
+ <div v:shape="_x0000_s378883" class=B>
+ <div style='position:absolute;top:27.5%;left:8.42%;width:87.64%;height:8.5%'><span
+ style='position:absolute;top:0%;left:4.27%;width:95.72%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.46%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Closed-world assumption not valid&#13;</span></span></div>
+ <span style='position:absolute;top:36.0%;left:12.17%;width:79.4%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>General problem: class loading </span></span><span
+ style='position:absolute;top:43.25%;left:12.17%;width:85.01%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>invalidates assumptions about C =&gt; </span></span><span
+ style='position:absolute;top:50.25%;left:12.17%;width:79.4%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>invalidates most analysis&#13;</span></span>
+ <div style='position:absolute;top:58.75%;left:8.42%;width:83.14%;height:8.5%'><span
+ style='position:absolute;top:0%;left:4.5%;width:95.49%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.71%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Ex. </span></span></div>
+ </div>
+ <div v:shape="_x0000_s378884" class=O style='position:absolute;top:65.25%;
+ left:38.57%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>A: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>A</b></span><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>,n</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>A</b></span></div>
+ <div v:shape="_x0000_s378885" class=O style='position:absolute;top:72.25%;
+ left:34.45%;width:11.42%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>B: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>B</b></span></div>
+ <div v:shape="_x0000_s378886" class=O style='position:absolute;top:80.0%;
+ left:32.02%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>C: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>C</b></span><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>,p</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>C</b></span></div>
+ <v:line id="_x0000_s378888" style='position:absolute;flip:x' from="283.25pt,378.75pt"
+  to="307.25pt,396.75pt" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:line id="_x0000_s378889" style='position:absolute;flip:x' from="253.25pt,408.75pt"
+  to="289.25pt,438.75pt" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:shape id="_x0000_s378891" type="#_x0000_t202" style='position:absolute;
+  left:378pt;top:336pt;width:114pt;height:93.5pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s378892" type="#_x0000_t202" style='position:absolute;
+  left:516pt;top:336pt;width:120pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s378893" type="#_x0000_t202" style='position:absolute;
+  left:487.25pt;top:372.75pt;width:81.625pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s378894" type="#_x0000_t202" style='position:absolute;
+  left:469.25pt;top:414.75pt;width:120pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s378895" type="#_x0000_t202" style='position:absolute;
+  left:600pt;top:414pt;width:120pt;height:36pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s378888,_x0000_s378889"
+ src="slide0231_image215.gif" style='position:absolute;top:70.0%;left:35.01%;
+ width:8.23%;height:12.0%'><![endif]>
+ <div v:shape="_x0000_s378891" class=O style='mso-line-spacing:"100 50 0"'><span
+ style='position:absolute;top:62.25%;left:53.55%;width:15.54%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Dynamic </span></span><span
+ style='position:absolute;top:67.5%;left:53.55%;width:14.23%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Load of </span></span><span
+ style='position:absolute;top:72.75%;left:53.55%;width:14.04%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Class D</span></span></div>
+ <div v:shape="_x0000_s378892" class=O style='position:absolute;top:63.0%;
+ left:72.65%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>A: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>A</b></span><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>,n</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>A</b></span></div>
+ <div v:shape="_x0000_s378893" class=O style='position:absolute;top:70.0%;
+ left:68.72%;width:11.42%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>B: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>B</b></span></div>
+ <div v:shape="_x0000_s378894" class=O style='position:absolute;top:77.75%;
+ left:66.1%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>C: m</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>C</b></span><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ mso-fareast-language:JA'><b>,p</b></span><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:67%;position:relative;top:.37em;mso-text-raise:-25%;mso-fareast-language:
+ JA'><b>C</b></span></div>
+ <div v:shape="_x0000_s378895" class=O style='position:absolute;top:77.5%;
+ left:84.26%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Courier New";mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ color:red;mso-fareast-language:JA'><b>D: m</b></span><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:67%;color:red;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>D</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";color:red;mso-fareast-language:JA'><b>,n</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:67%;color:red;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>D</b></span></div>
+ <v:line id="_x0000_s378896" style='position:absolute;flip:x' from="529.25pt,366.75pt"
+  to="553.25pt,384.75pt" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:line id="_x0000_s378897" style='position:absolute;flip:x' from="499.25pt,396.75pt"
+  to="535.25pt,426.75pt" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:line id="_x0000_s378898" style='position:absolute' from="570pt,402pt"
+  to="660pt,426pt" strokecolor="red" strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><![if !vml]><img border=0
+ v:shapes="_x0000_s378896,_x0000_s378897,_x0000_s378898"
+ src="slide0231_image216.gif" style='position:absolute;top:67.75%;left:69.1%;
+ width:23.03%;height:12.0%'><![endif]><v:line id="_x0000_s378899" style='position:absolute'
+  from="366pt,450pt" to="492pt,450pt" strokecolor="black [1]" strokeweight="6pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrow="block"
+   endarrowwidth="narrow" endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:rect id="_x0000_s378900" style='position:absolute;left:198pt;
+  top:456pt;width:191.375pt;height:31.25pt;mso-wrap-style:none;v-text-anchor:top-baseline'
+  filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]"
+  strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:rect><v:rect id="_x0000_s378901" style='position:absolute;left:492pt;
+  top:448.75pt;width:219.75pt;height:31.25pt;mso-wrap-style:none;
+  v-text-anchor:top-baseline' filled="f" fillcolor="#82b5ca [4]" stroked="f"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:rect><v:shape id="_x0000_s378902" type="#_x0000_t202" style='position:absolute;
+  left:0;top:366pt;width:258pt;height:79.25pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s378899"
+ src="slide0231_image217.gif" style='position:absolute;top:81.5%;left:50.37%;
+ width:18.72%;height:4.0%'><![endif]>
+ <div v:shape="_x0000_s378900" class=O style='position:absolute;top:84.5%;
+ left:28.46%;width:29.77%;height:5.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:
+ "Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>Methods(A,n)={</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>n</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>A</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>}</b></span></div>
+ <div v:shape="_x0000_s378901" class=O style='position:absolute;top:83.25%;
+ left:69.28%;width:34.45%;height:5.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:
+ "Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>Methods(A,n)={</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>n</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:54%;position:relative;
+ top:.37em;mso-text-raise:-25%;mso-fareast-language:JA'><b>a</b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>,</b></span><span
+ lang=EN-US style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;color:red;mso-fareast-language:
+ JA'><b>n</b></span><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:54%;color:red;position:relative;top:.37em;mso-text-raise:-25%;
+ mso-fareast-language:JA'><b>D</b></span><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:
+ "Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>}</b></span></div>
+ <div v:shape="_x0000_s378902" class=O style='mso-line-spacing:"100 50 0"'><span
+ style='position:absolute;top:68.5%;left:.93%;width:42.13%'><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>A
+ a=getAorSubclass();<br>
+ </b></span></span><span style='position:absolute;
+ top:73.0%;left:.93%;width:36.14%'><span lang=EN-US style='font-family:"Courier New";
+ mso-ascii-font-family:"Courier New";mso-hansi-font-family:"Courier New";
+ font-size:83%;mso-fareast-language:JA'><b>a.n; //bad if n is </b></span></span><span
+ style='position:absolute;top:77.5%;left:.93%;width:34.08%'><span lang=EN-US
+ style='font-family:"Courier New";mso-ascii-font-family:"Courier New";
+ mso-hansi-font-family:"Courier New";font-size:83%;mso-fareast-language:JA'><b>inlined</b></span></span></div>
+</p:slide></div>
+
+</body>
+
+</html>

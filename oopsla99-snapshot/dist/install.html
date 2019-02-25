@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="../common.css" type="text/css">
+<link rev=made href="mailto:webmaster@matsulab.is.titech.ac.jp">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OpenJIT: Installation Manual</title>
+
+<style type="text/css">
+<!--
+-->
+</style>
+</head>
+
+<body>
+
+<h1 class=banner>OpenJIT</h1>
+<h1 class=subbanner>Installation Manual</h1>
+
+<h2 class=genre>Installation of a binary package</h2>
+
+The steps of installing binary package vary with the version of the JDK.
+
+<dl>
+  <dt>JDK version 1.1.x
+  <dd>Unpack a binary package, everywhere you want.
+  <dd>Example:
+       <pre>
+&gt; gunzip -c OpenJIT-sparc-solaris-jdk118.tar.gz | (cd /usr/local; tar xf -)</pre>
+       It contains the following files:
+       <pre>
+OpenJIT-1.1.7/OpenJIT.jar
+OpenJIT-1.1.7/libOpenJIT.so
+OpenJIT-1.1.7/libOpenJIT_g.so</pre>
+       
+  <dt>JDK version is 1.2 or later
+  <dd>Unpack a binary package into 'jre' directory, which is a sub-directory of the JDK you installed.
+  <dd>Example: (If you've already installed JDK 1.2.2 into '/usr/local/jdk1.2.2')
+       <pre>
+&gt; gunzip -c OpenJIT-sparc-solaris-jdk122.tar.gz | (cd /usr/local/jdk1.2.2/jre; tar xf -)</pre>
+       A binary package contains the following files:
+       <pre>
+classes/org/OpenJIT/BCinfo.class
+classes/org/OpenJIT/Compile.class
+...
+lib/&lt;architecture-name&gt;/libOpenJIT.so
+lib/&lt;architecture-name&gt;/libOpenJIT_g.so</pre>
+
+</dl>
+
+<h2 class=genre>Installation of a source package</h2>
+
+To build OpenJIT from a source package:
+
+<ol>
+  <li>Unpack a source package, everywhere you want.
+       <pre>
+&gt; gunzip -c OpenJIT-1.1.7.tar.gz | tar xf -</pre>
+
+  <li>Do 'configure' script in the unpacked directory.
+       <pre>
+&gt; cd OpenJIT-1.1.7
+&gt; ./configure</pre>
+
+  <li>Do 'make' (GNU make is needed)
+<pre>&gt; gmake</pre>
+
+  <li>Create 'OpenJIT.jar' (for JDK 1.1.x only)
+<pre>&gt; gmake OpenJIT.jar</pre>
+
+</ol>
+
+The steps of installing binaries you built above, vary with the version of the JDK.
+
+<dl>
+  <dt>JDK version 1.1.x
+
+  <dd>There's nothing to do for just running OpenJIT. But, you can move files necessary for running, into your favorite directory.
+
+  <dd>Example: (The install direcotry is '/usr/local/OpenJIT-1.1.7')
+       <pre>
+&gt; mkdir /usr/local/OpenJIT-1.1.7
+&gt; cp OpenJIT.jar libOpenJIT.so /usr/local/OpenJIT-1.1.7</pre>
+
+  <dt>JDK version 1.2 or later
+
+  <dd>You must copy many files into 'jre' directory, which is a sub-directory of the JDK you installed.
+
+  <dd>Example: (Solaris SPARC/JDK 1.2.2)
+       <pre>
+&gt; cp libOpenJIT.so /usr/local/jdk1.2.2/jre/lib/sparc
+&gt; mkdir /usr/local/jdk1.2.2/jre/classes
+&gt; tar cf - org/OpenJIT/*.class | (cd /usr/local/jdk1.2.2/jre/classes; tar xf -)</pre>
+
+  <dd>Example: (Linux x86/JDK 1.2pre2)
+       <pre>
+&gt; cp libOpenJIT.so /usr/local/jdk1.2pre2/jre/lib/i386
+&gt; mkdir /usr/local/jdk1.2pre2/jre/classes
+&gt; tar cf - org/OpenJIT/*.class | (cd /usr/local/jdk1.2pre2/jre/classes; tar xf -)</pre>
+</dl>
+
+<h2 class=genre>How to run OpenJIT</h2>
+
+<dl>
+  <dt>JDK version 1.1.x
+
+  <dd>Set several environment variables:
+       <ul>
+	 <li>set the 'CLASSPATH' variable to contain the file 'OpenJIT.jar'
+	 <li>set the 'LD_LIBRARY_PATH' variable to contain the directory where the file 'libOpenJIT.so' can be found.
+	 <li>set the 'JAVA_COMPILER' variable to 'OpenJIT'
+       </ul>
+
+  <dd>Example: (The directory of OpenJIT is '/usr/local/OpenJIT-1.1.7')
+       <pre>
+&gt; setenv CLASSPATH /usr/local/OpenJIT-1.1.7/OpenJIT.jar:$CLASSPATH
+&gt; setenv LD_LIBRARY_PATH /usr/local/OpenJIT-1.1.7:$LD_LIBRARY_PATH
+&gt; setenv JAVA_COMPILER OpenJIT
+&gt; java Hello</pre>
+
+  <dt>JDK version 1.2 or later
+
+  <dd>Set 'JAVA_COMPILER' variable to 'OpenJIT'
+
+  <dd>Example:
+       <pre>
+&gt; setenv JAVA_COMPILER OpenJIT
+&gt; java Hello</pre>
+</dl>
+
+
+<hr>
+<address>openjit@is.titech.ac.jp</address>
+</body>
+</html>

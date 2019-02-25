@@ -1,0 +1,200 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: 最適なJITコンパイラ？">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0354.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 100209;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 101208);
+//-->
+</script><![endif]><p:slidetransition advancetime="100208" flag="1025"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="596"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><v:rect id="_x0000_s610306"
+  style='position:absolute;left:390pt;top:210pt;width:84pt;height:2in;
+  mso-wrap-style:none;v-text-anchor:middle' fillcolor="#36f" stroked="f"
+  strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><v:rect id="_x0000_s610307" style='position:absolute;left:474pt;
+  top:324pt;width:108pt;height:30pt;mso-wrap-style:none;v-text-anchor:middle'
+  fillcolor="#36f" stroked="f" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><![if !vml]><img border=0 v:shapes="_x0000_s610306,_x0000_s610307"
+ src="slide0354_image407.gif" style='position:absolute;top:39.0%;left:54.11%;
+ width:26.96%;height:27.0%'><![endif]><v:rect id="_x0000_s610308" style='position:absolute;
+  left:60pt;top:210pt;width:60pt;height:2in;mso-wrap-style:none;
+  v-text-anchor:middle' fillcolor="#36f" stroked="f" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><![if !vml]><img border=0 v:shapes="_x0000_s610308"
+ src="slide0354_image408.gif" style='position:absolute;top:39.0%;left:8.42%;
+ width:8.61%;height:27.0%'><![endif]><v:rect id="_x0000_s610309" style='position:absolute;
+  left:120pt;top:324pt;width:126pt;height:30pt;mso-wrap-style:none;
+  v-text-anchor:middle' fillcolor="#36f" stroked="f" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><p:shaperange href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s610310"
+  type="#_x0000_m141324" style='position:absolute;left:54pt;top:48pt;width:612pt;
+  height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s610311" type="#_x0000_m141325"
+  style='position:absolute;left:36pt;top:402pt;width:644pt;height:120pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape><![if !vml]><img border=0
+ v:shapes="_x0000_s610309" src="slide0354_image409.gif" style='position:absolute;
+ top:60.0%;left:16.66%;width:17.79%;height:6.0%'><![endif]>
+ <div v:shape="_x0000_s610310" class=T style='position:absolute;top:11.0%;
+ left:8.42%;width:83.14%;height:11.5%'>最適な<span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>JIT</span>コンパイラ？</div>
+ <div v:shape="_x0000_s610311" class=B>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:75.5%;left:9.73%;width:99.25%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-3.77%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span>実行時間最小を与える最適化度はメソッド毎</span><span
+ style='position:absolute;top:82.0%;left:9.73%;width:83.89%'>に異なる&#13;</span></div>
+ <div style='mso-line-spacing:"90 20 0";position:absolute;top:89.75%;
+ left:5.99%;width:87.64%;height:6.25%'><span style='position:absolute;
+ top:0%;left:4.27%;width:95.72%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-4.46%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span>アプリケーションによる差異も大きい</span></div>
+ </div>
+ <v:line id="_x0000_s610312" style='position:absolute' from="60pt,174pt" to="60pt,354pt"
+  strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke startarrow="block"/>
+  <v:shadow color="white [2]"/>
+ </v:line><![if !vml]><img border=0 v:shapes="_x0000_s610312"
+ src="slide0354_image410.gif" style='position:absolute;top:32.0%;left:7.49%;
+ width:2.05%;height:34.25%'><![endif]><v:line id="_x0000_s610313" style='position:absolute'
+  from="60pt,354pt" to="330pt,354pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:shadow color="white [2]"/>
+ </v:line><v:shape id="_x0000_s610314" style='position:absolute;left:60pt;
+  top:188pt;width:269.25pt;height:163.125pt' coordsize="2154,1305" path="m0,32c46,55,149,,275,171,401,342,441,868,754,1057,1067,1246,1862,1253,2154,1305e"
+  filled="f" strokecolor="#f90" strokeweight="2pt">
+  <v:shadow color="white [2]"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202"
+  path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s610315" type="#_x0000_t202" style='position:absolute;
+  left:12pt;top:138pt;width:192pt;height:36pt' filled="f" fillcolor="#cff"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:line id="_x0000_s610316" style='position:absolute' from="390pt,174pt"
+  to="390pt,354pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:stroke startarrow="block"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:line id="_x0000_s610317" style='position:absolute' from="390pt,354pt"
+  to="660pt,354pt" strokecolor="black [1]" strokeweight="2pt">
+  <v:shadow color="white [2]"/>
+ </v:line><v:shape id="_x0000_s610318" style='position:absolute;left:389.875pt;
+  top:256pt;width:269.375pt;height:95.125pt' coordsize="2155,761" path="m0,17c100,32,376,,603,105,830,210,1106,537,1365,646,1624,755,1991,737,2155,761e"
+  filled="f" strokecolor="#f90" strokeweight="2pt">
+  <v:shadow color="white [2]"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:shape id="_x0000_s610319" type="#_x0000_t202" style='position:absolute;
+  left:132pt;top:354pt;width:114pt;height:36pt' filled="f" fillcolor="#cff"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s610320" type="#_x0000_t202" style='position:absolute;
+  left:468pt;top:354pt;width:114pt;height:36pt' filled="f" fillcolor="#cff"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s610321" type="#_x0000_t202" style='position:absolute;
+  left:342pt;top:138pt;width:186pt;height:36pt' filled="f" fillcolor="#cff"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0
+ v:shapes="_x0000_s610313,_x0000_s610314,_x0000_s610316,_x0000_s610317,_x0000_s610318"
+ src="slide0354_image411.gif" style='position:absolute;top:32.0%;left:8.23%;
+ width:83.89%;height:34.25%'><![endif]>
+ <div v:shape="_x0000_s610315" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:27.0%;left:1.12%;width:27.71%;height:4.75%'><span style='layout-flow:horizontal'>最適な最適化度</span></div>
+ <div v:shape="_x0000_s610319" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:67.0%;left:19.28%;width:14.04%;height:4.75%'><span style='layout-flow:
+ horizontal'>メソッド</span></div>
+ <div v:shape="_x0000_s610320" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:67.0%;left:65.91%;width:14.04%;height:4.75%'><span style='layout-flow:
+ horizontal'>メソッド</span></div>
+ <div v:shape="_x0000_s610321" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:27.0%;left:46.62%;width:27.71%;height:4.75%'><span style='layout-flow:
+ horizontal'>最適な最適化度</span></div>
+</p:slide></div>
+
+</body>
+
+</html>

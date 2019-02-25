@@ -1,0 +1,221 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: OpenJIT Customization">
+<link rel=next href=slide0038.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0032.htm');   
+  else
+    parent.location.href = "../OpenJIT-ICSE98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master05_background.gif" bgcolor="#0066cc" alink="#ff9933"
+link="#330099" vlink="#cbcbcb" text=white topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=65 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=307 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=28 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=90 height=33 colspan=2></td>
+  <td width=307 height=33>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=307 height=33 align=center><font face="Times New Roman"
+    color="#cbcbcb" size=5>OpenJIT Customization</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=78 height=33 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=25 height=222></td>
+  <td width=409 height=222 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=132 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=43 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=34 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=31 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=195 height=21 colspan=10><font face="Times New Roman" size=3>3
+    levels of customization</font><br>
+    </td>
+    <td width=196 height=21 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=408 height=5 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=349 height=18 colspan=13><font face="Times New Roman" size=2><i>1.
+    No changes in Java language syntax or semantics</i></font><br>
+    </td>
+    <td width=21 height=18 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=408 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=236 height=16 colspan=6><font face="Times New Roman" size=1>Standard
+    Compiler incl. OO optimizations</font><br>
+    </td>
+    <td width=113 height=16 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=408 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=150 height=16 colspan=3><font face="Times New Roman" size=1>User-definable
+    (like SUIF)</font><br>
+    </td>
+    <td width=199 height=16 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=408 height=4 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=370 height=18 colspan=15><font face="Times New Roman" size=2><i>2.
+    Semantic extensions but no syntax change extensions</i></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=408 height=4 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=241 height=16 colspan=7><font face="Times New Roman" size=1>Adaptation
+    to Computing Env. (e.g., DSM)</font><br>
+    </td>
+    <td width=108 height=16 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=408 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=196 height=16 colspan=5><font face="Times New Roman" size=1>Both
+    frontend and backend support</font><br>
+    </td>
+    <td width=153 height=16 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=408 height=4 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=284 height=18 colspan=11><font face="Times New Roman" size=2><i>3.
+    Both Syntactic and Semantic Extensions</i></font><br>
+    </td>
+    <td width=86 height=18 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=408 height=4 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=342 height=16 colspan=11><font face="Times New Roman" size=1>New
+    Language Primitives (e.g.,<span style="mso-spacerun: yes">&nbsp;
+    </span>Data distribution Directives)</font><br>
+    </td>
+    <td width=7 height=16></td>
+   </tr>
+   <tr>
+    <td width=408 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=133 height=16 colspan=2><font face="Times New Roman" size=1>NOT
+    directly supported</font><br>
+    </td>
+    <td width=216 height=16 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=408 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=297 height=16 colspan=9><font face="Times New Roman" size=1>New
+    bytecode </font><font face="ＭＳ Ｐゴシック" size=1>→</font><font
+    face="Times New Roman" size=1> Need javac equiv. to emit bytecode</font><br>
+    </td>
+    <td width=52 height=16 colspan=3></td>
+   </tr>
+  </table>
+  </td>
+  <td width=41 height=222 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=425 height=11 colspan=4></td>
+  <td width=11 height=11 colspan=2><img src="master05_image013.gif" border=0
+  width=11 height=11></td>
+  <td width=39 height=11></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

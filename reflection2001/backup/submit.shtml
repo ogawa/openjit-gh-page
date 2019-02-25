@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="common.css" type="text/css"/>
+<link rev=made href="mailto:webmaster@openjit.org">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+<title>Reflection 2001: Submission Guideline</title>
+<style>
+</style>
+</head>
+
+<body>
+
+<table>
+<tr><td class="menu">
+
+<p class="m1">REFLECTION 2001</p>
+
+<div style="text-align: center"><img src="cover.jpg" width="125" height="92"></div>
+
+<p class="m2"><a href="index.shtml">COVER PAGE</a></p>
+
+<p class="m2"><a href="cfp.shtml">CALL FOR PAPERS</a></p>
+
+<p class="m2s">SUBMISSION GUIDELINE</p>
+<!--
+<p class="m2"><a href="submit.shtml">SUBMISSION GUIDELINE</a></p>
+-->
+
+<p class="m2"><a href="cfa.shtml">CALL FOR PARTICIPATION</a></p>
+
+<p class="m2"><a href="program.shtml">PROGRAM</a></p>
+
+</td>
+<td>
+
+<p class="t5">
+REFLECTION 2001<br>
+The Third International Conference on<br>
+Metalevel Architectures and Separation of Crosscutting Concerns<br>
+Kyoto, Japan, September 26-28, 2001</p>
+
+<p class="t2">SUBMISSION GUIDELINE</p>
+
+<div style="margin-top: 2em">&nbsp;</div>
+
+<a name="techpapers"><h1>SUBMISSION GUIDELINE</h1></a>
+
+<p>All submissions, acknowledgements, notifications, etc. will be done electronically. Manuscripts should preferably be prepared <strong>using <a href="http://www.springer.de/comp/lncs/authors.html">the LNCS format</a> (http://www.springer.de/comp/lncs/authors.html)</strong> for submission. Paper length should be <strong>less than 5000 words, excluding figures, tables, and references</strong>.  Papers exceeding this limit will not be reviewed.</p>
+
+<p>The program committee will select papers based on standard scientific grounds and merits such as technical novelty, correctness, technical interest and utility to the community, etc. Case Study/Experience papers will be judged on generality and utility of the feedback provided to the community.</p>
+
+<p>A paper may either be accepted in full form, as a short paper, or recommended as a poster presentation. A short paper will have shorter page allowance in the proceedings. Also, it could be given a shorter presentation slot during the conference.</p>
+
+<p>Papers are solicited on topics including, but not limited to:</p>
+
+<ol>
+<li>Systems and applications with a reflective architecture and/or designed with strong separation of concerns</li>
+
+<ul>
+  <li>Operating systems/Middleware
+  <li>Concurrent /Distributed/Parallel/Mobile systems
+  <li>Networking/Internet/Web/Collaboration
+  <li>Embedded/Fault-tolerant systems
+  <li>Databases/Expert Systems
+  <li>AI and knowledge-based systems/Agents
+</ul>
+
+<li>Programming Languages</li>
+
+<ul>
+  <li>Programming languages for reflection and/or separation of concerns (OO, functional, parallel, distributed, etc.)
+  <li>Implementation techniques (open compilers, specializers, weavers, interpreters, analysis techniques, etc.)
+</ul>
+
+<li>Software Engineering
+
+<ul>
+  <li>Metaobject protocols
+  <li>Programming methodologies and environments
+  <li>Metamodels (UML, CORBA, etc.)
+  <li>Formal methods
+  <li>Safety and security issues
+</ul>
+
+<li>Separation of Concerns
+
+<ul>
+  <li>Mechanisms for handling crosscutting concerns and/or multiple kinds of concerns (adaptive programming, aspect-oriented programming, composition filters, multi-dimensional separation of concerns, etc.)
+  <li>The use of reflection for achieving improved separation of concerns
+  <li>Language and environment support
+  <li>Specification, verification and analysis of concerns and their compositions
+  <li>Conceptual and theoretical foundations 
+  <li>Case studies
+</ul>
+
+<li>Foundations of reflection and/or separation of concerns
+
+<ul>
+  <li>Conceptual and theoretical foundations
+  <li>Language semantics
+</ul>
+</ol>
+
+<a name="submit"><h1>SUBMISSION PROCEDURE</h1></a>
+
+<p>To allow smooth processing of the review, we strongly encourage you to submit the paper in two phases (although not a strict requirement).</p>
+
+<p>In the first phase, the abstract of the paper written in English will be electronically submitted before (and including) <strong>March 9<sup>th</sup>, 2001</strong> at <a href="http://www.is.titech.ac.jp/reflection2001/submit/">http://www.is.titech.ac.jp/reflection2001/</a>. This will allow us to process the submission smoothly for early reviewer assignments. Submission will be possible starting January 25th, 2001.</p>
+
+<p>In the second phase, the full paper must be electronically submitted before (and including) <strong>March 15<sup>th</sup>, 2001</strong>. The paper must be written in English and not longer then 5,000 words. Papers arriving late or clearly longer than the limit may be rejected immediately, without being reviewed. Submission of papers whose abstract had not been submitted by March 9th is allowed, but the abstract and other submission information must accompany the submission.</p>
+
+<!--
+<p>Papers must be submitted in two phases.</p>
+
+<p>In the first phase, the abstract of the paper written in English must be electronically submitted <strong>before (and including) March 9<sup>th</sup>, 2001</strong> at <a href="http://www.is.titech.ac.jp/reflection2001/submit/">http://www.is.titech.ac.jp/reflection2001/submit/</a>.  Submission will be possible starting January 25<sup>th</sup>, 2001.</p>
+
+<p>In the second phase, the full paper must be electronically submitted <strong>before (and including) March 15<sup>th</sup>, 2001</strong>. The paper must be written in English and not longer then 5,000 words. Papers arriving late or clearly longer than the limit may be rejected immediately, without being reviewed.</p>
+-->
+
+<ul>
+<li><a href="http://www.openjit.org/cman/reflection2001/REG-paper/">Go to SUBMISSION page!!!</a></li>
+</ul>
+
+<a name="deadlines"><h1>DEADLINES</h1></a>
+
+<dl style="font-size: 12pt; font-weight: bold">
+<dt>Start of electronic submission</dt>
+<dd>January 25<sup>th</sup>, 2001</dd>
+<dt>Abstract submission</dt>
+<dd>March 9<sup>th</sup>, 2001 (strongly encouraged)</dd>
+<dt>Full paper submission</dt>
+<dd>March 15<sup>th</sup>, 2001</dd>
+<dt>Notification of acceptance</dd>
+<dd>May 15<sup>th</sup>, 2001</dd>
+<dt>Camera ready copy due</dt>
+<dd>July 8<sup>th</sup>, 2001</dd>
+<dt>Conference</dt>
+<dd>September 26-28<sup>th</sup>, 2001</dd>
+</dl>
+
+<div style="margin-top: 2em">&nbsp;</div>
+
+<hr width="200" align="left">
+<I>Last modified: <!--#echo var="LAST_MODIFIED"--> by webmaster@openjit.org</I>
+
+</td></tr>
+</table>
+
+</body>
+</html>

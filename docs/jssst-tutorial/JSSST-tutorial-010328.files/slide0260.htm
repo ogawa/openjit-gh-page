@@ -1,0 +1,166 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: OpenJIT High-level Optimizer Toolkit">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0260.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = true, g_autoTrans = false, g_transSecs = 1;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(1);
+//-->
+</script><![endif]><p:slidetransition advancetime="0" effect="pull"
+ direction="right" flag="1"/><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="447"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden;filter:revealtrans(Duration=1, Transition=6)'><p:slide
+ coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s455682" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s455683" type="#_x0000_m141325"
+  style='position:absolute;left:66pt;top:150pt;width:630pt;height:378pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s455682" class=T><span style='position:absolute;
+ top:7.25%;left:2.24%;width:95.69%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:91%;mso-fareast-language:JA'>OpenJIT
+ High-level Optimizer </span></span><span style='position:absolute;top:16.0%;
+ left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:91%;mso-fareast-language:JA'>Toolkit</span></span></div>
+ <div v:shape="_x0000_s455683">
+ <div class=B style='position:absolute;top:27.75%;left:10.11%;width:85.58%;
+ height:6.5%'><span style='position:absolute;top:0%;left:4.37%;width:95.62%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-4.57%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Flowgraph
+ Constructor&#13;</span></span></div>
+ <div class=B1><span style='position:absolute;top:34.0%;left:18.35%;width:87.82%'><span
+ style='font-size:71%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.62%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Generate Data/Control Dependence Graph
+ etc. from the </span></span><span style='position:absolute;top:38.5%;
+ left:18.35%;width:77.52%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>AST/CFG&#13;</span></span></div>
+ <div class=B1><span style='position:absolute;top:43.75%;left:18.35%;
+ width:89.7%'><span style='font-size:71%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.54%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Each generator is defined as a
+ constructor of subclass of </span></span><span style='position:absolute;
+ top:48.25%;left:18.35%;width:89.32%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>Flowgraph
+ class using the Factory Method design pattern&#13;</span></span></div>
+ <div class=B1><span style='position:absolute;top:53.75%;left:18.35%;
+ width:87.64%'><span style='font-size:71%'><span style='mso-special-format:
+ bullet;color:#003399;mso-color-index:3;position:absolute;left:-3.63%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Other types of glow graphs can be
+ easily defined by the </span></span><span style='position:absolute;top:58.0%;
+ left:18.35%;width:77.52%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>user&#13;</span></span></div>
+ <div class=B style='position:absolute;top:63.5%;left:10.11%;width:85.58%;
+ height:6.5%'><span style='position:absolute;top:0%;left:4.37%;width:95.62%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-4.57%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Flowgraph
+ Analyzer&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:69.75%;left:15.16%;width:90.26%;
+ height:5.5%'><span style='position:absolute;top:0%;left:3.52%;width:96.47%'><span
+ style='font-size:71%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.65%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Implements general analysis algorithms
+ over flowgraphs&#13;</span></span></div>
+ <div class=B1><span style='position:absolute;top:75.0%;left:18.35%;width:79.96%'><span
+ style='font-size:71%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.98%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Each algorithm defined as the execute()
+ method of </span></span><span style='position:absolute;top:79.5%;left:18.35%;
+ width:88.57%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:71%;mso-fareast-language:JA'>subclass of the
+ Analyzer class using the Command design </span></span><span style='position:
+ absolute;top:84.0%;left:18.35%;width:77.52%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>pattern&#13;</span></span></div>
+ <div class=B style='position:absolute;top:89.5%;left:10.11%;width:85.58%;
+ height:6.5%'><span style='position:absolute;top:0%;left:4.37%;width:95.62%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-4.57%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>C.f.
+ SUIF&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:97.0%;left:15.16%;width:80.71%;
+ height:4.0%'><span style='position:absolute;top:0%;left:3.94%;width:96.05%'><span
+ style='font-size:71%;visibility:hidden'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-4.1%'>&#8226;</span></span><span
+ lang=EN-US style='font-size:71%;mso-fareast-language:JA;mso-special-format:
+ lastCR;display:none'>&#13;</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

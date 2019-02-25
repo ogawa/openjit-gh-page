@@ -1,0 +1,265 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 解析結果">
+<link rel=next href=slide0094.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0074.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0074_background.gif" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=25 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=97 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=36 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=31 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=43 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=179 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=11></td>
+ </tr>
+ <tr>
+  <td width=36 height=27 colspan=2></td>
+  <td width=112 height=27 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=112 height=27><font face="ＭＳ Ｐゴシック" size=5>解析結果</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=327 height=27 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=475 height=16 colspan=11></td>
+ </tr>
+ <tr>
+  <td width=51 height=19 colspan=3></td>
+  <td width=133 height=19 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=133 height=19 align=center><font face="ＭＳ Ｐゴシック" size=3>元のプログラム</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=77 height=19 colspan=3></td>
+  <td width=179 height=19>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=179 height=19 align=center><font face="ＭＳ Ｐゴシック" size=3>解析結果の表すもの</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=35 height=19 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=17 colspan=11></td>
+ </tr>
+ <tr>
+  <td width=25 height=8></td>
+  <td width=190 height=228 colspan=5 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=50 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=39 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=30 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=140 height=19 colspan=6><font face="Courier New" size=2><b>void
+    daily() {</b></font><br>
+    </td>
+    <td width=50 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=120 height=19 colspan=4><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp; </span>gotoLab();</b></font><br>
+    </td>
+    <td width=70 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=190 height=19 colspan=8><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp; </span>while (!hungry())</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=31 height=19 colspan=2><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp; </span>{</b></font><br>
+    </td>
+    <td width=159 height=19 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=190 height=19 colspan=8><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>if(emergency())</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=120 height=19 colspan=4><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>break;</b></font><br>
+    </td>
+    <td width=70 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=170 height=19 colspan=7><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>if (!tired())</b></font><br>
+    </td>
+    <td width=20 height=19></td>
+   </tr>
+   <tr>
+    <td width=140 height=19 colspan=6><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>study();</b></font><br>
+    </td>
+    <td width=50 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=81 height=19 colspan=3><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>else</b></font><br>
+    </td>
+    <td width=109 height=19 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=130 height=19 colspan=5><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>play();</b></font><br>
+    </td>
+    <td width=60 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=31 height=19 colspan=2><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp; </span>}</b></font><br>
+    </td>
+    <td width=159 height=19 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=11 height=19><font face="Courier New" size=2><b>}</b></font><br>
+    </td>
+    <td width=179 height=19 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=260 height=8 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=25 height=209></td>
+  <td width=43 height=209></td>
+  <td width=190 height=209 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=31 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=50 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=27 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=120 height=19 colspan=4><font face="Courier New" size=1><span
+    style="mso-spacerun: yes">&nbsp; </span></font><font face="Courier New"
+    size=2><b>gotoLab();</b></font><br>
+    </td>
+    <td width=70 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=190 height=19 colspan=8><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp; </span>while (!hungry())</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=31 height=19><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp; </span>{</b></font><br>
+    </td>
+    <td width=159 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=190 height=19 colspan=8><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>if(emergency())</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=120 height=19 colspan=4><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>break;</b></font><br>
+    </td>
+    <td width=70 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=160 height=19 colspan=7><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>if (tired())</b></font><br>
+    </td>
+    <td width=30 height=19></td>
+   </tr>
+   <tr>
+    <td width=130 height=19 colspan=5><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>play();</b></font><br>
+    </td>
+    <td width=60 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=81 height=19 colspan=2><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp; </span>else</b></font><br>
+    </td>
+    <td width=109 height=19 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=140 height=19 colspan=6><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span>study();</b></font><br>
+    </td>
+    <td width=50 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=31 height=19><font face="Courier New" size=2><b><span
+    style="mso-spacerun: yes">&nbsp; </span>}</b></font><br>
+    </td>
+    <td width=159 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=93 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=1><b>　　</b></font><font
+    face="Courier New" size=2><b>return;</b></font><br>
+    </td>
+    <td width=97 height=19 colspan=5></td>
+   </tr>
+  </table>
+  </td>
+  <td width=27 height=209></td>
+ </tr>
+ <tr>
+  <td width=25 height=11></td>
+  <td width=260 height=11 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=475 height=7 colspan=11></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

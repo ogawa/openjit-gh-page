@@ -1,0 +1,305 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: OpenJIT 2の概要(全体)">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0361.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 42321;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 43320);
+//-->
+</script><![endif]><p:slidetransition advancetime="42320" flag="1025"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="603"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><v:roundrect id="_x0000_s617474"
+  style='position:absolute;left:30pt;top:168pt;width:414pt;height:156pt;
+  mso-wrap-style:none;v-text-anchor:middle' arcsize="10923f" filled="f"
+  fillcolor="#ff9" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:roundrect><p:shaperange href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s617475"
+  type="#_x0000_m141324" style='position:absolute;left:54pt;top:48pt;width:612pt;
+  height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><![if !vml]><img border=0
+ v:shapes="_x0000_s617474" src="slide0361_image414.gif" style='position:absolute;
+ top:31.0%;left:4.11%;width:57.86%;height:29.5%'><![endif]>
+ <div v:shape="_x0000_s617475" class=T style='position:absolute;top:11.0%;
+ left:8.42%;width:83.14%;height:11.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>OpenJIT 2</span>の概要<span style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS"'>(</span>全体<span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS"'>)</span></div>
+ <v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202" path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s617476" type="#_x0000_t202" style='position:absolute;
+  left:186pt;top:469.625pt;width:312pt;height:46.375pt' fillcolor="#cff"
+  strokecolor="#930">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s617477" type="#_x0000_t202" style='position:absolute;
+  left:186pt;top:420pt;width:312pt;height:46.375pt' fillcolor="#ff9"
+  strokecolor="#930">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s617476,_x0000_s617477"
+ src="slide0361_image415.gif" style='position:absolute;top:77.75%;left:25.84%;
+ width:43.82%;height:18.25%'><![endif]>
+ <div v:shape="_x0000_s617476" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:87.75%;left:23.4%;width:48.5%;height:7.5%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;font-size:133%;layout-flow:horizontal;mso-fareast-language:JA'>Java
+ Virtual Machine</span></div>
+ <div v:shape="_x0000_s617477" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:78.5%;left:24.53%;width:46.25%;height:7.5%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;font-size:133%;layout-flow:horizontal;mso-fareast-language:JA'>OpenJIT
+ C Runtime</span></div>
+ <v:group id="_x0000_s617478" style='position:absolute;left:516pt;top:252pt;
+  width:162pt;height:84pt' coordorigin="2160,2016" coordsize="1296,672">
+  <v:oval id="_x0000_s617479" style='position:absolute;left:2160;top:2016;
+   width:1296;height:672;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+   fillcolor="#82b5ca [4]" strokecolor="black [1]">
+   <v:fill color2="white [0]"/>
+   <v:shadow color="white [2]"/>
+  </v:oval><v:shape id="_x0000_s617480" type="#_x0000_t202" style='position:absolute;
+   left:2304;top:2112;width:1056;height:518' filled="f" fillcolor="#82b5ca [4]"
+   stroked="f" strokecolor="black [1]">
+   <v:fill color2="white [0]"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s617478,_x0000_s617479,_x0000_s617480"
+ src="slide0361_image416.gif" style='position:absolute;top:46.5%;left:71.53%;
+ width:22.84%;height:16.0%'><![endif]>
+ <div v:shape="_x0000_s617480" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0'><span style='position:absolute;
+ top:49.5%;left:75.09%;width:16.47%'><span lang=EN-US style='font-family:Tahoma;
+ mso-ascii-font-family:Tahoma;mso-hansi-font-family:Tahoma;layout-flow:horizontal;
+ mso-fareast-language:JA'>Compiled </span></span><span style='position:absolute;
+ top:54.75%;left:75.09%;width:16.47%'><span lang=EN-US style='font-family:Tahoma;
+ mso-ascii-font-family:Tahoma;mso-hansi-font-family:Tahoma;layout-flow:horizontal;
+ mso-fareast-language:JA'>code</span></span></div>
+ <v:line id="_x0000_s617481" style='position:absolute' from="456pt,252pt" to="516pt,270pt"
+  strokecolor="navy" strokeweight="3pt">
+  <v:stroke endarrow="classic" endarrowwidth="wide"/>
+  <v:shadow color="white [2]"/>
+ </v:line><![if !vml]><img border=0 v:shapes="_x0000_s617481"
+ src="slide0361_image417.gif" style='position:absolute;top:46.25%;left:63.1%;
+ width:9.17%;height:5.5%'><![endif]><v:line id="_x0000_s617482" style='position:absolute'
+  from="156pt,336pt" to="210pt,408pt" strokecolor="red" strokeweight="3pt">
+  <v:stroke startarrow="block" endarrow="block"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:line id="_x0000_s617483" style='position:absolute;flip:x y'
+  from="180pt,336pt" to="234pt,408pt" strokecolor="navy" strokeweight="3pt">
+  <v:stroke endarrow="classic" endarrowwidth="wide"/>
+  <v:shadow color="white [2]"/>
+ </v:line><![if !vml]><img border=0 v:shapes="_x0000_s617482,_x0000_s617483"
+ src="slide0361_image418.gif" style='position:absolute;top:62.0%;left:21.34%;
+ width:11.61%;height:14.5%'><![endif]><v:line id="_x0000_s617484" style='position:absolute;
+  flip:x' from="450pt,330pt" to="516pt,408pt" strokecolor="red" strokeweight="3pt">
+  <v:stroke startarrow="block" endarrow="block"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:line id="_x0000_s617485" style='position:absolute;flip:x' from="474pt,336pt"
+  to="534pt,408pt" strokecolor="navy" strokeweight="3pt">
+  <v:stroke startarrow="classic" startarrowwidth="wide" endarrow="classic"
+   endarrowwidth="wide"/>
+  <v:shadow color="white [2]"/>
+ </v:line><![if !vml]><img border=0 v:shapes="_x0000_s617484,_x0000_s617485"
+ src="slide0361_image419.gif" style='position:absolute;top:60.75%;left:62.35%;
+ width:12.35%;height:15.5%'><![endif]><v:line id="_x0000_s617486" style='position:absolute'
+  from="36pt,444pt" to="120pt,444pt" strokecolor="red" strokeweight="3pt">
+  <v:stroke endarrow="block"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:shape id="_x0000_s617487" type="#_x0000_t202" style='position:absolute;
+  left:42pt;top:408pt;width:66pt;height:36pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s617486"
+ src="slide0361_image420.gif" style='position:absolute;top:80.75%;left:4.68%;
+ width:12.35%;height:3.5%'><![endif]>
+ <div v:shape="_x0000_s617487" class=O style='mso-line-spacing:"100 50 0";
+ mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;top:77.0%;left:6.92%;
+ width:8.23%;height:4.75%'><span style='layout-flow:horizontal'>制御</span></div>
+ <v:line id="_x0000_s617488" style='position:absolute' from="36pt,510pt" to="120pt,510pt"
+  strokecolor="navy" strokeweight="3pt">
+  <v:stroke endarrow="classic" endarrowwidth="wide"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:shape id="_x0000_s617489" type="#_x0000_t202" style='position:absolute;
+  left:36pt;top:474pt;width:96pt;height:36pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s617488"
+ src="slide0361_image421.gif" style='position:absolute;top:92.25%;left:4.68%;
+ width:12.35%;height:5.0%'><![endif]>
+ <div v:shape="_x0000_s617489" class=O style='mso-line-spacing:"100 50 0";
+ mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;top:89.25%;
+ left:5.99%;width:11.42%;height:4.75%'><span style='layout-flow:horizontal'>データ</span></div>
+ <v:group id="_x0000_s617490" style='position:absolute;left:54pt;top:204pt;
+  width:150pt;height:102pt' coordorigin="480,1872" coordsize="1200,816">
+  <v:roundrect id="_x0000_s617491" style='position:absolute;left:480;top:1872;
+   width:1200;height:816;mso-wrap-style:none;v-text-anchor:middle' arcsize="10923f"
+   fillcolor="#cfc" strokecolor="black [1]">
+   <v:shadow color="white [2]"/>
+  </v:roundrect><v:shape id="_x0000_s617492" type="#_x0000_t202" style='position:absolute;
+   left:480;top:1920;width:1200;height:672' filled="f" fillcolor="#82b5ca [4]"
+   stroked="f" strokecolor="black [1]">
+   <v:fill color2="white [0]"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><v:group id="_x0000_s617493" style='position:absolute;
+  left:3in;top:192pt;width:186pt;height:102pt' coordorigin="480,1872"
+  coordsize="1200,816">
+  <v:roundrect id="_x0000_s617494" style='position:absolute;left:480;top:1872;
+   width:1200;height:816;mso-wrap-style:none;v-text-anchor:middle' arcsize="10923f"
+   fillcolor="#cfc" strokecolor="black [1]">
+   <v:shadow color="white [2]"/>
+  </v:roundrect><v:shape id="_x0000_s617495" type="#_x0000_t202" style='position:absolute;
+   left:480;top:1920;width:1200;height:672' filled="f" fillcolor="#82b5ca [4]"
+   stroked="f" strokecolor="black [1]">
+   <v:fill color2="white [0]"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s617490,_x0000_s617491,_x0000_s617492,_x0000_s617493,_x0000_s617494,_x0000_s617495"
+ src="slide0361_image422.gif" style='position:absolute;top:35.5%;left:7.49%;
+ width:48.68%;height:21.75%'><![endif]>
+ <div v:shape="_x0000_s617492" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0'><span style='position:absolute;
+ top:39.5%;left:8.23%;width:19.66%'><span lang=EN-US style='font-family:Tahoma;
+ mso-ascii-font-family:Tahoma;mso-hansi-font-family:Tahoma;font-size:133%;
+ layout-flow:horizontal;mso-fareast-language:JA'>Baseline </span></span><span
+ style='position:absolute;top:46.5%;left:7.49%;width:20.97%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;font-size:133%;layout-flow:horizontal;mso-fareast-language:JA'>Compiler</span></span></div>
+ <div v:shape="_x0000_s617495" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0'><span style='position:absolute;
+ top:37.25%;left:29.77%;width:26.59%'><span lang=EN-US style='font-family:Tahoma;
+ mso-ascii-font-family:Tahoma;mso-hansi-font-family:Tahoma;font-size:133%;
+ layout-flow:horizontal;mso-fareast-language:JA'>customized </span></span><span
+ style='position:absolute;top:44.5%;left:31.08%;width:23.97%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;font-size:133%;layout-flow:horizontal;mso-fareast-language:JA'>Compiler</span></span></div>
+ <v:group id="_x0000_s617496" style='position:absolute;left:228pt;top:204pt;
+  width:186pt;height:102pt' coordorigin="480,1872" coordsize="1200,816">
+  <v:roundrect id="_x0000_s617497" style='position:absolute;left:480;top:1872;
+   width:1200;height:816;mso-wrap-style:none;v-text-anchor:middle' arcsize="10923f"
+   fillcolor="#cfc" strokecolor="black [1]">
+   <v:shadow color="white [2]"/>
+  </v:roundrect><v:shape id="_x0000_s617498" type="#_x0000_t202" style='position:absolute;
+   left:480;top:1920;width:1200;height:672' filled="f" fillcolor="#82b5ca [4]"
+   stroked="f" strokecolor="black [1]">
+   <v:fill color2="white [0]"/>
+   <v:shadow color="white [2]"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s617496,_x0000_s617497,_x0000_s617498"
+ src="slide0361_image423.gif" style='position:absolute;top:37.75%;left:31.64%;
+ width:26.21%;height:19.5%'><![endif]>
+ <div v:shape="_x0000_s617498" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0'><span style='position:absolute;
+ top:39.5%;left:31.46%;width:26.59%'><span lang=EN-US style='font-family:Tahoma;
+ mso-ascii-font-family:Tahoma;mso-hansi-font-family:Tahoma;font-size:133%;
+ layout-flow:horizontal;mso-fareast-language:JA'>customized </span></span><span
+ style='position:absolute;top:46.5%;left:32.58%;width:23.97%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;font-size:133%;layout-flow:horizontal;mso-fareast-language:JA'>Compiler</span></span></div>
+ <v:roundrect id="_x0000_s617499" style='position:absolute;left:240pt;top:3in;
+  width:186pt;height:102pt;mso-wrap-style:none;v-text-anchor:middle' arcsize="10923f"
+  fillcolor="#cfc" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:roundrect><v:shape id="_x0000_s617500" type="#_x0000_t202" style='position:absolute;
+  left:240pt;top:242.375pt;width:186pt;height:45.625pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s617501" type="#_x0000_t202" style='position:absolute;
+  left:108pt;top:2in;width:270pt;height:45.625pt' fillcolor="white [0]"
+  stroked="f" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s617499,_x0000_s617501"
+ src="slide0361_image424.gif" style='position:absolute;top:26.75%;left:14.98%;
+ width:44.56%;height:32.75%'><![endif]>
+ <div v:shape="_x0000_s617500" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:45.5%;left:34.26%;width:23.97%;height:7.5%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;font-size:133%;layout-flow:horizontal;mso-fareast-language:JA'>Compilet</span></div>
+ <div v:shape="_x0000_s617501" class=O style='text-align:center;mso-line-spacing:
+ "100 50 0";mso-char-wrap:0;mso-kinsoku-overflow:0;position:absolute;
+ top:27.25%;left:12.54%;width:42.5%;height:7.5%'><span lang=EN-US
+ style='font-family:Tahoma;mso-ascii-font-family:Tahoma;mso-hansi-font-family:
+ Tahoma;font-size:133%;layout-flow:horizontal;mso-fareast-language:JA'>OpenJIT
+ Compiler</span></div>
+</p:slide></div>
+
+</body>
+
+</html>

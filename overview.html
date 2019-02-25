@@ -1,0 +1,44 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="common.css" type="text/css">
+<link rev=made href="mailto:webmaster@matsulab.is.titech.ac.jp">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OpenJIT: Overview</title>
+
+<style type="text/css">
+<!--
+p { text-align: justify; }
+-->
+</style>
+</head>
+
+<body>
+
+<div class=begin-title>OpenJIT</div>
+<h1 class=title>Overview</h1>
+<div class=end-title>&nbsp;</div>
+
+<p style="text-align: right; font-size: smaller">Satoshi Matsuoka, Tokyo Institute of Technology</p>
+
+<p>The OpenJIT project is an ongoing Java&#153; the programming language JIT compiler project as a collaborative effort between Tokyo Institute of Technology and Fujitsu Laboratory, partly sponsored by the Information Promotion Agency of Japan. OpenJIT is a "reflective" JIT compiler in that not only it is almost entirely written in Java, but also that it bootstraps and compiles itself during execution of the user program, and compiler components coexist as first-class objects in user heap space. Thus, users can tailor and customize the compilation of classes at runtime for variety of purposes such as application-specific optimization and partial evaluation, dynamic, compiler-assisted environment adaptation of programs, debugging, language extension and experimentation, and other types of advanced compiler-based research and applications. OpenJIT even allows full dynamic update of itself by loading the compiler classes on the fly from the network.</p>
+
+<p>OpenJIT is by no means a toy or partially functional prototype --- rather, it is a full-fledged Java&#153; JIT compiler, able to execute real-life applications such as HotJava. To our knowledge, OpenJIT is the only JIT compiler written in Java with standard JVM plug-in capability. This means that the user can easily specify OpenJIT as a substitute JIT in a standard JDK environment. OpenJIT is fully JDK compliant, and plugs into standard JVMs several Unix platforms such as Solaris (Sparc), Linux (x86), and FreeBSD (x86).</p>
+
+<p>The performance of OpenJIT is respectable considering the inherent restriction that it is currently based on the so-called "classic-VM". On Linux/x86 platform, OpenJIT 1.1.14 (the current release) is faster than the JDK 1.2 classic VM compiler, runs more or less the same speed as other commercial JIT compilers on classic VM. In fact, its SpecJVM score is about half of the Sun Hotspot and IBM JDK 1.1.8 JITs, which are the fastest JITs on x86s as of Nov., 1999. Recent high-performance JIT compilers including Sun Hotspot are increasingly integrated with the JVM itself, incorporating performance enhancement features such as efficient and exact memory management, fast monitor synchronization, adaptive compilation, etc.; however, this makes pluggable and portable JITs such as OpenJIT extremely difficult to build. One of our research agenda is to define, in collaboration with Sun Laboratory, a JIT API such that JITs could be made pluggable even for modern VMs.</p>
+
+<p>As OpenJIT is a reflective compiler, it can be extended and modified. Such an extension is called "compilets", and our plan is to build a framework for compilets such that the user could easily add his compiler customizations. Moreover, the compilets themselves are planned to be downloadable over the network; this allows classes to be described such that the base code describes the algorithm, and the optimizations in a separate compilet classes (which are effectively compiler metaclasses). Although these features are planned for version 2.0, one can already customize the current OpenJIT using standard object-oriented techniques.</p>
+
+<p>Architecturally, OpenJIT consists of two major portions. The OpenJIT frontend performs Bytecode decompilation, high-level program analysis and transformation. OpenJIT backend performs low-level program analysis and transformation, code generation and run-time support. The backend alone can act as a standalone JIT compiler, whereas the frontend is meant to be invoked only when heavy-duty 
+optimizations are required.</p>
+
+<p>We are finally releasing the project Web page <!--snapshot CD--> which includes the release version of the backend (version 1.1.14), partially completed frontend, various papers and presentation, and documents. Although we are still in the midst of research and development, especially completion of the frontend, improved compilets feature, support for more platforms, improved optimization etc., we believe it would be beneficial to release OpenJIT now so that people can start experimenting with different projects.</p>
+
+<p>OpenJIT is completely free so long as it is used for non-commercial purposes. Its source, binaries, etc. can be freely distributed and modified without restriction. The only restriction is when the whole or parts of the code is used in a commercial application, upon which a license will be required.</p>
+
+<p>Information on OpenJIT can be found on <a target="_top" href="http://www.openjit.org/">www.openjit.org</a>.</p>
+
+<hr>
+<address>openjit@is.titech.ac.jp</address>
+</body>
+</html>

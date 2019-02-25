@@ -1,0 +1,165 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OMPC++: A Portable High-Performance Implementation of DSM using OpenC++
+Reflection</title>
+<meta name=Description
+content="99/10/27: Example: before and after the transformation">
+<link rel=next href=slide0013.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0025.htm');   
+  else
+    parent.location.href = "../OMPC++Reflection99.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0025_background.gif" bgcolor="#000066" alink="#000044"
+link="#3366ff" vlink=yellow text=white topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=13 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=27 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=157 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=222 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=2 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=40 height=76 colspan=2></td>
+  <td width=379 height=76 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=274 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=379 height=41 colspan=2><font face="Comic Sans MS" color="#ffcc66"
+    size=5>Example: before and after</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=274 height=35><font face="Comic Sans MS" color="#ffcc66" size=5>the
+    transformation</font><br>
+    </td>
+    <td width=105 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=56 height=76></td>
+ </tr>
+ <tr>
+  <td width=475 height=5 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=13 height=157></td>
+  <td width=184 height=157 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=54 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=27 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=123 height=14 colspan=8><font face="Times New Roman" size=1>Shared&lt;double&gt;
+    a(100);</font><br>
+    </td>
+    <td width=61 height=14></td>
+   </tr>
+   <tr>
+    <td width=96 height=14 colspan=7><font face="Times New Roman" size=1>Shared&lt;double&gt;
+    b;</font><br>
+    </td>
+    <td width=88 height=14 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=72 height=14 colspan=3><font face="Times New Roman" size=1>sdsm_main(){</font><br>
+    </td>
+    <td width=112 height=14 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=88 height=14 colspan=6><font face="Times New Roman" size=1><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font><font
+    face="Times New Roman" color="#ffcc66" size=1>b = (double*)</font><br>
+    </td>
+    <td width=96 height=14 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=184 height=1 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=184 height=14 colspan=9><font face="Times New Roman"
+    color="#ffcc66" size=1><span style="mso-spacerun:
+    yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </span>malloc(sizeof(double) * 10);</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=77 height=14 colspan=4><font face="Times New Roman" size=1><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font><font
+    face="Times New Roman" color="#ff99ff" size=1>b[0] = a[0];</font><br>
+    </td>
+    <td width=107 height=14 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=10 height=14><font face="Times New Roman" size=1>};</font><br>
+    </td>
+    <td width=174 height=14 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=64 height=14 colspan=2><font face="Times New Roman" size=1>sdsm_init(){</font><br>
+    </td>
+    <td width=120 height=14 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=184 height=1 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=78 height=14 colspan=5><font face="Times New Roman" size=1><span
+    style="mso-spacerun: yes">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </span></font><font
+    face="Times New Roman" color="#ff99ff" size=1>a[0] = 10.0;</font><br>
+    </td>
+    <td width=106 height=14 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=10 height=14><font face="Times New Roman" size=1>};</font><br>
+    </td>
+    <td width=174 height=14 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=96 height=14 colspan=7><font face="Times New Roman" size=1>sdsm_done(){
+    ... };</font><br>
+    </td>
+    <td width=88 height=14 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=278 height=157 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=116 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

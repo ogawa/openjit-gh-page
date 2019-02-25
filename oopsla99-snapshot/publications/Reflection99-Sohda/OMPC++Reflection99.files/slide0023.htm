@@ -1,0 +1,156 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OMPC++: A Portable High-Performance Implementation of DSM using OpenC++
+Reflection</title>
+<meta name=Description
+content="99/10/27: Rules for source programs written by users">
+<link rel=next href=slide0011.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0023.htm');   
+  else
+    parent.location.href = "../OMPC++Reflection99.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master04_background.gif" bgcolor="#000066" alink="#000044"
+link="#3366ff" vlink=yellow text=white topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=375 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=2 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=40 height=76></td>
+  <td width=375 height=76>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=235 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=375 height=41 colspan=2><font face="Comic Sans MS" color="#ffcc66"
+    size=5>Rules for source programs</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=235 height=35><font face="Comic Sans MS" color="#ffcc66" size=5>written
+    by users</font><br>
+    </td>
+    <td width=140 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=60 height=76 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=4 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=40 height=197></td>
+  <td width=391 height=197 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=54 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=27 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=64 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=53 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=73 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=30><font color=white size=4>&#8226;</font></td>
+    <td width=200 height=30 colspan=12><font face="Comic Sans MS" size=4>OMPC++
+    sdsm APIs</font><br>
+    </td>
+    <td width=174 height=30 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=24 height=27 colspan=3></td>
+    <td width=15 height=27><font color=white size=3>&#8226;</font></td>
+    <td width=103 height=27 colspan=6><font face="Comic Sans MS" size=3>sdsm_init()</font><br>
+    </td>
+    <td width=250 height=27 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=48 height=23 colspan=6></td>
+    <td width=12 height=23><font color=white size=2>&#8226;</font></td>
+    <td width=332 height=23 colspan=9><font face="Comic Sans MS" size=2>initializes
+    shared data structures, execute</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=60 height=19 colspan=7></td>
+    <td width=55 height=19 colspan=2><font face="Comic Sans MS" size=2>on 1 PE</font><br>
+    </td>
+    <td width=277 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=24 height=27 colspan=3></td>
+    <td width=15 height=27><font color=white size=3>&#8226;</font></td>
+    <td width=113 height=27 colspan=7><font face="Comic Sans MS" size=3>sdsm_main()</font><br>
+    </td>
+    <td width=240 height=27 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=48 height=22 colspan=6></td>
+    <td width=12 height=22><font color=white size=2>&#8226;</font></td>
+    <td width=211 height=22 colspan=7><font face="Comic Sans MS" size=2>main
+    routine, run in parallel</font><br>
+    </td>
+    <td width=121 height=22 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=24 height=27 colspan=3></td>
+    <td width=15 height=27><font color=white size=3>&#8226;</font></td>
+    <td width=115 height=27 colspan=8><font face="Comic Sans MS" size=3>sdsm_done()</font><br>
+    </td>
+    <td width=238 height=27 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=48 height=22 colspan=6></td>
+    <td width=12 height=22><font color=white size=2>&#8226;</font></td>
+    <td width=284 height=22 colspan=8><font face="Comic Sans MS" size=2>cleanup/finalization,
+    execute on 1 PE</font><br>
+    </td>
+    <td width=48 height=22></td>
+   </tr>
+  </table>
+  </td>
+  <td width=44 height=197></td>
+ </tr>
+ <tr>
+  <td width=475 height=77 colspan=4></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

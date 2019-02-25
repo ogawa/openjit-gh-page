@@ -1,0 +1,127 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="../common.css" type="text/css">
+<link rev=made href="mailto:webmaster@matsulab.is.titech.ac.jp">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OpenJIT: Benchmark Results</title>
+
+<style type="text/css">
+<!--
+TABLE {
+	margin-bottom:	40px;
+}
+TH {
+	border-width: 1;
+	padding: 5px;
+	border-style: outset;
+	background-color: #ccffcc;
+}
+TD {
+	border-width: 1;
+	padding: 5px;
+	border-style: outset;
+	background-color: #ffffcc;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<div class=begin-title>OpenJIT</div>
+<h1 class=title>Benchmark Results</h1>
+<div class=end-title>&nbsp;</div>
+
+<h2 class=genre>SPEC JVM98 on Solaris (SPARC)</h2>
+
+<h3>Experimental Environment</h3>
+
+<ul>
+ <li>SUN Ultra60 300MHz x 2 with 256MB of memory
+ <li>Solaris 2.6
+ <li>Command line option: -mx128m
+</ul>
+
+<h3>Java Runtime</h3>
+
+<ul>
+ <li>OpenJIT: Javasoft JDK 1.2.2 with OpenJIT
+ <li>sunwjit: Javasoft JDK 1.2.2 with sunwjit
+ <li>HotSpot: Javasoft JDK 1.2.2 with HotSpotVM
+ <li>ExactVM: Sun Microsystems JDK 1.2.1_03 (Production release)
+</ul>
+
+<table>
+ <tr>
+  <th colspan=5>SPEC JVM98 Benchmark</th>
+ </tr>
+ <tr>
+  <th>Benchmark</th>
+  <th>OpenJIT</th>
+  <th>sunwjit</th>
+  <th>HotSpot</th>
+  <th>ExactVM</th>
+ </tr>
+ <tr>
+  <td>_200_check</td>
+  <td align=right>0.075</td>
+  <td align=right>0.07</td>
+  <td align=right>0.339</td>
+  <td align=right>0.064</td>
+ </tr>
+ <tr>
+  <td>_201_compress</td>
+  <td align=right>77.244</td>
+  <td align=right>89.924</td>
+  <td align=right>36.208</td>
+  <td align=right>47.112</td>
+ </tr>
+ <tr>
+  <td>_202_jess</td>
+  <td align=right>51.916</td>
+  <td align=right>64.651</td>
+  <td align=right>16.516</td>
+  <td align=right>20.306</td>
+ </tr>
+ <tr>
+  <td>_209_db</td>
+  <td align=right>175.104</td>
+  <td align=right>150.298</td>
+  <td align=right>57.901</td>
+  <td align=right>73.094</td>
+ </tr>
+ <tr>
+  <td>_213_javac</td>
+  <td align=right>102.111</td>
+  <td align=right>98.994</td>
+  <td align=right>33.935</td>
+  <td align=right>37.361</td>
+ </tr>
+ <tr>
+  <td>_222_mpegaudio</td>
+  <td align=right>86.419</td>
+  <td align=right>79.058</td>
+  <td align=right>31.51</td>
+  <td align=right>53.611</td>
+ </tr>
+ <tr>
+  <td>_227_mtrt</td>
+  <td align=right>55.16</td>
+  <td align=right>57.56</td>
+  <td align=right>9.146</td>
+  <td align=right>13.863</td>
+ </tr>
+ <tr>
+  <td>_228_jack</td>
+  <td align=right>72.515</td>
+  <td align=right>74.878</td>
+  <td align=right>31.708</td>
+  <td align=right>26.066</td>
+ </tr>
+</table>
+
+<hr>
+<address>openjit@is.titech.ac.jp</address>
+</body>
+</html>

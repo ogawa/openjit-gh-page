@@ -1,0 +1,78 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTNts" )
+  parent.location.href = "../OMPC++Reflection99.html";
+//-->
+</script>
+</head>
+
+<body bgcolor="#000066" text=white>
+
+<table border=0 width="100%">
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>This is an
+  example of the program transformation by OMPC++.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>The left list is
+  before the transformation, the right is after the transformation.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>A shared object
+  is declared like shared&lt;double&gt;.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>Before and after
+  write accessing to a share object, writestart and writeend are inserted.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>Malloc statement
+  is transformed into allocate method of a shared object.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>Initialize,
+  Finalize and mpc_main function are added by transformation executed by
+  overridden FinalizeInstance method. Initialize function calls memory
+  allocation, and Finalize function calls memory release method of each shared
+  object. A mpc_main function is equivalent to the main function of an MPC++
+  program.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>Mpc_main
+  function calls initialization and finalization function, and user defined
+  sdsm_init,main,done functions.</font><br>
+  </td>
+ </tr>
+</table>
+
+</body>
+
+</html>

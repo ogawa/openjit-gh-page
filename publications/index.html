@@ -1,0 +1,192 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+<head>
+<link rel=stylesheet href="../common.css" type="text/css">
+<link rev=made href="mailto:webmaster@matsulab.is.titech.ac.jp">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>OpenJIT: Publications</title>
+
+<style type="text/css">
+<!--
+.author {
+  font-style: normal;
+  font-weight: medium;
+}
+.title {
+  font-style: normal;
+  font-weight: bold;
+}
+.booktitle {
+  font-style: italic;
+  font-weight: normal;
+}
+li {
+  padding-bottom: 25px;
+}
+blockquote {
+  text-align: justify;
+}
+div.note {
+  font-style: italic;
+}
+div.head {
+  font-weight: bold;
+}
+-->
+</style>
+</head>
+
+<body>
+
+<div class=begin-title>OpenJIT</div>
+<h1 class=title>Publications</h1>
+<div class=end-title>&nbsp;</div>
+
+<h2 class=genre>Implementation of OpenJIT</h2>
+
+<ul>
+  <li><div><span class=author>H. Ogawa, K. Shimura, S. Matsuoka, F. Maruyama, Y. Sohda, Y. Kimura</span>:
+       <span class=title>OpenJIT: An Open-Ended, Reflective JIT Compile Framework for Java</span>.</div>
+
+       <div class=note>(submitted to ECOOP '2000)</div>
+       <div>&nbsp;</div>
+       <div class=head>Abstract</div>
+       <blockquote>OpenJIT is an open-ended, reflective JIT compiler framework for Java being researched and developed in a joint project by Tokyo Inst. Tech. and Fujitsu Ltd. Although in general self-descriptive systems have been studied in various contexts such as reflection and interpreter/compiler bootstrapping, OpenJIT is a first system we know to date that offers a stable, full-fledged Java JIT compiler that plugs into existing monolithic JVMs, and offer competitive performance to JITs typically written in C or C++. This is in contrast to previous work where compilation did not occur in the execution phase, customized VMs being developed ground-up, performance not competing with existing optimizing JIT compilers, and/or only a subset of the Java language being supported.  The main contributions of this paper are, 1) we propose an architecture for a reflective JIT compiler on a monolithic VM, and identify the technical challenges as well as the techniques employed, 2) We define an API that adds to the existing JIT compiler APIs in ``classic'' JVM to allow reflective JITs to be constructed, 3) We show detailed benchmarks of run-time behavior of OpenJIT to demonstrate that, while being competitive with existing JITs the time- and space-overheads of compiler metaobjects that exist in the heap are small and manageable, and 4) we demonstrate how reflective JITs could be useful class- or application specific customization and optimization by providing an important reflective ``hook'' into a Java system.  Being an object-oriented compilerframework, OpenJIT can be configured to be small and portable or fully-fledged optimizing compiler framework in the spirit of SUIF. It is fully JCK compliant, and runs all large Java applications we have tested to date including HotJava. We are currently distributing OpenJIT for free to foster further research into advanced compiler optimization, compile-time reflection, advanced run-time support for languages, as well as other areas such as embedded computing, metacomputing, and ubiquitous computing.</blockquote>
+
+      <div class=head><a href="ecoop2000/ecoop2000.ps.gz">Postscript (A4 paper)</a></div>
+
+      <div class=head><a href="ecoop2000/ecoop2000.pdf">PDF</a></div>
+
+
+  <li><div><span class=author>H. Ogawa, K. Shimura, S. Matsuoka, F. Maruyama, Y. Sohda, Y. Kimura</span>:
+       <span class=title>OpenJIT Frontend System: an implementation of the reflective JIT compiler frontend</span>.</div>
+
+       <div class=note>(to appear LNCS 1826</div>
+       <div>&nbsp;</div>
+       <div class=head>Abstract</div>
+       <blockquote>  OpenJIT is an open-ended, reflective JIT compiler framework for Java being researched and developed in a joint project by Tokyo Inst. Tech. and Fujitsu Ltd. Although in general self-descriptive systems have been studied in various contexts such as reflection and interpreter/compiler bootstrapping, OpenJIT is a first system we know to date that offers a stable, full-fledged Java JIT compiler that plugs into existing monolithic JVMs, and offer competitive performance to JITs typically written in C or C++. We propose an architecture for a reflective JIT compiler on a monolithic VM, and describe the details of its frontend system.  And we demonstrate how reflective JITs could be useful class- or application specific customization and optimization by providing an important reflective ``hook'' into a Java system.</blockquote>
+
+      <div class=head><a href="lncs1826/lncs1826-openjit.ps.gz">Postscript (A4 paper)</a></div>
+
+      <div class=head><a href="lncs1826/lncs1826-openjit.pdf">PDF</a></div>
+
+ <li><div><span class=author>H. Ogawa, S. Matsuoka, F. Maruyama, Y. Sohda, and K. Shimura</span>:
+      <span class=title>A Design of OpenJIT Frontend System</span>,
+      <span class=booktitle>IPSJ SIGPRO (domestic workshop)</span>,
+      August, 1999.<div>
+
+      <div class=note>(This paper is written in Japanese.)</div>
+
+      <div>&nbsp;</div>
+
+      <div class=head>Abstract</div>
+
+      <blockquote>The so-called `Open Compilers' is a technique to incorporate various self-descriptive modules for language customization and optimization based on computational reflection. We apply the open compiler technique to a Java Just-In-Time compiler to develop the OpenJIT compiler, which allows class-specific customization and optimization, fostering research of new compilation techniques such as application-specific customization and dynamic optimizations. The OpenJIT is largely devided into the frontend and the backend. The frontend takes the Java bytecodes as input, performs higher-level optimizations involving source-to-source transformations, and pass on the intermediate code to the backend. The backend takes the intermediate code from the frontend as input, performs lower-level optimizations, and outputs the native code for direct execution. In this paper, we describe the internal architecture of the frontend system and evaluate it for a simple loop example.</blockquote>
+
+      <div class=head><a href="pro1999-08/frontend-pro-199908.ps.gz">Postscript (A4 paper)</a></div>
+
+      <div class=head><a href="pro1999-08/frontend-pro-199908.pdf">PDF</a></div>
+
+      <div class=head><a href="pro1999-08/frontend-pro-199908.htm" target="_top">Slides</a></div>
+
+ <li><div><span class=author>F. Maruyama, H. Ogawa, and S. Matsuoka</span>:
+      <span class=title>An Effective Decompilation Algorithm for Java Bytecodes</span>,
+      <span class=booktitle>IPSJ SIGPRO (domestic workshop)</span>,
+      June, 1999.</div>
+
+      <div class=note>(This paper is written in Japanese.)</div>
+
+      <div>&nbsp;</div>
+
+      <div class=head>Abstract</div>
+
+      <blockquote>The technique called decompilation that reads sequences of machine code and generates the corresponding source program has been known for some time, and utilized primarily for reverse-engineering.  For Java and its bytecode, although there have been several proposals of decompilers, most generate outputs that are inappropriately extend the Java language, such as insertion of gotos not present in Java. Moreover, the decompilation algorithms are somewhat ad-hoc and difficult to extend of verify its applicability, which is a hindrance to our OpenJIT compiler which requires a decompiler frontend to recover the correct source structure from arbitrary bytecode. Instead, we have devised an new and effective alghorithm for decompilation, with emphasis on properly recovering control structures. The key idea is to base the algorithm around the dominator tree of the control flow graph of a method. This is based on the observation that, for a properly-nested block-structured language, each part of program representing a control structure corresponds to just a single subtree in the dominator tree.  As such, the algorithm is general enough to be applied to other languges besides Java. The evaluation of our preliminary implementation in OpenJIT show that our algorithm properly recovers control structures where other exisiting decompilers fail, and with relatively equivalent execution speeds.</blockquote>
+
+      <div class=head><a href="pro1999-06/decompiler-pro-199906.ps.gz">Postscript (A4 paper)</a></div>
+
+      <div class=head><a href="pro1999-06/decompiler-pro-199906.pdf">PDF</a></div>
+
+      <div class=head><a href="pro1999-06/decompiler-pro-199906.htm" target="_top">Slides</a></div>
+
+
+  <li><div><span class=author>S. Matsuoka, H. Ogawa, and K. Shimura</span>:
+       <span class=title>OpenJIT --- A Reflective JIT Compiler in Java</span>,
+       <span class=booktitle>Talks at SunLabs East</span>,
+       May, 1999.</div>
+
+       <div>&nbsp;</div>
+
+       <div class=head>Abstract</div>
+
+       <blockquote>
+       <p>OpenJIT is a reflective "Open" Just-In-Time compiler, allowing various language extension and compiler optimizations to be added as compiler metaclasses written in Java. OpenJIT allows customization of the JIT compiler for dynamic adaptation to the computing environment, not only of the compiled code but of itself; in this sense, OpenJIT is the first self-compiling JIT compiler we know to date that works with standard Sun JDK JVMs. In fact, almost all of OpenJIT is written in Java, save for a small amount of native code for runtime support and adding APIs to the JVM.</p>
+
+       <p>OpenJIT consists of the frontend and the backend. The frontend recovers the abstract syntax tree as well as various control-flow and dataflow information, allowing incorporation of various program analysis and program transformation. In particular, we are currently working on run-time program specialization at JIT compile time using the frontend infrastructure, with some preliminary results.</p>
+
+       <p>The backend of OpenJIT uses the JIT interface API to convert the Java bytecodes into SPARC V8 native code, and controls the execution between the JDK and the native code. The backend itself currently does not perform extensive optimization to control the compilation time, performing only "economical" optimizations such as good register allocation and effective peephole optimizations. Additionally, the runtime must be efficient, which we show to have achieved with benchmark results comparing against some production JIT compilers.</p>
+
+       <p>OpenJIT has been an ongoing project with collaborative efforts by Tokyo Institute of Technology and Fujitsu, and we are almost ready for a public release. There are additional research and development plans such as x86 code generation, better optimization APIs, and applications to high-performance portable code.</p>
+       </blockquote>
+
+       <div class=head><a href="SunLabsEast/sun-talk-ogawa-Frontend.htm" target="_top">Slides 1</a></div>
+
+       <div class=head><a href="SunLabsEast/sun-talk-shimura-Backend.htm" target="_top">Slides 2</a></div>
+
+  <li><div><span class=author>S. Matsuoka, H. Ogawa, K. Shimura, Y. Kimura, K. Hotta, H. Takagi</span>:
+       <span class=title>OpenJIT ---A Reflective Java JIT Compiler</span>,
+       <span class=booktitle>Proceedings of OOPSLA '98 Workshop on Reflective Programming in C++ and Java</span>,
+       pp.16-20,
+       November, 1998.</div>
+
+       <div>&nbsp;</div>
+
+       <div class=head>Abstract</div>
+
+       <blockquote>The so-called `OpenJIT Compilers' is a technique to incorporate various self-descriptive modules for language customization and optimization based on computational reflection.  We apply the open compiler technique to a Java Just-In-Time compiler to develop the OpenJIT compiler, which allows class-specific customization and optimization, fostering research of new compilation techniques such as application-specific customization adn dynamic optimizations.  Benchmarks with the current prototype, which is almost entirely written in Java, have been seen comparable benchmark results compared to traditional C-based JIT compilers.</blockquote>
+
+       <div class=head><a href="oopsla98-workshop/OpenJIT-OOPSLA98.ps.gz">Postscript (A4 paper)</a></div>
+
+       <div class=head><a href="oopsla98-workshop/OpenJIT-OOPSLA98.pdf">PDF</a></div>
+
+       <div class=head><a href="oopsla98-workshop/OpenJIT-OOPSLA98.htm" target="_top">Slides</a></div>
+
+
+  <li><div><span class=author>S. Matsuoka</span>:
+       <span class=title>The OpenJIT project: Opening-up the Java JIT Comiler</span>,
+       <span class=booktitle>ICSE '98 AOP Workshop</span>,
+       April, 1998.</div>
+
+       <div class=note>(appeared in International Conference on Software Engineering '98)</div>
+
+       <div>&nbsp;</div>
+
+       <div class=head><a href="icse98-aop-workshop/OpenJIT-ICSE98.htm" target="_top">Slides</a></div>
+
+</ul>
+
+<h2 class=genre>Application Studies</h2>
+
+<ul>
+ <li><div><span class=author>Y. Sohda, H. Ogawa and S. Matsuoka</span>:
+      <span class=title>OMPC++ - A Portable High-Performance Implementation of DSM using OpenC++ Reflection</span>,
+      <span class=booktitle>Proceedings of Reflection'99, LNCS 1616 Meta-Level Architecture and Reflection</span>,
+      pp 215-234, July 1999.</div>
+
+      <div>&nbsp;</div>
+
+      <div class=head>Abstract</div>
+
+      <blockquote>Platform portability is one of the utmost demanded properties of a system today, due to the diversity of runtime execution environment of wide-area networks, and parallel programs are no exceptions. However, parallel execution environments are VERY diverse, could change dynamically, while performance must be portable as well. As a result, techniques for achieving platform portability are sometimes not appropriate, or could restrict the programming model, e.g., to simple message passing. Instead, we propose the use of reflection for achieving platform portability of parallel programs. As a prototype experiment, a software DSM system called OMPC++ was created which utilizes the compile-time metaprogramming features of OpenC++ 2.5 to generate a message-passing MPC++ code from a SPMD-style, shared-memory C++ program. The translation creates memory management objects on each node to manage the consistency protocols for objects arrays residing on different nodes. Read- and write- barriers are automatically inserted on references to shared objects. The resulting system turned out to be quite easy to construct compared to traditional DSM construction methodologies. We evaluated this system on a PC cluster linked by the Myrinet gigabit network, and resulted in reasonable performance compared to a high-performance SMP.</blockquote>
+
+      <div class=head><a href="reflection99/OMPC++Reflection99.ps.gz">Postscript (A4 paper)</a></div>
+
+      <div class=head><a href="reflection99/OMPC++Reflection99.pdf">PDF</a></div>
+
+      <div class=head><a href="reflection99/OMPC++Reflection99.htm" target="_top">Slides</a></div>
+
+</ul>
+
+<hr>
+<address>openjit@is.titech.ac.jp</address>
+</body>
+</html>

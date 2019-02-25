@@ -1,0 +1,147 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: What characterizes Java execution model, c.f. Fortran w.r.t. Optimization?">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0206.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="342,508"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s350210" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s350211" type="#_x0000_m141325"
+  style='position:absolute;left:48pt;top:192pt;width:612pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s350210" class=T><span style='position:absolute;
+ top:1.25%;left:6.55%;width:86.89%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>What
+ characterizes Java </span></span><span style='position:absolute;top:11.0%;
+ left:.37%;width:99.43%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>execution
+ model, c.f. Fortran </span></span><span style='position:absolute;top:20.75%;
+ left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>w.r.t.
+ Optimization?</span></span></div>
+ <div v:shape="_x0000_s350211" class=B>
+ <div style='mso-line-spacing:"90 20 0";position:absolute;top:34.75%;
+ left:7.67%;width:100.0%;height:8.5%'><span style='position:absolute;
+ top:0%;left:3.74%;width:96.25%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-3.89%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS"'>(1) Object-Orientation
+ (Encapsulation)&#13;</span></span></div>
+ <div style='mso-line-spacing:"90 20 0";position:absolute;top:42.5%;left:7.67%;
+ width:93.07%;height:8.5%'><span style='position:absolute;top:0%;left:4.02%;
+ width:95.97%'><span style='mso-special-format:bullet;color:#82B5CA;mso-color-index:
+ 4;position:absolute;left:-4.19%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>(2) Inherent
+ Semantical Dynamicity&#13;</span></span></div>
+ <div style='mso-line-spacing:"90 20 0";position:absolute;top:50.25%;
+ left:7.67%;width:83.14%;height:8.5%'><span style='position:absolute;
+ top:0%;left:4.5%;width:95.49%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-4.71%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>(3) Language-Imposed Safety&#13;</span></span></div>
+ <div style='mso-line-spacing:"90 20 0";position:absolute;top:58.25%;
+ left:7.67%;width:91.57%;height:8.5%'><span style='position:absolute;
+ top:0%;left:4.08%;width:95.91%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-4.26%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>(4) Strict Portability Requirements&#13;</span></span></div>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:66.0%;left:11.42%;width:89.13%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-4.2%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>(5) Language-Level Concurrency and </span></span><span
+ style='position:absolute;top:72.25%;left:11.42%;width:80.89%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Interaction with Memory Model, </span></span><span
+ style='position:absolute;top:78.75%;left:11.42%;width:79.4%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Portability&#13;</span></span></div>
+ <div style='mso-line-spacing:"90 20 0";position:absolute;top:86.5%;left:7.67%;
+ width:83.14%;height:8.5%'><span style='position:absolute;top:0%;left:4.5%;
+ width:95.49%'><span style='color:red'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-4.71%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span></span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ color:red;mso-fareast-language:JA'>(6) Execution Environment?&#13;</span></span></div>
+ <div style='mso-line-spacing:"90 20 0";position:absolute;top:96.25%;
+ left:7.67%;width:83.14%;height:6.25%'><span style='mso-special-format:nobullet;
+ display:none;color:#82B5CA;mso-color-index:4;font-family:"Monotype Sorts";
+ font-size:65%'>s</span><span style='mso-special-format:lastCR;display:none'>&#13;</span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

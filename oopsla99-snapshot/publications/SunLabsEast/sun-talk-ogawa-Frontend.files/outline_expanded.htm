@@ -1,0 +1,1062 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor=black text=white link=white vlink=white alink=white>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0001.htm');">A Design of OpenJIT Frontend
+System</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Hirotaka Ogawa</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Tokyo Institute of Technology</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0047.htm');">OpenJIT Compiler System (1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>A Joint effort with Fujitsu’s Java
+  compiler group</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>A Reflective Just-in-time (Open JIT
+  Compiler)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Based on Reflection/OI principle<span
+  style="mso-spacerun: yes">&nbsp; </span>(Java JIT in Java)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A Java framework for JIT compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Can download/compile various
+  customization &amp; optimization modules into a JIT compiler “just-in-time”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>“Plugs in” to Standard JavaVM (JDK
+  1.1.x)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Works just like off-the-shelf JIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>setenv JAVA_COMPILER OpenJIT<br>
+  setenv CLASSPATH &lt;openjitdir&gt;<br>
+  setenv LD_LIBRARY_PATH &lt;openjitdir&gt;</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Initially “self-compiles” on startup</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0049.htm');">OpenJIT Compiler System (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0048.htm');">OpenJIT Compiler System (3)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT Frontend System</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Preprocessor for Backend System</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Java class framework for
+  JIT-optimizer and/or JIT-customizer, on Java bytecode or higher-level
+  Intermediate Representation (e.g. Backend RTL)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Classfile Annotation support</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Embed various information to
+  classfiles, and utilize them at JIT-compile phase</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT Backend System</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Compact and efficient Java JIT
+  Compiler written in Java itself</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Microscopic optimization on RTL</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>stack-to-register allocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>peephole optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0045.htm');">Framework of OpenJIT
+Frontend system</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Frontend system provides a framework
+  for JIT-optimizer and/or JIT-customizer, on Java bytecode or higher-level
+  Intermediate Representation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Decompiles Java bytecodes into Java
+  ASTs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Transforms ASTs to
+  optimized-/customized- ASTs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Compiles customized-ASTs into Java
+  bytecodes or Intermediate Representation (such as RTL) for Backend system</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0023.htm');">Overview of OpenJIT Frontend
+System (1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>OpenJIT Frontend System consists of 4
+  modules:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT Bytecode Discompiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>converting bytecodes to Abstract
+  Syntax Tree</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT Class Annotation Analyzer</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>reading classfile annotation and
+  embedding annotation info to AST</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT High-level Optimizer Toolkit</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>toolkit for optimizations and
+  customizations using OpenJIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Flow graph constructor</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Flow graph analyzer</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Program transformer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Abstract Syntax Tree Package</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>AST representation, utility routines</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0036.htm');">Overview of OpenJIT Frontend
+System (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0024.htm');">OpenJIT Bytecode Discompiler</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>This module recovers Java Abstract
+  Syntax Tree from input’s bytecodes</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>extract control flow information</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>recover expressions in basic blocks</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Basic Idea: AST’s control flowgraph
+  is analogous with dominator tree in its form.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>See Maruyama’s slides.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0037.htm');">Overview of OpenJIT Frontend
+System (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0039.htm');">OpenJIT Class Annotation
+Analyzer (1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>Classfile Annotation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Various information for optimizations
+  and customizations, which enables downloadable OpenJIT extensions</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>specify the name of user-defined
+  optimizer class (Compilets)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>mark all immutable objects for
+  efficient DSM support</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>etc. (but still under design)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Embedded to the method attribute in
+  the classfiles</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>→In some cases, preferable to embed
+  to the class attribute</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>need specialized javac, but not
+  implemented yet</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>some customizable java compilers are
+  avaliable:</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>EPP (Ichisugi@ETL)</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Javassist (Chiba@Tsukuba-U)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0040.htm');">OpenJIT Class Annotation
+Analyzer (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Classfile Annotation (cont’d)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Annotated Classfiles are still
+  portable</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>standard (non-OpenJIT) JIT compilers
+  can also execute annotated classfiles</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>unnecessary to change the method body</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>How the analyzer works?</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>associates each classfile annotation
+  with the corresponding AST node</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0026.htm');">OpenJIT High-level Optimizer
+Toolkit (1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Toolkit for building optimizer
+  (called Compilets)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>*This module does not provide
+  “optimizer” itself</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0033.htm');">OpenJIT High-level Optimizer
+Toolkit (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Optimizer toolkit routines in the
+  current version</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Flow graph constructor</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>generates flowgraph(data-flow,
+  control-flow) from AST</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>users can add any other flowgraphs’
+  constructors if necessary</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Flow graph analyzer</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>provides several common algorithms
+  over flowgraphs, such as fix-point computation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Program Transformer</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>AST to AST transformer, using
+  pattern-matching</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>These routines are somewhat low-level
+  and inflexible, so we will design more nice APIs in the near future.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0035.htm');">OpenJIT High-level Optimizer
+Toolkit (3)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>Program Transformer works as shown
+  below:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>1. Register pattern matching rules</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>register_pattern(Expression pat,
+  Expression subst)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>register_pattern(Statement pat,
+  Statement subst)</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>“pat” and “subst” can be made by
+  using AST package</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>They can include *not concern* node</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>2. Check if the sub-tree, whose root
+  is specified (usually this), matches an existing pattern. If match,
+  substitution is performed.</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>substitution(Expression root)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>substitution(Statement root)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0038.htm');">Overview of OpenJIT Frontend
+System (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0027.htm');">Abstract Syntax Tree Package</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>“AST package” includes frontend
+  intermediate code and several utility routines</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Each node of AST represents an
+  expression or a statement, similar to Java abstract syntax</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Specialized classes (over 100
+  classes) for each Java language constructs are provided:</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>AddExpression, SubtractExpression,
+  MultiplyExpression, …</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>ForStatement, IfStatement,
+  CaseStatement, ...</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0041.htm');">Abstract Syntax Tree Package</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>Node</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>BinaryExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>AddExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SubtractExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>UnaryExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ConstantExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Statement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>IfStatement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ForStatement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0028.htm');">AST Package (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Expression (typical binary
+  expression)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>int op;		// Operator ID</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Expression left;	// LHS expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Expression right;	// RHS expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Type type;	// Type of the expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Annotation ann;	// Embedded
+  annotation (default: null)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>code() {		// Convert AST to backend
+  intermediate 					// codes (low-level bytecodes)<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>if (ann)
+  ann.perform();<br>
+  			// call-back for metacomputation<br>
+  <span
+  style="mso-spacerun: yes">&nbsp;&nbsp; </span>left.code();	// generate code
+  for LHS<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>right.code();	//
+  generate code for RHS<br>
+  <span style="mso-spacerun: yes">&nbsp;&nbsp; </span>add(op);
+  }	// generate code for “operator”</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>simplify()		// Simplify expression
+  form. For example, 				// convert “ax1” to “a”</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0029.htm');">AST Package (3)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Statement</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>int op;		// Operator ID for statement</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Label lbl;		// Label</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Annotation ann;	// Embedded
+  annotation (default: null)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>code();		// Convert AST to backend
+  intermediate 					// codes (low-level bytecodes) <br>
+  			// As same as Expression, call-back 					// ann.perform() method to
+  metacomputation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>simplify();	// Simplify statement
+  form. For example, 					// convert “a=a+1;” to “a++;”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>We strongly hope to support SSA for
+  easier program transformations.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0042.htm');">Preliminary Evaluation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Trivial program transformation
+  example for evaluation</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0043.htm');">Condition for Evaluation</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Target Machine &amp; OS</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Sun Ultra60 (UltraSPARC II 300Mhz,
+  256MB)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Solaris 2.6</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Java runtime system</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT 1.1.0+JDK 1.1.8</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Execute Program1 as it is (without
+  Frontend overhead)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Transform Program1 to Program2, using
+  OpenJIT Frontend (with Frontend overhead)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>JDK 1.2.2(ClassicVM)+sunwjit</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Execute Program1 and Program2</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Matrix</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>200, 600</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0044.htm');">Results</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJITとsunwjitの実行時間の差は10%以下<br>
+  →生成されるネイティブコードの効率の差</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJITとsunwjitのオーバーヘッドの比は2倍強<br>
+  →OpenJITではJIT本体もコンパイルするため</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Frontend overhead is independent of
+  matrix sizes and times of execution<br>
+  →サイズや実行回数が大きくなれば償却</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0046.htm');">関連研究(Suifとの比較)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Suif (Stanford U.)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>C++による最適化コンパイラのOOフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>共通の中間表現に対する解析器・変換器をコンパイルパスに追加</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>パスの追加は静的</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>解析器生成ツールなどを提供</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JavaによるJava JITコンパイラのOOフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>クラスまたはメソッドごとに特化した解析器・変換器を追加可能</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>最適化器などの作成を支援するデザインパターンやAPIを用意</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0031.htm');">OpenJIT frontend system:
+Current status</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The first prototype is operational</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The current version will not have
+  Compilets or nice APIs</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>As slow as javac (AST-to-backend
+  intermediate code conversion costs high)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>The Limitations of the current
+  implementation of JIT (classical JIT) prevent us to recover entire program
+  structure and runtime information</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0032.htm');">Conclusion and future work</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT frontend system provides the
+  framework of bytecode-to-bytecode optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>High portability, extensibility</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Basis for work on dynamic
+  compilation, Java extensions, AOP weavers, etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Many technical problems remain</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OO Framework API design</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Specialized javac design yielding
+  bytecodes with annotations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SSA support for AST</font></td>
+ </tr>
+</table>
+
+</p>
+
+</body>
+
+</html>

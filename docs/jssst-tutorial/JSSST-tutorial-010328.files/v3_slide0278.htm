@@ -1,0 +1,211 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Heap profiling USING OpenJIT">
+<link rel=next href="v3_slide0279.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0278.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=48 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=24 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=331 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=43 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=72 height=76 colspan=2></td>
+  <td width=331 height=76>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=97 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=138 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=331 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Heap profiling USING</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=97 height=35></td>
+    <td width=138 height=35 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>OpenJIT</font><br>
+    </td>
+    <td width=96 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=72 height=76 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=1 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=48 height=222></td>
+  <td width=398 height=222 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=53 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=65 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=52 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=44 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=35 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=38 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=23><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=280 height=23 colspan=14><font face="Comic Sans MS" size=2>Measureable
+    run-time profile values</font><br>
+    </td>
+    <td width=101 height=23 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color="#003399" size=1>&#8226;</font></td>
+    <td width=336 height=18 colspan=15><font face="Comic Sans MS" size=1>A
+    profiler using JVMPI(JavaVM Profiler Interface)</font><br>
+    </td>
+    <td width=24 height=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=229 height=19 colspan=10><font face="ＭＳ Ｐゴシック" size=1>→</font><font
+    face="Comic Sans MS" size=1>Plug in to the JDK 1.2(ClassicVM)</font><br>
+    </td>
+    <td width=146 height=19 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=6></td>
+    <td width=12 height=17><font color="#003399" size=1>&#8226;</font></td>
+    <td width=237 height=17 colspan=7><font face="Comic Sans MS" size=1>Number,
+    Type, Size of allocated objects</font><br>
+    </td>
+    <td width=102 height=17 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=6></td>
+    <td width=12 height=17><font color="#003399" size=1>&#8226;</font></td>
+    <td width=119 height=17 colspan=3><font face="Comic Sans MS" size=1>Number
+    of GCs, etc.</font><br>
+    </td>
+    <td width=220 height=17 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=399 height=1 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=15 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=294 height=19 colspan=12><font face="Comic Sans MS" size=1>A
+    Profiler created w/OpenJIT customization</font><br>
+    </td>
+    <td width=66 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=347 height=19 colspan=14><font face="ＭＳ Ｐゴシック" size=1>→</font><font
+    face="Comic Sans MS" size=1> Output various info generated from backend
+    paths</font><br>
+    </td>
+    <td width=28 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#003399" size=1>&#8226;</font></td>
+    <td width=171 height=16 colspan=4><font face="Comic Sans MS" size=1>Number
+    of methods compiled</font><br>
+    </td>
+    <td width=168 height=16 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=399 height=1 colspan=20></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=6></td>
+    <td width=12 height=17><font color="#003399" size=1>&#8226;</font></td>
+    <td width=339 height=17 colspan=13><font face="Comic Sans MS" size=1>Number,
+    type, size, and lifetime of objects that OpenJIT</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=60 height=14 colspan=7></td>
+    <td width=54 height=14 colspan=2><font face="Comic Sans MS" size=1>allocated</font><br>
+    </td>
+    <td width=285 height=14 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=48 height=17 colspan=6></td>
+    <td width=12 height=17><font color="#003399" size=1>&#8226;</font></td>
+    <td width=176 height=17 colspan=5><font face="Comic Sans MS" size=1>Size of
+    generated native code</font><br>
+    </td>
+    <td width=163 height=17 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=18 height=23><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=356 height=23 colspan=17><font face="Comic Sans MS" size=2>Direct
+    execution, c.f., simulation [Diekman99]</font><br>
+    </td>
+    <td width=25 height=23 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=29 height=222></td>
+ </tr>
+ <tr>
+  <td width=475 height=35 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

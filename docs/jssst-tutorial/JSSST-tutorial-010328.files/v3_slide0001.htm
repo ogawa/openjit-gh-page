@@ -1,0 +1,150 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Efficient Execution of Languages Like Java (Java言語の高速化技術) ">
+<link rel=next href="v3_slide0205.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0001.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master09_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=61 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=344 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=40 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=61 height=111></td>
+  <td width=367 height=111 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=301 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=15 height=41></td>
+    <td width=336 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Efficient Execution of</font><br>
+    </td>
+    <td width=16 height=41></td>
+   </tr>
+   <tr>
+    <td width=32 height=35 colspan=2></td>
+    <td width=301 height=35 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Languages Like Java</font><br>
+    </td>
+    <td width=34 height=35 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=367 height=35 colspan=5 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>(Java</font><font face="ＭＳ Ｐゴシック" color="#003399"
+    size=5>言語の高速化技術</font><font face="Comic Sans MS" color="#003399" size=5>)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=47 height=111></td>
+ </tr>
+ <tr>
+  <td width=475 height=30 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=70 height=172 colspan=2></td>
+  <td width=344 height=172>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=73 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=48 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=73 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=75 height=30 colspan=3></td>
+    <td width=194 height=30 colspan=3 align=center><font face="Comic Sans MS"
+    size=4>Satoshi Matsuoka</font><br>
+    </td>
+    <td width=75 height=30 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=344 height=30 colspan=9 align=center><font face="Comic Sans MS"
+    size=4>Tokyo Institute of Technology/</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=148 height=26 colspan=4></td>
+    <td width=48 height=26 align=center><font face="Comic Sans MS" size=4>JST</font><br>
+    </td>
+    <td width=148 height=26 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=344 height=30 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=28 height=30></td>
+    <td width=288 height=30 colspan=7 align=center><font face="Comic Sans MS"
+    size=4>JSSSTutorial 2001/03/31</font><br>
+    </td>
+    <td width=28 height=30></td>
+   </tr>
+   <tr>
+    <td width=50 height=26 colspan=2></td>
+    <td width=244 height=26 colspan=5 align=center><font face="Comic Sans MS"
+    size=4>Slide ver. 2001/03/03</font><br>
+    </td>
+    <td width=50 height=26 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=61 height=172 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=3 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

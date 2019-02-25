@@ -1,0 +1,154 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 評価">
+<link rel=next href=slide0075.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0021.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master10_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=53 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=322 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=26 height=27></td>
+  <td width=56 height=27 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=56 height=27><font face="ＭＳ Ｐゴシック" size=5>評価</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=393 height=27 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=35 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=29 height=211 colspan=2></td>
+  <td width=375 height=211 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=62 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=168 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=61 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=16 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=346 height=22 colspan=11><font face="ＭＳ Ｐゴシック" size=4>本研究のアルゴリズムの実装として、</font><br>
+    </td>
+    <td width=12 height=22></td>
+   </tr>
+   <tr>
+    <td width=17 height=25></td>
+    <td width=330 height=25 colspan=10><font face=Tahoma size=4>OpenJIT</font><font
+    face="ＭＳ Ｐゴシック" size=4>のデコンパイラ部分を使用</font><br>
+    </td>
+    <td width=28 height=25 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=375 height=7 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=19 height=19 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=233 height=19 colspan=3><font face="ＭＳ Ｐゴシック" size=3>テスト用ドライバを使用した。</font><br>
+    </td>
+    <td width=100 height=19 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=375 height=5 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=26><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=319 height=26 colspan=8><font face="ＭＳ Ｐゴシック" size=4>比較対象として、</font><font
+    face=Tahoma size=4>mocha-b1</font><font face="ＭＳ Ｐゴシック" size=4>を使用</font><br>
+    </td>
+    <td width=39 height=26 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=375 height=8 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face=Marlett color="#0000cc" size=2>n</font></td>
+    <td width=90 height=22 colspan=6><font face="ＭＳ Ｐゴシック" size=4>評価環境</font><br>
+    </td>
+    <td width=268 height=22 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=375 height=5 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=23 height=23 colspan=3></td>
+    <td width=19 height=23 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=333 height=23 colspan=8><font face=Tahoma size=3>Sun Ultra60
+    (UltraSparc2<span style="mso-spacerun: yes">&nbsp; </span>300MHz x 2,</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=38 height=22 colspan=4></td>
+    <td width=66 height=22 colspan=2><font face=Tahoma size=3>256MB)</font><br>
+    </td>
+    <td width=271 height=22 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=375 height=3 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=23 height=23 colspan=3></td>
+    <td width=19 height=23 colspan=2><font face=Marlett color="#0000cc" size=3>i</font></td>
+    <td width=297 height=23 colspan=5><font face=Tahoma size=3>JDK-1.1.7B</font><font
+    face="ＭＳ Ｐゴシック" size=3>と付属の</font><font face=Tahoma size=3>Java</font><font
+    face="ＭＳ Ｐゴシック" size=3>仮想マシン</font><br>
+    </td>
+    <td width=36 height=23 colspan=3></td>
+   </tr>
+  </table>
+  </td>
+  <td width=71 height=211></td>
+ </tr>
+ <tr>
+  <td width=475 height=41 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

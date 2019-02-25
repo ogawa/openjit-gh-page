@@ -1,0 +1,180 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: OpenJIT Current Status">
+<link rel=next href=slide0039.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0038.htm');   
+  else
+    parent.location.href = "../OpenJIT-OOPSLA98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master03_background.gif" bgcolor=white alink="#5f5f5f"
+link="#969696" vlink="#cbcbcb" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=290 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=88 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=40 height=33></td>
+  <td width=290 height=33>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=290 height=33><font face="Times New Roman" size=5>OpenJIT Current
+    Status</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=145 height=33 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=27 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=40 height=206></td>
+  <td width=378 height=206 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=38 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=156 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=22 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=13 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=30 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=62 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=357 height=20 colspan=12><font face=Arial size=3><b>Parallel
+    Design &amp; Development at TIT and</b></font><br>
+    </td>
+    <td width=4 height=20></td>
+   </tr>
+   <tr>
+    <td width=379 height=1 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=60 height=20 colspan=5><font face=Arial size=3><b>Fujitsu</b></font><br>
+    </td>
+    <td width=301 height=20 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=379 height=5 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=361 height=20 colspan=13><font face=Arial size=3><b>The first
+    prototype backend is operational</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=379 height=4 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=236 height=17 colspan=6><font face=Arial size=2><b>can run javac,
+    reasonable speed</b></font><br>
+    </td>
+    <td width=104 height=17 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=379 height=4 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=216 height=20 colspan=6><font face=Arial size=3><b>Frontend being
+    designed</b></font><br>
+    </td>
+    <td width=145 height=20 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=379 height=5 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=349 height=20 colspan=11><font face=Arial size=3><b>Frontend
+    &amp; Backend API being designed</b></font><br>
+    </td>
+    <td width=12 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=379 height=5 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=287 height=20 colspan=10><font face=Arial size=3><b>Full
+    prototype operational 3Q ’98,</b></font><br>
+    </td>
+    <td width=74 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=238 height=20 colspan=7><font face=Arial size=3><b>distributable
+    version 1Q ’99</b></font><br>
+    </td>
+    <td width=123 height=20 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=379 height=5 colspan=14></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=244 height=20 colspan=8><font face=Arial size=3><b>Will be PDS
+    (under contract)</b></font><br>
+    </td>
+    <td width=117 height=20 colspan=5></td>
+   </tr>
+  </table>
+  </td>
+  <td width=57 height=206 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=15 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=425 height=11 colspan=4></td>
+  <td width=11 height=11><img src="master03_image018.gif" border=0 width=11
+  height=11></td>
+  <td width=39 height=11></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=6></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

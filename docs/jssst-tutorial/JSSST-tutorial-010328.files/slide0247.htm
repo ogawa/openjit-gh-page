@@ -1,0 +1,170 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: OpenJIT Compiler System http://www.openjit.org">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0247.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = true, g_autoTrans = false, g_transSecs = 1;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(1);
+//-->
+</script><![endif]><p:slidetransition advancetime="0" effect="pull"
+ direction="right" flag="1"/><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="432,434"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden;filter:revealtrans(Duration=1, Transition=6)'><p:slide
+ coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s442370" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:12pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s442371" type="#_x0000_m141325"
+  style='position:absolute;left:12pt;top:126pt;width:684pt;height:396pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s442370" class=T><span style='position:absolute;
+ top:-.5%;left:4.49%;width:91.19%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>OpenJIT
+ Compiler System<br>
+ </span></span><span style='position:absolute;top:9.25%;
+ left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>http://www.openjit.org</span></span></div>
+ <div v:shape="_x0000_s442371">
+ <div class=B><span style='position:absolute;top:23.25%;left:6.36%;width:94.19%'><span
+ style='font-size:88%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-3.97%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'>A
+ Joint effort with Fujitsu’s Java compiler </span></span><span
+ style='position:absolute;top:29.5%;left:6.36%;width:89.32%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>group&#13;</span></span></div>
+ <div class=B style='position:absolute;top:37.0%;left:2.62%;width:106.36%;
+ height:7.5%'><span style='position:absolute;top:0%;left:3.52%;width:96.47%'><span
+ style='font-size:88%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-3.64%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'>A
+ Reflective Just-in-time (Open JIT Compiler)&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:44.25%;left:7.67%;width:101.87%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.12%;width:96.87%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.22%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Based on Reflection/OI principle<span
+ style="mso-spacerun: yes">&nbsp; </span>(Java JIT in Java)&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:50.75%;left:7.67%;width:88.2%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.6%;width:96.39%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.74%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>A Java framework for JIT compiler&#13;</span></span></div>
+ <div class=B1><span style='position:absolute;top:57.0%;left:10.86%;width:85.76%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.71%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Can </span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'><i>download/compile </i></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>various customization &amp; </span></span><span
+ style='position:absolute;top:62.5%;left:10.86%;width:103.18%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>optimization modules into a JIT
+ compiler </span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>“</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>just-in-time</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>”</span><span lang=EN-US
+ style='font-size:86%;mso-fareast-language:JA;display:none'>&#13;</span></span></div>
+ <div class=B style='position:absolute;top:69.0%;left:2.62%;width:107.86%;
+ height:7.5%'><span style='position:absolute;top:0%;left:3.47%;width:96.52%'><span
+ style='font-size:88%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-3.59%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'>“Plugs
+ in” to Standard JavaVM (JDK 1.1.x, 1.2.x)&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:76.25%;left:7.67%;width:88.2%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.6%;width:96.39%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.74%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Works just like off-the-shelf JIT&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:82.75%;left:7.67%;width:88.2%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.6%;width:96.39%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.74%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>JCK (Java Compatibility Kit)
+ Compiliant&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:89.0%;left:7.67%;width:88.2%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.6%;width:96.39%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.74%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Initially “self-compiles” on startup</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

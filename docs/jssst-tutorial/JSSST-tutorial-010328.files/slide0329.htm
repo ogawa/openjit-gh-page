@@ -1,0 +1,198 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<link rel=OLE-Object-Data href=oledata.mso>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: AJaPACK : Automatic Optimization using Downloadable Self-tuning Portable Library [ACM JavaGrande 2000]">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0329.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 30849;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 31848);
+//-->
+</script><![endif]>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml" href="slide0329.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><p:shaperange
+  href="master08.xml#_x0000_m141325"/><p:shaperange
+  href="slide0329.xml#_x0000_s572418"/>
+ <div v:shape="_x0000_s572418" class=T><span style='position:absolute;
+ top:1.75%;left:-.74%;width:100.56%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>AJaPACK</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:64%;mso-fareast-language:JA'> : Automatic Optimization using </span></span><span
+ style='position:absolute;top:12.0%;left:.93%;width:97.0%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:64%;mso-fareast-language:JA'><i><u>Downloadable Self-tuning Portable
+ Library<br>
+ </u></i></span></span><span style='position:absolute;top:18.25%;
+ left:.93%;width:97.0%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:64%;mso-fareast-language:JA'>[ACM
+ JavaGrande 2000]</span></span></div>
+ <div v:shape="_x0000_s572419" class=B>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:27.0%;left:4.68%;width:52.8%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-7.09%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'><u>The package includes </u></span></span><span
+ style='position:absolute;top:33.5%;left:4.68%;width:52.8%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'><u>BLAS library and a </u></span></span><span
+ style='position:absolute;top:39.75%;left:4.68%;width:57.11%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'><u>tuning tool for its core </u></span></span><span
+ style='position:absolute;top:46.25%;left:4.68%;width:52.8%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'><u>routine&#13;</u></span></span></div>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:54.0%;left:4.68%;width:58.98%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-6.34%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'><u>tunes the BLAS core</u></span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'> to </span></span><span style='position:absolute;
+ top:60.25%;left:4.68%;width:52.8%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>achieve highest
+ </span></span><span style='position:absolute;top:66.75%;left:4.68%;width:52.8%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>performance on any </span></span><span
+ style='position:absolute;top:73.25%;left:4.68%;width:52.8%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>environments<br>
+ </span></span><span
+ style='position:absolute;top:79.5%;left:4.68%;width:60.86%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>(this process </span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ color:red;mso-fareast-language:JA'>is portable </span></span><span
+ style='position:absolute;top:86.0%;left:4.68%;width:57.86%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ color:red;mso-fareast-language:JA'>and hidden from users</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>)&#13;</span></span></div>
+ <div style='mso-line-spacing:"90 20 0";position:absolute;top:95.5%;left:.93%;
+ width:56.55%;height:6.25%'><span style='position:absolute;top:0%;left:6.62%;
+ width:93.37%'><span style='visibility:hidden'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-7.09%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ style='mso-special-format:lastCR;display:none'>&#13;</span></span></div>
+ </div>
+ <div v:shape="_x0000_s572420" class=O><span style='position:absolute;
+ top:64.75%;left:74.71%;width:23.22%'><span lang=EN-US style='font-family:"Times New Roman";
+ mso-ascii-font-family:"Times New Roman";mso-fareast-language:JA'>Self-tuning
+ on<br>
+ </span></span><span style='position:absolute;top:70.0%;left:74.71%;
+ width:23.59%'><span lang=EN-US style='font-family:"Times New Roman";
+ mso-ascii-font-family:"Times New Roman";mso-fareast-language:JA'>every machine</span></span></div>
+ <p:shaperange href="slide0329.xml#_x0000_s572421"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572421,_x0000_s572422,_x0000_s572423,_x0000_s572424,_x0000_s572425,_x0000_s572426,_x0000_s572427,_x0000_s572428,_x0000_s572429,_x0000_s572430,_x0000_s572431,_x0000_s572432,_x0000_s572433,_x0000_s572434,_x0000_s572435,_x0000_s572436,_x0000_s572437,_x0000_s572438,_x0000_s572439,_x0000_s572440,_x0000_s572441,_x0000_s572442,_x0000_s572443,_x0000_s572444,_x0000_s572445,_x0000_s572446,_x0000_s572447,_x0000_s572448,_x0000_s572449,_x0000_s572450,_x0000_s572451,_x0000_s572452,_x0000_s572453,_x0000_s572454,_x0000_s572455,_x0000_s572456,_x0000_s572457,_x0000_s572458,_x0000_s572459,_x0000_s572460,_x0000_s572461,_x0000_s572462,_x0000_s572463,_x0000_s572464,_x0000_s572465,_x0000_s572466,_x0000_s572467,_x0000_s572468,_x0000_s572469,_x0000_s572470,_x0000_s572471,_x0000_s572472,_x0000_s572473,_x0000_s572474,_x0000_s572475,_x0000_s572476,_x0000_s572477,_x0000_s572478,_x0000_s572479,_x0000_s572480,_x0000_s572481,_x0000_s572482,_x0000_s572483,_x0000_s572484,_x0000_s572485,_x0000_s572486,_x0000_s572487,_x0000_s572488,_x0000_s572489,_x0000_s572490,_x0000_s572491,_x0000_s572492,_x0000_s572493,_x0000_s572494,_x0000_s572495,_x0000_s572496,_x0000_s572497,_x0000_s572498,_x0000_s572499,_x0000_s572500,_x0000_s572501,_x0000_s572502,_x0000_s572503"
+ src="slide0329_image287.gif" style='position:absolute;top:64.0%;left:59.92%;
+ width:15.73%;height:26.5%'><![endif]><p:shaperange
+  href="slide0329.xml#_x0000_s572504"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572504" src="slide0329_image289.gif" style='position:absolute;
+ top:26.75%;left:80.89%;width:5.99%;height:10.25%'><![endif]><p:shaperange
+  href="slide0329.xml#_x0000_s572505"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572505" src="slide0329_image290.gif" style='position:absolute;
+ top:49.75%;left:80.89%;width:5.99%;height:10.25%'><![endif]><p:shaperange
+  href="slide0329.xml#_x0000_s572506"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572506,_x0000_s572507,_x0000_s572508"
+ src="slide0329_image291.gif" style='position:absolute;top:28.0%;left:73.4%;
+ width:7.86%;height:29.0%'><![endif]><p:shaperange
+  href="slide0329.xml#_x0000_s572509"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572509,_x0000_s572510,_x0000_s572511"
+ src="slide0329_image292.gif" style='position:absolute;top:29.0%;left:88.01%;
+ width:4.49%;height:31.75%'><![endif]><p:shaperange
+  href="slide0329.xml#_x0000_s572512"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572512" src="slide0329_image293.gif" style='position:absolute;
+ top:29.25%;left:62.54%;width:9.73%;height:24.5%'><![endif]><p:shaperange
+  href="slide0329.xml#_x0000_s572513"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572513" src="slide0329_image294.gif" style='position:absolute;
+ top:37.0%;left:82.2%;width:4.3%;height:12.25%'><![endif]><p:shaperange
+  href="slide0329.xml#_x0000_s572514"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572514" src="slide0329_image295.gif" style='position:absolute;
+ top:49.75%;left:56.17%;width:11.04%;height:8.5%'><![endif]>
+ <div v:shape="_x0000_s572514" class=O style='text-align:center;position:absolute;
+ top:50.75%;left:56.36%;width:9.92%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'>server</span></div>
+ <p:shaperange href="slide0329.xml#_x0000_s572515"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572515,_x0000_s572516" src="slide0329_image296.gif"
+ style='position:absolute;top:53.5%;left:65.73%;width:17.6%;height:12.75%'><![endif]>
+ <div v:shape="_x0000_s572516" class=O style='position:absolute;top:57.75%;
+ left:68.16%;width:16.85%;height:5.25%'><span lang=EN-US style='font-family:
+ "Times New Roman";mso-ascii-font-family:"Times New Roman";mso-fareast-language:
+ JA'><b>download</b></span></div>
+ <p:shaperange href="slide0329.xml#_x0000_s572517"/><![if !vml]><img border=0
+ v:shapes="_x0000_s572517" src="slide0329_image297.gif" style='position:absolute;
+ top:78.75%;left:71.72%;width:27.9%;height:15.0%'><![endif]>
+ <div v:shape="_x0000_s572517" class=O style='text-align:center'><span
+ style='position:absolute;top:82.25%;left:70.03%;width:29.4%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'>High performance<br>
+ </span></span><span
+ style='position:absolute;top:87.5%;left:69.66%;width:29.96%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'>Global Computing</span></span></div>
+</p:slide>
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,325 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Preparing for Dynamic Class Loading">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0235.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="375"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s384002" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s384003" type="#_x0000_m141325"
+  style='position:absolute;left:0;top:150pt;width:552pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape><v:shapetype id="_x0000_t202"
+  coordsize="21600,21600" o:spt="202" path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s384004" type="#_x0000_t202" style='position:absolute;
+  left:546pt;top:204pt;width:132pt;height:36pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape>
+ <div v:shape="_x0000_s384002" class=T><span style='position:absolute;
+ top:6.25%;left:2.24%;width:95.69%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Preparing for
+ Dynamic Class </span></span><span style='position:absolute;top:16.0%;
+ left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Loading</span></span></div>
+ <div v:shape="_x0000_s384003">
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:27.25%;
+ left:.93%;width:74.9%;height:6.5%'><span style='position:absolute;top:0%;
+ left:5.0%;width:95.0%'><span style='font-size:75%'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-5.26%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'><b><u>Deoptimization&#13;</u></b></span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:33.25%;
+ left:5.99%;width:69.85%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.55%;width:95.44%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.77%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>Revert
+ to non-optimized dynamic dispatch&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:38.0%;
+ left:5.99%;width:69.85%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.55%;width:95.44%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.77%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>difficulties
+ of </span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:71%;mso-fareast-language:JA'><b><u>on-stack
+ replacement&#13;</u></b></span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:43.0%;left:13.48%;width:71.34%'><span style='font-size:75%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.41%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Replace
+ method while there is an active context on </span></span><span
+ style='position:absolute;top:46.5%;left:13.48%;width:62.35%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>stack&#13;</span></span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:51.0%;
+ left:11.04%;width:64.79%;height:5.0%'><span style='position:absolute;
+ top:0%;left:3.75%;width:96.24%'><span style='font-size:75%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-3.9%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Even
+ more difficult due to multiple threads&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:55.5%;
+ left:.93%;width:85.01%;height:6.5%'><span style='position:absolute;top:0%;
+ left:4.4%;width:95.59%'><span style='font-size:75%'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-4.6%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'><b><u>Preexistence Analysis</u></b></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'> [Detlefs&amp;Agesen99] &#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:61.25%;
+ left:5.99%;width:69.85%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.55%;width:95.44%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.77%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>Analysis
+ to avoid on-stack replacement&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:66.25%;
+ left:5.99%;width:75.46%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.21%;width:95.78%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.4%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>o
+ prexisting in a </span><span lang=EN-US style='font-family:Wingdings;
+ font-size:71%;mso-fareast-language:JA;mso-char-type:symbol'>&oacute;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'> o exists prior to exec. of a&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:71.0%;left:9.17%;width:77.34%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.11%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>If
+ a is preexisting then single-impl. assumption of </span></span><span
+ style='position:absolute;top:75.0%;left:9.17%;width:75.65%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>b will be valid for the duration of
+ invocation of a</span><span lang=EN-US style='font-size:71%;mso-fareast-language:
+ JA;display:none'>&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:80.0%;left:9.17%;width:77.15%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.12%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>Guarantees
+ that invocation completes safely even </span></span><span style='position:
+ absolute;top:84.0%;left:9.17%;width:69.66%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:71%;
+ mso-fareast-language:JA'>if class loading invalidates inlining for future </span></span><span
+ style='position:absolute;top:88.0%;left:9.17%;width:66.66%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>invocations&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:92.75%;
+ left:5.99%;width:69.85%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.55%;width:95.44%'><span style='font-size:71%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.77%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:71%;mso-fareast-language:JA'>In
+ practice, very little recompilations</span></span></div>
+ </div>
+ <div v:shape="_x0000_s384004" class=O style='mso-line-spacing:"100 50 0";
+ position:absolute;top:37.75%;left:76.77%;width:18.53%;height:6.5%'><span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS"'>(call o2.b)</span></div>
+ <v:rect id="_x0000_s384005" style='position:absolute;left:546pt;top:186pt;
+  width:162pt;height:174pt;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+  fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:rect><v:rect id="_x0000_s384006" style='position:absolute;left:558pt;
+  top:234pt;width:138pt;height:78pt;mso-wrap-style:none;v-text-anchor:middle'
+  filled="f" fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:rect><v:shape id="_x0000_s384007" type="#_x0000_t202" style='position:absolute;
+  left:546pt;top:324pt;width:156pt;height:36pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:line id="_x0000_s384010" style='position:absolute' from="534pt,2in"
+  to="558pt,180pt" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrow="block"
+   endarrowwidth="narrow" endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:line><v:shape id="_x0000_s384011" type="#_x0000_t202" style='position:absolute;
+  left:564pt;top:240pt;width:132pt;height:64.75pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s384012" type="#_x0000_t202" style='position:absolute;
+  left:516pt;top:114pt;width:132pt;height:36pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s384013" type="#_x0000_t202" style='position:absolute;
+  left:558pt;top:420pt;width:132pt;height:36pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><![if !vml]><img border=0
+ v:shapes="_x0000_s384005,_x0000_s384006,_x0000_s384010"
+ src="slide0235_image218.gif" style='position:absolute;top:26.5%;left:73.97%;
+ width:24.71%;height:40.75%'><![endif]>
+ <div v:shape="_x0000_s384007" class=O style='mso-line-spacing:"100 50 0";
+ position:absolute;top:60.0%;left:76.77%;width:19.85%;height:6.5%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Method a</span></div>
+ <div v:shape="_x0000_s384011" class=O style='mso-line-spacing:"100 50 0"'><span
+ style='position:absolute;top:44.5%;left:79.4%;width:16.47%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Method<br>
+ </span></span><span
+ style='position:absolute;top:49.75%;left:79.4%;width:18.72%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>b (inlined)</span></span></div>
+ <div v:shape="_x0000_s384012" class=O style='mso-line-spacing:"100 50 0";
+ position:absolute;top:21.0%;left:72.65%;width:16.47%;height:6.5%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>call o1.a</span></div>
+ <div v:shape="_x0000_s384013" class=O style='mso-line-spacing:"100 50 0";
+ position:absolute;top:77.75%;left:78.46%;width:16.47%;height:6.5%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>call o.b</span></div>
+ <v:rect id="_x0000_s384014" style='position:absolute;left:546pt;top:402pt;
+  width:162pt;height:120pt;mso-wrap-style:none;v-text-anchor:middle' filled="f"
+  fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="2.25pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+ </v:rect><v:shape id="_x0000_s384016" type="#_x0000_t202" style='position:absolute;
+  left:546pt;top:486pt;width:156pt;height:36pt' filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shapetype id="_x0000_t67" coordsize="21600,21600" o:spt="67"
+  adj="16200,5400" path="m0@0l@1@0@1,0@2,0@2@0,21600@0,10800,21600xe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="val #1"/>
+   <v:f eqn="sum height 0 #1"/>
+   <v:f eqn="sum 10800 0 #1"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @4 @3 10800"/>
+   <v:f eqn="sum width 0 @5"/>
+  </v:formulas>
+  <v:path o:connecttype="custom" o:connectlocs="10800,0;0,@0;10800,21600;21600,@0"
+   o:connectangles="270,180,90,0" textboxrect="@1,0,@2,@6"/>
+  <v:handles>
+   <v:h position="#1,#0" xrange="0,10800" yrange="0,21600"/>
+  </v:handles>
+ </v:shapetype><v:shape id="_x0000_s384019" type="#_x0000_t67" style='position:absolute;
+  left:606pt;top:366pt;width:36pt;height:30pt;mso-wrap-style:none;
+  v-text-anchor:middle' adj="11520,6375" fillcolor="#82b5ca [4]" strokecolor="black [1]"
+  strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='layout-flow:vertical-ideographic'/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s384014,_x0000_s384019"
+ src="slide0235_image219.gif" style='position:absolute;top:67.0%;left:75.65%;
+ width:23.03%;height:30.25%'><![endif]>
+ <div v:shape="_x0000_s384016" class=O style='mso-line-spacing:"100 50 0";
+ position:absolute;top:90.0%;left:76.77%;width:19.85%;height:6.5%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Method a</span></div>
+</p:slide></div>
+
+</body>
+
+</html>

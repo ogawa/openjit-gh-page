@@ -1,0 +1,168 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Comparison on the size of JIT compilers">
+<link rel=next href="v3_slide0275.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0274.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=383 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=46 height=76 colspan=2></td>
+  <td width=383 height=76>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=86 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=212 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=383 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Comparison on the size of</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=86 height=35></td>
+    <td width=212 height=35 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>JIT compilers</font><br>
+    </td>
+    <td width=85 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=46 height=76 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=1 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=40 height=168></td>
+  <td width=405 height=168 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=37 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=334 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=389 height=19 colspan=3><font face="Comic Sans MS" size=1><span
+    style='mso-tab-count:3'>　　　 </span><span style="mso-spacerun: yes">　　　　　　　
+    </span>class#<span style="mso-spacerun: yes">　 </span>method#<span
+    style="mso-spacerun: yes">　　 </span>#lines<span style="mso-spacerun: yes">　
+    </span>class(binary)</font><br>
+    </td>
+    <td width=16 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=18 height=16></td>
+    <td width=37 height=16><font face="Comic Sans MS" size=1>bytes</font><br>
+    </td>
+    <td width=350 height=16 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=405 height=19 colspan=7><font face="Comic Sans MS" size=1>Frontend<span
+    style='mso-tab-count:2'>　　 </span>243<span style='mso-tab-count:1'>　 </span>1,439<span
+    style='mso-tab-count:1'>　 </span>24,148<span style='mso-tab-count:2'>　　 </span>629,062</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=400 height=19 colspan=5><font face="Comic Sans MS" size=1>Backend(sparc)<span
+    style='mso-tab-count:2'>　　 </span><span style="mso-spacerun: yes">　
+    </span>23<span style='mso-tab-count:1'>　 </span><span style="mso-spacerun:
+    yes">　　 </span>182<span style='mso-tab-count:1'>　 </span><span
+    style="mso-spacerun: yes">　 </span>7,560<span style='mso-tab-count:2'>　　 </span>118,592</font><br>
+    </td>
+    <td width=5 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=398 height=19 colspan=4><font face="Comic Sans MS" size=1>Backend(x86)<span
+    style='mso-tab-count:2'>　　 </span><span style="mso-spacerun: yes">　
+    </span>21<span style='mso-tab-count:1'>　 </span><span style="mso-spacerun:
+    yes">　　 </span>182<span style='mso-tab-count:1'>　 </span><span
+    style="mso-spacerun: yes">　 </span>8,085<span style='mso-tab-count:2'>　　 </span>118,125</font><br>
+    </td>
+    <td width=7 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=405 height=19 colspan=7><font face="Comic Sans MS" size=1>C
+    runtime(sparc)<span style='mso-tab-count:1'>　 </span><span
+    style="mso-spacerun: yes">　　　 </span>3<span style='mso-tab-count:4'>　　　　 </span><span
+    style="mso-spacerun: yes">　 </span>42,556</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=405 height=19 colspan=7><font face="Comic Sans MS" size=1>C
+    runtime(x86)<span style='mso-tab-count:2'>　　 </span><span
+    style="mso-spacerun: yes">　　　 </span>3<span style='mso-tab-count:4'>　　　　 </span><span
+    style="mso-spacerun: yes">　 </span>28,928</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=400 height=19 colspan=5><font face="Comic Sans MS" size=1>Sunwjit(sparc)<span
+    style='mso-tab-count:6'>　　　　　　 </span>234,112</font><br>
+    </td>
+    <td width=5 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=403 height=19 colspan=6><font face="Comic Sans MS" size=1>Sunwjit(x86)<span
+    style='mso-tab-count:6'>　　　　　　 </span>146,508</font><br>
+    </td>
+    <td width=2 height=19></td>
+   </tr>
+  </table>
+  </td>
+  <td width=30 height=168></td>
+ </tr>
+ <tr>
+  <td width=475 height=89 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

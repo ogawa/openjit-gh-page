@@ -1,0 +1,216 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: ATLAS for Java [Matsuoka et. al., FGCS2000]">
+<link rel=next href="v3_slide0333.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0332.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0332_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=75 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=240 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=20 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=7 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=53 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=24 colspan=15></td>
+ </tr>
+ <tr>
+  <td width=75 height=63></td>
+  <td width=319 height=63 colspan=8>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=48 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=224 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=48 height=38></td>
+    <td width=224 height=38 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>ATLAS for Java</font><br>
+    </td>
+    <td width=47 height=38></td>
+   </tr>
+   <tr>
+    <td width=319 height=24 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=4>[Matsuoka et. al., FGCS2000]</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=81 height=63 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=475 height=35 colspan=15></td>
+ </tr>
+ <tr>
+  <td width=326 height=37 colspan=3></td>
+  <td width=137 height=37 colspan=9>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=22 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=93 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=137 height=18 colspan=3 align=center><font face="Times New Roman"
+    size=2>Parameter Searcher</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=137 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=22 height=18></td>
+    <td width=93 height=18 align=center><font face="Times New Roman" size=2>(xmmsearch)</font><br>
+    </td>
+    <td width=22 height=18></td>
+   </tr>
+  </table>
+  </td>
+  <td width=12 height=37 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=15></td>
+ </tr>
+ <tr>
+  <td width=408 height=16 colspan=10></td>
+  <td width=66 height=16 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=66 height=16 align=center><font face="Times New Roman"
+    color="#3030f6" size=1><b>parameter</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=1 height=16></td>
+ </tr>
+ <tr>
+  <td width=475 height=33 colspan=15></td>
+ </tr>
+ <tr>
+  <td width=341 height=16 colspan=4></td>
+  <td width=35 height=16 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=35 height=16><font face="Times New Roman" color="#3030f6" size=1><b>result</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=99 height=16 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=15></td>
+ </tr>
+ <tr>
+  <td width=410 height=16 colspan=11></td>
+  <td width=54 height=16 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=54 height=16 align=center><font face="Times New Roman"
+    color="#3030f6" size=1><b>generate</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=11 height=16 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=15 colspan=15></td>
+ </tr>
+ <tr>
+  <td width=315 height=33 colspan=2></td>
+  <td width=46 height=37 colspan=3 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=26 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=46 height=18 colspan=3 align=center><font face="Times New Roman"
+    size=2>Driver</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=46 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=10 height=18></td>
+    <td width=26 height=18 align=center><font face="Times New Roman" size=2>(fc)</font><br>
+    </td>
+    <td width=10 height=18></td>
+   </tr>
+  </table>
+  </td>
+  <td width=114 height=33 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=315 height=4 colspan=2></td>
+  <td width=4 height=4></td>
+  <td width=22 height=16 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=22 height=16><font face="Times New Roman" color="#3030f6" size=1><b>test</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=88 height=4 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=365 height=12 colspan=6></td>
+  <td width=88 height=12 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=475 height=16 colspan=15></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

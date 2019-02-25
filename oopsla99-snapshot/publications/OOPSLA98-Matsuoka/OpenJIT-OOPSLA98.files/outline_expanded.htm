@@ -1,0 +1,1027 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../OpenJIT-OOPSLA98.html";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor=white text=black link=black vlink=black alink=black>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0001.htm');">The OpenJIT project ---
+Opening-up the Java JIT Compiler</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Satoshi Matsuoka</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Tokyo Institute of Technology</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>http://openjit.is.titech.ac.jp</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OOPSLA98 Reflection Workshop
+  Presentation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Vancouver BC, Oct. 17, 1998</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0002.htm');">Objectives of OpenJIT
+Project</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A TIT/Fujitsu Project</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A dynamically customizable Java JIT
+  compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Apply “Open Compiler” “Reflection” to
+  JITs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Dynamic compilation</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Self-compiling</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Basis for various JIT research</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Will be public domain (at least
+  binaries)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Plugs into standard Sun JVM (1.1.x)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Allow customization of JITs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Dynamic loading of optimization
+  classes</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Customize language (w/OpenJava)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Optimize for apps and environment</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0050.htm');">Current Projects Overview</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Ninf Global Computing System</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>w/ETL-RWC, RPC-based HPDC system</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Quantitative Global Computing Model,
+  Architecture for Resource Scheduling, Global Computing Simulator,
+  Security/Authentication, etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>HPDC and Cluster Computing</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>C++ (OpenC++/MPC++) Class Libraries,
+  Reflection and HPDC (OpenDSM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Java-based Open-ended, Turn-key HPDC</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Ninflet---Java-based global computing
+  system</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT --- Reflective Java JIT
+  Compiler (w/Fujitsu)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Adaptation and Optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Java dynamic optimiazations for HPDC</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0020.htm');">Java and Just-in-time
+Compiler</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>“Portable” languages e.g., Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Does not compile directly to CPU
+  native code</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Interpretive execution of common
+  bytecodes on JVMs (Java VM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Speed problem （1/10 ～ 1/100 vs.
+  optim. native code)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Just-In-Time compiler to the rescue</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Rather old idea: Smalltalk, etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Compile bytecode into native code at
+  runtime</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>1/2 ～ 1/10 vs. optim. native code</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Sun, MS, IBM, Symantec, Fujitsu,
+  etc., vigorously developing “the best” Java JIT. (e.g., HotSpot）</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0019.htm');">Java and JIT Compilers (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>The Java “Portability Myth”</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Write once, debug everywhere</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Optimizations not “Portable”</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>traditional optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>object-oriented optimization (CHA +
+  inlining)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>JIT itself non-portable</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>hard to retarget (e.g., JIT on VPP)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Difficult to Customize</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>E.g., Embedded apps &reg; Need Memory
+  Efficiency</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Lack of “Performance Portability”</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Optimizations may not work</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>What do we do? &reg; Use Reflection</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0023.htm');">Our Proposal: OpenJIT
+Compiler</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A Joint effort with Fujitsu’s Java
+  compiler group</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A Reflective Just-in-time (Open JIT
+  Compiler)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Based on Reflection/OI principle<span
+  style="mso-spacerun: yes">&nbsp; </span>(Java JIT in Java)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>A Java framework for JIT compiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Can download/compile various
+  customization &amp; optimization modules into a JIT compiler “just-in-time”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Generic JIT Customization Library</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Class-specific JIT customization →　The
+  library builder can embed class-specific customization of JIT into the
+  classfile</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>scope control</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0027.htm');">OpenJIT general schema</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0026.htm');">OpenJIT Applications</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Large-scale metacomputing environment</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Adapting Java to different HPC
+  platforms</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Embedded Applications</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>For embedded RISC processors</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>resource efficient optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Others</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>JIT technology experiments</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>parallel languages</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>other custom languages</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0028.htm');">The “Simple App” Scenario</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Software DSM on a Cluster of WS/PCs →
+  need mods on compiler/runtime (c.f. DEC Shasta)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Assume source code is not available
+  (e.g., Applets)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Java (VM) does not support such
+  customization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJIT →　customize “DSM” class such
+  that read/write barriers are automatically inserted, etc.</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0049.htm');">Implementing the Simple App
+Scenario</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Proof-of-concept: OMPC++ DSM</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenC++ plus RWC MPC++</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Implement Software DSM as a Metaclass
+  Library</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Portable, High-Performance</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Runs on 256-node RWC PC cluster</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Implementing SPLASH2 programs</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Future implementation in Java
+  w/OpenJIT</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0034.htm');">OpenJIT Compiler Overview
+(1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>99% written in Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Need JNI native method support for
+  JVM access</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>“Plugs in” to Standard JavaVM</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Works just like off-the-shelf JIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>setenv JAVA_COMPILER OpenJIT<br>
+  setenv CLASSPATH &lt;openjitdir&gt;<br>
+  setenv LD_LIBRARY_PATH &lt;openjitdir&gt;</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Initially “self-compiles” on startup</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Downloadable OpenJIT extensions</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Class Annotation + Interface</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Scope Control (class-only, general
+  (except JIT), everything (incl. JIT)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>API still under design</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0030.htm');">OpenJIT Compiler Overview
+(2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0035.htm');">OpenJIT Compiler Overview
+(3)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT Frontend System</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Bytecode-to-bytecode optimizer</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>“Discompiler” to recover Java source
+  structure</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Class framework for standard program
+  analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Classfile Annotation Analysis</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Various info for optimization and
+  extensions</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJIT Backend System</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>A small Java JIT compiler in Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Standard optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>stack-to-register allocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>peephole optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>stack ops to RISC ops</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0032.htm');">OpenJIT Customization</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>3 levels of customization</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>1. No changes in Java language syntax
+  or semantics</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Standard Compiler incl. OO
+  optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>User-definable (like SUIF)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>2. Semantic extensions but no syntax
+  change extensions</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Adaptation to Computing Env. (e.g.,
+  DSM)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Both frontend and backend support</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>3. Both Syntactic and Semantic
+  Extensions</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>New Language Primitives (e.g.,<span
+  style="mso-spacerun: yes">&nbsp; </span>Data distribution Directives)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>NOT directly supported</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>New bytecode → Need javac equiv. to
+  emit bytecode</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0025.htm');">OpenJIT and OpenJava</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJava Compiler (Univ. of Tsukuba,
+  Chiba)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>An Open Compiler for Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>c.f., OpenC++ v.2.x</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Sophisticated source-to-source macro
+  processing</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Collaboration w/ OpenJIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Open Java - language extensions (new
+  bytecode), some static optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT - main optimizations,
+  run-time customization</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Inverse parsing + customization+
+  re-compilation</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0031.htm');">OpenJIT Project Member</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Joint project between TIT &amp;
+  Fujitsu</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Fujitsu Compiler Technologies
+  Division</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Koichiro Hotta</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Fujitsu Laboratories</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Fuminori Kimura</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Kouya Shimura</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Tokyo Institute of Technology</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Satoshi Matsuoka</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Hirotaka Ogawa</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Other students</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Electrotechnical Laboratory</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Hiromitsu Takagi</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0038.htm');">OpenJIT Current Status</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Parallel Design &amp; Development at
+  TIT and Fujitsu</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>The first prototype backend is
+  operational</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>can run javac, reasonable speed</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Frontend being designed</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Frontend &amp; Backend API being
+  designed</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Full prototype operational 3Q ’98,
+  distributable version 1Q ’99</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Will be PDS (under contract)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0039.htm');">OpenJIT Preliminary
+Benchmarks (1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Very early results - does not
+  directly reflect final performance</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>No Frontend</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Prototype Backend</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>No good register allocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Little peephole optimizations</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Still, good news is that it runs and
+  works pretty well…</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Comparison to Fujitsu’s commercial
+  JIT and Sun’s JIT (JDK 1.1.x), UltraSparc 250Mhz</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>written in C</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0041.htm');">OpenJIT Preliminary
+Benchmarks (2) - CaffeineMark</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0051.htm');">OpenJIT Preliminary
+Benchmarks (3) - CaffineMark</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0042.htm');">OpenJIT Preliminary
+Benchmarks (4) - Warmup Time</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Coldstart, compile &amp; execute an
+  empty method (incl. self-compile time)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Execution Result (wo/Frontend)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0043.htm');">Conclusion and Future Work</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT is the first reflective JIT
+  compiler for Java</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>High portability, extensibility</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Basis for work on dynamic
+  compilation, Java extensions, AOP weavers, etc.</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Many technical challenges remain</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Various techniques - e.g.,
+  Multithreading of self-modifying code</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Space/Time efficient frontend
+  optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OO Framework API design</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Various interesting research based on
+  OpenJIT</font></td>
+ </tr>
+</table>
+
+</p>
+
+</body>
+
+</html>

@@ -1,0 +1,211 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: Bckgrnd3 - Problems w/ JITs (cont.)">
+<link rel=next href=slide0023.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0022.htm');   
+  else
+    parent.location.href = "../OpenJIT-ICSE98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master05_background.gif" bgcolor="#0066cc" alink="#ff9933"
+link="#330099" vlink="#cbcbcb" text=white topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=401 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=35 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=476 height=46 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=9 height=33></td>
+  <td width=467 height=33 colspan=6><img src="slide0022_image003.gif" border=0
+  width=467 height=33></td>
+ </tr>
+ <tr>
+  <td width=476 height=10 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=29 height=236 colspan=2></td>
+  <td width=442 height=236 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=63 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=83 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=69 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=64 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=30 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=21><font color=white size=3>&#8226;</font></td>
+    <td width=189 height=21 colspan=9><font face="Times New Roman" size=3>Lack
+    of Customizability</font><br>
+    </td>
+    <td width=235 height=21 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=441 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=403 height=18 colspan=15><font face="Times New Roman" size=2>New
+    apps from HPC to Internet Appliances - need</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=38 height=17 colspan=4></td>
+    <td width=403 height=17 colspan=15><font face="Times New Roman" size=2>optimization
+    and tuning for respective apps and</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=38 height=17 colspan=4></td>
+    <td width=85 height=17 colspan=5><font face="Times New Roman" size=2>environment</font><br>
+    </td>
+    <td width=318 height=17 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=441 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=335 height=18 colspan=13><font face="Times New Roman" size=2>(1)
+    App/Env-specific code generation (e.g., DSM)</font><br>
+    </td>
+    <td width=68 height=18 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=441 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=267 height=18 colspan=11><font face="Times New Roman" size=2>(2)
+    Customized optimization techniques</font><br>
+    </td>
+    <td width=136 height=18 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=441 height=2 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=247 height=18 colspan=8><font face="Times New Roman" size=2>(3)
+    Language extensions if necessary</font><br>
+    </td>
+    <td width=156 height=18 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=441 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=18 colspan=3></td>
+    <td width=15 height=18><font color=white size=2>&#8226;</font></td>
+    <td width=259 height=18 colspan=10><font face="Times New Roman" size=2>Example:
+    HPC on network of WS/PCs</font><br>
+    </td>
+    <td width=144 height=18 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=441 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=227 height=16 colspan=6><font face="Times New Roman" size=1>Distribution/parallelization
+    directives (3)</font><br>
+    </td>
+    <td width=155 height=16 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=441 height=1 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=250 height=16 colspan=9><font face="Times New Roman" size=1>parallelized
+    code generation/optimization (2)</font><br>
+    </td>
+    <td width=132 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=441 height=1 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=47 height=16 colspan=6></td>
+    <td width=12 height=16><font color=white size=1>&#8226;</font></td>
+    <td width=216 height=16 colspan=4><font face="Times New Roman" size=1>adaption
+    to networked WS/PC env. (1)</font><br>
+    </td>
+    <td width=166 height=16 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=441 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=17 height=21><font face=Wingdings color=white size=3>L</font></td>
+    <td width=386 height=21 colspan=17><font face="Times New Roman" size=3>No
+    JIT compilers (nor JVM) today support these!</font><br>
+    </td>
+    <td width=38 height=21></td>
+   </tr>
+  </table>
+  </td>
+  <td width=5 height=236 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=476 height=2 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=430 height=11 colspan=3></td>
+  <td width=6 height=11><img src="master05_image004.gif" border=0 width=6
+  height=11></td>
+  <td width=40 height=11 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=476 height=18 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

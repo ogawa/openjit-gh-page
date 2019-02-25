@@ -1,0 +1,261 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: AJaPACK : Automatic Optimization using Downloadable Self-tuning Portable Library [ACM JavaGrande 2000]">
+<link rel=next href="v3_slide0331.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0329.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0329_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=253 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=43 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=34 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=16 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=7 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=16 height=85></td>
+  <td width=438 height=85 colspan=18>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=85 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=235 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=84 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=438 height=41 colspan=5 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>AJaPACK</font><font face="Comic Sans MS"
+    color="#003399" size=3> : Automatic Optimization using</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=17 height=22></td>
+    <td width=404 height=22 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=3><i><u>Downloadable Self-tuning Portable Library</u></i></font><br>
+    </td>
+    <td width=17 height=22></td>
+   </tr>
+   <tr>
+    <td width=102 height=22 colspan=2></td>
+    <td width=235 height=22 align=center><font face="Comic Sans MS"
+    color="#003399" size=3>[ACM JavaGrande 2000]</font><br>
+    </td>
+    <td width=101 height=22 colspan=2></td>
+   </tr>
+  </table>
+  </td>
+  <td width=21 height=85 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=3 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=349 height=8 colspan=6></td>
+  <td width=65 height=37 colspan=7 rowspan=2><img
+  src="v3_slide0329_image076.gif" border=0 width=65 height=37></td>
+  <td width=61 height=8 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=349 height=29 colspan=6></td>
+  <td width=4 height=29></td>
+  <td width=20 height=36 colspan=2 rowspan=2><img
+  src="v3_slide0329_image077.gif" border=0 width=20 height=36></td>
+  <td width=37 height=29 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=390 height=7 colspan=10></td>
+  <td width=20 height=44 colspan=2 rowspan=5><img
+  src="v3_slide0329_image078.gif" border=0 width=20 height=44></td>
+  <td width=8 height=7 colspan=2></td>
+  <td width=37 height=7 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=390 height=1 colspan=10></td>
+  <td width=65 height=1 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=351 height=1 colspan=7></td>
+  <td width=38 height=27 colspan=2 rowspan=2><img
+  src="v3_slide0329_image079.gif" border=0 width=38 height=27></td>
+  <td width=1 height=1></td>
+  <td width=65 height=1 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=351 height=26 colspan=7></td>
+  <td width=1 height=26></td>
+  <td width=11 height=26 colspan=3></td>
+  <td width=20 height=36 colspan=2 rowspan=3><img
+  src="v3_slide0329_image080.gif" border=0 width=20 height=36></td>
+  <td width=34 height=26 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=390 height=9 colspan=10></td>
+  <td width=11 height=9 colspan=3></td>
+  <td width=34 height=9 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=421 height=1 colspan=15></td>
+  <td width=34 height=1 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=4 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=269 height=2 colspan=2></td>
+  <td width=43 height=18 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=43 height=18 align=center><font face="Times New Roman" size=2>server</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=163 height=2 colspan=18></td>
+ </tr>
+ <tr>
+  <td width=269 height=16 colspan=2></td>
+  <td width=109 height=16 colspan=12></td>
+  <td width=20 height=36 colspan=2 rowspan=3><img
+  src="v3_slide0329_image081.gif" border=0 width=20 height=36></td>
+  <td width=34 height=16 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=421 height=7 colspan=15></td>
+  <td width=34 height=7 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=324 height=13 colspan=4></td>
+  <td width=70 height=18 colspan=7 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=70 height=18><font face="Times New Roman" size=2><b>download</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=27 height=13 colspan=4></td>
+  <td width=34 height=13 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=324 height=5 colspan=4></td>
+  <td width=81 height=5 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=475 height=7 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=355 height=37 colspan=8></td>
+  <td width=98 height=37 colspan=10>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=96 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=96 height=18><font face="Times New Roman" size=2>Self-tuning on</font><br>
+    </td>
+    <td width=2 height=18></td>
+   </tr>
+   <tr>
+    <td width=98 height=1 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=98 height=18 colspan=2><font face="Times New Roman" size=2>every
+    machine</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=22 height=37 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=25 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=337 height=37 colspan=5></td>
+  <td width=131 height=37 colspan=15>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=128 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=1 height=18></td>
+    <td width=128 height=18 align=center><font face="Times New Roman" size=2>High
+    performance</font><br>
+    </td>
+    <td width=2 height=18></td>
+   </tr>
+   <tr>
+    <td width=131 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=131 height=18 colspan=3 align=center><font face="Times New Roman"
+    size=2>Global Computing</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=7 height=37></td>
+ </tr>
+ <tr>
+  <td width=475 height=26 colspan=21></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,149 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Optimizing Java Packages [Zaks et.al., OOPSLA2K]">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0348.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="586"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s600066" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s600067" type="#_x0000_m141325"
+  style='position:absolute;left:36pt;top:150pt;width:672pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s600066" class=T><span style='position:absolute;
+ top:6.25%;left:6.17%;width:87.82%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Optimizing Java
+ Packages<br>
+ </span></span><span style='position:absolute;top:16.0%;
+ left:7.86%;width:84.26%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>[Zaks et.al.,
+ OOPSLA2K]</span></span></div>
+ <div v:shape="_x0000_s600067">
+ <div class=B><span style='position:absolute;top:27.75%;left:9.73%;width:90.82%'><span
+ style='font-size:88%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-4.12%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'>Identify
+ “Sealed”, </span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'><i>non-final</i></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'> calls that are </span></span><span
+ style='position:absolute;top:34.0%;left:9.73%;width:87.82%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>confined within Sealed (JAR)
+ Packages&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:41.25%;left:11.04%;width:100.93%;
+ height:6.5%'><span style='position:absolute;top:0%;left:2.96%;width:96.84%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.06%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>All files in package either loaded or
+ not loaded at all&#13;</span></span></div>
+ <div class=B><span style='position:absolute;top:47.75%;left:9.73%;width:99.25%'><span
+ style='font-size:88%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-3.77%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'>Create
+ Package Based Class Hierarchy Graph, </span></span><span style='position:absolute;
+ top:54.0%;left:9.73%;width:97.19%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'>analyze
+ all methods based on class modifiers&#13;</span></span></div>
+ <div class=B style='position:absolute;top:61.5%;left:5.99%;width:91.57%;
+ height:7.5%'><span style='position:absolute;top:0%;left:4.08%;width:95.91%'><span
+ style='font-size:88%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-4.26%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'>Subject
+ to aggressive optimizations&#13;</span></span></div>
+ <div class=B1 style='position:absolute;top:68.75%;left:11.04%;width:86.51%;
+ height:6.5%'><span style='position:absolute;top:0%;left:3.46%;width:96.32%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.59%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>rt.jar &#13;</span></span></div>
+ <div class=B2 style='position:absolute;top:75.25%;left:15.91%;width:81.46%;
+ height:5.5%'><span style='position:absolute;top:0%;left:3.21%;width:97.01%'><span
+ style='font-size:83%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.31%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>10% of packages 20-60% sealed
+ calls&#13;</span></span></div>
+ <div class=B2 style='position:absolute;top:80.5%;left:15.91%;width:81.46%;
+ height:5.5%'><span style='position:absolute;top:0%;left:3.21%;width:97.01%'><span
+ style='font-size:83%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-3.31%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:83%;mso-fareast-language:JA'>&gt;50% packages &gt;5% sealed calls</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

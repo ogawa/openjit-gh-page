@@ -1,0 +1,127 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<link rel=OLE-Object-Data href=oledata.mso>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Performance of AJaPACK(60 threads) Enterprise10000(UltraSparc 250MHz x 60CPU,  Solaris Production Release JDK 1.2.1_04a)">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0337.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="572"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s585730" type="#_x0000_m141324"
+  style='position:absolute;left:12pt;top:.625pt;width:732pt;height:127.25pt;
+  mso-wrap-style:square'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape>
+ <div v:shape="_x0000_s585730" class=T><span style='position:absolute;
+ top:-.5%;left:-2.99%;width:111.23%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Performance of
+ AJaPACK</span><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:55%;mso-fareast-language:JA'>(60 threads)</span><span
+ lang=EN-US style='mso-fareast-language:JA'><br>
+ </span></span><span
+ style='position:absolute;top:9.75%;left:.37%;width:104.49%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:64%;mso-fareast-language:JA'>Enterprise10000(UltraSparc 250MHz x
+ 60CPU,<br>
+ </span></span><span style='position:absolute;top:16.0%;
+ left:2.62%;width:99.81%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:64%;mso-fareast-language:JA'><span
+ style="mso-spacerun: yes">&nbsp;</span>Solaris Production Release JDK
+ 1.2.1_04a)</span></span></div>
+ <p:shaperange href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s585731"
+  type="#_x0000_m141325" style='position:absolute;left:-12.125pt;top:140.375pt;
+  width:747.5pt;height:372.5pt' o:spt="75" o:bwpure="blackTextAndLines"
+  o:bwnormal="blackTextAndLines" o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe"
+  filled="f" stroked="f">
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke joinstyle="miter" o:forcedash="f"/>
+  <v:imagedata src="slide0337_image318.emz" o:title=""/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t" text="t"/>
+  <p:placeholder type="graph" position="1"/></v:shape><o:OLEObject Type="Embed"
+  ProgID="MSGraph.Chart.8" ShapeID="_x0000_s585731" DrawAspect="Content"
+  ObjectID="615">
+  <p:oleclientdata subtype="graph" menuname="グラフ"
+   clipboardname="Microsoft Graph 2000 グラフ" followcolorscheme="fullScheme"/></o:OLEObject>
+ <![if !vml]><img border=0 v:shapes="_x0000_s585731"
+ src="slide0337_image319.gif" style='position:absolute;top:26.0%;left:-1.68%;
+ width:103.74%;height:69.0%'><![endif]></p:slide></div>
+
+</body>
+
+</html>

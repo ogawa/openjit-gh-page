@@ -1,0 +1,336 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>ｽﾗｲﾄﾞ ﾀｲﾄﾙなし</title>
+<meta name=Description
+content="99/10/29: OpenJIT High-level Optimizer Toolkit (1)">
+<link rel=next href=slide0033.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0026.htm');   
+  else
+    parent.location.href = "../sun-talk-ogawa-Frontend.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0026_background.gif" bgcolor=white alink="#ffffcc"
+link="#ff9966" vlink="#ffffcc" text="#009999" topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=48 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=71 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=10 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=51 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=27 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=33 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=49 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=26 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=45 colspan=24></td>
+ </tr>
+ <tr>
+  <td width=17 height=31></td>
+  <td width=432 height=31 colspan=21>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=432 height=31><font face="Arial Narrow" color="#010000" size=5><b>OpenJIT
+    High-level Optimizer Toolkit (1)</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=26 height=31 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=30 colspan=24></td>
+ </tr>
+ <tr>
+  <td width=17 height=39></td>
+  <td width=364 height=39 colspan=16>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=290 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face="Monotype Sorts" color="#ff9966" size=1>n</font></td>
+    <td width=346 height=19 colspan=4><font face=Arial color="#010000" size=2>Toolkit
+    for building optimizer (called Compilets)</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=363 height=4 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=290 height=17><font face=Arial color="#010000" size=2>*</font><font
+    face=Arial color="#010000" size=1>This module does not provide “optimizer”
+    itself</font><br>
+    </td>
+    <td width=50 height=17></td>
+   </tr>
+  </table>
+  </td>
+  <td width=94 height=39 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=475 height=17 colspan=24></td>
+ </tr>
+ <tr>
+  <td width=306 height=29 colspan=14></td>
+  <td width=121 height=31 colspan=5 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=115 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=3 height=16></td>
+    <td width=115 height=16 align=center><font face=Arial color="#010000"
+    size=1><u>Optimizer module</u></font><br>
+    </td>
+    <td width=3 height=16></td>
+   </tr>
+   <tr>
+    <td width=121 height=15 colspan=3 align=center><font face=Arial
+    color="#010000" size=1><u>(System prepared)</u></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=48 height=29 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=68 height=2 colspan=3></td>
+  <td width=83 height=16 colspan=3 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=83 height=16 align=center><font face=Arial color="#010000"
+    size=1>Original AST</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=155 height=2 colspan=8></td>
+  <td width=48 height=2 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=68 height=10 colspan=3></td>
+  <td width=324 height=10 colspan=18></td>
+ </tr>
+ <tr>
+  <td width=68 height=4 colspan=3></td>
+  <td width=181 height=4 colspan=10></td>
+  <td width=69 height=31 colspan=2 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=66 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=69 height=16 colspan=3 align=center><font face=Arial
+    color="#010000" size=1>Flowgraph</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=1 height=15></td>
+    <td width=66 height=15 align=center><font face=Arial color="#010000"
+    size=1>Generator</font><br>
+    </td>
+    <td width=2 height=15></td>
+   </tr>
+  </table>
+  </td>
+  <td width=74 height=4 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=332 height=10 colspan=16></td>
+  <td width=74 height=10 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=237 height=8 colspan=11></td>
+  <td width=84 height=59 colspan=4 rowspan=5><img src="slide0026_image020.gif"
+  border=0 width=84 height=59></td>
+  <td width=11 height=8></td>
+  <td width=74 height=8 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=149 height=9 colspan=5></td>
+  <td width=55 height=14 colspan=3 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=55 height=14 align=center><font face=Arial color="#010000"
+    size=1>Call-back</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=33 height=9 colspan=3></td>
+  <td width=11 height=9></td>
+  <td width=74 height=9 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=149 height=5 colspan=5></td>
+  <td width=33 height=5 colspan=3></td>
+  <td width=154 height=5 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=237 height=19 colspan=11></td>
+  <td width=154 height=19 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=139 height=18 colspan=4></td>
+  <td width=90 height=31 colspan=6 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=70 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=11 height=16></td>
+    <td width=70 height=16 align=center><font face=Arial color="#010000"
+    size=1>Compilets</font><br>
+    </td>
+    <td width=9 height=16></td>
+   </tr>
+   <tr>
+    <td width=90 height=16 colspan=3 align=center><font face=Arial
+    color="#010000" size=1>(user defined)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=8 height=18></td>
+  <td width=11 height=18></td>
+  <td width=69 height=31 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=57 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=69 height=16 colspan=3 align=center><font face=Arial
+    color="#010000" size=1>Flowgraph</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=6 height=16></td>
+    <td width=57 height=16 align=center><font face=Arial color="#010000"
+    size=1>Analyzer</font><br>
+    </td>
+    <td width=6 height=16></td>
+   </tr>
+  </table>
+  </td>
+  <td width=74 height=18 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=139 height=13 colspan=4></td>
+  <td width=103 height=13 colspan=6></td>
+  <td width=74 height=13 colspan=6></td>
+ </tr>
+ <tr>
+  <td width=475 height=23 colspan=24></td>
+ </tr>
+ <tr>
+  <td width=208 height=1 colspan=9></td>
+  <td width=56 height=14 colspan=3 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=56 height=14 align=center><font face=Arial color="#010000"
+    size=1>transform</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=211 height=1 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=65 height=8 colspan=2></td>
+  <td width=88 height=16 colspan=5 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=88 height=16 align=center><font face=Arial color="#010000"
+    size=1>Modified AST</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=55 height=8 colspan=2></td>
+  <td width=211 height=8 colspan=12></td>
+ </tr>
+ <tr>
+  <td width=65 height=5 colspan=2></td>
+  <td width=55 height=5 colspan=2></td>
+  <td width=33 height=5></td>
+  <td width=139 height=16 colspan=7 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=139 height=16 align=center><font face=Arial color="#010000"
+    size=1>Program Transformer</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=39 height=5 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=65 height=3 colspan=2></td>
+  <td width=144 height=3 colspan=6></td>
+  <td width=39 height=3 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=297 height=2 colspan=13></td>
+  <td width=39 height=2 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=297 height=6 colspan=13></td>
+  <td width=12 height=6></td>
+  <td width=12 height=11 colspan=2 rowspan=2><img src="master04_image021.gif"
+  border=0 width=12 height=11></td>
+  <td width=15 height=6></td>
+ </tr>
+ <tr>
+  <td width=448 height=5 colspan=21></td>
+  <td width=15 height=5></td>
+ </tr>
+ <tr>
+  <td width=475 height=14 colspan=24></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

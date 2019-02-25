@@ -1,0 +1,184 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=x-sjis">
+<!--link rel="stylesheet" type="text/css" href="./style.css"-->
+<title>News</title>
+</head>
+<body>
+[ <a href="3.html">前章</a>
+| <a href="index.html">目次</a>
+| <a href="5.html">次章</a> ]
+<hr>
+<h1>4 評価</h1>
+
+<a name="1">
+<h2>4.1 評価環境</h2>
+<p>
+評価環境として、松岡研究室で開発されているPresto Cluster、
+PentiumII 350MHz32台構成を用いた。各ノードのメモリは128MBで
+2系統の100MbpsのFastEthernetでSwitch接続されている。このシステムは、OSがLinux
+2.2.14、VIAの実装であるM-VIA 1.0を用いている。なお、M-VIAは2系統あるネッ
+トワークのうち1系統のみで利用可能となっている。
+コンパイラはgcc 2.95.2を用い、最適化のオプションは ``-O6 -
+fomit-frame-pointer ''とした。
+</p>
+ 
+<a name="2">
+<h2>4.2 性能評価</h2>
+
+<h3>JVIA基本性能</h3>
+<p>
+VIAをJavaから利用するJVIAの基本性能としてJVIAのレイテンシとバンド幅を測
+定した(表 4.1)。
+これをC言語でのnativeなVIAと比較すると(表 4.2)、
+サイズが小さいときにレイテンシがJVIAの方が非常に大きく、サイズが大きくな
+るにしたがって、差が小さくなっているのが分かる。また、バンド幅でみると、
+同じようにサイズが小さいときにはJVIAの方が小さいが、サイズが大きくなるに
+したがって、nativeのVIAのバンド幅近く出ているのが分かる。
+</p>
+<p>
+<table align=center border=1>
+<caption><nobr>表 4.1 JVIAのレイテンシとバンド幅</nobr></caption>
+<tr><th>サイズ </th><th> レイテンシ(usec) </th><th> バンド幅(MB)</th></tr>
+<tr><td>0 </td><td> 125.5 </td><td> 0.0 </td></tr>
+<tr><td>1 </td><td> 124.5 </td><td> 0.0080</td></tr>
+<tr><td>4 </td><td> 125.0 </td><td> 0.032</td></tr>
+<tr><td>16 </td><td> 131.0 </td><td> 0.122</td></tr>
+<tr><td>64 </td><td> 133.0 </td><td> 0.481</td></tr>
+<tr><td>256 </td><td> 168.5 </td><td> 1.519</td></tr>
+<tr><td>1024 </td><td> 301.0 </td><td> 3.402</td></tr>
+<tr><td>4096 </td><td> 625.0 </td><td> 6.554</td></tr>
+<tr><td>16384 </td><td> 1825.0 </td><td> 8.97</td></tr>
+<tr><td>32000 </td><td> 3310.0 </td><td> 9.66</td></tr>
+</table>
+</p>
+<p>
+<table align=center border=1>
+<caption><nobr>表 4.2 VIAのレイテンシとバンド幅</nobr></caption>
+<tr><th>サイズ </th><th> レイテンシ(usec) </th><th> バンド幅(MB)</th></tr>
+<tr><td>         0 </td><td>    30.238 </td><td>    0.000</td></tr>
+<tr><td>         1 </td><td>    31.279 </td><td>    0.031</td></tr>
+<tr><td>         4 </td><td>    31.253 </td><td>    0.127</td></tr>
+<tr><td>        16 </td><td>    31.385 </td><td>    0.509</td></tr>
+<tr><td>        64 </td><td>    38.636 </td><td>    1.656</td></tr>
+<tr><td>       256 </td><td>    72.491 </td><td>    3.531</td></tr>
+<tr><td>      1024 </td><td>   204.680 </td><td>    5.002</td></tr>
+<tr><td>      4096 </td><td>   490.276 </td><td>    8.354</td></tr>
+<tr><td>     16384 </td><td>  1526.766 </td><td>   10.731</td></tr>
+<tr><td>     32000 </td><td>  2835.135 </td><td>   11.286</td></tr>
+</table>
+</p>
+
+<p>
+レイテンシがこのように大きい原因は、Java側で持っているデータ構造である
+VIP_DESCRIPTORのnativeへのマーシャリングによるものである。この
+VIP_DESCRIPTORは内部に
+VIP_DESCRIPTOR_SEGMENT、さらに
+VIP_CONTROL_SEGMENTや\\VIP_ADDRESS_SEGMENT、VIP_DATA_SEGMENTさらに
+VIP_PVOID64など、データ構造が深い。このため、データのマーシャリングに多
+くの時間が化かってしまっているためである。また、JVIAの実装では、バッファ
+データをJavaからnativeのバッファへのコピーが1回行われてしまうため、これ
+もオーバーヘッドの要因でもある。
+
+このVIP_DESCRIPTORのマーシャリングがオーバーヘッドとなっていることを確
+認するため、VIP_DESCRIPTORのマーシャリングを一部(25\%)行わないでレイテンシと
+バンド幅を計測した(表 4.3)。
+</p>
+
+<p>
+<table align=center border=1>
+<caption><nobr>表 4.3 JVIAのレイテンシとバンド幅(一部マーシャリングなし)</nobr></caption>
+<tr><th>サイズ </th><th> レイテンシ(usec) </th><th> バンド幅(MB)</th></tr>
+<tr><td>0 </td><td> 102.0 </td><td> 0.0</td></tr>
+<tr><td>1 </td><td> 106.5 </td><td> 0.0094</td></tr>
+<tr><td>4 </td><td> 106.0 </td><td> 0.0377</td></tr>
+<tr><td>16 </td><td> 106.5 </td><td> 0.150</td></tr>
+<tr><td>64 </td><td> 114.0 </td><td> 0.561</td></tr>
+<tr><td>256 </td><td> 155.0 </td><td> 1.651</td></tr>
+<tr><td>1024 </td><td> 280.5 </td><td> 3.650</td></tr>
+<tr><td>4096 </td><td> 601.0 </td><td> 6.815</td></tr>
+<tr><td>16384 </td><td> 1760.5 </td><td> 9.306</td></tr>
+<tr><td>32000 </td><td> 3226.0 </td><td> 9.919 </td></tr>
+</table>
+</p>
+<p>
+これから、サイズが小さい場合、レイテンシが大幅に向上していることが分かる。
+つまりVIP_DESCRIPTORのマーシャリングを極力行わないことが有効であること
+が判明したが、VIP_DESCRIPTORのマーシャリングを行わないと正常な通信が行
+えないため、通信を行う場合に必要なデータ、更新されるデータのみにしぼって
+マーシャリングを行う必要がある。しかし、サイズが大きい場合、あまり性能が
+改善されていない(図 4.1, 4.2)。
+これは、サイズが大きい場合、通信用のバッファをnativeからJava側へのコピー
+のオーバーヘッドが大きいためと考えられる。そこで、サイズの大小によらず、
+Java側で扱うデータ構造を改良し、データ領域をpinningして、native側より直
+接扱うような改良を行うことも必要である。
+</p>
+
+<p>
+<table align=center border=1>
+<caption><nobr>図 4.1 JVIA, VIAのレイテンシ</nobr></caption>
+<tr><th><img src="latency.gif"></th></tr>
+</table>
+</p>
+
+<p>
+<table align=center border=1>
+<caption><nobr>図 4.2 JVIA, VIAのバンド幅</nobr></caption>
+<tr><th><img src="bandwidth.gif"></th></tr>
+</table>
+</p>
+
+<h3>SPLASH2 LU Kernel</h3>
+<p>
+次に、SPLASH2からLU KernelをJava言語へ移植し、その性能を評価した。
+</p>
+
+<p>
+LU Kernelを分散共有メモリ機能なし(1ノード)で動作させた場合、PCクラスタで
+は36.1秒である。まず、行列サイズ512の場合(表 4.4)、4
+ノード以上では正常な性能が得られなかった。この原因としては、JDSMシステム
+は配列オブジェクトの配列要素ごとの共有機能を提供しているが、これは1次元
+配列に限ったものである。LU Kernelのように、2次元配列を扱う場合、1次元目
+は各要素ごとに共有することが可能であるが、2次元目以降は各要素ごとには管
+理できない。このため、メモリの管理単位が8byte * 512 = 4KB 以上と管理単位
+が大きくなってしまったため、False Sharingが多発してしまったと考えられる。
+これに対しては、管理可能な配列の次元数を増やすことが考えられるが、全ての
+次元数に対応することは難しい。そこで、現実的に3次元程度までは効率よく管
+理できるようにすべきであることが分かった。また、通信インタフェースJVIA
+において、データのマーシャリングのオーバーヘッドが指摘されている。これも
+分散共有メモリ機能の性能低下の要因であるとも考えられる。なお、2ノードで
+は1ノードより若干性能が低下しているのが分かる。これは並列化による性能向
+上が分散共有メモリのオーバーヘッドによって相殺されているためである。
+</p>
+
+<p>
+<table align=center border=1>
+<caption><nobr>表4.4 SPLASH2 LU Kernel</nobr></caption>
+<tr><th>プロセッサ数 </th><th> 実行時間(sec)</th></tr>
+<tr><td>1 </td><td> 40.5</td></tr>
+<tr><td>2 </td><td> 61.1</td></tr>
+</table>
+</p>
+
+<p>
+また、行列サイズが小さい場合、並列化の効果が得られないが、参考までに行列
+サイズを32まで小さくした場合の結果を\figref{fig:eval:jdsm:lu}にしめす。
+グラフから分かるように台数が増えるにしたがって性能が低下しているのが分か
+る。これは行列サイズが小さいため、並列化の効果よりも、並列化のオーバーヘッ
+ドが大きいためである。
+</p>
+
+<p>
+<table align=center border=1>
+<caption><nobr>図 4.3 SPLASH2 LU Kernel (Cluster)</nobr></caption>
+<tr><th><img src="lu-32.gif"></th></tr>
+</table>
+</p>
+
+
+<hr>
+[ <a href="3.html">前章</a>
+| <a href="index.html">目次</a>
+| <a href="5.html">次章</a> ]
+</body>
+</html>

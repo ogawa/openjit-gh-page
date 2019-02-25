@@ -1,0 +1,542 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Prototype : AJaPACK [Itou etc、JavaGrande2000]  = ATLAS for Java + JLAPACK [Blount,’99]">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0331.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 35985;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 36984);
+//-->
+</script><![endif]><p:slidetransition advancetime="35984" flag="1025"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="563"/>
+ <o:rules v:ext="edit">
+  <o:r id="V:Rule1" type="callout" idref="#_x0000_s576535"/>
+ </o:rules>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s576514" type="#_x0000_m141324"
+  style='position:absolute;left:19.25pt;top:0;width:681.375pt;height:141.625pt;
+  mso-wrap-style:square'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s576515" type="#_x0000_m141325"
+  style='position:absolute;left:0;top:150pt;width:366pt;height:5in' o:spt="1"
+  path="m0,0l0,21600,21600,21600,21600,0xe" filled="f" fillcolor="#82b5ca [4]"
+  stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]" o:detectmouseclick="f"/>
+  <v:stroke joinstyle="miter" o:forcedash="f"/>
+  <v:shadow color="white [2]"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" text="f" grouping="t"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s576514" class=T><span style='position:absolute;
+ top:-.5%;left:3.74%;width:92.88%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Prototype :
+ AJaPACK<br>
+ </span></span><span style='position:absolute;top:9.5%;
+ left:3.74%;width:92.69%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:82%;mso-fareast-language:JA'>[Itou
+ etc</span><span lang=EN-US style='font-size:82%;mso-fareast-language:JA'>、</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:82%;mso-fareast-language:JA'>JavaGrande2000] <br>
+ </span></span><span
+ style='position:absolute;top:17.5%;left:-2.43%;width:105.05%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:73%;mso-fareast-language:JA'>= ATLAS for Java + JLAPACK [Blount,’99]</span></span></div>
+ <div v:shape="_x0000_s576515">
+ <div class=B2 style='mso-margin-left-alt:816'></div>
+ <div class=B3 style='mso-margin-left-alt:1080'></div>
+ <div class=B4 style='mso-margin-left-alt:1368'></div>
+ <div class=B style='mso-line-spacing:"100 0 0";mso-margin-left-alt:336;
+ position:absolute;top:27.75%;left:.93%;width:51.49%;height:6.5%'><span
+ style='position:absolute;top:0%;left:11.63%;width:88.72%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-13.11%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>AJaPACK
+ as a prototype&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"100 0 0";mso-margin-left-alt:576'><span
+ style='position:absolute;top:33.25%;left:5.99%;width:46.62%'><span
+ style='mso-special-format:nobullet;display:none;color:#003399;mso-color-index:
+ 3'>&#8226;</span><span lang=EN-US style='font-size:71%;mso-fareast-language:JA'>→</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Not downloadable, but self-</span></span><span
+ style='position:absolute;top:37.75%;left:11.04%;width:38.95%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>tunable&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"100 0 0";mso-margin-left-alt:576;
+ position:absolute;top:42.0%;left:5.99%;width:44.0%;height:5.5%'><span
+ style='position:absolute;top:0%;left:11.48%;width:88.51%'><span
+ style='font-size:71%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-12.98%'>&#8226;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:71%;mso-fareast-language:JA'>Equivalent to LAPACK&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"100 0 0";mso-margin-left-alt:336;
+ position:absolute;top:46.5%;left:.93%;width:49.06%;height:6.5%'><span
+ style='position:absolute;top:0%;left:12.21%;width:87.78%'><span
+ style='font-size:75%'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-13.91%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Achievements&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"100 0 0";mso-margin-left-alt:336'><span
+ style='position:absolute;top:51.75%;left:6.92%;width:47.19%'><span
+ style='font-size:75%'><span style='mso-special-format:"numbullet3\,1";
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-12.69%'>1.</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>Evaluate validity of Self-</span></span><span
+ style='position:absolute;top:57.0%;left:6.92%;width:43.07%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>tuning on java&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"100 0 0";mso-margin-left-alt:576;
+ position:absolute;top:62.5%;left:5.99%;width:51.12%;height:6.5%'><span
+ style='position:absolute;top:0%;left:9.89%;width:90.1%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-10.97%;font-family:Wingdings'>&Oslash;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>ATLAS for Java</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:64%;mso-fareast-language:JA'>[Hokke’99]&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"100 0 0";mso-margin-left-alt:336'><span
+ style='position:absolute;top:67.75%;left:6.92%;width:49.62%'><span
+ style='font-size:75%'><span style='mso-special-format:"numbullet3\,1";
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-12.07%'>2.</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>speed-up with parallelizing </span></span><span
+ style='position:absolute;top:73.0%;left:6.92%;width:43.07%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:75%;mso-fareast-language:JA'>the library&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"100 0 0";mso-margin-left-alt:576'><span
+ style='position:absolute;top:78.25%;left:11.04%;width:45.13%'><span
+ style='font-size:86%'><span style='mso-special-format:bullet;color:#003399;
+ mso-color-index:3;position:absolute;left:-11.2%;font-family:Wingdings'>&Oslash;</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>parallelization of GEMM </span></span><span
+ style='position:absolute;top:83.75%;left:11.04%;width:38.95%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:64%;mso-fareast-language:JA'>[JavaGrande2000]</span></span></div>
+ </div>
+ <v:rect id="_x0000_s576516" style='position:absolute;left:388.375pt;top:2in;
+  width:307.625pt;height:305pt;mso-wrap-style:none;mso-wrap-distance-left:0;
+  mso-wrap-distance-right:0;v-text-anchor:middle' fillcolor="#dff95b"
+  strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><v:rect id="_x0000_s576517" style='position:absolute;left:403pt;
+  top:149.375pt;width:146.5pt;height:294.25pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:middle'
+  fillcolor="#b9e7ed" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><v:shapetype id="_x0000_t102" coordsize="21600,21600" o:spt="102"
+  adj="12960,19440,14400" path="ar0,0@23@3@22,,0@4,0@15@23@1,0@7@2@13l@2@14@22@8@2@12wa0,0@23@3@2@11@26@17,0@15@23@1@26@17@22@15xear0,0@23@3,0@4@26@17nfe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="val #1"/>
+   <v:f eqn="val #2"/>
+   <v:f eqn="sum #0 width #1"/>
+   <v:f eqn="prod @3 1 2"/>
+   <v:f eqn="sum #1 #1 width"/>
+   <v:f eqn="sum @5 #1 #0"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="mid width #0"/>
+   <v:f eqn="sum height 0 #2"/>
+   <v:f eqn="ellipse @9 height @4"/>
+   <v:f eqn="sum @4 @10 0"/>
+   <v:f eqn="sum @11 #1 width"/>
+   <v:f eqn="sum @7 @10 0"/>
+   <v:f eqn="sum @12 width #0"/>
+   <v:f eqn="sum @5 0 #0"/>
+   <v:f eqn="prod @15 1 2"/>
+   <v:f eqn="mid @4 @7"/>
+   <v:f eqn="sum #0 #1 width"/>
+   <v:f eqn="prod @18 1 2"/>
+   <v:f eqn="sum @17 0 @19"/>
+   <v:f eqn="val width"/>
+   <v:f eqn="val height"/>
+   <v:f eqn="prod height 2 1"/>
+   <v:f eqn="sum @17 0 @4"/>
+   <v:f eqn="ellipse @24 @4 height"/>
+   <v:f eqn="sum height 0 @25"/>
+   <v:f eqn="sum @8 128 0"/>
+   <v:f eqn="prod @5 1 2"/>
+   <v:f eqn="sum @5 0 128"/>
+   <v:f eqn="sum #0 @17 @12"/>
+   <v:f eqn="ellipse @20 @4 height"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @32 1 2"/>
+   <v:f eqn="prod height height 1"/>
+   <v:f eqn="prod @9 @9 1"/>
+   <v:f eqn="sum @34 0 @35"/>
+   <v:f eqn="sqrt @36"/>
+   <v:f eqn="sum @37 height 0"/>
+   <v:f eqn="prod width height @38"/>
+   <v:f eqn="sum @39 64 0"/>
+   <v:f eqn="prod #0 1 2"/>
+   <v:f eqn="ellipse @33 @41 height"/>
+   <v:f eqn="sum height 0 @42"/>
+   <v:f eqn="sum @43 64 0"/>
+   <v:f eqn="prod @4 1 2"/>
+   <v:f eqn="sum #1 0 @45"/>
+   <v:f eqn="prod height 4390 32768"/>
+   <v:f eqn="prod height 28378 32768"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" o:connecttype="custom" o:connectlocs="0,@17;@2,@14;@22,@8;@2,@12;@22,@16"
+   o:connectangles="180,90,0,0,0" textboxrect="@47,@45,@48,@46"/>
+  <v:handles>
+   <v:h position="bottomRight,#0" yrange="@40,@29"/>
+   <v:h position="bottomRight,#1" yrange="@27,@21"/>
+   <v:h position="#2,bottomRight" xrange="@44,@22"/>
+  </v:handles>
+  <o:complex v:ext="view"/>
+ </v:shapetype><v:shape id="_x0000_s576518" type="#_x0000_t102" style='position:absolute;
+  left:530pt;top:336.625pt;width:43.875pt;height:54.75pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:middle'
+  fillcolor="#82b5ca [4]" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+ </v:shape><v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202"
+  path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s576519" type="#_x0000_t202" style='position:absolute;
+  left:366pt;top:451.5pt;width:134.125pt;height:40.75pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:top-baseline'
+  filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:shape id="_x0000_s576520" type="#_x0000_t202" style='position:absolute;
+  left:583.625pt;top:390.25pt;width:119.75pt;height:36pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:top-baseline'
+  filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:rect id="_x0000_s576521" style='position:absolute;left:417.625pt;
+  top:154.75pt;width:92.75pt;height:37.375pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:middle'
+  fillcolor="#82b5ca [4]" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><v:rect id="_x0000_s576522" style='position:absolute;left:461.625pt;
+  top:406.25pt;width:78.125pt;height:32.125pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:middle'
+  fillcolor="white [2]" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><v:rect id="_x0000_s576523" style='position:absolute;left:447pt;
+  top:213.625pt;width:83pt;height:32pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:middle'
+  fillcolor="white [2]" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:rect><![if !vml]><img border=0
+ v:shapes="_x0000_s576516,_x0000_s576517,_x0000_s576518,_x0000_s576521,_x0000_s576522,_x0000_s576523"
+ src="slide0331_image298.gif" style='position:absolute;top:26.5%;left:53.93%;
+ width:43.07%;height:57.0%'><![endif]>
+ <div v:shape="_x0000_s576519" class=O style='position:absolute;top:84.75%;
+ left:51.87%;width:20.22%;height:6.0%'><span lang=EN-US style='font-family:
+ "Times New Roman";mso-ascii-font-family:"Times New Roman";font-size:117%;
+ mso-fareast-language:JA'><b><i><u>AJaPACK</u></i></b></span></div>
+ <div v:shape="_x0000_s576520" class=O style='position:absolute;top:73.25%;
+ left:82.02%;width:17.79%;height:5.25%'><span lang=EN-US style='font-family:
+ "Times New Roman";mso-ascii-font-family:"Times New Roman";mso-fareast-language:
+ JA'><b><i>JLAPACK</i></b></span></div>
+ <div v:shape="_x0000_s576521" class=O style='text-align:center;position:absolute;
+ top:29.75%;left:54.49%;width:20.03%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b>xmmsearch</b></span></div>
+ <div v:shape="_x0000_s576522" class=O style='text-align:center;position:absolute;
+ top:76.0%;left:65.16%;width:8.98%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b>fc</b></span></div>
+ <div v:shape="_x0000_s576523" class=O style='text-align:center;position:absolute;
+ top:40.25%;left:63.1%;width:9.73%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b>xemit</b></span></div>
+ <v:shapetype id="_x0000_t104" coordsize="21600,21600" o:spt="104" adj="12960,19440,7200"
+  path="ar0@22@3@21,,0@4@21@14@22@1@21@7@21@12@2l@13@2@8,0@11@2wa0@22@3@21@10@2@16@24@14@22@1@21@16@24@14,0xewr@14@22@1@21@7@21@16@24nfe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="val #1"/>
+   <v:f eqn="val #2"/>
+   <v:f eqn="sum #0 width #1"/>
+   <v:f eqn="prod @3 1 2"/>
+   <v:f eqn="sum #1 #1 width"/>
+   <v:f eqn="sum @5 #1 #0"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="mid width #0"/>
+   <v:f eqn="ellipse #2 height @4"/>
+   <v:f eqn="sum @4 @9 0"/>
+   <v:f eqn="sum @10 #1 width"/>
+   <v:f eqn="sum @7 @9 0"/>
+   <v:f eqn="sum @11 width #0"/>
+   <v:f eqn="sum @5 0 #0"/>
+   <v:f eqn="prod @14 1 2"/>
+   <v:f eqn="mid @4 @7"/>
+   <v:f eqn="sum #0 #1 width"/>
+   <v:f eqn="prod @17 1 2"/>
+   <v:f eqn="sum @16 0 @18"/>
+   <v:f eqn="val width"/>
+   <v:f eqn="val height"/>
+   <v:f eqn="sum 0 0 height"/>
+   <v:f eqn="sum @16 0 @4"/>
+   <v:f eqn="ellipse @23 @4 height"/>
+   <v:f eqn="sum @8 128 0"/>
+   <v:f eqn="prod @5 1 2"/>
+   <v:f eqn="sum @5 0 128"/>
+   <v:f eqn="sum #0 @16 @11"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @29 1 2"/>
+   <v:f eqn="prod height height 1"/>
+   <v:f eqn="prod #2 #2 1"/>
+   <v:f eqn="sum @31 0 @32"/>
+   <v:f eqn="sqrt @33"/>
+   <v:f eqn="sum @34 height 0"/>
+   <v:f eqn="prod width height @35"/>
+   <v:f eqn="sum @36 64 0"/>
+   <v:f eqn="prod #0 1 2"/>
+   <v:f eqn="ellipse @30 @38 height"/>
+   <v:f eqn="sum @39 0 64"/>
+   <v:f eqn="prod @4 1 2"/>
+   <v:f eqn="sum #1 0 @41"/>
+   <v:f eqn="prod height 4390 32768"/>
+   <v:f eqn="prod height 28378 32768"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" o:connecttype="custom" o:connectlocs="@8,0;@11,@2;@15,0;@16,@21;@13,@2"
+   o:connectangles="270,270,270,90,0" textboxrect="@41,@43,@42,@44"/>
+  <v:handles>
+   <v:h position="#0,topLeft" xrange="@37,@27"/>
+   <v:h position="#1,topLeft" xrange="@25,@20"/>
+   <v:h position="bottomRight,#2" yrange="0,@40"/>
+  </v:handles>
+  <o:complex v:ext="view"/>
+ </v:shapetype><v:shape id="_x0000_s576524" type="#_x0000_t104" style='position:absolute;
+  left:422.5pt;top:192.125pt;width:29.375pt;height:51.5pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:middle'
+  fillcolor="#82b5ca [4]" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+ </v:shape><v:shape id="_x0000_s576525" type="#_x0000_t202" style='position:absolute;
+  left:383.5pt;top:272.5pt;width:96.5pt;height:64.75pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:top-baseline'
+  filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><v:group id="_x0000_s576526" style='position:absolute;left:564.125pt;
+  top:160pt;width:131.875pt;height:240.875pt' coordorigin="4513,1280"
+  coordsize="1055,1927">
+  <v:rect id="_x0000_s576527" style='position:absolute;left:4513;top:1280;
+   width:1055;height:1927;mso-wrap-style:none;mso-wrap-distance-left:0;
+   mso-wrap-distance-right:0;v-text-anchor:middle' fillcolor="#b9e7ed"
+   strokecolor="black [1]">
+   <v:shadow color="white [2]"/>
+  </v:rect><v:rect id="_x0000_s576528" style='position:absolute;left:4591;
+   top:1366;width:898;height:548;mso-wrap-style:none;mso-wrap-distance-left:0;
+   mso-wrap-distance-right:0;v-text-anchor:middle' fillcolor="#82b5ca [4]"
+   strokecolor="black [1]">
+   <v:fill color2="white [0]"/>
+   <v:shadow color="white [2]"/>
+  </v:rect><v:rect id="_x0000_s576529" style='position:absolute;left:4591;
+   top:1969;width:898;height:548;mso-wrap-style:none;mso-wrap-distance-left:0;
+   mso-wrap-distance-right:0;v-text-anchor:middle' fillcolor="#82b5ca [4]"
+   strokecolor="black [1]">
+   <v:fill color2="white [0]"/>
+   <v:shadow color="white [2]"/>
+  </v:rect><v:rect id="_x0000_s576530" style='position:absolute;left:4591;
+   top:2572;width:898;height:547;mso-wrap-style:none;mso-wrap-distance-left:0;
+   mso-wrap-distance-right:0;v-text-anchor:middle' fillcolor="white [2]"
+   strokecolor="black [1]">
+   <v:shadow color="white [2]"/>
+  </v:rect><v:rect id="_x0000_s576531" style='position:absolute;left:5177;
+   top:2907;width:273;height:171;mso-wrap-style:none;mso-wrap-distance-left:0;
+   mso-wrap-distance-right:0;v-text-anchor:middle' fillcolor="#82b5ca [4]"
+   strokecolor="black [1]">
+   <v:fill color2="white [0]"/>
+   <v:shadow color="white [2]"/>
+  </v:rect></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s576524,_x0000_s576526,_x0000_s576527,_x0000_s576528,_x0000_s576529,_x0000_s576530,_x0000_s576531"
+ src="slide0331_image299.gif" style='position:absolute;top:29.5%;left:58.23%;
+ width:38.76%;height:45.25%'><![endif]>
+ <div v:shape="_x0000_s576525" class=O>
+ <div style='position:absolute;top:51.5%;left:54.3%;width:12.54%;height:5.25%'><span
+ lang=EN-US style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b><i>ATLAS&#13;</i></b></span></div>
+ <div style='position:absolute;top:56.75%;left:54.3%;width:13.85%;height:5.25%'><span
+ lang=EN-US style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b><i>for Java</i></b></span></div>
+ </div>
+ <div v:shape="_x0000_s576528" class=O style='text-align:center;position:absolute;
+ top:35.75%;left:79.02%;width:17.04%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b>LAPACK</b></span></div>
+ <div v:shape="_x0000_s576529" class=O style='text-align:center;position:absolute;
+ top:49.5%;left:80.71%;width:13.67%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b>BLAS</b></span></div>
+ <div v:shape="_x0000_s576530" class=O style='text-align:center;position:absolute;
+ top:63.5%;left:80.71%;width:13.67%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b>GEMM</b></span></div>
+ <div v:shape="_x0000_s576531" class=O style='text-align:center;position:absolute;
+ top:67.0%;left:88.95%;width:6.92%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b>mm</b></span></div>
+ <v:shape id="_x0000_s576532" type="#_x0000_t104" style='position:absolute;
+  left:456.75pt;top:245.625pt;width:53.375pt;height:158.625pt;flip:x;
+  mso-wrap-style:none;mso-wrap-distance-left:0;mso-wrap-distance-right:0;
+  v-text-anchor:middle' fillcolor="#e2f531" strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:shape><v:rect id="_x0000_s576533" style='position:absolute;left:481.125pt;
+  top:320.625pt;width:58.625pt;height:37.375pt;mso-wrap-style:none;
+  mso-wrap-distance-left:0;mso-wrap-distance-right:0;v-text-anchor:middle'
+  fillcolor="#82b5ca [4]" strokecolor="black [1]">
+  <v:fill color2="white [0]"/>
+  <v:shadow color="white [2]"/>
+ </v:rect><![if !vml]><img border=0 v:shapes="_x0000_s576532,_x0000_s576533"
+ src="slide0331_image300.gif" style='position:absolute;top:45.0%;left:63.1%;
+ width:12.35%;height:31.0%'><![endif]>
+ <div v:shape="_x0000_s576533" class=O style='text-align:center;position:absolute;
+ top:60.5%;left:67.6%;width:6.92%;height:5.25%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ mso-fareast-language:JA'><b>mm</b></span></div>
+ <v:shape id="_x0000_s576534" style='position:absolute;left:510.375pt;top:358pt;
+  width:151.375pt;height:90.125pt;mso-wrap-style:none;mso-wrap-distance-left:0;
+  mso-wrap-distance-top:0;mso-wrap-distance-right:0;mso-wrap-distance-bottom:0;
+  mso-position-horizontal:absolute;mso-position-horizontal-relative:text;
+  mso-position-vertical:absolute;mso-position-vertical-relative:text;
+  v-text-anchor:top' coordsize="1488,808" path="m0,0c404,364,808,728,1056,768,1304,808,1396,524,1488,240e"
+  filled="f" fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="3pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke endarrow="block" endarrowwidth="wide" endarrowlength="long"
+   joinstyle="miter"/>
+  <v:shadow color="white [2]"/>
+  <v:path arrowok="t"/>
+ </v:shape><v:shapetype id="_x0000_t62" coordsize="21600,21600" o:spt="62"
+  adj="1350,25920" path="m3600,0qx0,3600l0@8@12@24,0@9,,18000qy3600,21600l@6,21600@15@27@7,21600,18000,21600qx21600,18000l21600@9@18@30,21600@8,21600,3600qy18000,0l@7,0@21@33@6,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="sum 10800 0 #0"/>
+   <v:f eqn="sum 10800 0 #1"/>
+   <v:f eqn="sum #0 0 #1"/>
+   <v:f eqn="sum @0 @1 0"/>
+   <v:f eqn="sum 21600 0 #0"/>
+   <v:f eqn="sum 21600 0 #1"/>
+   <v:f eqn="if @0 3600 12600"/>
+   <v:f eqn="if @0 9000 18000"/>
+   <v:f eqn="if @1 3600 12600"/>
+   <v:f eqn="if @1 9000 18000"/>
+   <v:f eqn="if @2 0 #0"/>
+   <v:f eqn="if @3 @10 0"/>
+   <v:f eqn="if #0 0 @11"/>
+   <v:f eqn="if @2 @6 #0"/>
+   <v:f eqn="if @3 @6 @13"/>
+   <v:f eqn="if @5 @6 @14"/>
+   <v:f eqn="if @2 #0 21600"/>
+   <v:f eqn="if @3 21600 @16"/>
+   <v:f eqn="if @4 21600 @17"/>
+   <v:f eqn="if @2 #0 @6"/>
+   <v:f eqn="if @3 @19 @6"/>
+   <v:f eqn="if #1 @6 @20"/>
+   <v:f eqn="if @2 @8 #1"/>
+   <v:f eqn="if @3 @22 @8"/>
+   <v:f eqn="if #0 @8 @23"/>
+   <v:f eqn="if @2 21600 #1"/>
+   <v:f eqn="if @3 21600 @25"/>
+   <v:f eqn="if @5 21600 @26"/>
+   <v:f eqn="if @2 #1 @8"/>
+   <v:f eqn="if @3 @8 @28"/>
+   <v:f eqn="if @4 @8 @29"/>
+   <v:f eqn="if @2 #1 0"/>
+   <v:f eqn="if @3 @31 0"/>
+   <v:f eqn="if #1 0 @32"/>
+   <v:f eqn="val #0"/>
+   <v:f eqn="val #1"/>
+  </v:formulas>
+  <v:path o:connecttype="custom" o:connectlocs="10800,0;0,10800;10800,21600;21600,10800;@34,@35"
+   textboxrect="791,791,20809,20809"/>
+  <v:handles>
+   <v:h position="#0,#1"/>
+  </v:handles>
+ </v:shapetype><v:shape id="_x0000_s576535" type="#_x0000_t62" style='position:absolute;
+  left:510pt;top:468pt;width:192pt;height:54pt;mso-wrap-distance-left:0;
+  mso-wrap-distance-right:0' adj="4402,-36850" fillcolor="white [0]"
+  strokecolor="black [1]">
+  <v:shadow color="white [2]"/>
+ </v:shape><![if !vml]><img border=0 v:shapes="_x0000_s576534,_x0000_s576535"
+ src="slide0331_image301.gif" style='position:absolute;top:64.0%;left:69.28%;
+ width:29.02%;height:33.5%'><![endif]>
+ <div v:shape="_x0000_s576535" class=O style='mso-line-spacing:"100 50 0"'><span
+ style='position:absolute;top:88.0%;left:72.84%;width:22.84%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ font-size:83%;mso-fareast-language:JA'>Tuning for own </span></span><span
+ style='position:absolute;top:92.5%;left:72.84%;width:27.9%'><span lang=EN-US
+ style='font-family:"Times New Roman";mso-ascii-font-family:"Times New Roman";
+ font-size:83%;mso-fareast-language:JA'>machine (only on</span><span
+ style='font-size:83%'>ｃ</span><span lang=EN-US style='font-family:"Times New Roman";
+ mso-ascii-font-family:"Times New Roman";font-size:83%;mso-fareast-language:
+ JA'>e)</span></span></div>
+</p:slide></div>
+
+</body>
+
+</html>

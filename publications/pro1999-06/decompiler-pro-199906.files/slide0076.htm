@@ -1,0 +1,123 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: Javaバイトコードをデコンパイルする 効果的なアルゴリズム">
+<link rel=next href=slide0077.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0076.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master11_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=45 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=261 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=76 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=43 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=40 height=61></td>
+  <td width=412 height=61 colspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=261 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=412 height=30 colspan=2><font face="Times New Roman" size=5>Java</font><font
+    face="ＭＳ Ｐゴシック" size=5>バイトコードをデコンパイルする</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=412 height=4 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=261 height=27><font face="ＭＳ Ｐゴシック" size=5>効果的なアルゴリズム</font><br>
+    </td>
+    <td width=151 height=27></td>
+   </tr>
+  </table>
+  </td>
+  <td width=23 height=61></td>
+ </tr>
+ <tr>
+  <td width=475 height=38 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=85 height=21 colspan=2></td>
+  <td width=291 height=21 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=291 height=21 align=center><font face="ＭＳ Ｐゴシック" size=3>東京工業大学</font><font
+    face="Times New Roman" size=3> </font><font face="ＭＳ Ｐゴシック" size=3>情報理工学研究科</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=99 height=21 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=106 height=65 colspan=3></td>
+  <td width=261 height=65>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=67 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=129 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=67 height=30></td>
+    <td width=129 height=30 align=center><font face="ＭＳ Ｐゴシック" color="#ff6600"
+    size=5>丸山冬彦</font><br>
+    </td>
+    <td width=65 height=30></td>
+   </tr>
+   <tr>
+    <td width=261 height=2 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=261 height=33 colspan=3 align=center><font face="ＭＳ Ｐゴシック"
+    color="#ff6600" size=5>小川宏高</font><font face="Times New Roman"
+    color="#ff6600" size=5><span style='mso-tab-count:1'>&nbsp;&nbsp; </span></font><font
+    face="ＭＳ Ｐゴシック" color="#ff6600" size=5>松岡</font><font face="Times New Roman"
+    color="#ff6600" size=5> </font><font face="ＭＳ Ｐゴシック" color="#ff6600"
+    size=5>聡</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=108 height=65 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=82 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

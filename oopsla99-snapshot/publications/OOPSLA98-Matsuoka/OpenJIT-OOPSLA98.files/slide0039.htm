@@ -1,0 +1,206 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: OpenJIT Preliminary Benchmarks (1)">
+<link rel=next href=slide0041.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0039.htm');   
+  else
+    parent.location.href = "../OpenJIT-OOPSLA98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0039_background.gif" bgcolor=white alink="#5f5f5f"
+link="#969696" vlink="#cbcbcb" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=259 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=139 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=29 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=40 height=68></td>
+  <td width=259 height=68>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=196 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=259 height=33 colspan=2><font face="Times New Roman" size=5>OpenJIT
+    Preliminary</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=259 height=1 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=196 height=33><font face="Times New Roman" size=5>Benchmarks (1)</font><br>
+    </td>
+    <td width=63 height=33></td>
+   </tr>
+  </table>
+  </td>
+  <td width=176 height=68 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=9 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=40 height=232></td>
+  <td width=398 height=232 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=62 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=39 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=61 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=117 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=20 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=371 height=20 colspan=16><font face=Arial size=3><b>Very early
+    results - does not directly reflect</b></font><br>
+    </td>
+    <td width=10 height=20></td>
+   </tr>
+   <tr>
+    <td width=399 height=1 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=152 height=20 colspan=11><font face=Arial size=3><b>final
+    performance</b></font><br>
+    </td>
+    <td width=229 height=20 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=399 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=92 height=17 colspan=7><font face=Arial size=2><b>No Frontend</b></font><br>
+    </td>
+    <td width=268 height=17 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=399 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=140 height=17 colspan=9><font face=Arial size=2><b>Prototype
+    Backend</b></font><br>
+    </td>
+    <td width=220 height=17 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=399 height=3 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=180 height=16 colspan=7><font face=Arial size=1><b>No good
+    register allocation</b></font><br>
+    </td>
+    <td width=159 height=16 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=399 height=3 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=48 height=16 colspan=6></td>
+    <td width=12 height=16><font color="#5f5f5f" size=1>&#8226;</font></td>
+    <td width=192 height=16 colspan=8><font face=Arial size=1><b>Little
+    peephole optimizations</b></font><br>
+    </td>
+    <td width=147 height=16 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=399 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=351 height=20 colspan=15><font face=Arial size=3><b>Still, good
+    news is that it runs and works</b></font><br>
+    </td>
+    <td width=30 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=399 height=1 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=108 height=20 colspan=9><font face=Arial size=3><b>pretty well…</b></font><br>
+    </td>
+    <td width=273 height=20 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=399 height=5 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=381 height=20 colspan=17><font face=Arial size=3><b>Comparison to
+    Fujitsu’s </b><b><i>commercial</i></b><b> JIT and</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=351 height=20 colspan=15><font face=Arial size=3><b>Sun’s JIT
+    (JDK 1.1.x), UltraSparc 250Mhz</b></font><br>
+    </td>
+    <td width=30 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=399 height=4 colspan=18></td>
+   </tr>
+   <tr>
+    <td width=24 height=17 colspan=3></td>
+    <td width=15 height=17><font color=black size=2>&#8226;</font></td>
+    <td width=84 height=17 colspan=5><font face=Arial size=2><b>written in C</b></font><br>
+    </td>
+    <td width=276 height=17 colspan=9></td>
+   </tr>
+  </table>
+  </td>
+  <td width=37 height=232></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=4></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

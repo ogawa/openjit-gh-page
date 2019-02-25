@@ -1,0 +1,141 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: IBM High Performance Compiler for Java">
+<link rel=next href="v3_slide0171.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0175.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=40 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=26 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=344 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=53 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=22 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=66 height=76 colspan=2></td>
+  <td width=344 height=76>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=39 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=266 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=344 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>IBM High Performance</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=39 height=35></td>
+    <td width=266 height=35 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Compiler for Java</font><br>
+    </td>
+    <td width=39 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=65 height=76 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=40 height=151></td>
+  <td width=423 height=151 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=121 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=186 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=48 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=40 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=6 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=27><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=406 height=27 colspan=7><font face="Comic Sans MS" size=3>Static
+    Compiler --- produces PPC native code</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=18 height=27><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=308 height=27 colspan=3><font face="Comic Sans MS" size=3>Traditional
+    Fortran-like numerical</font><br>
+    </td>
+    <td width=98 height=27 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=18 height=22></td>
+    <td width=122 height=22 colspan=2><font face="Comic Sans MS" size=3>optimizations</font><br>
+    </td>
+    <td width=284 height=22 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=18 height=27><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=396 height=27 colspan=5><font face="Comic Sans MS" size=3>No
+    language extensions--- idiom recognition</font><br>
+    </td>
+    <td width=10 height=27 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=18 height=22></td>
+    <td width=356 height=22 colspan=4><font face="Comic Sans MS" size=3>for
+    typical cases, special class libraries</font><br>
+    </td>
+    <td width=50 height=22 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=18 height=27><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=402 height=27 colspan=6><font face="Comic Sans MS" size=3>Almost
+    Fortran-like performance as a result</font><br>
+    </td>
+    <td width=4 height=27></td>
+   </tr>
+  </table>
+  </td>
+  <td width=12 height=151></td>
+ </tr>
+ <tr>
+  <td width=475 height=107 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

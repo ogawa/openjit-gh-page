@@ -1,0 +1,244 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: What we did not have in the Slides Today">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0203.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="338"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s346114" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s346115" type="#_x0000_m141325"
+  style='position:absolute;left:54pt;top:150pt;width:342pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="body" position="1" size="half"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s346116" type="#_x0000_m141325"
+  style='position:absolute;left:366pt;top:150pt;width:300pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="2" size="half"/></v:shape>
+ <div v:shape="_x0000_s346114" class=T><span style='position:absolute;
+ top:6.25%;left:1.87%;width:96.44%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>What we did not
+ have in the </span></span><span style='position:absolute;top:16.0%;left:8.42%;
+ width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";mso-fareast-language:JA'>Slides Today</span></span></div>
+ <div v:shape="_x0000_s346115">
+ <div class=HB style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:27.25%;left:12.17%;width:41.94%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-8.92%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Memory Management, </span></span><span
+ style='position:absolute;top:32.25%;left:12.17%;width:41.94%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Garbage Collection&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:38.0%;
+ left:8.42%;width:52.43%;height:6.5%'><span style='position:absolute;
+ top:0%;left:7.14%;width:92.5%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-7.72%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Profiling/Instrumentation&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:43.75%;
+ left:8.42%;width:47.37%;height:6.5%'><span style='position:absolute;
+ top:0%;left:7.9%;width:92.09%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-8.58%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Other Numerical Stuff&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:49.75%;
+ left:13.48%;width:40.63%;height:5.5%'><span style='position:absolute;
+ top:0%;left:7.83%;width:92.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.5%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>e.g,
+ complex number&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:54.5%;
+ left:8.42%;width:45.69%;height:6.5%'><span style='position:absolute;
+ top:0%;left:8.19%;width:91.8%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-8.92%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Benchmarks&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:60.5%;left:16.66%;width:37.45%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.5%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>SpecJVM98,
+ SciMark, </span></span><span style='position:absolute;top:64.5%;left:16.66%;
+ width:37.45%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Spec98fp ports&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:69.25%;left:16.66%;width:37.45%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.5%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Still
+ early, no parallel </span></span><span style='position:absolute;top:73.25%;
+ left:16.66%;width:37.45%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>benchmarks&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:78.25%;
+ left:8.42%;width:45.69%;height:6.5%'><span style='position:absolute;
+ top:0%;left:8.19%;width:91.8%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-8.92%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Fast Communication&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:84.0%;
+ left:13.48%;width:40.63%;height:5.5%'><span style='position:absolute;
+ top:0%;left:7.83%;width:92.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.5%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Fast
+ RMI [Phillipsen99]&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:89.0%;
+ left:13.48%;width:40.63%;height:5.5%'><span style='position:absolute;
+ top:0%;left:7.83%;width:92.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.5%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Jaguar
+ [Welsch99]&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:93.75%;
+ left:13.48%;width:40.63%;height:5.5%'><span style='position:absolute;
+ top:0%;left:7.83%;width:92.16%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.5%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Etc.</span></span></div>
+ </div>
+ <div v:shape="_x0000_s346116">
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:27.25%;
+ left:51.87%;width:39.88%;height:6.5%'><span style='position:absolute;
+ top:0%;left:9.38%;width:90.61%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-10.36%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Grid computing&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:33.25%;left:59.92%;width:36.89%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.12%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Many
+ - Javelin, Ninflet, </span></span><span style='position:absolute;top:37.25%;
+ left:59.92%;width:35.76%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>JavaParty,
+ Dogma, etc. </span></span><span style='position:absolute;top:41.25%;
+ left:59.92%;width:31.64%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>etc.
+ &#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:46.0%;
+ left:51.87%;width:39.88%;height:6.5%'><span style='position:absolute;
+ top:0%;left:9.38%;width:90.61%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-10.36%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Applications&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:52.0%;left:59.92%;width:35.95%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.33%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Reports
+ of competitive </span></span><span style='position:absolute;top:56.0%;
+ left:59.92%;width:35.01%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>performance
+ in sparse </span></span><span style='position:absolute;top:60.0%;left:59.92%;
+ width:31.64%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:83%;mso-fareast-language:JA'>code&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:64.75%;left:55.61%;width:36.51%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-10.25%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Language Extension </span></span><span
+ style='position:absolute;top:69.75%;left:55.61%;width:36.14%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Experiments&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:75.5%;
+ left:56.92%;width:34.83%;height:5.5%'><span style='position:absolute;
+ top:0%;left:8.6%;width:90.86%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-9.46%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>SPMD,
+ BSP support&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:80.5%;
+ left:56.92%;width:34.83%;height:5.5%'><span style='position:absolute;
+ top:0%;left:8.6%;width:90.86%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-9.46%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>OpenMP
+ for Java&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:86.75%;
+ left:51.87%;width:39.88%;height:4.75%'><span style='position:absolute;
+ top:0%;left:9.38%;width:90.61%'><span style='font-size:86%;visibility:hidden'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-10.36%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ style='font-size:86%;mso-special-format:lastCR;display:none'>&#13;</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>Javaバイトコードの効果的 ディスコンパイルのアルゴリズム</title>
+<meta name=Description content="99/10/28: 速度比較の結果">
+<link rel=next href=slide0085.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0082.htm');   
+  else
+    parent.location.href = "../decompiler-pro-199906.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master10_background.jpg" bgcolor=white alink="#ffcc00"
+link="#996633" vlink=olive text=black topmargin=0 leftmargin=0 onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=24 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=192 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=230 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=42 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=26 height=27 colspan=2></td>
+  <td width=195 height=27 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=195 height=27><font face="ＭＳ Ｐゴシック" size=5>速度比較の結果</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=254 height=27 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=30 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=24 height=93></td>
+  <td width=427 height=93 colspan=4><img src="slide0082_image052.gif" border=0
+  width=427 height=93></td>
+  <td width=24 height=93 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=8 colspan=7></td>
+ </tr>
+ <tr>
+  <td width=29 height=140 colspan=3></td>
+  <td width=426 height=140 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=40 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=135 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=72 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=128 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=23><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=271 height=23 colspan=9><font face=Tahoma size=3>mocha-b1</font><font
+    face="ＭＳ Ｐゴシック" size=3>の方がわずかに速い。</font><br>
+    </td>
+    <td width=137 height=23 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=425 height=7 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=270 height=19 colspan=8><font face="ＭＳ Ｐゴシック" size=3>有意な差は、システム時間のみ。</font><br>
+    </td>
+    <td width=138 height=19 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=425 height=6 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=23 height=17 colspan=3></td>
+    <td width=16 height=17 colspan=2><font face=Marlett color="#0000cc" size=2>i</font></td>
+    <td width=386 height=17 colspan=7><font face="ＭＳ Ｐゴシック" size=2>デコンパイル対象のクラスファイルを読み込む時間が大</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=425 height=2 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=38 height=17 colspan=4></td>
+    <td width=42 height=17 colspan=3><font face="ＭＳ Ｐゴシック" size=2>きい。</font><br>
+    </td>
+    <td width=345 height=17 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=425 height=7 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=19><font face=Marlett color="#0000cc" size=1>n</font></td>
+    <td width=399 height=19 colspan=10><font face="ＭＳ Ｐゴシック" size=3>我々のアルゴリズムは、より完全に制御構造を復</font><br>
+    </td>
+    <td width=9 height=19></td>
+   </tr>
+   <tr>
+    <td width=425 height=3 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=17 height=19></td>
+    <td width=198 height=19 colspan=7><font face="ＭＳ Ｐゴシック" size=3>元し、かつ、遅くはない。</font><br>
+    </td>
+    <td width=210 height=19 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=20 height=140></td>
+ </tr>
+ <tr>
+  <td width=475 height=16 colspan=7></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

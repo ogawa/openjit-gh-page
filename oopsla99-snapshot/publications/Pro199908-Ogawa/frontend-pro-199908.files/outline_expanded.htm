@@ -1,0 +1,1202 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../frontend-pro-199908.htm";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor=black text=white link=white vlink=white alink=white>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0001.htm');">OpenJITフロントエンドシステムの設計</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>小川 宏高</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>ogawa@is.titech.ac.jp</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>http://openjit.is.titech.ac.jp/</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0002.htm');">背景</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>「可搬な」言語 (e.g. Java)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>ネイティブコードを直接コンパイルしない</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>VM上で共通のバイトコードを解釈実行</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>速度に難 (最適化されたコードに比べて1/10～1/100)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Just-in-timeコンパイラ</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>別に新しいアイディアではない (e.g. Smalltalk, etc.)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>実行時にバイトコードをネイティブコードにコンパイル</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>最適化コード比で1/2～1/10</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Sun, MS, IBM, Symantec, 富士通などが「最良」のJava
+  JITを頑張って作っている</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0003.htm');">既存のJITの問題点</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>JITを作成するための技術基盤の欠如</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>共通のツールやライブラリがない</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>新しい最適化技法をうまく利用できない、など</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>JIT自体がポータブルでない (c.f. gcc)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>最適化の尺度が明確でない</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>素晴らしく洗練されて優れた最適化がいつも適用できるとは限らない、選択的に適用せざるを得ない</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>カスタム化の欠如</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>アプリ・実行環境に特化したコード生成 (DSM, ...)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>言語仕様の拡張への対応 (parameterized type, ...)</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0004.htm');">OpenJIT</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>自己反映的なJust-in-timeコンパイラ</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Java自身で書かれたJava JIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JITコンパイラに関するクラスフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Just-in-timeに、様々なカスタム化・最適化モジュールをJITコンパイラに組み込み、コンパイルできる</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>標準のJavaVMに組み込み可能</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>既存のJITと同じように動作</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>スタートアップ時にJIT自身のコードをコンパイル</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0005.htm');">既存のJITとOpenJITの比較</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0007.htm');">OpenJITシステムの概要</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0008.htm');">OpenJITシステムの概要(2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJITフロントエンドシステム</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>バイトコードレベルでの最適化・カスタム化のためのクラスフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Javaのソースプログラムの構造をASTとして復元</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>AST上の標準的なプログラム解析のためのクラスフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>最適化・カスタム化のためのさまざまな情報をクラスファイルに付加し、利用可能</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>OpenJITバックエンドシステム</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Javaで書かれたJava JITコンパイラ</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>RTLレベルで実施される局所的な最適化</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>stack-to-register allocation</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>peephole optimization</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0006.htm');">本発表の概要</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>フロントエンドシステムの概要</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>フロントエンドシステムを用いた単純な最適化</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>まとめ</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0009.htm');">フロントエンドシステム</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>バイトコード、またはより高位の中間表現での、最適化器・特化器のフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>デコンパイラによって、バイトコードから抽象構文木を取得</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>最適化・カスタム化に相当する抽象構文木上の変換</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>変換後の抽象構文木からバイトコード、またはバックエンドの中間表現を生成</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0011.htm');">フロントエンドシステムの構成</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT Bytecode Decompiler</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>バイトコードを抽象構文木に変換</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT Class Annotation Analyzer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>クラスファイルアノテーションを抽出</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>アノテーション情報を抽象構文木に付加</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT High-level Optimizer Toolkit</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>最適化・カスタム化を支援するツールキット</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Abstract Syntax Tree Package</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>抽象構文木の表現</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>バックエンドの中間表現への変換を含むユーティリティルーチン群</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0010.htm');">フロントエンドシステムの構成</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0017.htm');">OpenJIT Bytecode Decompiler
+(1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>バイトコードを抽象構文木に変換</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>バイトコードをJVMの命令列に分解、基本ブロックの先頭命令にマーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>基本ブロックのリストとして、コントロールフローグラフを構築</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>コントロールフローグラフに対応するドミネータツリーを構築</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>基本ブロック毎に基本ブロックを跨がない式や分を復元</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>基本ブロックを跨ぐ条件演算子、条件文を復元</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>その他の制御構造を復元</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>結果を抽象構文木として出力</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0018.htm');">OpenJIT Bytecode Decompiler
+(2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>ドミネータツリーを用いて制御構造を復元<br>
+  [丸山99]</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>直接コントロールフローグラフを解析するより低コスト</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>パターンマッチによる方法(Krakatoaなど)と比較して:</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>潜在的に効率が良い</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Code obfuscationに対してロバスト</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0019.htm');">Class Annotation Analyzer</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0012.htm');">クラスファイルアノテーション</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>最適化やカスタム化の指示をOpenJITに与える、クラスファイルに付加されたアノテーション情報</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>クラスファイルのメソッドアトリビュート領域に付加</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>場合によっては、クラスアトリビュートに付加する方が望ましい</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>アノテーション付きクラスファイルはポータブルのまま</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JVMの規約により、JVMの定義しないアトリビュートは無視される</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>標準のJITコンパイラでも実行可能</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>アノテーション付きクラスファイルを生成するには、拡張可能なJavaコンパイラが必要(未実装)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>現状で利用可能な拡張可能Javaコンパイラ</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>EPP (一杉さん)、Javassist (千葉さん)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0013.htm');">クラスファイルアノテーションと<br>
+その利用例</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ユーザ定義による最適化・カスタム化メタクラスの指定</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>フロントエンドシステムの振る舞いを変更</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>メタクラスの名前、メタクラスの中身をエンコードしてアノテーションとして付加</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ユーザレベルの分散共有メモリのサポート</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Read/Writeバリアを必要な箇所に挿入</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Immutableオブジェクトの一覧表</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>数値計算の最適化のサポート</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Fortranで行われているようなループの高度な変換</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>安全かつ効果的に変換できるループを静的に判定してマーキング</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0020.htm');">Class Annotation Analyzer</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>処理の流れ</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>アトリビュート領域にアクセスし、バイトアレイを取得</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>アトリビュートへのアクセスはNative Methodとして実現</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>取得できない場合にはフロントエンドの処理自体をバイパス</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>バイトアレイをAnnotationクラスのシリアライズオブジェクトと見なして、readObjectする</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Annotationオブジェクトを抽象構文木のノードにアノテーション情報として登録</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Annotationクラス</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>アノテーションの用途によって仕様が異なるため、サブクラス化によって、汎用性・拡張性を確保</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0014.htm');">OpenJIT High-level Optimizer
+Toolkit (1)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>最適化器・特化器を作成するためのツールキット</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>このモジュールは最適化器そのものは提供しない</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0015.htm');">OpenJIT High-level Optimizer
+Toolkit (2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Flowgraph Constructor</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>抽象構文木からデータ依存グラフ、コントロール依存グラフなどを生成</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Factory methodパターンに従い、各生成器はFlowgraphクラスのサブクラスのコンストラクタとして実現</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>他の種類のフローグラフもユーザの拡張によって、容易に実現可能</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Flowgraph Analyzer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>フローグラフ上の代表的な解析アルゴリズムを実現</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Commandパターンに従い、各アルゴリズムはAnalyzerクラスのサブクラスのexecuteメソッドとして実現</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>他の種類のフローグラフもユーザの拡張によって、容易に実現可能</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0016.htm');">OpenJIT High-level Optimizer
+Toolkit (3)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Program Transformer</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>パターンを登録</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>register_pattern(Expression src,
+  Expression dst)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>register_pattern(Statement src,
+  Statement dst)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>指定されたノードをルートノードとする部分木に対して、深さ優先探索で登録されたパターンを検索、置換</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>substitution(Expression root)</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>substitution(Statement root)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>これらのルーチンは低レベル、かつパターンを生成する手続きが煩雑</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>より高度な記述からパターンを生成するAPIが必要</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0021.htm');">Abstract Syntax Tree Package</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>抽象構文木の表現、ユーティリティルーチン群</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4><font face="ＭＳ 明朝" size=2>Node</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>BinaryExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>AddExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SubtractExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=4></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>UnaryExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ConstantExpression</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>Statement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>IfStatement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ForStatement</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=4></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0022.htm');">Abstract Syntax Tree
+Package(2)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>public class MultiplyExpression
+  extends BinaryExpression {</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	int op;		// ID</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Expression left;	// LHS expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Expression right;	// RHS expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Type type;		// Type of this
+  expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Annotation ann;	// Embedded
+  Annotation (default: null)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	void code() {		// Convert AST to
+  backend-IR or bytecodes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		if (ann) ann.execute();	//
+  call-back for metacomputation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		left.code();	// generate code for
+  LHS</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		right.code();	// generate code for
+  RHS</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		add(op);	// generate code for “operator”</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	}</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>… }</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0023.htm');">Abstract Syntax Tree
+Package(3)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>public class IfStatement extends
+  Statement {</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	int op;		// ID</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Expression cond;	// Conditional
+  expression</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Statement ifTrue;	// Statement of
+  True-part</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Statement ifFalse;	// Statement of
+  False-part</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	Annotation ann;	// Embedded
+  Annotation (default: null)</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	void code() {		// Convert AST to
+  backend-IR or bytecodes</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		if (ann) ann.execute();	//
+  call-back for metacomputation</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		codeBranch(cond);	// generate code
+  for Condition</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		ifTrue.code();	// generate code for
+  Then-part</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		ifFalse.code();	// generate code
+  for Else-part</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>		addLabel();	// add label for “Break”
+  statement</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>	}</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>… }</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>抽象構文木の代わりにSSA形式(Single Static
+  Assignment form)を取ることも検討中</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0024.htm');">予備的評価</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>単純なプログラム変換例を用いて、本システムを評価</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0025.htm');">評価条件</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>計算機</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Sun Ultra60 (UltraSPARC II 300Mhz,
+  256MB)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Solaris 2.6</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>処理系</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT 1.1.0+JDK 1.1.8</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Program1をそのまま実行（フロントエンドのオーバーヘッドなし）</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Just-in-timeにProgram2に相当する抽象構文木に変換、実行</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>JDK 1.2.2(ClassicVM)+付属のsunwjit</font></td>
+ </tr>
+ <tr>
+  <td colspan=3></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>Program1, Program2を実行</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=3><font face="ＭＳ 明朝" size=2>行列サイズ</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>200, 600</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0026.htm');">結果</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJITとsunwjitの実行時間の差は10%以下<br>
+  →生成されるネイティブコードの効率の差</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJITとsunwjitのオーバーヘッドの比は2倍強<br>
+  →OpenJITではJIT本体もコンパイルするため</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>フロントエンドのオーバーヘッドはサイズや実行回数に依らない<br>
+  →サイズや実行回数が大きくなれば償却</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0027.htm');">関連研究(Suifとの比較)</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>Suif (Stanford U.)</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>C++による最適化コンパイラのOOフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>共通の中間表現に対する解析器・変換器をコンパイルパスに追加</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>パスの追加は静的</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>解析器生成ツールなどを提供</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>OpenJIT</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>JavaによるJava JITコンパイラのOOフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>クラスまたはメソッドごとに特化した解析器・変換器を追加可能</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>最適化器などの作成を支援するデザインパターンやAPIを用意</font></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0028.htm');">まとめ</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width=20 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>フロントエンドシステムはバイトコードレベルでの最適化・カスタム化を実現するクラスフレームワーク</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>ポータブル、かつ拡張性のある設計</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=2><font face="ＭＳ 明朝" size=2>行列積に対する単純なプログラム変換の例を用いて評価した：</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJITとsunwjitの実行時間の差は10%以下<br>
+  →生成されるネイティブコードの効率の差</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>OpenJITとsunwjitのオーバーヘッドの比は2倍強<br>
+  →OpenJITではJIT本体もコンパイルするため</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>フロントエンドのオーバーヘッドはサイズや実行回数に依らない<br>
+  →サイズや実行回数が大きくなれば償却</font></td>
+ </tr>
+ <tr>
+  <td colspan=2></td>
+  <td colspan=1></td>
+ </tr>
+</table>
+
+</p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('slide0029.htm');">今後の課題</a></b></font>
+
+<table>
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>APIのデザインのさらなる洗練</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>アノテーション付きクラスファイル生成用の拡張Javaコンパイラの設計</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>SSAへの対応</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>…</font></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td colspan=1><font face="ＭＳ 明朝" size=2>リリース<br>
+  http://openjit.is.titech.ac.jp/</font></td>
+ </tr>
+</table>
+
+</p>
+
+</body>
+
+</html>

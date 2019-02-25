@@ -1,0 +1,206 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: OpenJIT High-level Optimizer Toolkit">
+<link rel=next href="v3_slide0261.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0260.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=30 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=398 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=14 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=26 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=30 height=69></td>
+  <td width=416 height=69 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=160 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=97 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=416 height=38 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>OpenJIT High-level Optimizer</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=160 height=31></td>
+    <td width=97 height=31 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Toolkit</font><br>
+    </td>
+    <td width=159 height=31></td>
+   </tr>
+  </table>
+  </td>
+  <td width=29 height=69 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=4 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=48 height=242 colspan=2></td>
+  <td width=412 height=242 colspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=21 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=5 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=69 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=175 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=30 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=23><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=178 height=23 colspan=10><font face="Comic Sans MS" size=2>Flowgraph
+    Constructor</font><br>
+    </td>
+    <td width=216 height=23 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color="#003399" size=1>&#8226;</font></td>
+    <td width=365 height=18 colspan=11><font face="Comic Sans MS" size=1>Generate
+    Data/Control Dependence Graph etc. from the</font><br>
+    </td>
+    <td width=8 height=18 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=39 height=16 colspan=4></td>
+    <td width=63 height=16 colspan=5><font face="Comic Sans MS" size=1>AST/CFG</font><br>
+    </td>
+    <td width=310 height=16 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=15 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=373 height=19 colspan=14><font face="Comic Sans MS" size=1>Each
+    generator is defined as a constructor of subclass of</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=39 height=16 colspan=4></td>
+    <td width=372 height=16 colspan=13><font face="Comic Sans MS" size=1>Flowgraph
+    class using the Factory Method design pattern</font><br>
+    </td>
+    <td width=1 height=16></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=15 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=364 height=19 colspan=10><font face="Comic Sans MS" size=1>Other
+    types of glow graphs can be easily defined by the</font><br>
+    </td>
+    <td width=9 height=19 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=39 height=16 colspan=4></td>
+    <td width=29 height=16 colspan=2><font face="Comic Sans MS" size=1>user</font><br>
+    </td>
+    <td width=344 height=16 colspan=12></td>
+   </tr>
+   <tr>
+    <td width=18 height=23><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=153 height=23 colspan=9><font face="Comic Sans MS" size=2>Flowgraph
+    Analyzer</font><br>
+    </td>
+    <td width=241 height=23 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=24 height=18 colspan=3></td>
+    <td width=15 height=18><font color="#003399" size=1>&#8226;</font></td>
+    <td width=362 height=18 colspan=9><font face="Comic Sans MS" size=1>Implements
+    general analysis algorithms over flowgraphs</font><br>
+    </td>
+    <td width=11 height=18 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=24 height=19 colspan=3></td>
+    <td width=15 height=19><font color="#003399" size=1>&#8226;</font></td>
+    <td width=332 height=19 colspan=8><font face="Comic Sans MS" size=1>Each
+    algorithm defined as the execute() method of</font><br>
+    </td>
+    <td width=41 height=19 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=39 height=16 colspan=4></td>
+    <td width=368 height=16 colspan=12><font face="Comic Sans MS" size=1>subclass
+    of the Analyzer class using the Command design</font><br>
+    </td>
+    <td width=5 height=16 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=39 height=16 colspan=4></td>
+    <td width=50 height=16 colspan=3><font face="Comic Sans MS" size=1>pattern</font><br>
+    </td>
+    <td width=323 height=16 colspan=11></td>
+   </tr>
+   <tr>
+    <td width=18 height=23><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=76 height=23 colspan=7><font face="Comic Sans MS" size=2>C.f.
+    SUIF</font><br>
+    </td>
+    <td width=318 height=23 colspan=10></td>
+   </tr>
+  </table>
+  </td>
+  <td width=15 height=242></td>
+ </tr>
+ <tr>
+  <td width=475 height=15 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

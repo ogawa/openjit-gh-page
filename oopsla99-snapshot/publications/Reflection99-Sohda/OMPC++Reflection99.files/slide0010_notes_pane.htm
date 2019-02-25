@@ -1,0 +1,74 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+
+<script>
+<!--
+if( window.name != "PPTNts" )
+  parent.location.href = "../OMPC++Reflection99.html";
+//-->
+</script>
+</head>
+
+<body bgcolor="#000066" text=white>
+
+<table border=0 width="100%">
+ <tr>
+  <td width=5 nowrap></td>
+  <td width="100%"></td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>We describe the
+  implementation of software DSM. This DSM implementation adopts sharing array.
+  So we defined distributed shared array class as a template class. Taking such
+  a way, compared with page-based DSM, it is advantageous in respect of
+  flexibility and portability. The Write-Invalidate style is<span
+  style="mso-spacerun: yes">&nbsp; </span>adopted as a memory consistency
+  protocol.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>Distributed
+  shared array class includes contents of array and management table. Array is
+  divided into blocks. Block is the unit of memory transfer. The size of the
+  block is BlockSize.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>Management table
+  has pointer to the real memory and the share status …</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>To access to
+  memory from program, we overrides [](bracket) and the ()(parentheses)
+  operators. The misscheck of memory access is performed in these operators.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>Moreover, at the
+  time of write access, you have to insert WriteStart() and WriteEnd() function
+  before and after the access. Because it must have the ownership of the block
+  for writing.</font><br>
+  </td>
+ </tr>
+ <tr>
+  <td colspan=1></td>
+  <td align=left colspan=1><font face="Times New Roman" size=3>For reduction of
+  the overhead of memory access, Invalidation is asynchronously invoked,
+  methods are inlined.</font><br>
+  </td>
+ </tr>
+</table>
+
+</body>
+
+</html>

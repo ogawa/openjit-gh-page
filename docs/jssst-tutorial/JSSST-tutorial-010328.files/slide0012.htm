@@ -1,0 +1,264 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Optimization in Java:  Current Status">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0012.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><p:slidetransition advancetime="46448" speed="1" flag="1"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="20,113"/>
+ <o:regrouptable v:ext="edit">
+  <o:entry new="1" old="0"/>
+ </o:regrouptable>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s20482" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="title"/><p:animation number="1" delay="0" type="noBuild"
+   effect="fly" direction="up" flag="1028"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s20483" type="#_x0000_m141325"
+  style='position:absolute;left:24pt;top:150pt;width:300pt;height:252pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="body" position="1" size="half"/><p:animation number="2"
+   delay="0" type="noBuild" effect="cut" direction="noBlack" flag="1024"/></v:shape>
+ <div v:shape="_x0000_s20482" class=T><span style='position:absolute;
+ top:6.25%;left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Optimization in
+ Java: <br>
+ </span></span><span style='position:absolute;top:16.0%;
+ left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>Current Status</span><span
+ lang=EN-US style='font-size:218%;mso-fareast-language:JA;mso-special-format:
+ lastCR;display:none'>&#13;</span></span></div>
+ <div v:shape="_x0000_s20483">
+ <div class=HB style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:27.25%;left:8.05%;width:37.45%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-10.0%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'><b>Optimization in OO </b></span></span><span
+ style='position:absolute;top:32.25%;left:8.05%;width:42.13%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'><b>Languages (Smalltalk, </b></span></span><span
+ style='position:absolute;top:37.0%;left:8.05%;width:36.14%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'><b>Self, Java)&#13;</b></span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:42.75%;
+ left:9.36%;width:36.51%;height:5.5%'><span style='position:absolute;
+ top:0%;left:8.71%;width:91.28%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-9.55%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>Message
+ Dispatching&#13;</b></span></span></div>
+ <div class=HB2 style='mso-line-spacing:"90 20 0";position:absolute;top:47.75%;
+ left:14.41%;width:29.77%;height:5.0%'><span style='position:absolute;
+ top:0%;left:8.17%;width:91.82%'><span style='font-size:90%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.9%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:90%;mso-fareast-language:JA'><b>Caching&#13;</b></span></span></div>
+ <div class=HB2 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:52.0%;left:16.85%;width:27.34%'><span style='font-size:90%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.9%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:90%;mso-fareast-language:JA'><b>Fast
+ Subclass </b></span></span><span style='position:absolute;top:55.75%;
+ left:16.85%;width:27.34%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:90%;mso-fareast-language:JA'><b>determination&#13;</b></span></span></div>
+ <div class=HB2 style='mso-line-spacing:"90 20 0";position:absolute;top:60.25%;
+ left:14.41%;width:29.77%;height:5.0%'><span style='position:absolute;
+ top:0%;left:8.17%;width:91.82%'><span style='font-size:90%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.9%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:90%;mso-fareast-language:JA'><b>Type
+ analysis&#13;</b></span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:64.5%;
+ left:9.36%;width:34.83%;height:5.5%'><span style='position:absolute;
+ top:0%;left:9.13%;width:90.86%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-10.05%'>&#8226;</span></span><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:83%;
+ mso-fareast-language:JA'><b>Fast Threads&#13;</b></span></span></div>
+ <div class=HB2 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:69.5%;left:16.85%;width:27.34%'><span style='font-size:90%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.9%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:90%;mso-fareast-language:JA'><b>Does
+ not consider </b></span></span><span style='position:absolute;top:73.0%;
+ left:16.85%;width:29.02%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:90%;mso-fareast-language:JA'><b>numerical
+ computing</b></span></span></div>
+ </div>
+ <v:shapetype id="_x0000_t67" coordsize="21600,21600" o:spt="67" adj="16200,5400"
+  path="m0@0l@1@0@1,0@2,0@2@0,21600@0,10800,21600xe">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="val #0"/>
+   <v:f eqn="val #1"/>
+   <v:f eqn="sum height 0 #1"/>
+   <v:f eqn="sum 10800 0 #1"/>
+   <v:f eqn="sum width 0 #0"/>
+   <v:f eqn="prod @4 @3 10800"/>
+   <v:f eqn="sum width 0 @5"/>
+  </v:formulas>
+  <v:path o:connecttype="custom" o:connectlocs="10800,0;0,@0;10800,21600;21600,@0"
+   o:connectangles="270,180,90,0" textboxrect="@1,0,@2,@6"/>
+  <v:handles>
+   <v:h position="#1,#0" xrange="0,10800" yrange="0,21600"/>
+  </v:handles>
+ </v:shapetype><v:shape id="_x0000_s20488" type="#_x0000_t67" style='position:absolute;
+  left:294pt;top:5in;width:132pt;height:76.875pt;mso-wrap-style:none;
+  v-text-anchor:middle' o:regroupid="1" strokecolor="black [1]" strokeweight="1pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow on="t" color="white [2]" offset="6pt,-6pt"/>
+  <o:extrusion v:ext="view" rotationangle="-25,25" viewpoint="0,0"
+   viewpointorigin="0,0" skewangle="0" skewamt="0" lightposition=",50000"
+   type="perspective"/>
+  <v:textbox style='layout-flow:vertical-ideographic'/>
+ </v:shape><v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202"
+  path="m0,0l0,21600,21600,21600,21600,0xe">
+  <v:stroke joinstyle="miter"/>
+  <v:path gradientshapeok="t" o:connecttype="rect"/>
+ </v:shapetype><v:shape id="_x0000_s20490" type="#_x0000_t202" style='position:absolute;
+  left:1in;top:450pt;width:570pt;height:64.75pt' o:regroupid="1" filled="f"
+  fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]" strokeweight="1pt">
+  <v:fill color2="white [0]"/>
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short"/>
+  <v:shadow color="white [2]"/>
+  <v:textbox style='mso-fit-shape-to-text:t'/>
+ </v:shape><p:shaperange href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s20491"
+  type="#_x0000_m141325" style='position:absolute;left:5in;top:162pt;width:336pt;
+  height:228pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="body" position="2" size="half"/><p:animation number="1"
+   delay="0" type="noBuild" effect="stretch" direction="across" flag="1024"/></v:shape><![if !vml]><img
+ border=0 v:shapes="_x0000_s20488" src="slide0012_image286.gif"
+ style='position:absolute;top:64.75%;left:40.26%;width:20.59%;height:17.25%'><![endif]>
+ <div v:shape="_x0000_s20490" class=O style='text-align:center'><span
+ style='position:absolute;top:83.25%;left:9.73%;width:79.96%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";mso-fareast-language:JA'>Not many HPC
+ benchmarks, except for the </span></span><span style='position:absolute;
+ top:88.75%;left:7.49%;width:84.45%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>JavaGrande benchmark (www.javagrande.org)</span></span></div>
+ <div v:shape="_x0000_s20491">
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:29.5%;
+ left:50.93%;width:44.75%;height:6.5%'><span style='position:absolute;
+ top:0%;left:8.36%;width:91.63%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-9.13%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Java Benchmarks&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:35.5%;
+ left:55.99%;width:39.88%;height:5.5%'><span style='position:absolute;
+ top:0%;left:7.98%;width:92.01%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.67%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>Java
+ microbenchmark&#13;</b></span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:40.25%;left:59.17%;width:36.7%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.67%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>Sieve,
+ Dhrystone, </b></span></span><span style='position:absolute;top:44.25%;
+ left:59.17%;width:36.7%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>Whetstone,
+ Queen&#13;</b></span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:49.25%;
+ left:55.99%;width:39.88%;height:5.5%'><span style='position:absolute;
+ top:0%;left:7.98%;width:92.01%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.67%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>javac,
+ Richards, etc.&#13;</b></span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:54.0%;
+ left:55.99%;width:46.25%;height:5.5%'><span style='position:absolute;
+ top:0%;left:6.88%;width:93.11%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-7.39%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>CaffeineMark,
+ Volanomark&#13;</b></span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:59.0%;
+ left:55.99%;width:39.88%;height:5.5%'><span style='position:absolute;
+ top:0%;left:7.98%;width:92.01%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-8.67%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'><b>SpecJVM98&#13;</b></span></span></div>
+ <div class=HB1 style='mso-line-spacing:"80 20 0"'><span style='position:absolute;
+ top:63.5%;left:55.99%;width:40.63%'><span style='mso-special-format:nobullet;
+ display:none;color:#003399;mso-color-index:3'>&#8226;</span><span lang=EN-US
+ style='mso-fareast-language:JA'>→</span><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'> Not appropriate as </span></span><span style='position:absolute;
+ top:67.75%;left:59.17%;width:36.7%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>HPC benchmarks</span></span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

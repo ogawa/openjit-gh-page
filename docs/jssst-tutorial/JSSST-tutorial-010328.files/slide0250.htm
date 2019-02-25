@@ -1,0 +1,188 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<link rel=OLE-Object-Data href=oledata.mso>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: JDSM [JavaGrande2001]  w/OpenJIT">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0250.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="437"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s445442" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:36pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s445443" type="#_x0000_m141325"
+  style='position:absolute;left:18pt;top:126pt;width:456pt;height:378pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s445442" class=T><span style='position:absolute;
+ top:4.75%;left:6.74%;width:86.7%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:JA'>JDSM
+ [JavaGrande2001] <br>
+ </span></span><span style='position:absolute;
+ top:15.0%;left:8.42%;width:83.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:82%;mso-fareast-language:JA'>w/OpenJIT</span></span></div>
+ <div v:shape="_x0000_s445443">
+ <div class=B style='mso-line-spacing:"90 20 0";position:absolute;top:22.75%;
+ left:3.55%;width:66.47%;height:7.5%'><span style='position:absolute;
+ top:0%;left:5.63%;width:94.36%'><span style='font-size:88%;text-shadow:auto'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-5.97%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;text-shadow:auto;mso-fareast-language:JA'>Portable DSM on PC
+ clusters&#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:29.5%;left:11.61%;width:56.74%'><span style='font-size:86%;text-shadow:
+ auto'><span style='mso-special-format:bullet;color:#003399;mso-color-index:
+ 3;position:absolute;left:-5.61%'>&#8226;</span></span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;text-shadow:auto;mso-fareast-language:JA'>Using OpenJIT to
+ insert DSM </span></span><span style='position:absolute;top:34.25%;left:11.61%;
+ width:59.36%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:86%;text-shadow:auto;mso-fareast-language:JA'>read/write
+ barriers etc. at JIT </span></span><span style='position:absolute;top:39.25%;
+ left:11.61%;width:53.37%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;text-shadow:auto;
+ mso-fareast-language:JA'>compile time<br>
+ </span></span><span
+ style='position:absolute;top:44.0%;left:11.61%;width:53.37%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;text-shadow:auto;mso-fareast-language:JA'><span
+ style="mso-spacerun: yes">&nbsp;</span>(c.f. DEC Shasta) &#13;</span></span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:49.75%;
+ left:8.42%;width:66.29%;height:6.5%'><span style='position:absolute;
+ top:0%;left:4.8%;width:95.19%'><span style='font-size:86%;text-shadow:auto'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-5.04%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;text-shadow:auto;
+ mso-fareast-language:JA'>Develop OpenJIT JDSM compilet&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:55.75%;left:7.3%;width:57.67%'><span style='font-size:88%;text-shadow:
+ auto'><span style='mso-special-format:bullet;color:#82B5CA;mso-color-index:
+ 4;position:absolute;left:-6.49%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;text-shadow:auto;
+ mso-fareast-language:JA'>Assume no source code is </span></span><span
+ style='position:absolute;top:61.25%;left:7.3%;width:57.67%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;text-shadow:auto;mso-fareast-language:JA'>available&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:68.25%;left:7.3%;width:68.91%'><span style='font-size:88%;text-shadow:
+ auto'><span style='mso-special-format:bullet;color:#82B5CA;mso-color-index:
+ 4;position:absolute;left:-5.43%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;text-shadow:auto;
+ mso-fareast-language:JA'>Currently being implemented on </span></span><span
+ style='position:absolute;top:73.75%;left:7.3%;width:61.98%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;text-shadow:auto;mso-fareast-language:JA'>PC Cluster/VIA
+ environment&#13;</span></span></div>
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:80.5%;left:7.3%;width:57.67%'><span style='font-size:88%;text-shadow:auto'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-6.49%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;text-shadow:auto;mso-fareast-language:JA'>Precursor work: OMPC++
+ </span></span><span style='position:absolute;top:86.25%;left:7.3%;width:59.55%'><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;text-shadow:auto;mso-fareast-language:JA'>(Portable DSM
+ w/OpenC++)</span></span></div>
+ </div>
+ <v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75"
+  o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s445444" type="#_x0000_t75" style='position:absolute;
+  left:480pt;top:150pt;width:213.75pt;height:228pt' fillcolor="#82b5ca [4]"
+  strokecolor="black [1]" strokeweight="1pt">
+  <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+   endarrowlength="short" color2="white [0]" endcap="square"/>
+  <v:imagedata src="slide0250_image337.png" o:title=""/>
+ </v:shape><o:OLEObject Type="Embed" ProgID="MSPhotoEd.3"
+  ShapeID="_x0000_s445444" DrawAspect="Content" ObjectID="515">
+  <p:oleclientdata menuname="Photo Editor ｲﾒｰｼﾞ"
+   clipboardname="Microsoft Photo Editor 3.0 ｲﾒｰｼﾞ"/></o:OLEObject>
+ <![if !vml]><img border=0 v:shapes="_x0000_s445444"
+ src="slide0250_image338.jpg" style='position:absolute;top:27.75%;left:66.66%;
+ width:29.58%;height:42.25%'><![endif]></p:slide></div>
+
+</body>
+
+</html>

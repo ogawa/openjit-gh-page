@@ -1,0 +1,219 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Objective of The Tutorial">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0205.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+InitBuildEffects();
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="340,492"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s348162" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape>
+ <div v:shape="_x0000_s348162" class=T style='position:absolute;top:11.0%;
+ left:5.61%;width:89.13%;height:11.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>Objective of The Tutorial</span></div>
+ <![if !ppt]>
+ <div style='visibility:hidden'><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s348163" type="#_x0000_m141325"
+  style='position:absolute;left:18pt;top:126pt;width:666pt;height:324pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/><p:animation number="1" delay="0"
+   type="text" level="1" effect="fly" direction="left" flag="1040">
+   <p:sound id="5" builtinid="103" name="whoosh.wav" href="sound005.wav"/></p:animation>
+ </v:shape><![if !ppt]></div>
+ <![endif]><![if !ppt]>
+ <div style='position:absolute;top:22.75%;left:2.43%;width:106.55%;height:74.0%'><![endif]>
+ <div v:shape="_x0000_s348163" class=B>
+ <div style='position:absolute;top:0%;left:1.05%;width:92.97%;height:17.56%;
+ overflow:hidden;visibility:hidden;mso-build:0;mso-build-order:1;mso-build-sound-name:
+ sound005.wav'>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:0%;left:3.78%;width:96.21%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-3.92%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>Identify the different assumptions of
+ Java </span></span><span style='position:absolute;top:42.3%;left:3.78%;
+ width:93.95%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:88%;mso-fareast-language:JA'>execution, and
+ challenges imposed thereby&#13;</span></span></div>
+ </div>
+ <div style='position:absolute;top:16.89%;left:1.05%;width:96.83%;height:17.56%;
+ overflow:hidden;visibility:hidden;mso-build:0;mso-build-order:1;mso-build-sound-name:
+ sound005.wav'>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:0%;left:3.62%;width:96.37%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-3.76%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>Describe history and technicalities of
+ various </span></span><span style='position:absolute;top:42.3%;left:3.62%;
+ width:84.21%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:88%;mso-fareast-language:JA'>work to overcome the
+ challenges&#13;</span></span></div>
+ </div>
+ <div style='position:absolute;top:33.78%;left:1.05%;width:88.92%;height:17.56%;
+ overflow:hidden;visibility:hidden;mso-build:0;mso-build-order:1;mso-build-sound-name:
+ sound005.wav'>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:0%;left:3.95%;width:96.04%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.11%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>Introduce some of the work that </span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'><i>exploits</i></span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'> </span></span><span style='position:
+ absolute;top:42.3%;left:3.95%;width:91.69%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:88%;
+ mso-fareast-language:JA'>Java’s execution characteristics&#13;</span></span></div>
+ </div>
+ <div style='position:absolute;top:50.33%;left:1.05%;width:93.14%;height:25.33%;
+ overflow:hidden;visibility:hidden;mso-build:0;mso-build-order:1;mso-build-sound-name:
+ sound005.wav'>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:0%;left:3.77%;width:96.22%'><span style='font-size:88%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-3.92%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;mso-fareast-language:JA'>Convince people work on systems efforts
+ on </span></span><span style='position:absolute;top:30.66%;left:3.77%;
+ width:93.96%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:88%;mso-fareast-language:JA'>interesting and better
+ languages like Java, </span></span><span style='position:absolute;top:60.0%;
+ left:3.77%;width:91.5%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;mso-fareast-language:JA'>instead
+ of arcane languages like Fortran</span><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";font-size:88%;
+ mso-fareast-language:JA'>…</span><span lang=EN-US style='font-size:88%;
+ mso-fareast-language:JA;display:none'>&#13;</span></span></div>
+ </div>
+ <div style='position:absolute;top:75.0%;left:1.05%;width:99.12%;height:25.33%;
+ overflow:hidden;visibility:hidden;mso-build:0;mso-build-order:1;mso-build-sound-name:
+ sound005.wav'>
+ <div style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:0%;left:3.54%;width:96.45%'><span style='font-size:88%;color:red;
+ text-shadow:auto'><span style='mso-special-format:bullet;color:#82B5CA;
+ mso-color-index:4;position:absolute;left:-3.67%;top:.49em;font-family:"Monotype Sorts";
+ font-size:65%'>s</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:88%;text-shadow:auto;
+ color:red;mso-fareast-language:JA'>NOTE: Java is an exemplar for new
+ generation </span></span><span style='position:absolute;top:29.33%;left:3.54%;
+ width:82.26%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:88%;text-shadow:auto;color:red;mso-fareast-language:
+ JA'>of programming languages. Many issues </span></span><span
+ style='position:absolute;top:58.66%;left:3.54%;width:96.09%'><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:88%;text-shadow:auto;color:red;mso-fareast-language:JA'>discussed is
+ applicable to languages </span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-hansi-font-family:"Comic Sans MS";font-size:88%;text-shadow:auto;
+ color:red;mso-fareast-language:JA'>“</span><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";font-size:88%;
+ text-shadow:auto;color:red;mso-fareast-language:JA'>like Java</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-hansi-font-family:"Comic Sans MS";
+ font-size:88%;text-shadow:auto;color:red;mso-fareast-language:JA'>”</span><span
+ lang=EN-US style='font-size:88%;text-shadow:auto;color:red;mso-fareast-language:
+ JA;mso-special-format:lastCR;display:none'>&#13;</span></span></div>
+ </div>
+ </div>
+ <![if !ppt]></div>
+ <![endif]><v:shapetype id="_x0000_t75" coordsize="21600,21600" o:spt="75"
+  o:preferrelative="t" path="m@4@5l@4@11@9@11@9@5xe" filled="f" stroked="f">
+  <v:stroke joinstyle="miter"/>
+  <v:formulas>
+   <v:f eqn="if lineDrawn pixelLineWidth 0"/>
+   <v:f eqn="sum @0 1 0"/>
+   <v:f eqn="sum 0 0 @1"/>
+   <v:f eqn="prod @2 1 2"/>
+   <v:f eqn="prod @3 21600 pixelWidth"/>
+   <v:f eqn="prod @3 21600 pixelHeight"/>
+   <v:f eqn="sum @0 0 1"/>
+   <v:f eqn="prod @6 1 2"/>
+   <v:f eqn="prod @7 21600 pixelWidth"/>
+   <v:f eqn="sum @8 21600 0"/>
+   <v:f eqn="prod @7 21600 pixelHeight"/>
+   <v:f eqn="sum @10 21600 0"/>
+  </v:formulas>
+  <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
+  <o:lock v:ext="edit" aspectratio="t"/>
+ </v:shapetype><v:shape id="_x0000_s348165" type="#_x0000_t75" alt="Java Technology Home Page"
+  href="/" target="_parent" style='position:absolute;left:642pt;top:48pt;
+  width:46.75pt;height:79.25pt'>
+  <v:fill o:detectmouseclick="t"/>
+  <v:imagedata src="slide0205_image167.gif" o:title="javalogo52x88"/>
+  <p:onmouseclick hyperlinktype="url"/></v:shape><map name="map_s5"><area
+  href="/" target="_parent" onclick="window.event.cancelBubble=true;"
+  shape=rect coords="0, 0, 35, 58"></map><![if !vml]><img border=0
+ v:shapes="_x0000_s348165" src="slide0205_image167.gif" usemap="#map_s5"
+ alt="Java Technology Home Page" style='position:absolute;top:9.0%;left:89.13%;
+ width:6.55%;height:14.75%'><![endif]></p:slide></div>
+
+</body>
+
+</html>

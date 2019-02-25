@@ -1,0 +1,189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+  <head>
+    <link rel="stylesheet" href="common.css" type="text/css">
+    <link rev="made" href="mailto:webmaster@openjit.org">
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="Content-Style-Type" content="text/css">
+    <title>Reflection 2001: Call For Participation</title>
+    <style>
+    </style>
+  </head>
+
+<body>
+
+<p class="t2">CALL FOR PAPERS</p>
+
+<p>
+<div class="t1">REFLECTION 2001</div>
+<div class="t2">The Third International Conference on</div>
+<div class="t2">Metalevel Architectures and Separation of Crosscutting Concerns</div>
+<div class="t3">Kyoto, Japan</div>
+<div class="t3">September 26-28, 2001</div></p>
+
+<!--<p class="t3">ABSTRACT DEADLINE: March 9<sup>th</sup>, 2001</p>-->
+<p class="t3">PAPER DEADLINE: March 15<sup>th</sup>, 2001
+(**FINISHED**)
+<!--
+<br>
+<span style="color: red">(We strongly encourage you to submit the abstract of the paper by <span style="text-decoration: underline">March 9<sup>th</sup>, 2001</span>, prior to your submitting the full paper)</span>
+-->
+
+<!--span style="color:red">(We strongly recommend you to submit THE ABSTRACT before and including March 9<sup>th</sup>, 2001)</span-->
+</p>
+
+<p class="t3"><a href="http://www.is.titech.ac.jp/reflection2001/" target="_top">http://www.is.titech.ac.jp/reflection2001/</a></p>
+
+<p class="t4">
+Planned to be under auspices of <a href="http://www.jssst.or.jp/" target="_top">Japan Society for Software Science and Technology (JSSST)</a>, <a href="http://www.aito.org/" target="_top">AITO</a>, <a href="http://www.ipsj.or.jp/" target="_top">Information Processing Society of Japan (IPSJ)</a>, <a href="http://www.acm.org/sigs/sigplan/" target="_top">ACM SIGPLAN</a>. (All subject to formal approvals)
+</p>
+
+<div style="margin-top: 2em">&nbsp;</div>
+
+<h1 id="objectives">OBJECTIVES</h1>
+
+<p>Metalevel architectures and reflection have attracted the attention of researchers and practitioners throughout computer science. Reflective and metalevel techniques are being used to address real-world problems in such areas as: programming languages, operating systems, databases, distributed computing, expert systems and web computing.</p>
+
+<p>Reflection and related technologies like, AOP and SOP, have proven to be powerful tools for improving the separation of concerns in complex systems.  Systems built using these technologies can have better modularity than systems built using object-oriented or procedural programming alone.</p>
+
+<p>Separation of concerns has been a guiding principle of software engineering for nearly 30 years, but it's known benefits are seldom fully achieved in practice. This is primarily because traditional mechanisms for separating concerns into modules and then composing those modules into systems are not powerful enough to handle the many kinds of concerns that occur in practice. Over the last 10 years, this problem has attracted the attention of many researchers, including several from the reflection community, who have proposed approaches, including uses of reflection, to overcoming these limitations. For the first time, papers on advanced approaches to separation of concerns are explicitly solicited, so that this conference will also provide an opportunity for researchers in this growing area to discuss recent developments.</p>
+
+<p>Following the success of two previous conferences, Reflection'96 in San Francisco (online proceedings available at <a href="http://www.parc.xerox.com/csl/groups/sda/projects/reflection96/" target="_top">http://www.parc.xerox.com/csl/groups/projects/reflection96/</a>), and Reflection'99 in Saint Malo (proceedings available as Springer LNCS 1616), this conference will provide an opportunity for researchers with a broad range of interests in metalevel architectures, reflective techniques, and separation of concerns in general.</p>
+
+
+<h1 id="themes">THEMES</h1>
+
+<p>Papers are solicited on topics including, but not limited to:</p>
+
+<ol>
+<li>Systems and applications with a reflective architecture and/or designed with strong separation of concerns</li>
+
+<ul>
+  <li>Operating systems/Middleware
+  <li>Concurrent /Distributed/Parallel/Mobile systems
+  <li>Networking/Internet/Web/Collaboration
+  <li>Embedded/Fault-tolerant systems
+  <li>Databases/Expert Systems
+  <li>AI and knowledge-based systems/Agents
+</ul>
+
+<li>Programming Languages</li>
+
+<ul>
+  <li>Programming languages for reflection and/or separation of concerns (OO, functional, parallel, distributed, etc.)
+  <li>Implementation techniques (open compilers, specializers, weavers, interpreters, analysis techniques, etc.)
+</ul>
+
+<li>Software Engineering
+
+<ul>
+  <li>Metaobject protocols
+  <li>Programming methodologies and environments
+<!--  <li>Subject-Oriented Programming
+  <li>Aspect-Oriented Programming-->
+  <li>Metamodels (UML, CORBA, etc.)
+  <li>Formal methods
+  <li>Safety and security issues
+</ul>
+
+<!--OSSHER'S SUGGESTION:-->
+
+<li>Separation of Concerns
+
+<ul>
+  <li>Mechanisms for handling crosscutting concerns and/or multiple kinds of concerns (adaptive programming, aspect-oriented programming, composition filters, multi-dimensional separation of concerns, etc.)
+  <li>The use of reflection for achieving improved separation of concerns
+  <li>Language and environment support
+  <li>Specification, verification and analysis of concerns and their compositions
+  <li>Conceptual and theoretical foundations 
+  <li>Case studies
+</ul>
+
+<li>Foundations of reflection and/or separation of concerns
+
+<ul>
+  <li>Conceptual and theoretical foundations
+  <li>Language semantics
+</ul>
+</ol>
+
+<h1 id="papers">PAPER SUBMISSION</h1>
+
+<p>All submissions, acknowledgements, notifications, etc. will be done electronically. Manuscripts should preferably be prepared using <a href="http://www.springer.de/comp/lncs/authors.html" target="_top">the LNCS format</a> (http://www.springer.de/comp/lncs/authors.html) for submission. Paper length should be less than 5000 words, excluding figures, tables, and references.  Papers exceeding this limit will not be reviewed.</p>
+
+<p>The program committee will select papers based on standard scientific grounds and merits such as technical novelty, correctness, technical interest and utility to the community, etc. Case Study/Experience papers will be judged on generality and utility of the feedback provided to the community.</p>
+
+<p>A paper may either be accepted in full form, as a short paper, or recommended as a poster presentation. A short paper will have shorter page allowance in the proceedings. Also, it could be given a shorter presentation slot during the conference.</p>
+
+<p>The submission guideline and procedure are detailed at <a href="submit.shtml">http://www.is.titech.ac.jp/reflection2001/submit.html</a>.</p>
+
+<!--p>The conference website will detail the exact submission procedure by late January.</p-->
+
+
+<h1 id="posters">POSTERS</h1>
+
+<!--p>Posters will be separately solicited for a poster presentation slot in the conference. Additionally, as stated above, a submitted paper may be recommended for acceptance as a poster presentation. Each poster will have a page abstract in the proceedings if publication deadline permits.</p-->
+<p>Posters will be separately solicited for a poster presentation slot in the conference. Additionally, as stated above, a submitted paper may be recommended for acceptance as a poster presentation.</p>
+
+<h1 id="proceedings">PROCEEDINGS PUBLICATIONS</h1>
+
+<p>We have approval from Springer to publish the proceedings of Reflection 2001 in the series "Lecture Notes in Computer Science". As noted above the proceedings of Reflection '99 has been published as volume no. 1616.  <!--For details of paper submission, please refer to <a href="http://www.springer.de/comp/lncs/authors.html" target="_top">the web page</a>.--></p>
+
+<h1 id="location">LOCATION</h1>
+
+<p>Kyoto was the capital of Japan for 1000 years, and still retains the atmosphere of the old cultures fostered therein. For more information refer to <a href="http://www.city.kyoto.jp/koho/index_e.html" target="_top">the official web page of city of Kyoto</a> (http://www.city.kyoto.jp/koho/index_e.html). The conference site is the ASTEM research institute, which is located in the midst of the city.</p>
+
+<h1 id="dates">IMPORTANT DATES (2001)</h1>
+
+<div><strike>Abstract Deadline: March 9<sup>th</sup> (strongly encouraged)</strike></div>
+<div><strike>Paper Deadline: March 15<sup>th</sup></strike></div>
+<!--<div style="color: red">(We request you to submit the abstract of the paper by <span style="text-decoration: underline">March 9<sup>th</sup>, 2001</span>, prior to your submitting the full paper)</div>-->
+<div><strike>Notification: May 15<sup>th</sup></strike></div>
+<div>Camera Ready Due: July 8<sup>th</sup></div>
+<div>Conference: September 25-28<sup>th</sup></div>
+
+<h1 id="oc">ORGANIZING COMMITTEE</h1>
+
+<div>Conference Chair: Satoshi Matsuoka (TITECH)</div>
+<div>Program Chair: Akinori Yonezawa (U. Tokyo)</div>
+<div>Coordinator, America: Gregor Kiczales (U. British Columbia)</div>
+<div>Coordinator, Asia: Shigeru Chiba (U. Tsukuba)</div>
+<div>Coordinators, Europe: Pierre Cointe (Ecole des Mines de Nantes),<br>
+&nbsp;&nbsp;Jacques Malenfant (IRISA &amp; U. de Bretagne sud)</div>
+<div>Local Arrangements: Hirotaka Ogawa (TITECH)</div>
+
+<h1 id="pc">PROGRAM COMMITTEE</h1>
+
+<div>Mehmet Aksit (U. Twente)</div>
+<div>Gordon Blair (Lancaster U.)</div>
+<div>Gilad Bracha (Sun Microsystems)</div>
+<div>Jean-Pierre Briot (LIP6)</div>
+<div>Vinny Cahill (Trinity College)</div>
+<div>Roy Campbell (UIUC)</div>
+<div><a href="http://www.disi.unige.it/person/CazzolaW/" target="_top">Walter Cazzola</a> (U. Genova)</div>
+<div>Jean-Charles Fabre (Laas)</div>
+<div>Shigeru Chiba (U. Tsukuba)</div>
+<div>Pierre Cointe (Ecole des Mines de Nantes)</div>
+<div>Charles Consel (U. Bordeaux)</div>
+<div>Dan Friedman (Indiana U.)</div>
+<div>Andrew Grimshaw (U. Virginia)</div>
+<div><a href="http://www.cs.ucsd.edu/users/wgg/" target="_top">William Griswold</a> (UCSD)</div>
+<div>Yuuji Ichisugi (ETL)</div>
+<div>Yutaka Ishikawa (RWCP)</div>
+<div>Gregor Kiczales (U. British Columbia)</div>
+<div>Karl Lieberherr (Northeastern U.)</div>
+<div>Jacques Malenfant (IRISA &amp; U. de Bretagne sud)</div>
+<div>Hidehiko Masuhara (U. Tokyo)</div>
+<div>Mira Mezini (Darmstadt U. Tech)</div>
+<div>Harold Ossher (IBM T.J. Watson)</div>
+<div>Robert Stroud (U. Newcastle)</div>
+<div>Carolyn Talcott (Stanford U.)</div>
+<div>Akinori Yonezawa, Chair (U. Tokyo)</div>
+
+<div style="margin-top: 2em">&nbsp;</div>
+
+<hr width="200" align="left">
+<I>Last modified: <!--#echo var="LAST_MODIFIED"--> by webmaster@openjit.org</I>
+
+</body>
+</html>

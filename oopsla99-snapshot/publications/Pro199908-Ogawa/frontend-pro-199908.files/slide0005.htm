@@ -1,0 +1,341 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJITフロントエンドシステムの設計</title>
+<meta name=Description content="99/10/29: 既存のJITとOpenJITの比較">
+<link rel=next href=slide0007.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0005.htm');   
+  else
+    parent.location.href = "../frontend-pro-199908.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="slide0005_background.gif" bgcolor=white alink="#ffcf01"
+link="#3333cc" vlink="#cfdbfd" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=23 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=70 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=34 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=76 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=62 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=71 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=33 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=5 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=56 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=38 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=36 height=36 colspan=4></td>
+  <td width=362 height=36 colspan=13>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=362 height=36><font face="ＭＳ Ｐゴシック" color="#0000cc" size=5>既存の</font><font
+    face=Tahoma color="#0000cc" size=5>JIT</font><font face="ＭＳ Ｐゴシック"
+    color="#0000cc" size=5>と</font><font face=Tahoma color="#0000cc" size=5>OpenJIT</font><font
+    face="ＭＳ Ｐゴシック" color="#0000cc" size=5>の比較</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=77 height=36 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=28 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=150 height=6 colspan=9></td>
+  <td width=209 height=81 colspan=3 rowspan=6><img src="slide0005_image003.gif"
+  border=0 width=209 height=81></td>
+  <td width=116 height=6 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=26 height=19 colspan=2></td>
+  <td width=80 height=58 colspan=3 rowspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=35 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=22 height=20 colspan=2></td>
+    <td width=35 height=20 align=center><font face=Tahoma size=2>Java</font><br>
+    </td>
+    <td width=23 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=8 height=19></td>
+    <td width=63 height=19 colspan=3 align=center><font face=Tahoma size=2>Classfile</font><br>
+    </td>
+    <td width=9 height=19></td>
+   </tr>
+   <tr>
+    <td width=80 height=19 colspan=5 align=center><font face=Tahoma size=2>(methods)</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=44 height=19 colspan=4></td>
+  <td width=116 height=19 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=26 height=29 colspan=2></td>
+  <td width=9 height=29 colspan=2></td>
+  <td width=34 height=29><img src="slide0005_image004.gif" border=0 width=34
+  height=29></td>
+  <td width=1 height=29></td>
+  <td width=1 height=29></td>
+  <td width=34 height=29 colspan=2><img src="slide0005_image005.gif" border=0
+  width=34 height=29></td>
+  <td width=9 height=29 colspan=3></td>
+  <td width=61 height=30 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=37 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=61 height=14 colspan=3 align=center><font face="ＭＳ Ｐゴシック" size=1>ネイティブ</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=61 height=2 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=12 height=14></td>
+    <td width=37 height=14 align=center><font face="ＭＳ Ｐゴシック" size=1>コード</font><br>
+    </td>
+    <td width=12 height=14></td>
+   </tr>
+  </table>
+  </td>
+  <td width=11 height=29></td>
+ </tr>
+ <tr>
+  <td width=26 height=1 colspan=2></td>
+  <td width=44 height=1 colspan=4></td>
+  <td width=44 height=1 colspan=6></td>
+  <td width=11 height=1></td>
+ </tr>
+ <tr>
+  <td width=26 height=9 colspan=2></td>
+  <td width=44 height=9 colspan=4></td>
+  <td width=116 height=9 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=150 height=17 colspan=9></td>
+  <td width=116 height=17 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=475 height=31 colspan=21></td>
+ </tr>
+ <tr>
+  <td width=23 height=3></td>
+  <td width=86 height=96 colspan=5 rowspan=8>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=8 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=35 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=14 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=3 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=25 height=20 colspan=4></td>
+    <td width=35 height=20 align=center><font face=Tahoma size=2>Java</font><br>
+    </td>
+    <td width=26 height=20 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=11 height=18 colspan=3></td>
+    <td width=63 height=18 colspan=3 align=center><font face=Tahoma size=2>Classfile</font><br>
+    </td>
+    <td width=12 height=18 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=86 height=19 colspan=9 align=center><font face=Tahoma size=2>(methods+</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=9 height=19 colspan=2></td>
+    <td width=68 height=19 colspan=5 align=center><font face=Tahoma size=2>Compiler</font><br>
+    </td>
+    <td width=9 height=19 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=1 height=19></td>
+    <td width=83 height=19 colspan=7 align=center><font face=Tahoma size=2>metacode)</font><br>
+    </td>
+    <td width=2 height=19></td>
+   </tr>
+  </table>
+  </td>
+  <td width=366 height=3 colspan=15></td>
+ </tr>
+ <tr>
+  <td width=23 height=20></td>
+  <td width=41 height=20 colspan=3></td>
+  <td width=209 height=81 colspan=3 rowspan=5><img src="slide0005_image006.gif"
+  border=0 width=209 height=81></td>
+  <td width=116 height=20 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=23 height=1></td>
+  <td width=6 height=1></td>
+  <td width=34 height=29 rowspan=2><img src="slide0005_image007.gif" border=0
+  width=34 height=29></td>
+  <td width=1 height=1></td>
+  <td width=2 height=1 colspan=2></td>
+  <td width=34 height=29 colspan=2 rowspan=2><img src="slide0005_image008.gif"
+  border=0 width=34 height=29></td>
+  <td width=80 height=1 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=23 height=28></td>
+  <td width=6 height=28></td>
+  <td width=1 height=28></td>
+  <td width=2 height=28 colspan=2></td>
+  <td width=8 height=28 colspan=2></td>
+  <td width=61 height=30 colspan=2 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=12 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=37 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=61 height=14 colspan=3 align=center><font face="ＭＳ Ｐゴシック" size=1>ネイティブ</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=61 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=12 height=14></td>
+    <td width=37 height=14 align=center><font face="ＭＳ Ｐゴシック" size=1>コード</font><br>
+    </td>
+    <td width=12 height=14></td>
+   </tr>
+  </table>
+  </td>
+  <td width=11 height=28></td>
+ </tr>
+ <tr>
+  <td width=23 height=2></td>
+  <td width=41 height=2 colspan=3></td>
+  <td width=44 height=2 colspan=6></td>
+  <td width=11 height=2></td>
+ </tr>
+ <tr>
+  <td width=23 height=30></td>
+  <td width=41 height=30 colspan=3></td>
+  <td width=116 height=30 colspan=9></td>
+ </tr>
+ <tr>
+  <td width=23 height=9></td>
+  <td width=366 height=9 colspan=15></td>
+ </tr>
+ <tr>
+  <td width=23 height=3></td>
+  <td width=179 height=3 colspan=5></td>
+  <td width=120 height=39 colspan=8 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=25 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=71 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=120 height=20 colspan=3 align=center><font face=Tahoma size=2>JIT</font><font
+    face="ＭＳ Ｐゴシック" size=2>コンパイルの</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=120 height=2 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=25 height=17></td>
+    <td width=71 height=17 align=center><font face="ＭＳ Ｐゴシック" size=2>自己適用</font><br>
+    </td>
+    <td width=24 height=17></td>
+   </tr>
+  </table>
+  </td>
+  <td width=67 height=3 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=288 height=2 colspan=11></td>
+  <td width=67 height=2 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=27 height=34 colspan=3></td>
+  <td width=199 height=39 colspan=7 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=61 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=79 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=199 height=20 colspan=3 align=center><font face="ＭＳ Ｐゴシック"
+    size=2>コンパイラの</font><font face=Tahoma size=2>Just-in-time</font><font
+    face="ＭＳ Ｐゴシック" size=2>な</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=199 height=1 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=61 height=17></td>
+    <td width=79 height=17 align=center><font face="ＭＳ Ｐゴシック" size=2>カスタム化</font><br>
+    </td>
+    <td width=59 height=17></td>
+   </tr>
+  </table>
+  </td>
+  <td width=62 height=34></td>
+  <td width=67 height=34 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=27 height=5 colspan=3></td>
+  <td width=249 height=5 colspan=11></td>
+ </tr>
+ <tr>
+  <td width=475 height=5 colspan=21></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

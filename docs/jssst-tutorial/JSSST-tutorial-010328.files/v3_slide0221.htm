@@ -1,0 +1,188 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description
+content="2001/03/04: Basic Dispatch Optimization Techniques (Runtime)">
+<link rel=next href="v3_slide0222.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0221.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_slide0221_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=309 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=9 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=3 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=44 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=13 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=11 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=6 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=28 height=76></td>
+  <td width=420 height=76 colspan=9>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=50 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=319 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=420 height=41 colspan=3 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Basic Dispatch Optimization</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=50 height=35></td>
+    <td width=319 height=35 align=center><font face="Comic Sans MS"
+    color="#003399" size=5>Techniques (Runtime)</font><br>
+    </td>
+    <td width=51 height=35></td>
+   </tr>
+  </table>
+  </td>
+  <td width=27 height=76 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=475 height=88 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=337 height=16 colspan=2></td>
+  <td width=9 height=23 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=9 height=23><font face="Comic Sans MS" size=2>s</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=129 height=16 colspan=10></td>
+ </tr>
+ <tr>
+  <td width=337 height=7 colspan=2></td>
+  <td width=51 height=7 colspan=3></td>
+  <td width=38 height=23 colspan=3 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=38 height=23><font face="Comic Sans MS" size=2>jump</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=40 height=7 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=397 height=16 colspan=6></td>
+  <td width=40 height=16 colspan=4></td>
+ </tr>
+ <tr>
+  <td width=475 height=6 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=412 height=6 colspan=7></td>
+  <td width=57 height=35 colspan=5 rowspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=28 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=57 height=19 colspan=2><font face="Comic Sans MS" size=1>Receiver</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=28 height=16><font face="Comic Sans MS" size=1>test</font><br>
+    </td>
+    <td width=29 height=16></td>
+   </tr>
+  </table>
+  </td>
+  <td width=6 height=6></td>
+ </tr>
+ <tr>
+  <td width=349 height=23 colspan=4></td>
+  <td width=44 height=23>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=44 height=23><font face="Comic Sans MS" size=2>patch</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=19 height=23 colspan=2></td>
+  <td width=6 height=23></td>
+ </tr>
+ <tr>
+  <td width=412 height=6 colspan=7></td>
+  <td width=6 height=6></td>
+ </tr>
+ <tr>
+  <td width=475 height=11 colspan=13></td>
+ </tr>
+ <tr>
+  <td width=420 height=39 colspan=8></td>
+  <td width=38 height=39 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=32 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=32 height=19><font face="Comic Sans MS" size=1>Body</font><br>
+    </td>
+    <td width=6 height=19></td>
+   </tr>
+   <tr>
+    <td width=38 height=21 colspan=2><font face="Comic Sans MS" size=1>of </font><font
+    face="Comic Sans MS" size=2>m<sub>k</sub></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=17 height=39 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=56 colspan=13></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

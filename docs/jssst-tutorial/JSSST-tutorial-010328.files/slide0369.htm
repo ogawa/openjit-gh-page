@@ -1,0 +1,144 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: 考察">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0369.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+var g_hasTrans = false, g_autoTrans = true, g_transSecs = 114177;
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+   if( !parent.IsFramesMode() )
+
+      setTimeout("parent.GoToNextSld()", 115176);
+//-->
+</script><![endif]><p:slidetransition advancetime="114176" flag="1025"/><o:shapelayout
+ v:ext="edit">
+ <o:idmap v:ext="edit" data="611"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s625666" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s625667" type="#_x0000_m141325"
+  style='position:absolute;left:36pt;top:148.5pt;width:672pt;height:391.5pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <o:lock v:ext="edit" text="f"/>
+  <p:placeholder type="body" position="1"/></v:shape>
+ <div v:shape="_x0000_s625666" class=T style='position:absolute;top:13.75%;
+ left:8.42%;width:83.14%;height:8.5%'>考察</div>
+ <div v:shape="_x0000_s625667">
+ <div class=B style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:26.75%;left:9.73%;width:102.99%'><span style='mso-special-format:bullet;
+ color:#82B5CA;mso-color-index:4;position:absolute;left:-3.63%;top:.49em;
+ font-family:"Monotype Sorts";font-size:65%'>s</span><span lang=EN-US
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Java</span>で、アプリケーションフレームワークとして</span><span
+ style='position:absolute;top:33.0%;left:9.73%;width:101.68%'>記述された<span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>JIT</span>コンパイラによるコンパイル速</span><span
+ style='position:absolute;top:39.5%;left:9.73%;width:101.49%'>度は<span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS"'>3.5bytecode/</span>ミリ秒～<span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS"'>12bytecode/</span>ミリ</span><span
+ style='position:absolute;top:47.75%;left:9.73%;width:87.82%'>秒&#13;</span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:55.25%;
+ left:11.04%;width:86.51%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.46%;width:96.32%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.59%'>&#8226;</span>基本のコンパイラとしては遅い&#13;</span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:60.5%;
+ left:15.91%;width:81.46%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.21%;width:97.01%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.31%'>&#8226;</span>自己コンパイルに<span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS"'>7</span>秒～<span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS"'>25</span>秒&#13;</span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:68.0%;
+ left:11.04%;width:86.51%;height:5.5%'><span style='position:absolute;
+ top:0%;left:3.46%;width:96.32%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.59%'>&#8226;</span>最適化コンパイラとしては悪くない&#13;</span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:73.25%;
+ left:11.04%;width:86.51%;height:7.5%'><span style='position:absolute;
+ top:0%;left:3.46%;width:96.32%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.59%'>&#8226;</span>参考（<span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>PowerPC 604e, 166MHz</span>上）&#13;</span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:80.0%;
+ left:15.91%;width:81.46%;height:6.5%'><span style='position:absolute;
+ top:0%;left:3.21%;width:97.01%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.31%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>IBM JVM</span>は<span style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS"'>10bytecode/</span>ミリ秒&#13;</span></div>
+ <div class=B2 style='mso-line-spacing:"90 20 0";position:absolute;top:86.0%;
+ left:15.91%;width:94.0%;height:6.5%'><span style='position:absolute;
+ top:0%;left:2.78%;width:97.41%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-2.86%'>&#8226;</span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ mso-fareast-language:JA'>Jalapeno</span>の最適化コンパイラは<span style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS"'>3</span>～<span
+ style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS"'>5bytecode/</span>ミリ秒&#13;</span></div>
+ <div class=B1 style='mso-line-spacing:"90 20 0";position:absolute;top:93.5%;
+ left:11.04%;width:101.87%;height:5.5%'><span style='position:absolute;
+ top:0%;left:2.94%;width:97.05%'><span style='mso-special-format:bullet;
+ color:#003399;mso-color-index:3;position:absolute;left:-3.03%'>&#8226;</span>本当の評価はプログラムの実行性能を加味すべき</span></div>
+ </div>
+</p:slide></div>
+
+</body>
+
+</html>

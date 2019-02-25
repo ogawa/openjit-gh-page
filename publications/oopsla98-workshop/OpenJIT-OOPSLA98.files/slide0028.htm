@@ -1,0 +1,274 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<title>OpenJIT proposal</title>
+<meta name=Description content="99/10/28: The “Simple App” Scenario">
+<link rel=next href=slide0049.htm>
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('slide0028.htm');   
+  else
+    parent.location.href = "../OpenJIT-OOPSLA98.html";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="master03_background.gif" bgcolor=white alink="#5f5f5f"
+link="#969696" vlink="#cbcbcb" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=19 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=201 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=11 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=135 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=21 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=9 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+  <td width=15 height=0 nowrap><img src=space.gif border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=46 colspan=11></td>
+ </tr>
+ <tr>
+  <td width=40 height=33 colspan=2></td>
+  <td width=364 height=33 colspan=4>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=364 height=33><font face="Times New Roman" size=5><b>The “Simple
+    App” Scenario</b></font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=71 height=33 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=11></td>
+ </tr>
+ <tr>
+  <td width=258 height=4 colspan=4></td>
+  <td width=176 height=123 colspan=4 rowspan=2>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=18 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=107 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=19 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=4 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=18 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=108 height=20 colspan=2><font face=Arial size=3><b>OpenJIT </b></font><font
+    face="ＭＳ Ｐゴシック" size=3><b>→</b></font><br>
+    </td>
+    <td width=50 height=20 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=152 height=20 colspan=6><font face=Arial size=3><b>customize
+    “DSM”</b></font><br>
+    </td>
+    <td width=6 height=20></td>
+   </tr>
+   <tr>
+    <td width=176 height=1 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=131 height=20 colspan=4><font face=Arial size=3><b>class such
+    that</b></font><br>
+    </td>
+    <td width=27 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=158 height=20 colspan=7><font face=Arial size=3><b>read/write
+    barriers</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=176 height=1 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=148 height=20 colspan=5><font face=Arial size=3><b>are
+    automatically</b></font><br>
+    </td>
+    <td width=10 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=176 height=1 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=18 height=20></td>
+    <td width=112 height=20 colspan=3><font face=Arial size=3><b>inserted, etc.</b></font><br>
+    </td>
+    <td width=46 height=20 colspan=4></td>
+   </tr>
+  </table>
+  </td>
+  <td width=41 height=4 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=21 height=119></td>
+  <td width=220 height=234 colspan=2 rowspan=5>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=71 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=36 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=6 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=34 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=7 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=1 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=17 height=0 nowrap><img src=space.gif border=0></td>
+    <td width=2 height=0 nowrap><img src=space.gif border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=164 height=20 colspan=8><font face=Arial size=3><b>Software DSM
+    on a</b></font><br>
+    </td>
+    <td width=38 height=20 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=182 height=20 colspan=10><font face=Arial size=3><b>Cluster of
+    WS/PCs </b></font><font face="ＭＳ Ｐゴシック" size=3><b>→</b></font><br>
+    </td>
+    <td width=20 height=20 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=219 height=1 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=123 height=20 colspan=6><font face=Arial size=3><b>need mods on</b></font><br>
+    </td>
+    <td width=79 height=20 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=184 height=20 colspan=11><font face=Arial size=3><b>compiler/runtime
+    (c.f.</b></font><br>
+    </td>
+    <td width=18 height=20></td>
+   </tr>
+   <tr>
+    <td width=219 height=1 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=109 height=20 colspan=3><font face=Arial size=3><b>DEC Shasta)</b></font><br>
+    </td>
+    <td width=93 height=20 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=219 height=5 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=202 height=20 colspan=12><font face=Arial size=3><b>Assume source
+    code is</b></font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=157 height=20 colspan=7><font face=Arial size=3><b>not available
+    (e.g.,</b></font><br>
+    </td>
+    <td width=45 height=20 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=219 height=1 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=73 height=20 colspan=2><font face=Arial size=3><b>Applets)</b></font><br>
+    </td>
+    <td width=129 height=20 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=219 height=5 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=20><font face=Wingdings color="#5f5f5f" size=1>l</font></td>
+    <td width=165 height=20 colspan=9><font face=Arial size=3><b>Java (VM) does
+    not</b></font><br>
+    </td>
+    <td width=37 height=20 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=115 height=20 colspan=4><font face=Arial size=3><b>support such</b></font><br>
+    </td>
+    <td width=87 height=20 colspan=8></td>
+   </tr>
+   <tr>
+    <td width=219 height=1 colspan=13></td>
+   </tr>
+   <tr>
+    <td width=17 height=20></td>
+    <td width=122 height=20 colspan=5><font face=Arial size=3><b>customization</b></font><br>
+    </td>
+    <td width=80 height=20 colspan=7></td>
+   </tr>
+  </table>
+  </td>
+  <td width=17 height=119></td>
+  <td width=41 height=119 colspan=3></td>
+ </tr>
+ <tr>
+  <td width=21 height=4></td>
+  <td width=234 height=4 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=21 height=103></td>
+  <td width=28 height=103 colspan=2></td>
+  <td width=182 height=103 colspan=5><img src="slide0028_image011.gif"
+  border=0 width=182 height=103></td>
+  <td width=24 height=103></td>
+ </tr>
+ <tr>
+  <td width=21 height=6></td>
+  <td width=234 height=6 colspan=8></td>
+ </tr>
+ <tr>
+  <td width=21 height=2></td>
+  <td width=184 height=2 colspan=4></td>
+  <td width=11 height=11 colspan=2 rowspan=2><img src="master03_image012.gif"
+  border=0 width=11 height=11></td>
+  <td width=39 height=2 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=425 height=9 colspan=7></td>
+  <td width=39 height=9 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=18 colspan=11></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

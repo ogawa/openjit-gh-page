@@ -1,0 +1,695 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+
+<script>
+<!--
+if( window.name != "PPTOtl" )
+  parent.location.href = "../JSSST-tutorial-010328.htm";
+//-->
+</script>
+<meta name=Robots content=NoIndex>
+</head>
+
+<body bgcolor=black text=white link=white vlink=white alink=white>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0001.htm');">Efficient Execution of
+Languages Like Java<br>
+(Java言語の高速化技術)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0205.htm');">Objective of The Tutorial</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0216.htm');">Disclaimers</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0239.htm');">Audience Assumptions</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0179.htm');">Table of Contents</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0184.htm');">Intro -- Overview of Java
+and Diffs from Traditional Languages (e.g., Fortran)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0185.htm');">Java Historical
+Perspective<br>
+(Cont’d)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0243.htm');">Is Java Slow in the First
+Place?</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0214.htm');">Review of the Java
+Execution Model</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0206.htm');">What characterizes Java
+execution model, c.f. Fortran w.r.t. Optimization?</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0209.htm');">(1) Object-Orientation</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0339.htm');">(1) Object-Orientation
+(cont’d)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0207.htm');">(2) Inherent Dynamicity</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0210.htm');">(3) Language-Imposed
+Safety</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0211.htm');">(4) Strict Portability
+Requirement</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0208.htm');">(5) Concurrency &amp;
+Memory Models</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0218.htm');">General Strategy for
+Efficient Java Execution</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0224.htm');">Chapter 2: General
+Optimization of Java Programs</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0215.htm');">Object Orientation (1) &#8211;
+Encapsulation of Control</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0219.htm');">Dynamic Dispatch (cont’d)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0220.htm');">Basic Dynamic Dispatch
+Method Lookup Techniques</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0221.htm');">Basic Dispatch
+Optimization Techniques (Runtime)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0222.htm');">Improving on Caching
+Techniques</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0223.htm');">Basic Dispatch
+Optimization Techniques (Compile Time)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0225.htm');">Simple Algorithms for
+Analyzing Receiver Classes</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0226.htm');">CHA and Variants</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0229.htm');">More Sophisticated Class
+Analysis</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0242.htm');">Some Representative Work</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0340.htm');">Set Based Class Analysis</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0341.htm');">Classification of Set
+Based Analysis:<br>
+-Where we store class propagation info-<br>
+[Tip &amp; Palsberg OOPSLA2000]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0342.htm');">Hendren’s Practical Type
+Anlysis [OOPSLA2K]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0343.htm');">Hendren’s Algorithm
+(Example1)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0344.htm');">Hendren’s Algorithm (VTA)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0345.htm');">Hendren’s Algorithm
+(Result)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0230.htm');">Alternative: Type
+Feedback</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0346.htm');">Profiling Techniques</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0234.htm');">Static Analysis vs. Type
+Feedback: Which is better?</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0227.htm');">Program Transformations
+for Optimizing Dynamic Dispatch</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0286.htm');">Method Inlining (Cont’d)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0287.htm');">Inlining: Problem
+Generalization</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0288.htm');">Vivek Inlining Slide 2</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0289.htm');">Vivek Inlining Slide 3</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0290.htm');">Vivek Inlining Slide 4</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0291.htm');">Vivek Inlining Slide 5</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0231.htm');">Problems in Optimizing
+Dynamic Dispatch for Java</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0235.htm');">Preparing for Dynamic
+Class Loading</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0238.htm');">Other Sophisticated
+Optimizations of Control</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0299.htm');">Sarkar Exceptions Slide1</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0300.htm');">Sarkar Exceptions Slide2</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0302.htm');">Sarkar Exceptions Slide3</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0232.htm');">Optimizing Objects with
+Data Encapsulation</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0349.htm');">Other Interesting
+Optimizations</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0347.htm');">Quasi Static
+Compilation<br>
+[Serrano et.al., OOPLSA2000]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0348.htm');">Optimizing Java
+Packages<br>
+[Zaks et.al., OOPSLA2K]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0320.htm');">Chapter 3<br>
+Optimizing Java Concurrency</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0233.htm');">Java Concurrency</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0292.htm');">Techniques for Optimizing
+Java Concurrency</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0237.htm');">Run-time Techniques for
+Fast Synchronization</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0305.htm');">Some Na&iuml;ve Solutions to
+ubiquitous object locking</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0308.htm');">Classic JVM Monitor cache</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0309.htm');">Thin locks - overview</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0310.htm');">Thin locks - flat case</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0311.htm');">Thin locks - inflated
+case</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0312.htm');">Thin locks properties</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0298.htm');">Improved Run-time
+Synchornization Optimization</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0313.htm');">Metalocking
+[Detlefs,Agesen, OOPSLA99]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0315.htm');">Properties of meta-lock</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0317.htm');">Meta-lock performance</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0318.htm');">Monitor-lock
+performance<br>
+(MicroBenchmark)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0319.htm');">Performance comparison</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0236.htm');">Sarkar Escape Analysis 1</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0293.htm');">Sarkar Escape Analysis 2</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0294.htm');">Sarkar Escape Analysis 3</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0295.htm');">Sarkar Escape Analysis 4</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0296.htm');">Sarkar Escape Analysis 5</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0297.htm');">Sarkar Escape Analysis 6</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0350.htm');">New: Optimizing
+Contentious Locks [ECOOP2001]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0240.htm');">Some Major Java Systems</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0187.htm');">Chapter 4: Numerical
+Optimizations of Java Programs</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0170.htm');">Java sequential numerical
+performance inhibitors <br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0175.htm');">IBM High Performance
+Compiler for Java</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0171.htm');">Array checks
+optimization<br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0172.htm');">Safe regions through
+versioning<br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0099.htm');">500x500 MATMUL on RS/
+6000 590 <br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0174.htm');">Results of Java x Fortran
+on RS/ 6000 590<br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0173.htm');">Java Language Array
+layouts <br>
+(Picture courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0177.htm');">JavaGrande (IBM) Propsal:
+Java Array Package</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0178.htm');">Java DGEMM for the Array
+Package <br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0330.htm');">Code /Performance
+Portability</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0081.htm');">“Performance Portability”
+in Java<sup><br>
+</sup>(or lacks thereof)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0082.htm');">Problems in Java wrt
+Performance Portability</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0012.htm');">Optimization in Java:
+<br>
+Current Status</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0329.htm');">AJaPACK : Automatic
+Optimization using Downloadable Self-tuning Portable Library<br>
+[ACM
+JavaGrande 2000]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0331.htm');">Prototype : AJaPACK<br>
+[Itou
+etc、JavaGrande2000] <br>
+= ATLAS for Java + JLAPACK [Blount,’99]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0332.htm');">ATLAS for Java<br>
+[Matsuoka
+et. al., FGCS2000]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0333.htm');">Parallelizing GEMM<br>
+-multi-threaded
+parallelization</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0334.htm');">Evaluation Environment</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0335.htm');">Peak Performace of
+AJaPACK</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0336.htm');">Performance of AJaPACK(8
+threads)<br>
+Enterprise4000(UltraSparc 300MHz x 10CPU, Solaris Production
+Release JDK 1.2.1_04a)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0337.htm');">Performance of AJaPACK(60
+threads)<br>
+Enterprise10000(UltraSparc 250MHz x 60CPU,<br>
+<span style="mso-spacerun: yes">　</span>Solaris Production Release JDK
+1.2.1_04a)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0321.htm');">Chapter 5: Advanced
+Techniques and Research Trends Utilizing Java Characteristics</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0325.htm');">Partial Evaluation</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0322.htm');">Partial Evaluation in
+Java</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0327.htm');">Specialization Classes -
+Partial evaluation of classes [Consel et. al., OOPSLA97, ECOOP99]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0324.htm');">Bytecode
+Specialization<br>
+[Masuhara99]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0326.htm');">Overview of BCS</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0328.htm');">Preliminary
+Benchmarks<br>
+- Partial Evaluation of Power(x,n) &#8211;</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0164.htm');">Reflection</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0143.htm');">Early Work: the ABCL/Rx
+project</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0144.htm');">Open Compiler,
+Compile-Time Metaprogramming</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0145.htm');">C++ Metaprogramming/ Open
+Compilers (1)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0146.htm');">Open Compilers in C++ (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0147.htm');">Reflection in Java (1)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0148.htm');">Reflection in Java (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0245.htm');">Case Study:
+OpenJIT:<br>
+An Open-Ended, Reflective JIT <br>
+(http://www.openjit.org)<br>
+[Ogawa,
+Matsuoka et. al. ECOOP2000, etc.]</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0246.htm');">Our Claim</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0247.htm');">OpenJIT Compiler
+System<br>
+http://www.openjit.org</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0248.htm');">OpenJIT Compiler System
+(2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0249.htm');">OpenJIT High-level
+Motivations</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0250.htm');">JDSM [JavaGrande2001]
+<br>
+w/OpenJIT</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0251.htm');">Overview of the OpenJIT
+Framework</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0252.htm');">Overview of the OpenJIT
+Framework (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0253.htm');">The OpenJIT Frontend
+System</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0254.htm');">Architecture of OpenJIT
+Frontend</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0256.htm');">OpenJIT Bytecode
+Decompiler</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0257.htm');">Classfile Annotations</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0258.htm');">Classfile annotation
+(examples)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0260.htm');">OpenJIT High-level
+Optimizer Toolkit</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0261.htm');">OpenJIT High-level
+Optimizer Toolkit (3)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0262.htm');">Abstract Syntax Tree
+Package</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0263.htm');">Abstract Syntax Tree
+Package(2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0264.htm');">Abstract Syntax Tree
+Package(3)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0265.htm');">Overview of the OpenJIT
+Backend System</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0266.htm');">Overview of the OpenJIT
+Backend System (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0267.htm');">Overview of the OpenJIT
+Backend System (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0268.htm');">OpenJIT backend &#8211; the
+technical issues</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0269.htm');">Invoking OpenJIT</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0270.htm');">Recursive Compilation</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0271.htm');">Lack of Appropriate JVM
+JIT APIs</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0272.htm');">New JVM JIT APIs Contd</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0273.htm');">Performance Analysis</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0274.htm');">Comparison on the size of
+JIT compilers</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0275.htm');">Benchmarking Environment</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0276.htm');">Baseline performance (1)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0277.htm');">Baseline Performance (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0278.htm');">Heap profiling USING
+OpenJIT</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0279.htm');">Heap usage on Bootstrap</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0280.htm');">SPECjvm98 Heap Usage</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0281.htm');">SPECjvm98 Heap Usage (2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0282.htm');">Analysis of Heap Usage on
+Bootstrap</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0283.htm');">スライド151</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0284.htm');">スライド152</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0285.htm');">Summary of OpenJIT1</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0351.htm');">Now and Future: OpenJIT2</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0352.htm');">OpenJIT2<br>
+コンパイル時間と性能の関係</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0353.htm');">従来のJITコンパイラ</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0354.htm');">最適なJITコンパイラ？</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0355.htm');">更なる高性能を実現するために</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0356.htm');">JITコンパイラの多様化による問題</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0357.htm');">関連研究（1/2）</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0358.htm');">関連研究（2/2）</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0359.htm');">OpenJIT 2のデザイン</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0360.htm');">OpenJIT 2の中間表現</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0361.htm');">OpenJIT 2の概要(全体)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0362.htm');">OpenJIT 2の概要(コンパイラ内部)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0363.htm');">JITコンパイラ向けアプリケーションフレームワーク(1/2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0364.htm');">JITコンパイラ向けアプリケーションフレームワーク(2/2)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0365.htm');">多様なコンパイル方針を実現</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0366.htm');">OpenJIT2 実装の現状</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0367.htm');">評価</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0368.htm');">測定結果</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0369.htm');">考察</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0370.htm');">まとめ</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0371.htm');">今後の課題</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0167.htm');">JavaGrande Forum</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0168.htm');">JavaGrande Activities</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0169.htm');">JavaGrande Numerics
+Working Group<br>
+(Slide courtesy of Jose Moreira@IBM Watson)</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0203.htm');">What we did not have in
+the Slides Today</a></b></font></p>
+
+<p><font face="ＭＳ 明朝" size=2><b><a
+href="javascript:parent.GoToSld('v3_slide0217.htm');">Acknowledgements (_o_)</a></b></font></p>
+
+</body>
+
+</html>

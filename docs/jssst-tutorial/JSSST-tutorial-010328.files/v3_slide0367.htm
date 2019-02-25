@@ -1,0 +1,192 @@
+<html>
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: 評価">
+<link rel=next href="v3_slide0368.htm">
+<![if !ppt]>
+<script>
+<!--
+function Update()
+{
+  if( window.name == "PPTSld" )
+    parent.SlideUpdated('v3_slide0367.htm');   
+  else
+    parent.location.href = "v3_document.htm";
+}
+
+function NoHref() {}
+//-->
+</script>
+<![endif]>
+</head>
+
+<body background="v3_master08_background.gif" bgcolor=white alink="#448c8e"
+link="#a384c8" vlink="#6b5653" text=black topmargin=0 leftmargin=0
+onload="Update()">
+
+<table border=0 valign=top width=475 height=356 cellpadding=0 cellspacing=0>
+ <tr>
+  <td width=29 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=177 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=65 height=0 nowrap><img src="v3_space.gif" border=0></td>
+  <td width=196 height=0 nowrap><img src="v3_space.gif" border=0></td>
+ </tr>
+ <tr>
+  <td width=475 height=49 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=206 height=30 colspan=2></td>
+  <td width=65 height=30>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=65 height=30 align=center><font face="ＭＳ Ｐゴシック" color="#003399"
+    size=5>評価</font><br>
+    </td>
+   </tr>
+  </table>
+  </td>
+  <td width=204 height=30 colspan=2></td>
+ </tr>
+ <tr>
+  <td width=475 height=12 colspan=5></td>
+ </tr>
+ <tr>
+  <td width=29 height=242></td>
+  <td width=438 height=242 colspan=3>
+  <table border=0 valign=top cellpadding=0 cellspacing=0>
+   <tr>
+    <td width=17 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=2 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=15 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=8 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=57 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=186 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=27 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=41 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=12 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=25 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=4 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=10 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+    <td width=1 height=0 nowrap><img src="v3_space.gif" border=0></td>
+   </tr>
+   <tr>
+    <td width=17 height=22><font face="Monotype Sorts" color="#82b5ca" size=1>s</font></td>
+    <td width=391 height=22 colspan=13><font face="ＭＳ Ｐゴシック" size=4>実装済みの部分について動作速度を測定</font><br>
+    </td>
+    <td width=30 height=22 colspan=5></td>
+   </tr>
+   <tr>
+    <td width=23 height=26 colspan=3></td>
+    <td width=15 height=26><font color="#003399" size=3>&#8226;</font></td>
+    <td width=384 height=26 colspan=12><font face="ＭＳ Ｐゴシック" size=3>デバッグ用ドライバを用いた</font><font
+    face="Comic Sans MS" size=3>baseline</font><font face="ＭＳ Ｐゴシック" size=3>コンパイラ</font><br>
+    </td>
+    <td width=16 height=26 colspan=3></td>
+   </tr>
+   <tr>
+    <td width=47 height=20 colspan=6></td>
+    <td width=12 height=20><font color="#003399" size=2>&#8226;</font></td>
+    <td width=353 height=20 colspan=8><font face="ＭＳ Ｐゴシック" size=2>本体は全て</font><font
+    face="Comic Sans MS" size=2>Java</font><font face="ＭＳ Ｐゴシック" size=2>（時間計測用にネイティブメソッド）</font><br>
+    </td>
+    <td width=26 height=20 colspan=4></td>
+   </tr>
+   <tr>
+    <td width=23 height=25 colspan=3></td>
+    <td width=15 height=25><font color="#003399" size=3>&#8226;</font></td>
+    <td width=386 height=25 colspan=14><font face="Comic Sans MS" size=3>OpenJIT
+    2</font><font face="ＭＳ Ｐゴシック" size=3>の全てのメソッドに対する処理時間</font><br>
+    </td>
+    <td width=14 height=25></td>
+   </tr>
+   <tr>
+    <td width=47 height=21 colspan=6></td>
+    <td width=12 height=21><font color="#003399" size=2>&#8226;</font></td>
+    <td width=364 height=21 colspan=10><font face="Comic Sans MS" size=2>309</font><font
+    face="ＭＳ Ｐゴシック" size=2>クラスファイル、</font><font face="Comic Sans MS" size=2>2193</font><font
+    face="ＭＳ Ｐゴシック" size=2>メソッド、延べ</font><font face="Comic Sans MS" size=2>85203</font><font
+    face="ＭＳ Ｐゴシック" size=2>バイト</font><br>
+    </td>
+    <td width=15 height=21 colspan=2></td>
+   </tr>
+   <tr>
+    <td width=438 height=3 colspan=19></td>
+   </tr>
+   <tr>
+    <td width=23 height=19 colspan=3></td>
+    <td width=15 height=19><font color="#003399" size=3>&#8226;</font></td>
+    <td width=79 height=19 colspan=5><font face="ＭＳ Ｐゴシック" size=3>実験環境</font><br>
+    </td>
+    <td width=321 height=19 colspan=10></td>
+   </tr>
+   <tr>
+    <td width=47 height=23 colspan=6></td>
+    <td width=12 height=23><font color="#003399" size=2>&#8226;</font></td>
+    <td width=312 height=23 colspan=5><font face="Comic Sans MS" size=2>Pentium
+    III 500MHz x 2 (SMP), 384MB</font><br>
+    </td>
+    <td width=67 height=23 colspan=7></td>
+   </tr>
+   <tr>
+    <td width=47 height=21 colspan=6></td>
+    <td width=12 height=21><font color="#003399" size=2>&#8226;</font></td>
+    <td width=244 height=21 colspan=3><font face="Comic Sans MS" size=2>RedHat
+    Linux 6.2, kernel 2.2.18</font><br>
+    </td>
+    <td width=135 height=21 colspan=9></td>
+   </tr>
+   <tr>
+    <td width=47 height=21 colspan=6></td>
+    <td width=12 height=21><font color="#003399" size=2>&#8226;</font></td>
+    <td width=379 height=21 colspan=12><font face="Comic Sans MS" size=2>Sun
+    JDK-1.2.2_006 (Classic VM, nojit, OpenJIT)</font><br>
+    </td>
+   </tr>
+   <tr>
+    <td width=47 height=20 colspan=6></td>
+    <td width=12 height=20><font color="#003399" size=2>&#8226;</font></td>
+    <td width=324 height=20 colspan=6><font face="Comic Sans MS" size=2>Sun
+    J2SDK-1.3.0_01 (HotSpot Client VM)</font><br>
+    </td>
+    <td width=55 height=20 colspan=6></td>
+   </tr>
+   <tr>
+    <td width=47 height=21 colspan=6></td>
+    <td width=12 height=21><font color="#003399" size=2>&#8226;</font></td>
+    <td width=271 height=21 colspan=4><font face="Comic Sans MS" size=2>IBM
+    J2RE-1.3.0 (cx130-20001124)</font><br>
+    </td>
+    <td width=108 height=21 colspan=8></td>
+   </tr>
+  </table>
+  </td>
+  <td width=8 height=242></td>
+ </tr>
+ <tr>
+  <td width=475 height=23 colspan=5></td>
+ </tr>
+</table>
+
+</body>
+
+</html>

@@ -1,0 +1,245 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:p="urn:schemas-microsoft-com:office:powerpoint"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=shift_jis">
+<meta name=ProgId content=PowerPoint.Slide>
+<meta name=Generator content="Microsoft PowerPoint 9">
+<link id=Main-File rel=Main-File href="../JSSST-tutorial-010328.htm">
+<link rel=Preview href=preview.wmf>
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+p\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+v\:textbox {display:none;}
+</style>
+<![endif]-->
+<title>Javaコンパイラの高レベル数値処理最適化技法の性能評価  </title>
+<meta name=Description content="2001/03/04: Reflection">
+<link rel=Stylesheet href="master08_stylesheet.css">
+<![if !ppt]>
+
+<bgsound id=pptSound>
+
+<style media=print>
+<!--.sld
+	{left:0px !important;
+	width:6.0in !important;
+	height:4.5in !important;
+	font-size:107% !important;}
+-->
+</style>
+<script src=script.js></script><script><!--
+gId="slide0164.htm"
+if( !IsNts() ) Redirect( "PPTSld", gId );
+//-->
+</script><!--[if vml]><script>g_vml = 1;
+</script><![endif]--><script for=window event=onload><!--
+if( !IsSldOrNts() ) return;
+if( MakeNotesVis() ) return;
+LoadSld( gId );
+MakeSldVis(0);
+//-->
+</script><![endif]><o:shapelayout v:ext="edit">
+ <o:idmap v:ext="edit" data="265"/>
+</o:shapelayout>
+</head>
+
+<body lang=JA style='margin:0px;background-color:black'
+onclick="DocumentOnClick()" onresize="_RSW()" onkeypress="_KPH()">
+
+<div id=SlideObj class=sld style='position:absolute;top:0px;left:0px;
+width:534px;height:400px;font-size:16px;background-color:white;clip:rect(0%, 101%, 101%, 0%);
+visibility:hidden'><p:slide coordsize="720,540"
+ colors="#FFFFFF,#000000,#FFFFFF,#003399,#82B5CA,#448C8E,#A384C8,#6B5653"
+ masterhref="master08.xml">
+ <p:shaperange href="master08.xml#_x0000_s141313"/><![if !ppt]><p:shaperange
+  href="master08.xml#_x0000_s141314"/><![if !vml]><img border=0
+ v:shapes="_x0000_s141314,_x0000_s141315,_x0000_s141317,_x0000_s141318,_x0000_s141320,_x0000_s141322,_x0000_s141323"
+ src="master08_image166.gif" style='position:absolute;top:0%;left:0%;
+ width:100.37%;height:100.5%'><![endif]><p:shaperange
+  href="master08.xml#_x0000_s141326"/><p:shaperange
+  href="master08.xml#_x0000_s141327"/><![endif]><p:shaperange
+  href="master08.xml#_x0000_m141324"/><v:shape id="_x0000_s271362" type="#_x0000_m141324"
+  style='position:absolute;left:54pt;top:48pt;width:612pt;height:90pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="title"/></v:shape><p:shaperange
+  href="master08.xml#_x0000_m141325"/><v:shape id="_x0000_s271363" type="#_x0000_m141325"
+  style='position:absolute;left:0;top:114pt;width:618pt;height:156pt'>
+  <v:fill o:detectmouseclick="f"/>
+  <v:stroke o:forcedash="f"/>
+  <p:placeholder type="body" position="1" size="half"/></v:shape>
+ <div v:shape="_x0000_s271362" class=T style='position:absolute;top:11.0%;
+ left:8.42%;width:83.14%;height:11.5%'><span lang=EN-US style='font-family:
+ "Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";mso-fareast-language:
+ JA'>Reflection</span></div>
+ <div v:shape="_x0000_s271363">
+ <div class=HB style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:20.75%;left:4.68%;width:85.95%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.35%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>A Mechanism for Constructing an
+ Open-ended </span></span><span style='position:absolute;top:25.5%;left:4.68%;
+ width:80.14%'><span lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:
+ "Comic Sans MS";font-size:86%;mso-fareast-language:JA'>languages and
+ systems&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0"'><span style='position:absolute;
+ top:31.25%;left:4.68%;width:89.51%'><span style='font-size:86%'><span
+ style='mso-special-format:bullet;color:#82B5CA;mso-color-index:4;position:
+ absolute;left:-4.18%;top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>Has roots in logic, AI, universal
+ Turing Machine, </span></span><span style='position:absolute;top:36.0%;
+ left:4.68%;width:80.14%'><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:86%;mso-fareast-language:JA'>etc.&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:42.0%;
+ left:.93%;width:84.08%;height:6.5%'><span style='position:absolute;top:0%;
+ left:4.45%;width:95.32%'><span style='font-size:86%'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-4.67%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>3-Lisp [B.Smith, 1982]&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:47.75%;
+ left:5.99%;width:79.02%;height:5.0%'><span style='position:absolute;
+ top:0%;left:4.02%;width:95.97%'><span style='font-size:75%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.19%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Can
+ access its own interpreter during computation&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:52.25%;
+ left:5.99%;width:79.02%;height:5.0%'><span style='position:absolute;
+ top:0%;left:4.02%;width:95.97%'><span style='font-size:75%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.19%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Introspection
+ - Reference to computational state&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:56.75%;
+ left:5.99%;width:79.02%;height:5.0%'><span style='position:absolute;
+ top:0%;left:4.02%;width:95.97%'><span style='font-size:75%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.19%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:75%;mso-fareast-language:JA'>Reflection
+ - Modification of computational state&#13;</span></span></div>
+ <div class=HB style='mso-line-spacing:"90 20 0";position:absolute;top:61.0%;
+ left:.93%;width:84.08%;height:6.5%'><span style='position:absolute;top:0%;
+ left:4.45%;width:95.32%'><span style='font-size:86%'><span style='mso-special-format:
+ bullet;color:#82B5CA;mso-color-index:4;position:absolute;left:-4.67%;
+ top:.49em;font-family:"Monotype Sorts";font-size:65%'>s</span></span><span
+ lang=EN-US style='font-family:"Comic Sans MS";mso-ascii-font-family:"Comic Sans MS";
+ font-size:86%;mso-fareast-language:JA'>3-KRS [ P. Maes, 1987]&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:67.0%;
+ left:5.99%;width:79.02%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.02%;width:95.97%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.19%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Reflection
+ in OO languages&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:71.75%;
+ left:5.99%;width:79.02%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.02%;width:95.97%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.19%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Metaobject
+ - describe computation of object&#13;</span></span></div>
+ <div class=HB1 style='mso-line-spacing:"90 20 0";position:absolute;top:76.75%;
+ left:5.99%;width:79.02%;height:5.5%'><span style='position:absolute;
+ top:0%;left:4.02%;width:95.97%'><span style='font-size:83%'><span
+ style='mso-special-format:bullet;color:#003399;mso-color-index:3;position:
+ absolute;left:-4.19%'>&#8226;</span></span><span lang=EN-US style='font-family:"Comic Sans MS";
+ mso-ascii-font-family:"Comic Sans MS";font-size:83%;mso-fareast-language:JA'>Metaclass
+ =&gt; Smalltalk</span></span></div>
+ </div>
+ <v:group id="_x0000_s271364" style='position:absolute;left:7in;top:180pt;
+  width:223.625pt;height:312pt' coordorigin="3840,1920" coordsize="1913,2016">
+  <v:oval id="_x0000_s271365" style='position:absolute;left:3984;top:1920;
+   width:1440;height:864;mso-wrap-style:none;v-text-anchor:middle' fillcolor="#82b5ca [4]"
+   strokecolor="black [1]" strokeweight="1pt">
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short" color2="white [0]" endcap="square"/>
+  </v:oval><v:oval id="_x0000_s271366" style='position:absolute;left:3984;
+   top:3072;width:1440;height:864;mso-wrap-style:none;v-text-anchor:middle'
+   fillcolor="#82b5ca [4]" strokecolor="black [1]" strokeweight="1pt">
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short" color2="white [0]" endcap="square"/>
+  </v:oval><v:line id="_x0000_s271367" style='position:absolute;
+   mso-wrap-style:none;v-text-anchor:middle' from="4800,2688" to="4800,3216"
+   strokecolor="black [1]" strokeweight="6pt">
+   <v:stroke startarrow="block" endarrowwidth="narrow" endarrowlength="short"
+    color2="white [0]" endcap="square"/>
+  </v:line><v:line id="_x0000_s271368" style='position:absolute;
+   mso-wrap-style:none;v-text-anchor:middle' from="4560,2688" to="4560,3216"
+   strokecolor="black [1]" strokeweight="6pt">
+   <v:stroke endarrow="block" color2="white [0]" endcap="square"/>
+  </v:line><v:shapetype id="_x0000_t202" coordsize="21600,21600" o:spt="202"
+   path="m0,0l0,21600,21600,21600,21600,0xe">
+   <v:stroke joinstyle="miter"/>
+   <v:path gradientshapeok="t" o:connecttype="rect"/>
+  </v:shapetype><v:shape id="_x0000_s271369" type="#_x0000_t202" style='position:absolute;
+   left:4755;top:2784;width:998;height:357;mso-wrap-style:none;v-text-anchor:top-baseline'
+   filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]"
+   strokeweight="1pt">
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short" color2="white [0]" endcap="square"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape><v:shape id="_x0000_s271370" type="#_x0000_t202" style='position:absolute;
+   left:3840;top:2784;width:864;height:357;mso-wrap-style:none;v-text-anchor:top-baseline'
+   filled="f" fillcolor="#82b5ca [4]" stroked="f" strokecolor="black [1]"
+   strokeweight="1pt">
+   <v:stroke startarrowwidth="narrow" startarrowlength="short" endarrowwidth="narrow"
+    endarrowlength="short" color2="white [0]" endcap="square"/>
+   <v:textbox style='mso-fit-shape-to-text:t'/>
+  </v:shape></v:group><![if !vml]><img border=0
+ v:shapes="_x0000_s271364,_x0000_s271365,_x0000_s271366,_x0000_s271367,_x0000_s271368,_x0000_s271369,_x0000_s271370"
+ src="slide0164_image329.gif" style='position:absolute;top:33.25%;left:70.03%;
+ width:31.46%;height:58.5%'><![endif]>
+ <div v:shape="_x0000_s271365" class=O>
+ <div style='text-align:center;position:absolute;top:40.75%;left:74.34%;
+ width:19.47%;height:5.25%'><span lang=EN-US style='font-family:"Times New Roman";
+ mso-ascii-font-family:"Times New Roman";text-shadow:auto;mso-fareast-language:
+ JA'><b>Metaobject&#13;</b></span></div>
+ <div style='text-align:center;position:absolute;top:46.0%;left:68.72%;
+ width:30.89%;height:5.25%'><span lang=EN-US style='font-family:"Times New Roman";
+ mso-ascii-font-family:"Times New Roman";text-shadow:auto;mso-fareast-language:
+ JA'><b>(Interpreter, VM)</b></span></div>
+ </div>
+ <div v:shape="_x0000_s271366" class=O>
+ <div style='text-align:center;position:absolute;top:73.75%;left:76.59%;
+ width:15.16%;height:5.25%'><span lang=EN-US style='font-family:"Times New Roman";
+ mso-ascii-font-family:"Times New Roman";text-shadow:auto;mso-fareast-language:
+ JA'><b>Object&#13;</b></span></div>
+ <div style='text-align:center;position:absolute;top:79.0%;left:73.59%;
+ width:21.16%;height:5.25%'><span lang=EN-US style='font-family:"Times New Roman";
+ mso-ascii-font-family:"Times New Roman";text-shadow:auto;mso-fareast-language:
+ JA'><b>(Base Level)</b></span></div>
+ </div>
+ <div v:shape="_x0000_s271369" class=O><span style='position:absolute;
+ top:59.0%;left:85.95%;width:17.22%'><span lang=EN-US style='font-family:Arial;
+ mso-ascii-font-family:Arial;mso-hansi-font-family:Arial;font-size:83%;
+ text-shadow:auto;mso-fareast-language:JA'><b>Introspect/<br>
+ </b></span></span><span
+ style='position:absolute;top:63.5%;left:85.95%;width:14.41%'><span lang=EN-US
+ style='font-family:Arial;mso-ascii-font-family:Arial;mso-hansi-font-family:
+ Arial;font-size:83%;text-shadow:auto;mso-fareast-language:JA'><b>Reflect</b></span><span
+ lang=EN-US style='font-size:83%;text-shadow:auto;mso-fareast-language:JA;
+ mso-special-format:lastCR;display:none'><b>&#13;</b></span></span></div>
+ <div v:shape="_x0000_s271370" class=O><span style='position:absolute;
+ top:59.0%;left:70.97%;width:14.6%'><span lang=EN-US style='font-family:Arial;
+ mso-ascii-font-family:Arial;mso-hansi-font-family:Arial;font-size:83%;
+ text-shadow:auto;mso-fareast-language:JA'><b>Interpret/<br>
+ </b></span></span><span
+ style='position:absolute;top:63.5%;left:70.97%;width:12.92%'><span lang=EN-US
+ style='font-family:Arial;mso-ascii-font-family:Arial;mso-hansi-font-family:
+ Arial;font-size:83%;text-shadow:auto;mso-fareast-language:JA'><b>Execute</b></span><span
+ lang=EN-US style='font-size:83%;text-shadow:auto;mso-fareast-language:JA;
+ mso-special-format:lastCR;display:none'><b>&#13;</b></span></span></div>
+</p:slide></div>
+
+</body>
+
+</html>
